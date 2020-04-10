@@ -1,0 +1,33 @@
+---
+title: "Reporting_draft"
+author: 'NYSDEC SMAS : Keleigh Reynolds'
+date: "3/24/2020"
+output: 
+  word_document:
+    reference_docx: "draft_template.docx"
+    fig_caption: yes
+params:
+  location: Wallkill
+---
+
+```{r setup, include=FALSE}
+#start clean
+library(ggplot2)
+library(dplyr)
+
+```
+
+``r params$location``| Report
+================================================================================
+
+```{r setup, child="child/section1A_chemistry_stream_discharge.Rmd"}
+
+```
+
+
+```{r}
+file.path(here::here(),
+          "data",
+          "file.csv")
+```
+

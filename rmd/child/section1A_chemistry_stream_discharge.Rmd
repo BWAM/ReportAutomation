@@ -1,0 +1,144 @@
+---
+title: "Section 1 a) chemistry and stream discharge"
+author: 'NYSDEC SMAS : Keleigh Reynolds'
+date: "4/10/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#set up the file path
+file.path=file.path(here::here(),
+          "data",
+          "chemistry.csv")
+```
+
+
+```{r}
+#read in the chemistry file
+chem_all<-read.csv(file.path,stringsAsFactors = FALSE)
+          
+
+#Chemistry figures for each analyte
+library(stringr)
+library(reshape2)
+library(ggplot2)
+library(ggthemes)
+library(pander)
+library(dplyr)
+
+chem_all$SH_PWL_ID<-as.factor(chem_all$SH_PWL_ID)
+#take out the Rejected samples
+chem_all<-chem_all %>% 
+  filter(chem_all$validator_qualifiers!="R")
+
+#create units column
+chem.trans<-subset(chem_all,chem_all$result_unit=="mg/l"|chem_all$result_unit=="ug/l")
+chem.no.trans<-chem_all %>% 
+  filter(chem_all$result_unit != "mg/l"& chem_all$result_unit != "ug/l")
+
+#then probably need to merge with table that actually has metrics, bc we don't need to plot them all.
+
+#chemp<-ggplot(chem_stat,aes(SiteID,mean))+geom_point()
+#chemp+facet_wrap(~chemical_name,scales="free")+theme_bw()
+```
+
+
+```{r}
+# create graphing function for those that need to be log10 (ug/L or mg/l-so not weird ones)
+chem.graph <- function(df, na.rm = TRUE, ...){
+  
+  # create list of chmistry's in data to loop over 
+  chem_list <- unique(df$chemical_name)
+  l<-length(chem_list)
+  for (i in seq_along(chem_list)) { 
+    
+    # create plot for each PWL in df 
+    plot <- 
+      ggplot(subset(df, df$chemical_name==chem_list[i]),
+             aes(SITE_ID, result_value,shape=SH_PWL_ID))+ 
+      
+      geom_point() +
+      scale_shape_manual(values = 0:max(l))+
+      
+      theme_pander() +
+      theme(axis.text.x = element_text(angle = 60, hjust = 1))+
+      theme(legend.position="right") + 
+      
+      scale_y_log10(paste(df$chemical_name[df$chemical_name==chem_list[i]],"(log10)",df$result_unit[df$chemical_name==chem_list[i]])) + 
+      xlab("Location ID")+
+      ggtitle(paste(chem_list[i], ' \n', 
+                    "Chemical results by PWL ID",
+                    sep=''))
+    
+    # save plots as .png
+    # ggsave(plot, file=paste(results, 
+    #                        'projection_graphs/county_graphs/',
+    #                        county_list[i], ".png", sep=''), scale=2)
+   
+    # save plots as .pdf
+    # ggsave(plot, file=paste(results, 
+    #                        'projection_graphs/county_graphs/',
+    #                        county_list[i], ".pdf", sep=''), scale=2)
+    
+    # print plots to screen
+    print(plot)
+  }
+}
+```
+
+
+```{r}
+chem.graph(chem.trans)  
+
+```
+
+```{r echo=FALSE, fig.width=5,fig.height=6,message=FALSE,warning=FALSE}
+#this one for the other values (no transformation of units)
+
+# create graphing function for those that don't need to be log10
+chem.graph.n <- function(df, na.rm = TRUE, ...){
+  
+  # create list of chmistry's in data to loop over 
+  chem_list <- unique(df$chemical_name)
+  l<-length(df$SITE_ID)
+  for (i in seq_along(chem_list)) { 
+    
+    # create plot for each PWL in df 
+    plot <- 
+      ggplot(subset(df, df$chemical_name==chem_list[i]),
+             aes(SITE_ID, result_value,shape=SH_PWL_ID))+ 
+      
+      geom_point() +
+      scale_shape_manual(values = 0:max(l))+
+      
+      theme_pander() +
+      theme(axis.text.x = element_text(angle = 60, hjust = 1))+
+      theme(legend.position="right") + 
+      
+      scale_y_continuous(paste(df$chemical_name[df$chemical_name==chem_list[i]],df$result_unit[df$chemical_name==chem_list[i]])) + 
+      xlab("Location ID")+
+      ggtitle(paste(chem_list[i], ' \n', 
+                    "Chemical results by PWL ID",
+                    sep=''))
+    
+    # save plots as .png
+    # ggsave(plot, file=paste(results, 
+    #                        'projection_graphs/county_graphs/',
+    #                        county_list[i], ".png", sep=''), scale=2)
+   
+    # save plots as .pdf
+    # ggsave(plot, file=paste(results, 
+    #                        'projection_graphs/county_graphs/',
+    #                        county_list[i], ".pdf", sep=''), scale=2)
+    
+    # print plots to screen
+    print(plot)
+  }
+}
+
+chem.graph.n(chem.no.trans)
+
+```
+

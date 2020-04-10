@@ -1,0 +1,230 @@
+"","USER_PERCEPT_FLD_DATA_HIST_ID","event_id","SITE_ID","COLL_DATE","UPFDH_PRIMARY_CONTACT","UPFDH_SECONDARY_CONTACT","UPFDH_CURRENT_WEATHER","UPFDH_PAST_WEATHER","UPFDH_WATER_CLARITY","UPFDH_SUSP_PHYTOPLANKTON","UPFDH_PERIPHYTON","UPFDH_MACROPHYTE","UPFDH_ODOR","UPFDH_TRASH","UPFDH_DISCHARGE_PIPE","UPFDH_PRIMARY_VARIABLE","UPFDH_SECONDARY_VARIABLE","UPFDH_USER_COMMENT","CREATE_DATE","END_DATE","UPDATE_DATE","UPDATED_BY_GUID"
+"45",45,"13-WALK-19.0_20080715","13-WALK-19.0","7/15/2008","B","B","Sun","Rain",7,0,6,0,0,1,0,"Water Clarity","","",NA,NA,NA,NA
+"46",46,"13-WALK-22.8_20080715","13-WALK-22.8","7/15/2008","B","B","Sun","Rain",6,0,1,1,0,6,1,"Water Clarity; Trash","","",NA,NA,NA,NA
+"48",48,"13-WALK-35.6_20080715","13-WALK-35.6","7/15/2008","B","B","Sun","Rain",3,2,7,1,0,4,0,"Periphyton","","",NA,NA,NA,NA
+"51",51,"13-WALK-60.1_20080715","13-WALK-60.1","7/15/2008","B","A","Sun","Rain",10,2,NA,6,0,0,0,"Water clarity, nosey duck","","",NA,NA,NA,NA
+"57",57,"13-QKER-0.9_20080716","13-QKER-0.9","7/16/2008","E","D","Sun","Sun",10,10,6,10,5,4,2,"Water clarity, phytoplankton, macrophytes, yuck!","","",NA,NA,NA,NA
+"2430",2430,"13-DWAR-2.0_20180710","13-DWAR-2.0","7/10/2018","E","D","Sun","Sun",9,0,6,4,3,8,0,"Water Clarity","Macrophyte","",NA,NA,NA,NA
+"2431",2431,"13-GUNK-0.4_20180710","13-GUNK-0.4","7/10/2018","D","D","Sun","Sun",7,0,0,0,0,1,0,"Water Clarity","None","",NA,NA,NA,NA
+"2433",2433,"13-PKIL-0.4_20180710","13-PKIL-0.4","7/10/2018","F","A","Sun","Sun",7,0,3,3,0,0,0,"Water Clarity","","",NA,NA,NA,NA
+"2441",2441,"13-SWAK-1.7_20180710","13-SWAK-1.7","7/10/2018","A","A","Sun","Sun",0,0,0,0,0,0,0,"None","None","",NA,NA,NA,NA
+"2442",2442,"13-TINW-0.5_20180710","13-TINW-0.5","7/10/2018","A","A","Sun","Sun",0,0,0,0,0,0,0,"None","None","",NA,NA,NA,NA
+"2443",2443,"13-WALK-0.7_20180710","13-WALK-0.7","7/10/2018","B","A","Sun","Sun",7,1,NA,0,0,0,0,"Water Clarity","None","",NA,NA,NA,NA
+"2444",2444,"13-WALK-2.1_20180710","13-WALK-2.1","7/10/2018","C","B","Sun","Sun",5,0,1,0,0,0,0,"Water Clarity","None","",NA,NA,NA,NA
+"2445",2445,"13-WALK-9.8_20180710","13-WALK-9.8","7/10/2018","F","A","Clouds","",8,0,4,4,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2446",2446,"13-WALK-19.0_20180710","13-WALK-19.0","7/10/2018","B","B","Sun","Sun",4,0,5,5,0,4,0,"Periphyton","Macrophyte","",NA,NA,NA,NA
+"2447",2447,"13-WALK-22.8_20180710","13-WALK-22.8","7/10/2018","B","B","Sun","Sun",3,0,6,1,0,0,0,"Other","Other","",NA,NA,NA,NA
+"2448",2448,"13-WALK-26.9_20180710","13-WALK-26.9","7/10/2018","C","B","Sun","Sun",3,0,3,0,0,0,0,"Other","None","",NA,NA,NA,NA
+"2449",2449,"13-WKLEI-0.6_20180710","13-WKLEI-0.6","7/10/2018","E","D","Sun","Sun",10,0,5,0,1,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2450",2450,"13-GUNK-37.7_20180711","13-GUNK-37.7","7/11/2018","B","B","Sun","Sun",2,1,2,2,1,3,1,"Trash","Odor","",NA,NA,NA,NA
+"2451",2451,"13-GUNK-40.3_20180711","13-GUNK-40.3","7/11/2018","E","E","Sun","Sun",NA,6,6,5,10,1,10,"Discharge/Pipes","Discharge/Pipes","",NA,NA,NA,NA
+"2452",2452,"13-GUNK_T35-0.2_20170913","13-GUNK_T35-0.2","9/13/2017","B","B","Sun","Sun",9,0,3,1,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2454",2454,"13-LGUN-6.0_20180711","13-LGUN-6.0","7/11/2018","C","B","Sun","Sun",7,5,0,0,2,0,5,"Water Clarity","Odor","",NA,NA,NA,NA
+"2455",2455,"13-MASO-0.2_20180711","13-MASO-0.2","7/11/2018","A","A","Sun","Sun",1,0,1,0,0,2,0,"Trash","None","",NA,NA,NA,NA
+"2456",2456,"13-MONH-0.4_20180711","13-MONH-0.4","7/11/2018","E","F","Sun","Sun",1,0,7,0,6,9,0,"Trash","Odor","",NA,NA,NA,NA
+"2457",2457,"13-MONH-4.1_20180711","13-MONH-4.1","7/11/2018","C","C","Sun","Sun",5,0,0,0,6,0,1,"Odor","Water clarity","",NA,NA,NA,NA
+"2458",2458,"13-QKER-0.9_20180711","13-QKER-0.9","7/11/2018","F","B","Sun","Sun",7,0,3,1,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2463",2463,"13-RIOG-0.7_20180711","13-RIOG-0.7","7/11/2018","D","C","Sun","Clouds",2,0,5,0,2,7,0,"Periphyton","Trash","",NA,NA,NA,NA
+"2464",2464,"13-RUTG-1.5_20180711","13-RUTG-1.5","7/11/2018","C","B","Sun","Sun",3,0,6,1,3,6,0,"Odor","Periphyton","",NA,NA,NA,NA
+"2465",2465,"13-WALK-29.9_20180711","13-WALK-29.9","7/11/2018","F","C","Sun","Sun",9,0,6,3,0,0,0,"Other","Water clarity","",NA,NA,NA,NA
+"2466",2466,"13-WALK-35.6_20180711","13-WALK-35.6","7/11/2018","B","A","Sun","Sun",5,0,3,0,1,2,0,"Water Clarity","None","",NA,NA,NA,NA
+"2467",2467,"13-WALK-44.4_20180711","13-WALK-44.4","7/11/2018","C","C","Sun","Sun",10,0,NA,4,0,0,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"2468",2468,"13-WALK-46.6_20180711","13-WALK-46.6","7/11/2018","C","C","Sun","Sun",7,0,5,2,0,1,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2469",2469,"13-WALK-60.1_20180711","13-WALK-60.1","7/11/2018","B","A","Sun","Sun",4,0,1,0,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2470",2470,"13-WCHEE-0.6_20180711","13-WCHEE-0.6","7/11/2018","D","D","Sun","Sun",10,0,2,1,5,2,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"2535",2535,"13-DWAR-2.0_20180724","13-DWAR-2.0","7/24/2018","C","C","Clouds","Rain",2,0,2,4,0,0,2,"Macrophyte","Other","",NA,NA,NA,NA
+"2536",2536,"13-GUNK-0.4_20180724","13-GUNK-0.4","7/24/2018","C","C","Sun","Rain",1,0,2,0,0,2,0,"Other","","",NA,NA,NA,NA
+"2537",2537,"13-PKIL-0.4_20180724","13-PKIL-0.4","7/24/2018","C","B","Sun","Rain",6,0,8,8,0,0,0,"Macrophyte","Periphyton","",NA,NA,NA,NA
+"2538",2538,"13-POCH-1.8_20180724","13-POCH-1.8","7/24/2018","C","C","Clouds","Rain",7,5,3,0,0,0,0,"Suspended_Phytoplankton","Water clarity","",NA,NA,NA,NA
+"2539",2539,"13-QKER-0.9_20180724","13-QKER-0.9","7/24/2018","C","B","Clouds","Rain",7,0,4,2,0,0,0,"Water Clarity","","",NA,NA,NA,NA
+"2540",2540,"13-RUTG-1.5_20180724","13-RUTG-1.5","7/24/2018","D","C","Clouds","Rain",7,0,7,0,2,5,0,"Periphyton","Water clarity","",NA,NA,NA,NA
+"2541",2541,"13-SWAK-1.7_20180724","13-SWAK-1.7","7/24/2018","A","A","Clouds","Rain",0,0,0,0,0,0,0,"None","None","",NA,NA,NA,NA
+"2542",2542,"13-TINW-0.5_20180724","13-TINW-0.5","7/24/2018","C","B","Rain","Rain",0,0,0,0,0,0,0,"Other","None","",NA,NA,NA,NA
+"2543",2543,"13-WALK-0.8_20180724","13-WALK-0.8","7/24/2018","D","C","Clouds","Rain",8,8,7,0,1,1,0,"Water Clarity","Suspended Phytoplankton","",NA,NA,NA,NA
+"2544",2544,"13-WALK-2.1_20180724","13-WALK-2.1","7/24/2018","D","B","Clouds","Rain",8,NA,NA,NA,0,0,NA,"Water Clarity","Other","",NA,NA,NA,NA
+"2545",2545,"13-WALK-19.0_20180724","13-WALK-19.0","7/24/2018","D","B","Sun","Rain",7,0,4,3,0,7,0,"Water Clarity","Trash","",NA,NA,NA,NA
+"2546",2546,"13-WALK-22.8_20180724","13-WALK-22.8","7/24/2018","A","A","Clouds","Rain",8,0,5,2,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2547",2547,"13-WALK-26.9_20180724","13-WALK-26.9","7/24/2018","C","C","Clouds","Rain",10,0,4,2,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2548",2548,"13-WALK-29.9_20180724","13-WALK-29.9","7/24/2018","C","A","Rain","Rain",3,0,4,2,0,2,0,"Water Clarity","","",NA,NA,NA,NA
+"2549",2549,"13-WALK-60.1_20180724","13-WALK-60.1","7/24/2018","B","A","Clouds","Rain",2,0,0,0,0,0,0,"Other","None","",NA,NA,NA,NA
+"2550",2550,"13-WKLEI-0.6_20180724","13-WKLEI-0.6","7/24/2018","D","D","Clouds","Rain",10,0,2,0,0,0,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"2553",2553,"13-GUNK-37.7_20180725","13-GUNK-37.7","7/25/2018","E","E","Clouds","Rain",3,0,8,NA,5,10,10,"Discharge/Pipes","Trash","",NA,NA,NA,NA
+"2554",2554,"13-GUNK-40.3_20180725","13-GUNK-40.3","7/25/2018","C","C","Clouds","Rain",10,0,0,3,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2555",2555,"13-GUNK_T35-0.2_20180719","13-GUNK_T35-0.2","7/19/2018","B","A","Rain","Rain",2,0,3,2,1,0,0,"Odor","Other","",NA,NA,NA,NA
+"2556",2556,"13-LGUN-6.0_20180725","13-LGUN-6.0","7/25/2018","","","Rain","Rain",NA,NA,NA,NA,NA,NA,NA,"","","",NA,NA,NA,NA
+"2557",2557,"13-MASO-0.2_20180725","13-MASO-0.2","7/25/2018","C","C","Rain","Clouds",1,0,0,0,0,2,0,"Other","Other","",NA,NA,NA,NA
+"2558",2558,"13-MONH-0.4_20180725","13-MONH-0.4","7/25/2018","","","Rain","Clouds",NA,NA,NA,NA,NA,NA,NA,"","","",NA,NA,NA,NA
+"2559",2559,"13-MONH-4.1_20180725","13-MONH-4.1","7/25/2018","D","D","Rain","Rain",1,0,8,0,7,0,0,"Odor","Periphyton","",NA,NA,NA,NA
+"2560",2560,"13-RIOG-0.7_20180725","13-RIOG-0.7","7/25/2018","B","B","Rain","Clouds",1,0,1,0,0,0,0,"None","None","",NA,NA,NA,NA
+"2561",2561,"13-WALK-35.6_20180725","13-WALK-35.6","7/25/2018","C","B","Clouds","Rain",5,0,1,0,0,0,0,"Water Clarity","None","",NA,NA,NA,NA
+"2562",2562,"13-WALK-44.4_20180725","13-WALK-44.4","7/25/2018","C","A","Rain","Clouds",8,1,NA,2,0,1,0,"Water Clarity","None","",NA,NA,NA,NA
+"2563",2563,"13-WALK-46.6_20180725","13-WALK-46.6","7/25/2018","D","B","Rain","Clouds",7,0,3,2,0,2,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2564",2564,"13-WCHEE-0.6_20180725","13-WCHEE-0.6","7/25/2018","B","B","Rain","Clouds",4,0,1,1,0,2,0,"Trash","None","",NA,NA,NA,NA
+"2657",2657,"13-POCH-1.8_20180814","13-POCH-1.8","8/14/2018","B","A","Sun","Rain",4,0,3,0,1,0,0,"Water Clarity","","",NA,NA,NA,NA
+"2658",2658,"13-QKER-0.9_20180814","13-QKER-0.9","8/14/2018","B","A","Rain","Rain",1,1,1,5,7,0,0,"Macrophyte","","",NA,NA,NA,NA
+"2659",2659,"13-RIOG-0.7_20180814","13-RIOG-0.7","8/14/2018","C","C","Clouds","Rain",3,0,4,0,8,2,0,"Odor","Periphyton","",NA,NA,NA,NA
+"2660",2660,"13-RUTG-1.5_20180814","13-RUTG-1.5","8/14/2018","C","C","Sun","Rain",0,0,3,0,1,0,0,"Other","","",NA,NA,NA,NA
+"2661",2661,"13-SWAK-1.7_20180814","13-SWAK-1.7","8/14/2018","A","A","Clouds","Rain",0,0,0,0,0,0,0,"None","None","",NA,NA,NA,NA
+"2662",2662,"13-WKLEI-0.6_20180814","13-WKLEI-0.6","8/14/2018","D","D","Clouds","Rain",8,1,3,1,1,1,0,"Water Clarity","None","",NA,NA,NA,NA
+"2663",2663,"13-DWAR-2.0_20180815","13-DWAR-2.0","8/15/2018","D","E","Sun","Rain",7,0,3,7,5,10,10,"Discharge/Pipes","Trash","",NA,NA,NA,NA
+"2664",2664,"13-GUNK-0.4_20180815","13-GUNK-0.4","8/15/2018","C","B","Sun","Rain",4,0,2,1,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2665",2665,"13-MASO-0.2_20180815","13-MASO-0.2","8/15/2018","E","D","Sun","Clouds",9,0,0,0,6,3,0,"Water Clarity","Odor","",NA,NA,NA,NA
+"2666",2666,"13-MONH-0.4_20180815","13-MONH-0.4","8/15/2018","A","A","Sun","Clouds",4,0,1,1,5,0,5,"Discharge/Pipes","Odor","",NA,NA,NA,NA
+"2667",2667,"13-PKIL-0.4_20180815","13-PKIL-0.4","8/15/2018","D","B","Sun","Rain",7,0,4,5,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2668",2668,"13-TINW-0.5_20180815","13-TINW-0.5","8/15/2018","A","A","Sun","Rain",0,0,0,0,0,0,0,"None","None","",NA,NA,NA,NA
+"2669",2669,"13-WALK-19.0_20180815","13-WALK-19.0","8/15/2018","C","C","Sun","Rain",8,0,4,2,3,8,0,"Odor","Trash","",NA,NA,NA,NA
+"2670",2670,"13-WALK-22.8_20180815","13-WALK-22.8","8/15/2018","D","D","Sun","Rain",10,0,4,2,0,0,0,"Other","Water clarity","",NA,NA,NA,NA
+"2671",2671,"13-WALK-26.9_20180815","13-WALK-26.9","8/15/2018","F","B","Sun","Rain",10,0,3,2,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2672",2672,"13-WALK-29.9_20180815","13-WALK-29.9","8/15/2018","F","A","Sun","Rain",8,1,2,1,0,1,0,"Other","","",NA,NA,NA,NA
+"2673",2673,"13-WALK-44.4_20180815","13-WALK-44.4","8/15/2018","B","A","Sun","Clouds",6,0,1,0,0,0,0,"Water Clarity","None","",NA,NA,NA,NA
+"2674",2674,"13-WALK-46.6_20180815","13-WALK-46.6","8/15/2018","B","B","Sun","Clouds",1,0,5,0,0,1,0,"Trash","Other","",NA,NA,NA,NA
+"2675",2675,"13-WCHEE-0.6_20180815","13-WCHEE-0.6","8/15/2018","C","B","Sun","Clouds",4,4,0,0,1,0,0,"Water Clarity","Suspended Phytoplankton","",NA,NA,NA,NA
+"2676",2676,"13-GUNK-37.7_20180816","13-GUNK-37.7","8/16/2018","D","C","Sun","Sun",2,0,0,0,4,0,0,"Odor","","",NA,NA,NA,NA
+"2677",2677,"13-GUNK-40.3_20180816","13-GUNK-40.3","8/16/2018","D","E","Sun","Sun",6,1,7,0,3,1,1,"Water Clarity","Odor","",NA,NA,NA,NA
+"2678",2678,"13-GUNK_T35-0.2_20180809","13-GUNK_T35-0.2","8/9/2018","C","B","Sun","Sun",2,2,7,0,2,0,0,"Periphyton","Periphyton","",NA,NA,NA,NA
+"2679",2679,"13-LGUN-6.0_20180816","13-LGUN-6.0","8/16/2018","","","Sun","Sun",NA,NA,NA,NA,NA,NA,NA,"","","",NA,NA,NA,NA
+"2680",2680,"13-MONH-4.1_20180816","13-MONH-4.1","8/16/2018","D","C","Sun","Sun",3,2,10,2,8,4,0,"Odor","Periphyton","",NA,NA,NA,NA
+"2681",2681,"13-WALK-0.7_20180816","13-WALK-0.7","8/16/2018","B","A","Sun","Clouds",4,0,3,0,1,0,1,"None","None","",NA,NA,NA,NA
+"2682",2682,"13-WALK-2.1_20180816","13-WALK-2.1","8/16/2018","F","F","Sun","Clouds",8,0,0,0,0,4,1,"Water Clarity","Trash","",NA,NA,NA,NA
+"2683",2683,"13-WALK-9.8_20180816","13-WALK-9.8","8/16/2018","F","B","Sun","Clouds",8,0,4,2,1,0,0,"Water Clarity","","",NA,NA,NA,NA
+"2684",2684,"13-WALK-35.6_20180816","13-WALK-35.6","8/16/2018","D","C","Sun","Sun",8,3,8,1,2,2,7,"Odor","Water clarity","",NA,NA,NA,NA
+"2685",2685,"13-WALK-60.1_20180816","13-WALK-60.1","8/16/2018","A","A","Clouds","Clouds",0,0,0,0,0,0,0,"None","None","",NA,NA,NA,NA
+"2708",2708,"13-DWAR-2.0_20180827","13-DWAR-2.0","8/27/2018","C","B","Sun","Rain",5,0,3,0,0,0,0,"None","None","",NA,NA,NA,NA
+"2709",2709,"13-GUNK-0.4_20180827","13-GUNK-0.4","8/27/2018","A","A","Clouds","Rain",0,0,1,0,0,0,0,"None","None","Some bright green algaelgae on rocks. Not sure about bl gr",NA,NA,NA,NA
+"2710",2710,"13-GUNK-37.7_20180827","13-GUNK-37.7","8/27/2018","B","A","Sun","Clouds",2,1,3,0,1,1,0,"Periphyton","None","",NA,NA,NA,NA
+"2711",2711,"13-GUNK-40.3_20180827","13-GUNK-40.3","8/27/2018","B","A","Sun","Clouds",3,0,2,2,0,1,0,"Water Clarity","None","",NA,NA,NA,NA
+"2712",2712,"13-GUNK_T35-0.2_20180822","13-GUNK_T35-0.2","8/22/2018","B","A","Sun","Clouds",2,0,3,1,0,3,0,"Trash","None","",NA,NA,NA,NA
+"2713",2713,"13-LGUN-6.0_20180827","13-LGUN-6.0","8/27/2018","B","B","Sun","Clouds",1,0,0,1,0,0,0,"Other","None","Silty",NA,NA,NA,NA
+"2714",2714,"13-MASO-0.2_20180827","13-MASO-0.2","8/27/2018","D","D","Sun","Rain",0,0,3,0,8,9,0,"Odor","Trash","",NA,NA,NA,NA
+"2715",2715,"13-MONH-0.4_20180827","13-MONH-0.4","8/27/2018","C","B","Clouds","Clouds",1,0,1,0,4,1,0,"Odor","Other","Below STP",NA,NA,NA,NA
+"2716",2716,"13-MONH-4.1_20180827","13-MONH-4.1","8/27/2018","E","D","Sun","Clouds",2,0,NA,5,4,4,0,"Odor","Periphyton","Upstream of STP
+Strong odor",NA,NA,NA,NA
+"2717",2717,"13-PKIL-0.4_20180827","13-PKIL-0.4","8/27/2018","C","B","Clouds","Rain",1,0,1,0,0,1,0,"Other","Other","Surface scum foam formation in pool just upstream of sampling area",NA,NA,NA,NA
+"2718",2718,"13-SWAK-1.7_20180827","13-SWAK-1.7","8/27/2018","A","A","Clouds","Rain",0,0,2,0,0,0,0,"None","None","Nice trib to wallkill.  Good bugs.  Refeshing waters",NA,NA,NA,NA
+"2719",2719,"13-TINW-0.5_20180827","13-TINW-0.5","8/27/2018","C","B","Sun","Clouds",NA,3,1,0,0,1,0,"Other","Other","Lots of deep mud on edge of stream",NA,NA,NA,NA
+"2720",2720,"13-WALK-19.0_20180827","13-WALK-19.0","8/27/2018","B","B","Clouds","Rain",8,1,1,0,0,1,0,"Water Clarity","Water clarity","Popular site apparently for fishermen and place to cool off your dog.   Very hot day today",NA,NA,NA,NA
+"2721",2721,"13-WALK-22.8_20180827","13-WALK-22.8","8/27/2018","D","B","Clouds","Rain",8,1,2,1,1,6,1,"Water Clarity","Trash","Lots of dumped garbage at access site and old deer bones.  Other areas of reach are ok in a residential recreational setting",NA,NA,NA,NA
+"2722",2722,"13-WALK-26.9_20180827","13-WALK-26.9","8/27/2018","B","A","Sun","Clouds",4,0,6,1,0,0,0,"Periphyton","None","Heavy, thick diatom cover",NA,NA,NA,NA
+"2723",2723,"13-WALK-29.9_20180827","13-WALK-29.9","8/27/2018","B","A","Sun","Clouds",4,0,1,0,0,0,0,"Water Clarity","None","",NA,NA,NA,NA
+"2724",2724,"13-WALK-35.6_20180827","13-WALK-35.6","8/27/2018","D","D","Sun","Clouds",4,0,NA,0,1,2,0,"Other","Other","Thick mud on banks",NA,NA,NA,NA
+"2725",2725,"13-WALK-44.4_20180827","13-WALK-44.4","8/27/2018","B","B","Sun","Rain",NA,8,2,0,0,0,0,"Water Clarity","None","",NA,NA,NA,NA
+"2726",2726,"13-WKLEI-0.6_20180827","13-WKLEI-0.6","8/27/2018","E","D","Clouds","Rain",10,3,1,0,1,0,0,"Water Clarity","Water clarity","Muddy creek.  Sweet if you are an otter and like to slide down banks",NA,NA,NA,NA
+"2727",2727,"13-POCH-1.8_20180828","13-POCH-1.8","8/28/2018","C","A","Sun","Sun",8,1,2,2,2,1,0,"Water Clarity","None","",NA,NA,NA,NA
+"2728",2728,"13-QKER-0.9_20180828","13-QKER-0.9","8/28/2018","D","D","Sun","Sun",7,4,2,2,1,2,1,"Water Clarity","Suspended Phytoplankton","",NA,NA,NA,NA
+"2729",2729,"13-RIOG-0.7_20180828","13-RIOG-0.7","8/28/2018","D","D","Sun","Sun",2,0,2,0,1,1,0,"Other","None","",NA,NA,NA,NA
+"2730",2730,"13-RUTG-1.5_20180828","13-RUTG-1.5","8/28/2018","B","A","Sun","Sun",3,0,2,2,1,2,0,"Other","None","Mosquitoes",NA,NA,NA,NA
+"2731",2731,"13-WALK-46.6_20180828","13-WALK-46.6","8/28/2018","C","C","Sun","Sun",7,0,1,0,0,0,0,"Water Clarity","None","",NA,NA,NA,NA
+"2732",2732,"13-WCHEE-0.6_20180828","13-WCHEE-0.6","8/28/2018","C","B","Sun","Sun",3,0,3,1,1,1,0,"Water Clarity","Periphyton","",NA,NA,NA,NA
+"2740",2740,"13-GUNK-37.7_20180905","13-GUNK-37.7","9/5/2018","D","C","Sun","Sun",3,0,4,0,2,3,0,"Periphyton","Trash","",NA,NA,NA,NA
+"2741",2741,"13-GUNK-40.3_20180905","13-GUNK-40.3","9/5/2018","D","D","Sun","Sun",4,0,1,0,1,3,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2742",2742,"13-GUNK_T35-0.2_20180827","13-GUNK_T35-0.2","8/27/2018","D","C","Sun","Sun",4,0,NA,0,0,1,4,"Discharge/Pipes","Water clarity","",NA,NA,NA,NA
+"2743",2743,"13-LGUN-6.0_20180905","13-LGUN-6.0","9/5/2018","","","Sun","Sun",NA,NA,NA,NA,NA,NA,NA,"","","",NA,NA,NA,NA
+"2744",2744,"13-MONH-4.1_20180905","13-MONH-4.1","9/5/2018","D","C","Sun","Sun",3,1,4,3,0,7,2,"Trash","None","",NA,NA,NA,NA
+"2746",2746,"13-POCH-1.8_20180905","13-POCH-1.8","9/5/2018","D","B","Sun","Sun",3,1,3,0,1,0,0,"Water Clarity","","",NA,NA,NA,NA
+"2747",2747,"13-QKER-0.9_20180905","13-QKER-0.9","9/5/2018","F","A","","",3,0,3,2,0,0,0,"Other","","",NA,NA,NA,NA
+"2755",2755,"13-RUTG-1.5_20180905","13-RUTG-1.5","9/5/2018","B","B","Sun","Sun",3,0,2,0,1,2,0,"Water Clarity","Odor","",NA,NA,NA,NA
+"2756",2756,"13-SWAK-1.7_20180905","13-SWAK-1.7","9/5/2018","C","B","Sun","Sun",6,2,5,3,1,0,0,"Water Clarity","Periphyton","",NA,NA,NA,NA
+"2757",2757,"13-WALK-0.8_20180905","13-WALK-0.8","9/5/2018","D","C","Sun","Sun",10,4,3,1,0,4,0,"Water Clarity","Suspended Phytoplankton","",NA,NA,NA,NA
+"2758",2758,"13-WALK-2.1_20180905","13-WALK-2.1","9/5/2018","B","A","Sun","Sun",5,0,1,0,0,0,0,"Water Clarity","None","",NA,NA,NA,NA
+"2759",2759,"13-WALK-9.8_20180905","13-WALK-9.8","9/5/2018","A","A","Sun","Sun",1,1,4,3,0,0,0,"Other","","",NA,NA,NA,NA
+"2760",2760,"13-WALK-29.9_20180905","13-WALK-29.9","9/5/2018","D","D","Sun","Sun",10,NA,NA,0,0,2,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"2761",2761,"13-WALK-35.6_20180905","13-WALK-35.6","9/5/2018","D","D","Sun","Sun",10,NA,NA,NA,0,2,1,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"2762",2762,"13-WALK-60.1_20180905","13-WALK-60.1","9/5/2018","F","F","Sun","Sun",0,0,0,0,0,3,3,"Discharge/Pipes","Trash","",NA,NA,NA,NA
+"2763",2763,"13-WKLEI-0.6_20180905","13-WKLEI-0.6","9/5/2018","C","C","Sun","Sun",4,0,1,0,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2764",2764,"13-DWAR-2.0_20180906","13-DWAR-2.0","9/6/2018","E","E","Sun","Sun",0,0,0,0,4,10,10,"Discharge/Pipes","Trash","",NA,NA,NA,NA
+"2765",2765,"13-GUNK-0.4_20180906","13-GUNK-0.4","9/6/2018","D","D","Sun","Sun",10,0,0,0,3,10,0,"Trash","Water clarity","",NA,NA,NA,NA
+"2767",2767,"13-MASO-0.2_20180906","13-MASO-0.2","9/6/2018","B","A","Sun","Sun",1,0,5,0,NA,1,0,"Periphyton","Other","",NA,NA,NA,NA
+"2768",2768,"13-MONH-0.4_20180906","13-MONH-0.4","9/6/2018","B","A","Sun","Sun",5,0,4,0,3,0,1,"Odor","Water clarity","",NA,NA,NA,NA
+"2769",2769,"13-PKIL-0.4_20180906","13-PKIL-0.4","9/6/2018","F","C","Sun","Sun",1,0,6,7,0,0,0,"Macrophyte","","",NA,NA,NA,NA
+"2773",2773,"13-RIOG-0.7_20180906","13-RIOG-0.7","9/6/2018","D","D","Sun","Sun",3,0,5,2,6,0,0,"Odor","Water clarity","",NA,NA,NA,NA
+"2774",2774,"13-TINW-0.5_20180906","13-TINW-0.5","9/6/2018","A","A","Sun","Sun",0,0,0,0,0,0,1,"Other","None","",NA,NA,NA,NA
+"2775",2775,"13-WALK-19.0_20180906","13-WALK-19.0","9/6/2018","A","A","Sun","Sun",NA,1,4,3,0,5,0,"Trash","Macrophyte","",NA,NA,NA,NA
+"2776",2776,"13-WALK-22.8_20180906","13-WALK-22.8","9/6/2018","A","A","Sun","Sun",1,0,3,1,0,0,0,"None","None","",NA,NA,NA,NA
+"2777",2777,"13-WALK-26.9_20180906","13-WALK-26.9","9/6/2018","B","B","Sun","Sun",1,2,4,2,0,0,0,"Periphyton","Other","",NA,NA,NA,NA
+"2778",2778,"13-WALK-44.4_20180906","13-WALK-44.4","9/6/2018","C","C","Sun","Sun",2,0,1,0,3,3,1,"Trash","Other","",NA,NA,NA,NA
+"2779",2779,"13-WALK-46.6_20180906","13-WALK-46.6","9/6/2018","A","A","Sun","Sun",0,0,1,1,0,0,0,"Macrophyte","None","",NA,NA,NA,NA
+"2780",2780,"13-WCHEE-0.6_20180906","13-WCHEE-0.6","9/6/2018","F","C","Sun","Sun",8,0,0,0,0,1,2,"Water Clarity","None","",NA,NA,NA,NA
+"2837",2837,"13-DWAR-2.0_20181002","13-DWAR-2.0","10/2/2018","A","A","Clouds","Rain",1,0,3,2,0,0,0,"None","None","",NA,NA,NA,NA
+"2838",2838,"13-GUNK-0.4_20181002","13-GUNK-0.4","10/2/2018","D","D","Clouds","Rain",1,0,2,0,2,2,0,"Other","Trash","",NA,NA,NA,NA
+"2840",2840,"13-PKIL-0.4_20181002","13-PKIL-0.4","10/2/2018","B","B","Rain","Rain",1,0,1,0,0,2,1,"Trash","None","",NA,NA,NA,NA
+"2845",2845,"13-TINW-0.5_20181002","13-TINW-0.5","10/2/2018","A","A","Clouds","Rain",0,0,0,0,0,0,0,"None","None","",NA,NA,NA,NA
+"2846",2846,"13-WALK-19.0_20181002","13-WALK-19.0","10/2/2018","F","B","Rain","Rain",9,0,3,3,0,6,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2847",2847,"13-WALK-22.8_20181002","13-WALK-22.8","10/2/2018","F","B","Clouds","Rain",8,0,3,2,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2848",2848,"13-WALK-26.9_20181002","13-WALK-26.9","10/2/2018","F","B","Clouds","Rain",9,0,3,0,0,3,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2849",2849,"13-WALK-29.9_20181002","13-WALK-29.9","10/2/2018","C","C","Rain","Rain",10,0,1,0,0,3,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"2850",2850,"13-GUNK-37.7_20181003","13-GUNK-37.7","10/3/2018","C","C","Sun","Rain",2,0,7,NA,8,5,0,"Odor","Periphyton","",NA,NA,NA,NA
+"2851",2851,"13-GUNK-40.3_20181003","13-GUNK-40.3","10/3/2018","F","A","Sun","Rain",3,0,4,1,NA,0,0,"None","","",NA,NA,NA,NA
+"2852",2852,"13-GUNK_T35-0.2_20180920","13-GUNK_T35-0.2","9/20/2018","B","B","Clouds","Rain",9,2,7,3,0,1,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2853",2853,"13-LGUN-6.0_20181003","13-LGUN-6.0","10/3/2018","B","A","Sun","Rain",4,0,0,0,0,0,0,"None","None","",NA,NA,NA,NA
+"2854",2854,"13-MONH-4.1_20181003","13-MONH-4.1","10/3/2018","D","D","Sun","Rain",3,0,7,0,7,0,10,"Odor","Discharge/Pipes","",NA,NA,NA,NA
+"2855",2855,"13-POCH-1.8_20181003","13-POCH-1.8","10/3/2018","D","B","Sun","Rain",7,2,3,2,1,2,0,"Other","Suspended Phytoplankton","",NA,NA,NA,NA
+"2856",2856,"13-QKER-0.9_20181003","13-QKER-0.9","10/3/2018","C","D","Sun","Rain",10,10,8,8,4,0,0,"Suspended_Phytoplankton","Water clarity","",NA,NA,NA,NA
+"2857",2857,"13-RUTG-1.5_20181003","13-RUTG-1.5","10/3/2018","C","C","Sun","Rain",2,0,6,1,4,6,0,"Periphyton","Odor","",NA,NA,NA,NA
+"2858",2858,"13-SWAK-1.7_20181003","13-SWAK-1.7","10/3/2018","C","B","Sun","Rain",10,NA,NA,4,0,0,0,"Water Clarity","","",NA,NA,NA,NA
+"2859",2859,"13-WALK-0.8_20181003","13-WALK-0.8","10/3/2018","B","A","Sun","Rain",6,1,NA,0,1,2,0,"Water Clarity","None","",NA,NA,NA,NA
+"2860",2860,"13-WALK-2.1_20181003","13-WALK-2.1","10/3/2018","C","B","Sun","Rain",4,0,5,6,1,0,0,"Macrophyte","Periphyton","",NA,NA,NA,NA
+"2861",2861,"13-WALK-9.8_20181003","13-WALK-9.8","10/3/2018","","A","Sun","Rain",9,0,2,2,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2862",2862,"13-WALK-35.6_20181003","13-WALK-35.6","10/3/2018","D","C","","Rain",7,1,3,0,1,2,0,"Water Clarity","Other","",NA,NA,NA,NA
+"2863",2863,"13-WALK-60.1_20181003","13-WALK-60.1","10/3/2018","F","F","Sun","Rain",0,0,0,0,0,0,0,"None","None","",NA,NA,NA,NA
+"2864",2864,"13-WKLEI-0.6_20181003","13-WKLEI-0.6","10/3/2018","D","C","Sun","Rain",7,2,7,2,1,NA,2,"Periphyton","Water clarity","",NA,NA,NA,NA
+"2865",2865,"13-MASO-0.2_20181004","13-MASO-0.2","10/4/2018","C","A","Clouds","Rain",3,0,3,0,4,0,5,"Odor","Discharge/Pipes","",NA,NA,NA,NA
+"2866",2866,"13-MONH-0.4_20181004","13-MONH-0.4","10/4/2018","B","D","Clouds","Rain",1,0,2,0,5,0,1,"Odor","None","",NA,NA,NA,NA
+"2867",2867,"13-RIOG-0.7_20181004","13-RIOG-0.7","10/4/2018","E","E","Clouds","Rain",1,1,2,2,0,3,2,"Other","Discharge/Pipes","",NA,NA,NA,NA
+"2868",2868,"13-WALK-44.4_20181004","13-WALK-44.4","10/4/2018","E","D","Clouds","Rain",8,0,3,1,0,4,0,"Water Clarity","Trash","",NA,NA,NA,NA
+"2869",2869,"13-WALK-46.6_20181004","13-WALK-46.6","10/4/2018","B","A","Clouds","Rain",2,0,4,1,0,1,0,"Periphyton","None","",NA,NA,NA,NA
+"2870",2870,"13-WCHEE-0.6_20181004","13-WCHEE-0.6","10/4/2018","A","A","Clouds","Rain",6,0,3,0,0,0,0,"None","None","",NA,NA,NA,NA
+"2960",2960,"13-POCH-1.8_20190625","13-POCH-1.8","6/25/2019","D","C","Sun","Rain",8,0,2,0,7,0,0,"Odor","Odor","",NA,NA,NA,NA
+"2961",2961,"13-RUTG-1.5_20190625","13-RUTG-1.5","6/25/2019","B","A","Clouds","Rain",7,0,0,0,0,2,0,"Water Clarity","None","",NA,NA,NA,NA
+"2962",2962,"13-TINW-0.5_20190625","13-TINW-0.5","6/25/2019","C","B","Rain","Clouds",3,NA,0,0,0,2,0,"Water Clarity","Trash","",NA,NA,NA,NA
+"2964",2964,"13-WALK-60.1_20190625","13-WALK-60.1","6/25/2019","C","B","Sun","Rain",9,0,0,0,0,0,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"2965",2965,"13-DWAR-2.0_20190626","13-DWAR-2.0","6/26/2019","A","A","Sun","Rain",6,0,6,1,0,0,0,"None","None","",NA,NA,NA,NA
+"2966",2966,"13-PKIL-0.4_20190626","13-PKIL-0.4","6/26/2019","B","A","Sun","Rain",3,0,2,1,0,0,0,"Proximity_to_Development_Roads","None","",NA,NA,NA,NA
+"2967",2967,"13-SWAK-1.7_20190626","13-SWAK-1.7","6/26/2019","A","A","Sun","Rain",2,0,4,3,0,0,0,"None","None","",NA,NA,NA,NA
+"2968",2968,"13-WALK-9.8_20190626","13-WALK-9.8","6/26/2019","E","D","Sun","Rain",9,NA,NA,0,0,0,0,"Water Clarity","None","",NA,NA,NA,NA
+"2969",2969,"13-WALK-19.0_20190626","13-WALK-19.0","6/26/2019","B","A","Sun","Rain",7,0,5,0,3,0,0,"Water Clarity","None","",NA,NA,NA,NA
+"2970",2970,"13-WALK-44.4_20190626","13-WALK-44.4","6/26/2019","B","B","Sun","Rain",NA,0,3,0,0,0,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"3067",3067,"13-PKIL-0.4_20190723","13-PKIL-0.4","7/23/2019","C","B","Clouds","Rain",6,0,4,0,2,3,0,"Water Clarity","Proximity to development roads","",NA,NA,NA,NA
+"3069",3069,"13-SWAK-1.7_20190723","13-SWAK-1.7","7/23/2019","B","A","Clouds","Rain",6,0,5,0,0,0,0,"Proximity_to_Development_Roads","None","",NA,NA,NA,NA
+"3071",3071,"13-WALK-9.8_20190723","13-WALK-9.8","7/23/2019","D","B","Clouds","Rain",9,0,3,0,0,2,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"3072",3072,"13-WALK-19.0_20190723","13-WALK-19.0","7/23/2019","D","B","Sun","Rain",10,0,0,1,0,1,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"3081",3081,"13-DWAR-2.0_20190724","13-DWAR-2.0","7/24/2019","B","B","Clouds","Clouds",6,0,6,0,0,0,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"3089",3089,"13-POCH-1.8_20190724","13-POCH-1.8","7/24/2019","D","C","Sun","Clouds",8,0,3,0,2,0,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"3093",3093,"13-RUTG-1.5_20190724","13-RUTG-1.5","7/24/2019","C","B","Sun","Clouds",8,0,4,3,0,1,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"3096",3096,"13-TINW-0.5_20190724","13-TINW-0.5","7/24/2019","C","B","Clouds","Clouds",6,0,4,0,0,3,0,"Water Clarity","Proximity to development roads","",NA,NA,NA,NA
+"3100",3100,"13-WALK-44.4_20190724","13-WALK-44.4","7/24/2019","D","B","Clouds","Sun",10,NA,NA,NA,0,1,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"3101",3101,"13-WALK-60.1_20190724","13-WALK-60.1","7/24/2019","B","B","Sun","Clouds",9,0,NA,NA,0,3,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"3164",3164,"13-PKIL-0.4_20190808","13-PKIL-0.4","8/8/2019","C","C","Sun","Rain",5,0,0,0,0,0,0,"Water Clarity","Proximity to development roads","",NA,NA,NA,NA
+"3165",3165,"13-POCH-1.8_20190808","13-POCH-1.8","8/8/2019","E","D","Sun","Clouds",5,0,3,0,5,0,0,"Other","Odor","Proximity to agriculture",NA,NA,NA,NA
+"3166",3166,"13-RUTG-1.5_20190808","13-RUTG-1.5","8/8/2019","C","B","Sun","Clouds",3,0,3,1,0,1,0,"Periphyton","Proximity to development roads","",NA,NA,NA,NA
+"3168",3168,"13-SWAK-1.7_20190808","13-SWAK-1.7","8/8/2019","B","B","Sun","Clouds",1,0,2,0,0,0,0,"Proximity_to_Development_Roads","None","",NA,NA,NA,NA
+"3169",3169,"13-TINW-0.5_20190808","13-TINW-0.5","8/8/2019","D","C","Sun","Rain",1,0,4,0,0,2,0,"Water Clarity","Periphyton","",NA,NA,NA,NA
+"3177",3177,"13-DWAR-2.0_20190814","13-DWAR-2.0","8/14/2019","B","B","Rain","Clouds",6,0,6,0,0,0,0,"Water Clarity","Water clarity","Duplicate records submitted. Removed one based on conversation with team leader for this survey.",NA,NA,NA,NA
+"3180",3180,"13-PKIL-0.4_20190814","13-PKIL-0.4","8/14/2019","C","B","Clouds","Rain",1,0,6,0,0,1,0,"Proximity_to_Development_Roads","Proximity to development roads","",NA,NA,NA,NA
+"3196",3196,"13-SWAK-1.7_20190814","13-SWAK-1.7","8/14/2019","B","A","Rain","Clouds",1,0,7,NA,0,0,0,"Proximity_to_Development_Roads","Proximity to development roads","",NA,NA,NA,NA
+"3197",3197,"13-TINW-0.5_20190814","13-TINW-0.5","8/14/2019","D","C","Sun","Clouds",3,0,6,0,1,5,1,"Trash","Proximity to development roads","",NA,NA,NA,NA
+"3198",3198,"13-WALK-9.8_20190814","13-WALK-9.8","8/14/2019","D","B","Rain","Clouds",9,0,4,0,1,3,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"3199",3199,"13-WALK-19.0_20190814","13-WALK-19.0","8/14/2019","D","C","Clouds","Rain",10,0,5,0,1,3,0,"Water Clarity","Water clarity","Updated site ID to WALK-19.0 based on discussion with team leader.",NA,NA,NA,NA
+"3210",3210,"13-POCH-1.8_20190815","13-POCH-1.8","8/15/2019","D","C","Sun","Clouds",6,0,7,1,3,0,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"3211",3211,"13-RUTG-1.5_20190815","13-RUTG-1.5","8/15/2019","B","B","Sun","Clouds",4,0,9,0,0,1,0,"Proximity_to_Development_Roads","Proximity to development roads","",NA,NA,NA,NA
+"3213",3213,"13-WALK-44.4_20190815","13-WALK-44.4","8/15/2019","D","C","Clouds","Clouds",5,0,8,0,0,3,0,"Periphyton","Proximity to development roads","",NA,NA,NA,NA
+"3214",3214,"13-WALK-60.1_20190815","13-WALK-60.1","8/15/2019","D","B","Sun","Clouds",8,0,5,0,0,0,0,"Water Clarity","Proximity to development roads","",NA,NA,NA,NA
+"3376",3376,"13-DWAR-2.0_20190917","13-DWAR-2.0","9/17/2019","D","C","Sun","Sun",4,0,5,0,0,0,0,"Periphyton","Water clarity","",NA,NA,NA,NA
+"3384",3384,"13-PKIL-0.4_20190917","13-PKIL-0.4","9/17/2019","C","B","Sun","Sun",1,0,4,NA,1,2,0,"Proximity_to_Development_Roads","None","",NA,NA,NA,NA
+"3386",3386,"13-SWAK-1.7_20190917","13-SWAK-1.7","9/17/2019","B","A","Sun","Sun",1,0,3,0,0,0,0,"Proximity_to_Development_Roads","","",NA,NA,NA,NA
+"3387",3387,"13-TINW-0.5_20190917","13-TINW-0.5","9/17/2019","D","C","Sun","Sun",2,0,NA,3,0,3,0,"Proximity_to_Development_Roads","Trash","",NA,NA,NA,NA
+"3388",3388,"13-WALK-9.8_20190917","13-WALK-9.8","9/17/2019","D","C","Sun","Sun",7,0,7,0,0,1,0,"Water Clarity","Proximity to development buildings","",NA,NA,NA,NA
+"3389",3389,"13-WALK-19.0_20190917","13-WALK-19.0","9/17/2019","C","B","Sun","Sun",3,0,3,0,1,1,0,"Proximity_to_Development_Roads","Other","",NA,NA,NA,NA
+"3397",3397,"13-POCH-1.8_20190918","13-POCH-1.8","9/18/2019","E","D","Sun","",7,0,4,0,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"3398",3398,"13-RUTG-1.5_20190918","13-RUTG-1.5","9/18/2019","D","C","Sun","Sun",1,0,2,0,0,1,0,"Other","Proximity to development roads","",NA,NA,NA,NA
+"3401",3401,"13-WALK-44.4_20190918","13-WALK-44.4","9/18/2019","C","C","Sun","Sun",4,0,2,0,0,0,0,"Proximity_to_Development_Roads","Proximity to development buildings","",NA,NA,NA,NA
+"3402",3402,"13-WALK-60.1_20190918","13-WALK-60.1","9/18/2019","C","B","Sun","Sun",6,0,2,0,0,0,0,"Water Clarity","Other","",NA,NA,NA,NA
+"3425",3425,"13-DWAR-2.0_20191015","13-DWAR-2.0","10/15/2019","C","B","Sun","Sun",3,0,4,0,0,0,0,"Proximity_to_Development_Buildings","Proximity to development roads","",NA,NA,NA,NA
+"3426",3426,"13-PKIL-0.4_20191015","13-PKIL-0.4","10/15/2019","D","C","Sun","Sun",0,0,3,0,0,1,0,"Proximity_to_Development_Roads","","",NA,NA,NA,NA
+"3427",3427,"13-SWAK-1.7_20191015","13-SWAK-1.7","10/15/2019","B","B","Sun","Sun",1,0,2,0,0,0,0,"Proximity_to_Development_Roads","Proximity to development buildings","",NA,NA,NA,NA
+"3428",3428,"13-TINW-0.5_20191015","13-TINW-0.5","10/15/2019","D","C","Sun","Sun",1,0,2,0,0,3,0,"Trash","Proximity to development roads","",NA,NA,NA,NA
+"3429",3429,"13-WALK-9.8_20191015","13-WALK-9.8","10/15/2019","C","C","Sun","Sun",3,2,0,0,0,0,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
+"3430",3430,"13-WALK-19.0_20191015","13-WALK-19.0","10/15/2019","C","B","Sun","Sun",2,1,3,0,0,3,0,"Periphyton","Proximity to development roads","",NA,NA,NA,NA
+"3431",3431,"13-WALK-44.4_20191015","13-WALK-44.4","10/15/2019","C","B","Sun","Sun",1,0,2,0,0,0,0,"Proximity_to_Development_Buildings","Proximity to development roads","",NA,NA,NA,NA
+"3432",3432,"13-POCH-1.8_20191016","13-POCH-1.8","10/16/2019","E","D","Clouds","Sun",5,0,2,0,2,0,0,"Proximity_to_Development_Buildings","Water clarity","",NA,NA,NA,NA
+"3433",3433,"13-RUTG-1.5_20191016","13-RUTG-1.5","10/16/2019","D","C","Sun","Sun",2,0,5,3,0,1,0,"Periphyton","Proximity to development roads","",NA,NA,NA,NA
+"3434",3434,"13-WALK-60.1_20191016","13-WALK-60.1","10/16/2019","C","B","Sun","Clouds",5,0,0,2,0,1,0,"Water Clarity","Water clarity","",NA,NA,NA,NA
