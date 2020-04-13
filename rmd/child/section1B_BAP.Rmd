@@ -26,7 +26,6 @@ metrics.df<-read.csv(file.path,stringsAsFactors = FALSE)
 
 ```{r}
 
-#function to pull the ci's (from ZSmith)
 summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
                       conf.interval=.95, .drop=TRUE) {
   library(plyr)
@@ -50,7 +49,7 @@ summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
   )
   
   # Rename the "mean" column    
-  datac <- rename(datac, c("mean" = measurevar))
+  #datac <- rename(datac, c("mean" = measurevar))
   
   datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
   
@@ -70,14 +69,15 @@ metrics.df$pwl_year<-paste0(metrics.df$SH_PWL_ID,"_",metrics.df$year)
 
 
 #call the function on the metrics file
-sum.metrics<-summarySE(metrics.df,measurevar = "MMDH_BIO_ASMT_PROFILE_SCORE",groupvars = c("siteyear"))
+sum.metrics<-summarySE(metrics.df,"MMDH_BIO_ASMT_PROFILE_SCORE",groupvars = c("siteyear"))
 ```
 
-```{r}
+```{r message=FALSE,warning=FALSE}
 
 #pull out the year from each one for labels.
 
 library(stringr)
+library(dplyr)
 sum.metrics$year<-str_sub(sum.metrics$siteyear,-4,-1)
 
 #limit to 2017-2019 for Wallkill study
@@ -98,7 +98,7 @@ sum.metrics$SH_PWL_ID<-as.factor(sum.metrics$SH_PWL_ID)
 ```
 
 
-```{r message=FALSE,warning=FALSE}
+```{r fig.width=10,fig.height=10,message=FALSE,warning=FALSE}
 #Prob shoudl make this into a function, and make it by PWL ID, but this is a good start. 
 
 metrics.l<-unique(sum.metrics$siteyear)
@@ -115,11 +115,11 @@ labels.df <- data.frame(
   y = c(8.75, 6.25, 3.75, 1.25),
   stringsAsFactors = FALSE
 )
-
-bap_p<-ggplot(sum.metrics,aes(siteyear,MMDH_BIO_ASMT_PROFILE_SCORE))+geom_point(stat="identity",aes(shape=SH_PWL_ID))+
-  scale_shape_manual(values = 0:max(l.p))
+library(ggplot2)
+bap_p<-ggplot(sum.metrics,aes(siteyear,mean))+geom_point(stat="identity",aes(shape=SH_PWL_ID))+
+  scale_shape_manual(name="PWL Segment ID",values = 0:max(l.p))
 stat_smooth(method="lm",fullrange=T)
-bap_p+geom_errorbar(aes(ymin=MMDH_BIO_ASMT_PROFILE_SCORE-ci,ymax=MMDH_BIO_ASMT_PROFILE_SCORE+ci),width=.1)+theme_bw() + theme(
+bap_p+geom_errorbar(aes(ymin=mean-ci,ymax=mean+ci),width=.1)+theme_bw() + theme(
   panel.grid.major = element_blank(),
   panel.grid.minor = element_blank(),
   #remove gridlines
@@ -141,6 +141,58 @@ bap_p+geom_errorbar(aes(ymin=MMDH_BIO_ASMT_PROFILE_SCORE-ci,ymax=MMDH_BIO_ASMT_P
   legend.position = c(.11, .81) + #reduces white space around plot edges
     geom_label(aes(x = .5, y = .5), label = "test")
 )+geom_hline(yintercept=2.5,linetype="dashed",color="grey")+geom_hline(yintercept=5,linetype="dashed",color="grey")+geom_hline(yintercept=7.5,linetype="dashed",color="grey")+ylab("Biological Assessment Profile Score")+xlab("Year")+ geom_text(data = labels.df, aes(max(l)+1, y, label = label), color = "black",angle=90)+expand_limits(y=c(0,10),x=c(0:max(l+2)))
+
+```
+
+```{r message=FALSE,warning=FALSE}
+#PThis section is doing the same thing, but trying to make this into a function. 
+
+#might be able to do more of the pre-manipulation as a function, but I'm not sure yet.
+
+bap_plot<-function(df){
+  metrics.l<-unique(df$siteyear)
+l<-length(metrics.l)
+
+pwl.l<-unique(df$SH_PWL_ID)
+l.p<-length(pwl.l)
+
+
+#create labels
+labels.df <<- data.frame(
+  label = c("Non", "Slight", "Moderate", "Severe"),
+  x = max(l)+1,
+  y = c(8.75, 6.25, 3.75, 1.25),
+  stringsAsFactors = FALSE
+)
+library(ggplot2)
+bap_p<<-ggplot(sum.metrics,aes(siteyear,mean))+geom_point(stat="identity",aes(shape=SH_PWL_ID))+
+  scale_shape_manual(values = 0:max(l.p))
+stat_smooth(method="lm",fullrange=T)
+bap_p+geom_errorbar(aes(ymin=mean-ci,ymax=mean+ci),width=.1)+theme_bw() + theme(
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  #remove gridlines
+  axis.title.y = element_text(
+    size = 12,
+    family = "serif",
+    face = "bold"
+  ),
+  axis.title.x = element_blank(),
+  axis.text.x = element_text(
+    angle = 45,
+    hjust = 1,
+    size = 12,
+    family = "serif",
+    face = "bold"
+  ),
+  #rotate text angle
+  plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
+  legend.position = c(.11, .81) + #reduces white space around plot edges
+    geom_label(aes(x = .5, y = .5), label = "test")
+)+geom_hline(yintercept=2.5,linetype="dashed",color="grey")+geom_hline(yintercept=5,linetype="dashed",color="grey")+geom_hline(yintercept=7.5,linetype="dashed",color="grey")+ylab("Biological Assessment Profile Score")+xlab("Year")+ geom_text(data = labels.df, aes(max(l)+1, y, label = label), color = "black",angle=90)+expand_limits(y=c(0,10),x=c(0:max(l+2)))
+}
+
+
 
 ```
 
