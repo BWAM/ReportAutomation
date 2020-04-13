@@ -1,0 +1,149 @@
+---
+title: "Section 1 b) BAP metrics"
+author: 'NYSDEC SMAS : Keleigh Reynolds'
+date: "4/10/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#set up the file path to the metrics data
+file.path=file.path(here::here(),
+          "data",
+          "metrics.csv")
+```
+
+```{r}
+
+
+#Section 1 B) BAP
+
+#Read in the metrics file
+metrics.df<-read.csv(file.path,stringsAsFactors = FALSE)
+#limit to list of unique sites in the chem table
+```
+
+```{r}
+
+#function to pull the ci's (from ZSmith)
+summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
+                      conf.interval=.95, .drop=TRUE) {
+  library(plyr)
+  
+  # New version of length which can handle NA's: if na.rm==T, don't count them
+  length2 <- function (x, na.rm=FALSE) {
+    if (na.rm) sum(!is.na(x))
+    else       length(x)
+  }
+  
+  # This does the summary. For each group's data frame, return a vector with
+  # N, mean, and sd
+  datac <- ddply(data, groupvars, .drop=.drop,
+                 .fun = function(xx, col) {
+                   c(N    = length2(xx[[col]], na.rm=na.rm),
+                     mean = mean   (xx[[col]], na.rm=na.rm),
+                     sd   = sd     (xx[[col]], na.rm=na.rm)
+                   )
+                 },
+                 measurevar
+  )
+  
+  # Rename the "mean" column    
+  datac <- rename(datac, c("mean" = measurevar))
+  
+  datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
+  
+  # Confidence interval multiplier for standard error
+  # Calculate t-statistic for confidence interval: 
+  # e.g., if conf.interval is .95, use .975 (above/below), and use df=N-1
+  ciMult <- qt(conf.interval/2 + .5, datac$N-1)
+  datac$ci <- datac$se * ciMult
+  
+  return(datac)
+}
+```
+
+```{r echo = TRUE,results='asis',message=FALSE,warning=FALSE}
+#create PWL ID and year for the groupvars
+metrics.df$pwl_year<-paste0(metrics.df$SH_PWL_ID,"_",metrics.df$year)
+
+
+#call the function on the metrics file
+sum.metrics<-summarySE(metrics.df,measurevar = "MMDH_BIO_ASMT_PROFILE_SCORE",groupvars = c("siteyear"))
+```
+
+```{r}
+
+#pull out the year from each one for labels.
+
+library(stringr)
+sum.metrics$year<-str_sub(sum.metrics$siteyear,-4,-1)
+
+#limit to 2017-2019 for Wallkill study
+sum.metrics<-sum.metrics %>% 
+  filter(year=="2017"|year=="2018"|year=="2019")
+
+#ASLO need to assign PWL id to each site.
+sum.metrics$SITE_ID<-substr(sum.metrics$siteyear,1,nchar(sum.metrics$siteyear)-5)
+pwl<-metrics.df %>% 
+  select(SITE_ID,SH_PWL_ID)
+
+sum.metrics<-merge(sum.metrics,pwl,by="SITE_ID") %>% 
+  distinct()
+
+#make pwl as factor for mapping/plotting
+
+sum.metrics$SH_PWL_ID<-as.factor(sum.metrics$SH_PWL_ID)
+```
+
+
+```{r message=FALSE,warning=FALSE}
+#Prob shoudl make this into a function, and make it by PWL ID, but this is a good start. 
+
+metrics.l<-unique(sum.metrics$siteyear)
+l<-length(metrics.l)
+
+pwl.l<-unique(sum.metrics$SH_PWL_ID)
+l.p<-length(pwl.l)
+
+
+#create labels
+labels.df <- data.frame(
+  label = c("Non", "Slight", "Moderate", "Severe"),
+  x = max(l)+1,
+  y = c(8.75, 6.25, 3.75, 1.25),
+  stringsAsFactors = FALSE
+)
+
+bap_p<-ggplot(sum.metrics,aes(siteyear,MMDH_BIO_ASMT_PROFILE_SCORE))+geom_point(stat="identity",aes(shape=SH_PWL_ID))+
+  scale_shape_manual(values = 0:max(l.p))
+stat_smooth(method="lm",fullrange=T)
+bap_p+geom_errorbar(aes(ymin=MMDH_BIO_ASMT_PROFILE_SCORE-ci,ymax=MMDH_BIO_ASMT_PROFILE_SCORE+ci),width=.1)+theme_bw() + theme(
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),
+  #remove gridlines
+  axis.title.y = element_text(
+    size = 12,
+    family = "serif",
+    face = "bold"
+  ),
+  axis.title.x = element_blank(),
+  axis.text.x = element_text(
+    angle = 45,
+    hjust = 1,
+    size = 12,
+    family = "serif",
+    face = "bold"
+  ),
+  #rotate text angle
+  plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
+  legend.position = c(.11, .81) + #reduces white space around plot edges
+    geom_label(aes(x = .5, y = .5), label = "test")
+)+geom_hline(yintercept=2.5,linetype="dashed",color="grey")+geom_hline(yintercept=5,linetype="dashed",color="grey")+geom_hline(yintercept=7.5,linetype="dashed",color="grey")+ylab("Biological Assessment Profile Score")+xlab("Year")+ geom_text(data = labels.df, aes(max(l)+1, y, label = label), color = "black",angle=90)+expand_limits(y=c(0,10),x=c(0:max(l+2)))
+
+```
+
+
+
+
