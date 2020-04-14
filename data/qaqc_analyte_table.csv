@@ -1,0 +1,20 @@
+Analytes,Analytical Lab,Standard Method,Precision,Accuracy,Cal-initial,cal-ongoing,cal-blanks,Method Detection Limit,Reporting Limit
+Temperature,in situ,2550 B,± 1oC,± 1.5oC,Factory Set,~,~,~,~
+Dissolved Oxygen,in situ,4500-O G,± 1%,± 2%,Daily,~,~,~,~
+pH,in situ,4500-H+B,± .05 SU,± .2 SU,Weekly,~,~,~,~
+Salinity,in situ,Calculated,0.001 ppt,± 1%,N/A,~,~,~,~
+Specific Conductance,in situ,2510 B,± 1µs/cm,± 1%,Weekly,~,~,~,~
+Ammonia,ALS,D6919-09,^,± 20%,As needed,Every 10,Every 10,0.008 mg/L,0.01 mg/L
+Total Kjeldahl Nitrogen,ALS,EPA 351.2,^,± 20%,Daily,Every 10,Every 10,0.08 mg/L,0.1 mg/L
+"Nitrogen, Nitrate",ALS,EPA 353.2,^,± 20%,Daily,Every 10,Every 10,0.02 mg/L,0.05 mg/L
+"Nitrogen, Total",ALS,Calculated,^,,,,,,
+Total Phosphorus,ALS,EPA 365.1,^,± 20%,Daily,Every 10,Every 10,0.002 mg/L,0.003 mg/L
+Ortho-phosphate,ALS,EPA 365.1,^,± 20%,Daily,Every 10,Every 10,0.001 mg/L,0.005 mg/L
+Total Dissolved Solids,ALS,SM 2540C,^,± 20%,Daily,Every 20,Every 20,4.0 mg/L,10 mg/L
+Turbidity,ALS,EPA 180.1,^,± 10%,Daily,Every 10,Every 10,0.06 NTU,0.1 NTU
+Dissolved Organic Carbon,ALS,5310C,^,± 20%,As needed,Ever 10,Every 10,0.4 mg/L,10 mg/L
+Alkalinity,ALS,SM 2320B,^,± 20%,Daily,Every 10,Every 10,1.0 mg/L,2.0 mg/L
+Hardness,ALS,SM 2340C,^,± 20%,Daily,Every 10,Every 10,0.3 mg/L,2.0 mg/L
+Calcium,ALS,EPA 200.7,^,± 20%,Daily,Every 10,Every 10,0.1 mg/L,1.0 mg/L
+Magnesium,ALS,EPA 200.7,^,± 20%,Daily,Every 10,Every 10,0.04 mg/L,1.0 mg/L
+Potassium ,ALS,EPA 200.7,^,± 20%,Daily,Every 10,Every 10,0.06 mg/L,2.0 mg/L
