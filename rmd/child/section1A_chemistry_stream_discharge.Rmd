@@ -13,58 +13,39 @@ file.path=file.path(here::here(),
           "data",
           "chemistry.csv")
 
-file.path.s=file.path(here::here(),
-          "data",
-          "sites.csv")
+#for the table
+file.path.1<-file.path(here::here(),
+                       "data",
+                       "qaqc_analyte_table.csv")
+
 ```
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
 #Read in the data needed for the section
 
-
-sites<-read.csv(file.path.s,stringsAsFactors = FALSE)
+#analyte table
+analyte<-read.csv(file.path.1,stringsAsFactors = FALSE)
 
 #read in the chemistry file
 chem_all<-read.csv(file.path,stringsAsFactors = FALSE)
+
           
 ```
 
-```{r include=FALSE,message=FALSE,warning=FALSE}
-#Table 1
-#renames column in the sites table to match
-library(dplyr)
-sites<-sites %>% 
-  rename("SITE_ID"=SH_SITE_ID)
+## Analyte Table
 
-table1<-merge(chem_all,sites,by="SITE_ID") %>% 
-select(SITE_ID,SH_RIVMILE,SH_PWL_ID.x,SH_WQ_STANDARD.x,SH_DESC,SH_LATITUDE.x,SH_LONGITUDE.x) %>% 
-  distinct()
+```{r}
+#create table for the analyte list/precision method etc
+tl.1<-analyte %>% 
+  rename("Analytical Lab"=Analytical.Lab,"Standard Method"=Standard.Method,"Calibration: Initial"=Cal.initial,
+         "Calibration: Ongoing"=cal.ongoing,"Calibration: Blanks"=cal.blanks,"Method Detection Limit"=Method.Detection.Limit,"Reporting Limit"=Reporting.Limit)
 
-table1<-table1 %>% rename("Location ID"=SITE_ID,
-                  "Rivermile"=SH_RIVMILE,
-                  "WI/PWL"=SH_PWL_ID.x,
-                  "Waterbody Classification"=SH_WQ_STANDARD.x,
-                  "Description"=SH_DESC,
-                  "Latitude"=SH_LATITUDE.x,
-                  "Longitude"=SH_LONGITUDE.x)
-
-table1$Description<-toupper(table1$Description)
+tl.1<-flextable(tl.1) %>% font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% theme_zebra() %>% autofit()
+tl.1<-align(tl.1, i = NULL, j =(2:10) , align = "center", part = "all")
+tl.1
 
 
 ```
-
-
-```{r results='asis',message=FALSE,warning=FALSE}
-library(flextable)
-
-
-tl<-flextable(table1) %>% font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% theme_zebra() %>% autofit()
-tl<-align(tl, i = NULL, j =(2:4) , align = "center", part = "all")
-tl
-
-
-```
-
 
 
 
