@@ -58,7 +58,7 @@ userp_contact_fig(UserP_all, bar.width = 0.7)
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
 #create table of mean scores for Variables influencing recreation
-userp_variable_table<-function(df){
+userp_variables_table<-function(df){
 Variables<-df%>%
   group_by(SITE_ID)%>%
   summarize(`Water Clarity`=round(mean(UPFDH_WATER_CLARITY, na.rm = TRUE), digits=0),
@@ -71,7 +71,7 @@ Variables<-df%>%
 
 final_table<-flextable(Variables)%>%
   theme_zebra()%>%
-  set_header_labels(SITE_ID="Location \n ID", `Water Clarity`="Water \n Clarity", `Suspended Phytoplankton`="Suspended \nPhytoplankton", Periphyton="Periphyton", Odor="Odor", Trash="Trash", `Discharge Pipes`= "Dishcarge \n Pipes")%>%
+  set_header_labels(SITE_ID="Site \n ID", `Water Clarity`="Water \n Clarity", `Suspended Phytoplankton`="Suspended \nPhytoplankton", Periphyton="Periphyton", Odor="Odor", Trash="Trash", `Discharge Pipes`= "Dishcarge \n Pipes")%>%
   align(j=2:8, align="center", part="all")%>%
   width(j = c(2,4:5,8), width = 1)%>%
   width(j = 3, width = 1.2)%>%
@@ -85,13 +85,39 @@ userp_variable_table(UserP_all)
 ```
 
 ```{r}
-# function for graph of Dominant Factor influencing recreation
+# function for table of Dominant Factor influencing recreation
+userp_dominant_variable_table<-function(df, fontsize){
+DominantP<-UserP_all%>%
+  filter(UPFDH_PRIMARY_VARIABLE!="")%>%
+group_by(SITE_ID, UPFDH_PRIMARY_VARIABLE)%>%
+  count()%>%
+  group_by(SITE_ID)%>%
+  filter(n == max(n))%>%
+  group_by(SITE_ID)%>%
+  summarize(Primary=paste0(UPFDH_PRIMARY_VARIABLE, collapse = ", "))
+  
+DominantS<-UserP_all%>%
+  filter(UPFDH_SECONDARY_VARIABLE!="")%>%
+group_by(SITE_ID, UPFDH_SECONDARY_VARIABLE)%>%
+  count()%>%
+  group_by(SITE_ID)%>%
+  filter(n == max(n))%>%
+  group_by(SITE_ID)%>%
+  summarize(Secondary=paste0(UPFDH_SECONDARY_VARIABLE, collapse=", "))
 
-Dominant<-UserP_all%>%
-  mutate(Primary=ifelse(UPFDH_PRIMARY_VARIABLE=="Water Clarity", yes=1, no=ifelse(UPFDH_PRIMARY_VARIABLE=="Trash", yes=2, no=ifelse(UPFDH_PRIMARY_VARIABLE=="Periphyton", yes=4, no=ifelse(UPFDH_PRIMARY_VARIABLE=="Odor", yes=6, no=ifelse(UPFDH_PRIMARY_VARIABLE=="Discharge/Pipes", yes=7, no=ifelse(UPFDH_PRIMARY_VARIABLE=="Proximity_to_Development_Roads", yes=5, no=ifelse(UPFDH_PRIMARY_VARIABLE=="Other", yes=9, no=ifelse(UPFDH_PRIMARY_VARIABLE=="None", yes=0, no=ifelse(UPFDH_PRIMARY_VARIABLE=="Macrophyte", yes=3, no=ifelse(UPFDH_PRIMARY_VARIABLE=="Suspended_Phytoplankton", yes=8, no= NA)))))))))),
-         Secondary=ifelse(UPFDH_SECONDARY_VARIABLE=="Water clarity", yes=1, no=ifelse(UPFDH_SECONDARY_VARIABLE=="Trash", yes=2, no=ifelse(UPFDH_SECONDARY_VARIABLE=="Periphyton", yes=4, no=ifelse(UPFDH_SECONDARY_VARIABLE=="Odor", yes=6, no=ifelse(UPFDH_SECONDARY_VARIABLE=="Discharge/Pipes", yes=7, no=ifelse(UPFDH_SECONDARY_VARIABLE=="Proximity to development roads", yes=5, no=ifelse(UPFDH_SECONDARY_VARIABLE=="Other", yes=8, no=ifelse(UPFDH_SECONDARY_VARIABLE=="None", yes=0, no=ifelse(UPFDH_SECONDARY_VARIABLE=="Macrophyte", yes=3, no= NA))))))))))%>%
-  select(SITE_ID, Primary, Secondary)%>%
-  pivot_longer(-SITE_ID, names_to = "Contact Type", values_to = "value")
+Dominant<-left_join(DominantP, DominantS, by="SITE_ID")
+
+final_table<-flextable(Dominant)%>%
+  theme_zebra()%>%
+  align(j=1:3, align="left", part="all")%>%
+  fontsize(size = fontsize, part = "body")%>%
+  autofit()
+
+final_table
+}
 ```
 
-None, Macrophyte
+```{r}
+userp_dominant_variable_table(UserP_all, fontsize = 10)
+```
+
