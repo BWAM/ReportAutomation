@@ -1,0 +1,567 @@
+"station","Sediment.Collection.Test.Date","Sediment.Assessment","Porewater.Assessment","Sediment.EC50....","Porewater.EC50....","stationID","Latitude","Longitude"
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"","","","",NA,"","",NA,NA
+"Allegheny River @ Salamanca 02010023 (ALGY-08A) [ROUTINE]","07-19-12/08-29-12","Slightly Toxic","Non-toxic","34.31","> 100","2010023",42.156667,-78.715833
+"Allegheny River @ Salamanca 02010023 (ALGY-08A) [ROUTINE]","08-07-07/12-19-07","Slightly Toxic","N/A","39.85","N/A","2010023",42.156667,-78.715833
+"Alplaus Kill @ West Charlton 12051117 (ALPL-16.1) [INTENSIVE]","09-22-16/12-06&07-16","Slightly Toxic","Non-toxic","51.47","> 100","12051117",42.9745,-74.0199
+"Anthony Kill @ Mechanicville 11011101 (ANTH-01) [INTENSIVE]","09-11-12/11-16-12","Slightly Toxic","Non-toxic","33.71","> 100","11011101",42.90916824,-73.68916321
+"Ausable River @ Ausable 10041102 (SABL-13) [INTENSIVE]","08-18-09/01-12 & 14-10","Slightly Toxic","Non-toxic","29.07","> 100","10041102",44.55889,-73.44917
+"Ballou Creek @ Utica 12051601 (BALU-0.1) [INTENSIVE]","09-20-16/12-06&07-16","Moderately Toxic","N/A","28.36","N/A","12051601",43.1017,-75.2003
+"Basher Kill @ Cuddebackville 14022101 (BSHR-01) [INTENSIVE]","09-08/09-28 & 29-05","Slightly Toxic","Non-toxic","27.04","> 100","14022101",41.4538888,-74.5888888
+"Basher Kill @ Cuddebackville 14022104 (BSHR-01) [INTENSIVE]","10-21-10/10-28 & 29-10","Non-toxic","Non-toxic","53.09","> 100","14022104",41.48468,-74.57228
+"Basic Creek @ Freehold 13092100 (BASC-07) [INTENSIVE]","07-16-08/01-06 & 08-09","Slightly Toxic","Non-toxic","25.37","> 100","13092100",42.35947,-74.05067
+"Batavia Kill @ Prattsville 12022301 (BATV-14) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","12022301",42.30389,-74.4175
+"Batten Kill @ Center Falls 11031011 (BATT-01) [INTENSIVE]","09-06-07/01-03 & 04-08","Moderately Toxic","Non-toxic","16.47","> 100","11031011",43.09860992,-73.45805359
+"Bear Creek @ Adams 03032209 (BARA-11.5) [INTENSIVE]","08-17-16/11-29&30-16","Non-toxic","Non-toxic","64.2","> 100","3032209",43.73607,-75.97264
+"Bear Gutter Creek @ Armonk 17025100 (KEND-01) [INTENSIVE]","09-09-14/09-17-14","Severely Toxic","Non-toxic","21.18","> 100","17025100",41.114134,-73.723948
+"Beaver Brook-Oyster Bay [SCREENING]","09-11-18/10-30 & 31-18","Non-toxic","Non-toxic","76.55","> 100","17-BVBR-0.3",40.878102,-73.565952
+"Beaver Brook @ Mill Neck 17024101 (BVBR-01) [INTENSIVE]","09-09-14/09-17-14","Slightly Toxic","Non-toxic","69.64","> 100","17024101",40.87900161,-73.56580352
+"Beaver Brook @ Mill Neck 17024101 (BVBR-01) [INTENSIVE]","10-06-09/01-08-10","Slightly Toxic","Non-toxic","31.42","> 100","17024101",40.87900161,-73.56580352
+"Beaver Kill @ Cooks Falls 14032110 (BEAV-06) [INTENSIVE]","09-09-05/09-28 & 29-05","Non-toxic","Non-toxic","53.2","> 100","14032110",41.9463888,-74.9797222
+"Beaver River @ Naumburg 08011201 (BLCK-10) [INTENSIVE]","08-19-08/01-13 & 16-09","Non-toxic","N/A","78.32","N/A","8011201",43.89806,-75.49389
+"Beaverdam Creek @ Brookhaven 17012702 (BVDC-01) [INTENSIVE]","07-12-04/10-25-04","Slightly Toxic","Non-toxic","27.6","> 100","17012702",40.771,-72.917
+"Benedict Creek-Inlet","09-12-17/11-07 & 08-17","Non-toxic","Toxic","74.11","78.91","08-BENE-0.2",43.67611,-74.70834
+"Betty Brook @ Jefferson 12023100 (BETY-01) [INTENSIVE]","08-16-11/08-24-11","Non-toxic","Non-toxic","67.69","> 100","12023100",42.489,-74.509
+"Bidwells Creek @ York 04021601 (BIDW-1.4) [INTENSIVE]","07-29-15/09-24&25-15","Slightly Toxic","Non-toxic","48.32","> 100","4021601",42.833967,-77.89615
+"Big Brook @ Bennettsville 06011202 (BVIL-01) [INTENSIVE]","07-16-09/09-23 & 24-09","Non-toxic","Non-toxic","50.45","> 100","6011202",42.25749969,-75.44860839
+"Big Choconut Creek @ Vestal 06031600 (CHOC-01) [INTENSIVE]","07-15-09/09-23 & 24-09","Non-toxic","Non-toxic","64.13","> 100","6031600",42.08277893,-76.06388854
+"Big Creek @ Hartford 10053201 (BIGC-01) [INTENSIVE]","08-20-09/01-12 & 14-10","Non-toxic","Non-toxic","49.08","> 100","10053201",43.35626983,-73.4701004
+"Big Creek @ Hartford 10053205 (BIGC-01) [INTENSIVE]","06-03-14/07-14-14","Slightly Toxic","Non-toxic","78.32","> 100","10053205",43.3599,-73.4219
+"Big Creek @ Hornell 05033401 (BGCK-01) [INTENSIVE]","09-02-08/01-13 & 16-09","Slightly Toxic","N/A","26.18","N/A","5033401",42.353,-77.6598
+"Big Sister Creek @ Pontiac 01041208 (BSIS-01A) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","1041208",42.6242,-78.96895
+"Big Spring Creek @ Mumford 04022401 (BSPR-0.6) [INTENSIVE]","07-30-15/09-24&25-15","Moderately Toxic","Non-toxic","44.64","> 100","4022401",42.991944,-77.866183
+"Bishop Brook @ West Fort Ann 10054100 (BISH-01) [INTENSIVE]","08-20-09/01-12 & 14-10","Non-toxic","Non-toxic","52.92","> 100","10054100",43.40399932,-73.53900146
+"Black Creek @ Belfast 04031502 (BLCB-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","4031502",42.31607,-78.13316
+"Black Creek @ Philadelphia 09065301 (BLAP-01) [INTENSIVE]","08-11-05/09-07 & 21-05","Non-toxic","Non-toxic","50.47","> 100","9065301",44.1486111,-75.7005555
+"Black Creek @ South Hammond 09054107 (BLAH-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","9054107",44.39335,-75.72928
+"Black River @ Dexter 08010001 (BLCK-16) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","8010001",44.0044444,-76.0452778
+"Black River @ Enos 08010107 (BLCK-A) [INTENSIVE]","09-19-13/01-07&08-14","Slightly Toxic","Non-toxic","67.36","> 100","8010107",43.41083,-75.09564
+"Black River @ Hawkinsville 08010090 (BLCK-B) [INTENSIVE]","08-20-08/01-13 & 16-09","Non-toxic","Toxic","71.39","76.4","8010090",43.4938888,-75.2761111
+"Black River @ Lewis 10042401 (BLAR-01) [INTENSIVE]","08-18-09/01-12 & 14-10","Non-toxic","Non-toxic","43.38","> 100","10042401",44.23400115,-73.51000213
+"Black River @ Stephentown 13013203 (BLAG-00) [INTENSIVE]","09-27-13/01-14&16-14","Slightly Toxic","Non-toxic","79.31","> 100","13013203",42.57139,-73.40892
+"Blakesly Hollow @ Olean 02012400 (BLHL-01) [INTENSIVE]","07-24-12/08-29-12","Moderately Toxic","Non-toxic","17.11","> 100","2012400",42.11237,-78.43509
+"Blakesly Hollow @ Olean 02012400 (BLHL-01) [INTENSIVE]","07-28-11/08-03&04-11","Moderately Toxic","Non-toxic","2.8","> 100","2012400",42.11237,-78.43509
+"Blind Brook @ Rye 17022503 (BLND-04) [INTENSIVE]","09-14-04/10-27 & 28-04","Slightly Toxic","Non-toxic","24","> 100","17022503",40.9830555,-73.6872222
+"Blind Brook @ Rye 17022503 (BLND-04) [INTENSIVE]","10-08-09/01-08-10","Slightly Toxic","Non-toxic","39.44","> 100","17022503",40.9830555,-73.6872222
+"Boquet River @ Elizabethtown 10041230 (BOQT-04) [INTENSIVE]","06-18-14/07-14-14","Slightly Toxic","Non-toxic","70.3","> 100","10041230",44.21778,-73.58556
+"Boquet River @ Willsboro 10041203 (BOQT-07) [INTENSIVE]","08-10-04/11-02 & 04-04","Moderately Toxic","Non-toxic","3.35","> 100","10041203",44.363611,-73.391667
+"Bourne Creek @ Westfield 01053400 (BOUR-0.4) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","1053400",42.35706,-79.5515
+"Brandy Brook @ Waddington 09011102 (BRND-2.5) [INTENSIVE]","09-22-15/11-18&19-15","Slightly Toxic","Non-toxic","62.35","> 100","9011102",44.84972,-75.16417
+"Bronx River-New York [SCREENING]","09-11-18/10-30 & 31-18","Slightly Toxic","Non-toxic","54.12","> 100","17-BRNX-5.6",40.87978778,-73.86948005
+"Bronx River-White Plains [SCREENING]","09-11-18/10-30 & 31-18","Non-toxic","Non-toxic","79.99","> 100","17-BRNX-17.3",41.02396833,-73.78279441
+"Bronx River @ Bronx 17023307 (BRNX-04) [INTENSIVE]","09-14-04/10-27 & 28-04","Moderately Toxic","Non-toxic","9.2","> 100","17023307",40.8783333,-73.8691666
+"Bronx River @ Tuckahoe 17023312 (BRNX-03) [INTENSIVE]","09-12-14/09-17-14","Moderately Toxic","Non-toxic","46.58","> 100","17023312",40.959451,-73.821795
+"Buffalo Creek @ Arcade 01032337 (BUFC-37.8) [INTENSIVE]","07-19-16/08-17&18-16","Moderately Toxic","Non-toxic","29.92","> 100","1032337",42.64,-78.462
+"Buffalo Creek @ Gardenville 01032311 (BUFC-03) [INTENSIVE]","08-23-06/11-08 & 14-06","Severely Toxic","Non-toxic","0.92","> 100","1032311",42.854722,-78.754722
+"Buffalo River @ Buffalo 01031002 (BUFF-07) [ROUTINE]","08-02-11/08-10-11","Slightly Toxic","Non-toxic","29.67","> 100","1031002",42.861667,-78.867778
+"Buffalo River @ Buffalo 01031002 (BUFF-07) [ROUTINE]","08-23-06/11-08 & 14-06","Moderately Toxic","Non-toxic","11.41","> 100","1031002",42.861667,-78.867778
+"Buffalo River @ Buffalo 01031002 (BUFF-07) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","1031002",42.861667,-78.867778
+"Butternut Creek-Morris [SCREENING]","08-09-18/08-28-18","Non-toxic","Non-toxic","90","> 100","06-BTNT_T-12.0",42.51171569,-75.27616669
+"Butternut Creek @ Butternuts 06012102 (BTNT-01) [INTENSIVE]","10-05-04/12-07 & 08-04","Moderately Toxic","Non-toxic",NA,NA,"6012102",42.4208333,-75.3602777
+"Butternut Creek @ Lafayette 07034621 (BNUT-01) [INTENSIVE]","08-21-07/12-12 & 13-07","Moderately Toxic","Non-toxic","3.92","> 100","7034621",42.9113888,-76.0708333
+"Callicoon Creek @ Callicoon 14011301 (CALL-0.2) [INTENSIVE]","08-26-15/10-07&08-15","Slightly Toxic","Toxic","59.73","84.63","14011301",41.7644444,-75.0558333
+"Cameron Creek @ Cameron 05013100 (USTE-01) [INTENSIVE]","08-06-13/01-07&08-14","Non-toxic","Non-toxic","82.33","> 100","5013100",42.19956,-77.40678
+"Canacadea Creek-Hornell","08-09-17/11-21-17","Moderate","Non-toxic","26.62","> 100","05-CDEA-1.8",42.33567,-77.68267
+"Canacadea Creek @ Hornell 05033302 (CDEA-01) [INTENSIVE]","09-02-08/01-13 & 16-09","Non-toxic","Non-toxic","47.25","> 100","5033302",42.33472,-77.68278
+"Canadaway Creek @ Cassadaga 01051214 (CWAY-14.5) [INTENSIVE]","07-20-16/08-17&18-16","Moderately Toxic","Non-toxic","34.7","> 100","1051214",42.3672,-79.23686
+"Canadaway Creek @ Dunkirk 01051200 (CWAY-01) [INTENSIVE]","08-23-06/11-08 & 14-06","Moderately Toxic","Non-toxic","13.58","> 100","1051200",42.475556,-79.365556
+"Canajoharie Creek @ Marshville 12011205 (CAJO-5.1) [INTENSIVE]","09-21-16/12-06&07-16","Moderately Toxic","Non-toxic","38.23","> 100","12011205",42.87611,-74.60333
+"Canaseraga Creek @ Morris 04041001 (RAGA-06) [INTENSIVE]","09-27-05/11-08 & 09-05","Moderately Toxic","Non-toxic","2.19","> 100","4041001",42.736667,-77.840556
+"Canaseraga Creek @ Sonyea 04041009 (RAGA-05) [INTENSIVE]","07-29-15/09-24&25-15","Slightly Toxic","Non-toxic","54.29","> 100","4041009",42.68074,-77.78449
+"Canastota Creek @ Canastota 07034701 (TOTA-01B) [INTENSIVE]","08-07-12/12-18-12","Non-toxic","Non-toxic","75.61","> 100","7034701",43.08877945,-75.75538635
+"Canastota Creek @ Canastota 07034701 (TOTA-01B) [INTENSIVE]","09-02-11/09-14&15-11","Moderately Toxic","Non-toxic","16.21","> 100","7034701",43.08877945,-75.75538635
+"Caneadea Creek @ Caneadea 04031301 (CNEA-02) [INTENSIVE]","09-27-05/11-08-05","Slightly Toxic","N/A","21.98","N/A","4031301",42.3830555,-78.1547222
+"Canisteo River-Adrian","08-09-17/11-21-17","Moderate","Toxic","36.25","53.64","05-STEO-28.7",42.25261,-77.51772
+"Canisteo River @ Canisteo 05032134 (STEO-03A) [INTENSIVE]","09-02-08/01-13 & 16-09","Non-toxic","Non-toxic","62.16","> 100","5032134",42.2761111,-77.6016666
+"Canisteo River @ Derby Switch 05032110 (STEO-08) [INTENSIVE]","08-06-13/01-07&08-14","Non-toxic","Non-toxic","83.59","> 100","5032110",42.11642,-77.29933
+"Canisteo River @ Derby Switch 05032110 (STEO-08) [INTENSIVE]","09-03-08/01-13 & 16-09","Non-toxic","Non-toxic","46.09","> 100","5032110",42.11642,-77.29933
+"Carlls River @ Babylon 17012902 (CARL-02) [INTENSIVE]","09-10-14/09-17-14","Slightly Toxic","Non-toxic","62.94","> 100","17012902",40.70199966,-73.32849884
+"Carlls River @ Babylon 17012902 (CARL-02) [INTENSIVE]","10-07-09/01-08-10","Non-toxic","Non-toxic","47.06","> 100","17012902",40.70199966,-73.32849884
+"Carls River-Babylon [SCREENING]","09-12-18/10-30 & 31-18","Non-toxic","Non-toxic","83.05","> 100","17-CARL-1.8",40.71556,-73.32917
+"Carmans River-Brookhaven [SCREENING]","09-12-18/10-30 & 31-18","Moderately Toxic","Non-toxic","31.01","> 100","17-CARM-9.0",40.83,-72.9069
+"Carmans River @ Yaphank 17012307 (CARM-02) [INTENSIVE]","07-12-04/10-25-04","Severely Toxic","Non-toxic","0.998","> 100","17012307",40.8286111,-72.9055555
+"Caroga Creek @ Palatine 12011901 (CARO-01) [INTENSIVE]","08-03-06/11-29 & 30-06","Moderately Toxic","Non-toxic","3.42","> 100","12011901",42.9680555,-74.6275
+"Cascade Brook @ Keene 10043101 (CADE-01) [INTENSIVE]","08-11-04/10-27 & 28-04","Non-toxic","Non-toxic","43.23","> 100","10043101",44.2619444,-73.7961111
+"Cassadaga Creek @ Ross Mills 02022212 (CASS-03) [INTENSIVE]","08-07-07/12-19-07","Moderately Toxic","Non-toxic","19.69","> 100","2022212",42.1547222,-79.2233333
+"Castle Creek @ Hinmans Corners 06022401 (CSTL-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","6022401",42.16889953,-75.89969635
+"Catatonk Creek @ Catatonk 06032102 (CATA-03) [INTENSIVE]","07-30-14/09-03-14","Slightly Toxic","Toxic","69.36","97.56","6032102",42.1427777,-76.295
+"Catatonk Creek @ Catatonk 06032102 (CATA-03) [INTENSIVE]","10-06-04/12-07 & 08-04","Slightly Toxic","Non-toxic","22.58","> 100","6032102",42.1427777,-76.295
+"Catfish Creek @ Demster 03031602 (CATF-01) [INTENSIVE]","08-07-12/12-18-12","Moderately Toxic","Non-toxic","16.1","> 100","3031602",43.49888992,-76.31667328
+"Cattaraugus Creek @ Irving 01041302B (CATT-09) [INTENSIVE]","08-01-11/08-10-11","Non-toxic","Non-toxic","52.93","> 100","01041302B",42.568333,-79.104444
+"Cattaraugus Creek @ Irving 01041302B (CATT-09) [INTENSIVE]","08-23-06/11-08 & 14-06","Moderately Toxic","Non-toxic","9.13","> 100","01041302B",42.568333,-79.104444
+"Cayadutta Creek @ Sammonsville 12011105 (CAYA-02) [INTENSIVE]","07-29-10/08-11-10","Slightly Toxic","Non-toxic","34.86","> 100","12011105",42.986667,-74.430278
+"Cayadutta Creek @ Sammonsville 12011105 (CAYA-02) [INTENSIVE]","08-15-11/08-24-11","Non-toxic","Non-toxic","59.27","> 100","12011105",42.986667,-74.430278
+"Cayuga Creek @ Cheektowaga 01032204 (YUGA-02) [INTENSIVE]","08-23-06/11-08 & 14-06","Moderately Toxic","Toxic","2.71","65.13","1032204",42.883889,-78.754444
+"Cayuga Lake Inlet @ Ithaca 07053504 (CAYG-02) [INTENSIVE]","08-21-07/12-12 & 13-07","Moderately Toxic","Non-toxic","18.1","> 100","7053504",42.4152777,-76.5297222
+"Cayuta Creek @ Van Etten 06031715 (CAYU-00) [INTENSIVE]","07-15-09/09-23 & 24-09","Non-toxic","Non-toxic","40.59","> 100","6031715",42.20299911,-76.57399749
+"Cazenovia Creek @ Buffalo 01032101B (CAZE-05A) [INTENSIVE]","08-23-06/11-08 & 14-06","Moderately Toxic","Non-toxic","9.61","> 100","01032101B",42.8505556,-78.8091667
+"Chadakoin River @ Falconer 02023102 (CHAD-01) [INTENSIVE]","07-23-12/08-29-12","Non-toxic","Non-toxic","49.12","> 100","2023102",42.112222,-79.204167
+"Champlain Canal @ Comstock 10052204 (CHMP-01) [INTENSIVE]","08-20-09/01-12 & 14-10","Non-toxic","Non-toxic","46.1","> 100","10052204",43.48400115,-73.42456054
+"Charlotte Creek @ Davenport 06011509 (CHAR-00) [INTENSIVE]","07-16-09/09-23 & 24-09","Non-toxic","Non-toxic","53.24","> 100","6011509",42.46861,-74.88519
+"Chateaugay River @ Cooks Mill 09021102 (CGAY-01) [INTENSIVE]","08-10-05/09-07 & 21-05","Slightly Toxic","Non-toxic","31.76","> 100","9021102",44.9630555,-74.1322222
+"Chautauqua Creek @ Barcelona 01051301 (CHAU-01) [INTENSIVE]","08-01-11/08-10-11","Non-toxic","Non-toxic","48.14","> 100","1051301",42.3375,-79.601111
+"Cheechunk Creek-Goshen","08-02-17/11-15 & 16-17","Non-toxic","Non-toxic","65.38","> 100","13-WCHEE-0.6",41.40873,-74.37248
+"Chemung River @ Chemung 05010005 (CHEM-09) [ROUTINE]","09-03-08/01-13 & 16-09","Slightly Toxic","Non-toxic","31.06","> 100","5010005",42.002778,-76.635
+"Chemung River @ Chemung 05010005 (CHEM-09) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","5010005",42.002778,-76.635
+"Chenango River @ Binghamton 06021001 (NANG-17) [ROUTINE]","07-15-09/09-23 & 24-09","Slightly Toxic","Non-toxic","30.88","> 100","6021001",42.103056,-75.915
+"Chenango River @ Binghamton 06021001 (NANG-17) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","6021001",42.103056,-75.915
+"Chenango River @ Eagleville 06021088 (NANG-00) [INTENSIVE]","07-14-09/09-23 & 24-09","Slightly Toxic","Non-toxic","26.84","> 100","6021088",42.8825,-75.6386111
+"Chenango River @ Eagleville 06021088 (NANG-00) [INTENSIVE]","10-06-04/12-07 & 08-04","Moderately Toxic","Non-toxic","18.38","> 100","6021088",42.8825,-75.6386111
+"Chenango River @ Norwich 06021053 (NANG-04) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","6021053",42.553475,-75.523174
+"Chester Brook @ Chestertown 11042302 (CHST-00) [INTENSIVE]","09-10-12/11-16-12","Non-toxic","Non-toxic","82.35","> 100","11042302",43.65599823,-73.8010025
+"Cincinnati Creek @ Barneveld 12032103 (CINC-01A) [INTENSIVE]","08-02-06/11-29 & 30-06","Non-toxic","Non-toxic","54.48","> 100","12032103",43.2727778,-75.1872222
+"Clear Creek @ Arcade 01042500 (CLEA-0.1) [INTENSIVE]","07-19-16/08-17&18-16","Slightly Toxic","Non-toxic","42.24","> 100","1042500",42.53417,-78.42139
+"Clear Creek @ Ellington 02022307 (CLER-02) [INTENSIVE]","07-24-12/08-29-12","Slightly Toxic","Non-toxic","39.42","> 100","2022307",42.25764847,-79.15351105
+"Clear Creek @ Freedom 01042503 (CLEA-00) [INTENSIVE]","08-02-11/08-10-11","Non-toxic","Non-toxic","62.14","> 100","1042503",42.50491,-78.38789
+"Clear Creek @ Iroquois 01042301 (CATT-08B) [INTENSIVE]","08-23/11-08 & 14-06","Moderately Toxic","Non-toxic","10.51","> 100","1042301",42.5427777,-79.015
+"Cobleskill Creek @ Central Bridge 12022101 (COBL-07) [INTENSIVE]","08-16-11/08-24-11","Slightly Toxic","N/A","28.84","N/A","12022101",42.70722,-74.33833
+"Coeymans Creek @ Coeymans 13011401 (COEY-10) [INTENSIVE]","09-26-13/01-14&16-14","Slightly Toxic","Non-toxic","78.86","> 100","13011401",42.4777,-73.79391
+"Cohocton River-Wallace","08-09-17/11-21-17","Moderate","Non-toxic","32.66","> 100","05-COHO-33.6",42.46141,-77.4724
+"Cohocton River @ Cohocton 05021038 (COHO-03) [INTENSIVE]","06-07-13/01-07&08-14","Non-toxic","Non-toxic","86.68","> 100","5021038",42.49456,-77.50358
+"Cohocton River @ Curtis 05021006 (COHO-09) [INTENSIVE]","09-02-08/01-13 & 16-09","Non-toxic","Non-toxic","49.93","> 100","5021006",42.2063888,-77.1647222
+"Cold Creek @ Fillmore 04031401 (CLCK-01) [INTENSIVE]","08-11-10/08-25-10","Non-toxic","Non-toxic","67.47","> 100","4031401",42.4642,-78.1127
+"Conewango Creek @ Kennedy 02021020 (WANG-01) [INTENSIVE]","07-24-12/08-29-12","Slightly Toxic","Non-toxic","37.79","> 100","2021020",42.155556,-79.101667
+"Conewango Creek @ Kennedy 02021020 (WANG-01) [INTENSIVE]","08-07-07/12-19-07","Slightly Toxic","Non-toxic","39.83","> 100","2021020",42.155556,-79.101667
+"Conklin Gully @ Naples 07047100 (CONK-01) [INTENSIVE]","08-08-12/12-18-12","Non-toxic","Non-toxic","72.97","> 100","7047100",42.63499832,-77.36699677
+"Connetquot Brook @ Oakdale 17012805 (CONQ-01) [INTENSIVE]","07-12-04/10-25-04","Slightly Toxic","Non-toxic","23.9","> 100","17012805",40.7648,-73.1543
+"Corbeau Creek @ Coopersville 10022201 (CORB-01) [INTENSIVE]","08-10-04/11-02-04","Moderately Toxic","N/A","17.58","N/A","10022201",44.9377777,-73.4205555
+"Coulter Brook @ Bovina Center 14043100 (COUL-0.1) [INTENSIVE]","08-25-15/10-07&08-15","Moderately Toxic","Non-toxic","34.98","> 100","14043100",42.256682,-74.771258
+"Cowanesque River @ Lindley 05032201 (COWS-01) [INTENSIVE]","09-03-08/01-13 & 16-09","Non-toxic","Non-toxic","49.08","> 100","5032201",42.00172,-77.1271
+"Crawford Creek @ Oramel 04031H00 (CRAW-0.4) [INTENSIVE]","07-28-15/09-24&25-15","Slightly Toxic","Non-toxic","47.17","> 100","04031H00",42.36873,-78.13921
+"Cromline Creek @ Washingtonville 13012701 (CROM-01) [INTENSIVE]","07-15-08/01-06 & 08-09","Slightly Toxic","Non-toxic","39.4","> 100","13012701",41.43059,-74.20133
+"Crooked Brook @ Dunkirk 01053202 (CRKB-2.1) [INTENSIVE]","07-20-16/08-17&18-16","Slightly Toxic","Non-toxic","46.61","> 100","1053202",42.46938,-79.3309
+"Cryder Creek @ Paynesville 04031A01 (CRYD-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","04031A01",42.00763,-77.84185
+"Deans Creek @ Westmoreland 12042103 (DEAN-01) [INTENSIVE]","08-02-06/11-29 & 30-06","Moderately Toxic","Non-toxic","16.56","> 100","12042103",43.1169444,-75.4005555
+"Deer River @ Helena 09022101 (DERR-0.2) [INTENSIVE]","09-22-15/11-18&19-15","Non-toxic","Non-toxic","71.15","> 100","9022101",44.9197222,-74.7225
+"Delaware River @ Callicoon 14010053 (DELA-07) [INTENSIVE]","09-08-05/09-28 & 29-05","Non-toxic","Non-toxic","70.83","> 100","14010053",41.7647222,-75.0611111
+"Delaware River @ Callicoon 14010053 (DELA-07) [INTENSIVE]","10-22-10/10-28 & 29-10","Slightly Toxic","Non-toxic","36.22","> 100","14010053",41.7647222,-75.0611111
+"Delaware River @ Cochecton 14010047 (DELA-45.2) [INTENSIVE]","09-03-15/10-07&08-15","Non-toxic","Toxic","67.11","69.78","14010047",41.705,-75.06694
+"Delaware River @ Port Jervis 14010001 (DELA-1.2) [ROUTINE]","08-27-15/10-07&08-15","Moderately Toxic","Toxic","30.99","96.85","14010001",41.372222,-74.697222
+"Dodge Creek @ Portville 02011001 (DODG-00) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","2011001",42.0433,-78.3292
+"Dower Kill-Delmar","07-11-17/11-15 & 16-17","Slight","Non-toxic","41.46","> 100","13-DOWE-1.9",42.5775,-73.8137
+"Dutch Hollow Brook @ Owasco 07065100 (DUCH-03) [INTENSIVE]","08-08-12/12-18-12","Slightly Toxic","Non-toxic","38.4","> 100","7065100",42.86415863,-76.50804901
+"Dyke Creek @ Wellsville 04031601 (DYKE-02) [INTENSIVE]","09-27-05/11-08 & 09-05","Moderately Toxic","Non-toxic","10.25","> 100","4031601",42.1180555,-77.9413888
+"East Branch Ausable Creek-Jay [SCREENING]","07-18-18/08-02 & 03-18","Severely Toxic","Non-toxic","17.54","> 100","10-SABL_E-7.6",44.36606415,-73.73314426
+"East Branch Ausable River @ Keene 10042516 (ESAB-05) [INTENSIVE]","06-18-14/07-14-14","Non-toxic","Non-toxic","> 100","> 100","10042516",44.2567,-73.7938
+"East Branch Ausable River @ Keene 10042516 (ESAB-05) [INTENSIVE]","08-20-09/01-12 & 14-10","Non-toxic","Non-toxic","43.29","> 100","10042516",44.2567,-73.7938
+"East Branch Cazenovia Creek @ East Aurora 01033101 (CAZE-E-04C) [INTENSIVE]","08-02-11/08-10-11","Slightly Toxic","Non-toxic","25.2","> 100","1033101",42.75722,-78.645
+"East Branch Delaware River @ Arkville 14031057 (EDEL-03A) [INTENSIVE]","09-07-05/09-28 & 29-05","Moderately Toxic","Non-toxic","17.74","> 100","14031057",42.1611111,-74.6208333
+"East Branch Delaware River @ Hancock 14031001 (EDEL-12) [INTENSIVE]","09-07-05/09-28 & 29-05","Non-toxic","N/A","65.19","N/A","14031001",41.9529,-75.2767
+"East Branch Fish Creek @ Taberg 07034103 (FSHO-E-2) [INTENSIVE]","08-22-07/12-12 & 13-07","Non-toxic","Non-toxic","60.59","> 100","7034103",43.3022222,-75.6183333
+"East Branch Hackensack River-West Haverstraw","07-25-17/11-15 & 16-17","Non-toxic","Non-toxic","66.86","> 100","13-HACK-E-1.5",41.13114,-73.95028
+"East Branch Neversink River @ Claryville 14022300 (UNVR-NE-11) [INTENSIVE]","10-21-10/10-28 & 29-10","Non-toxic","Non-toxic","78.08","> 100","14022300",41.91885,-74.57238
+"East Branch Ten Mile River @ Tusten 14012400 (TENR-02) [INTENSIVE]","10-22-10/10-28 & 29-10","Non-toxic","Non-toxic","57.94","> 100","14012400",41.57109,-75.00911
+"East Fork Tonawanda Creek @ Johnsburg 01021067 (TONA-02) [INTENSIVE]","08-02-11/08-10-11","Non-toxic","Non-toxic","49.17","> 100","1021067",43.00022,-78.19768
+"East Kill @ Jewett Center 12022501 (EAST-01) [INTENSIVE]","08-04-06/11-29 & 30-06","Non-toxic","Non-toxic","66.67","> 100","12022501",42.2366666,-74.3177777
+"East Koy Creek @ East Koy 04032102 (EKOY-07) [INTENSIVE]","09-27-05/11-08 & 09-05","Slightly Toxic","Non-toxic","22.26","> 100","4032102",42.5355555,-78.0966666
+"East Meadow Creek-Hempstead [SCREENING]","09-12-18/10-30 & 31-18","Moderately Toxic","Non-toxic","32.31","> 100","17-EMED-0.4",40.66483,-73.56985
+"Eighteenmile Creek @ Evans 01041101 (TEEN-01) [INTENSIVE]","08-23-06/11-08 & 14-06","Slightly Toxic","Non-toxic","23.08","> 100","1041101",42.7122222,-78.9666667
+"Ellicott Creek @ Williamsville 01022111 (ELLI-10.3) [INTENSIVE]","07-21-16/08-17&18-16","Moderately Toxic","Non-toxic","21.55","> 100","1022111",42.978056,-78.764167
+"Elm Creek @ Hermon 09043105 (ELMK-01) [INTENSIVE]","07-13-10/07-21 & 22-10","Non-toxic","Non-toxic","61.36","> 100","9043105",44.4702777,-75.2330555
+"Elm Creek @ Hermon 09043105 (ELMK-01) [INTENSIVE]","08-11-05/09-07 & 21-05","Moderately Toxic","Non-toxic","17.23","> 100","9043105",44.4702777,-75.2330555
+"English Creek @ Allegany State Park 02012501 (ENSH-01) [INTENSIVE]","07-24-12/08-29-12","Non-toxic","Non-toxic","58.95","> 100","2012501",42.03240967,-78.80800629
+"English River @ Cannon Corners 09021502 (ENGL-01) [INTENSIVE]","07-15-10/07-21 & 22-10","Non-toxic","Non-toxic","53.34","> 100","9021502",44.97525,-73.66306
+"Fall Creek @ Ithaca 07053301 (FALL-06) [INTENSIVE]","08-08-12/12-18-12","Non-toxic","Non-toxic","48.73","> 100","7053301",42.45444489,-76.50027466
+"Felts Mills Creek-Rutland","09-12-17/11-07 & 08-17","Slight","Non-toxic","40.96","> 100","08-FELT-0.3",44.01917,-75.76139
+"Fish Creek @ Saratoga 11011204 (FISC-03) [INTENSIVE]","09-11-12/11-16-12","Non-toxic","Non-toxic","93.11","> 100","11011204",43.095,-73.613056
+"Fivemile Creek @ Ticonderoga 10051802 (FMIL-01) [INTENSIVE]","06-03-14/07-14-14","Moderately Toxic","Non-toxic","46.22","> 100","10051802",43.88089,-73.422795
+"Flint Creek @ Phelps 07043304 (FLNT-07) [INTENSIVE]","08-22-07/12-12 & 13-07","Moderately Toxic","Toxic","2.49","88.42","7043304",42.945,-77.0894444
+"Fourmile Creek @ Porter 03011601 (FOMI-A) [INTENSIVE]","08-03-11/08-10-11","Slightly Toxic","Non-toxic","34.84","> 100","3011601",43.26778,-79.00386
+"Fourmile Creek @ Porter 03011601 (FOMI-A) [INTENSIVE]","08-24-10/10-13-10","Moderately Toxic","Non-toxic","16.83","> 100","3011601",43.26778,-79.00386
+"Fulmer Creek @ Mohawk 12011001 (FULM-02) [INTENSIVE]","08-02-06/11-29 & 30-06","Non-toxic","Non-toxic","54.36","> 100","12011001",43.0102777,-75.0113888
+"Genesee River @ Rochester 04010003 (GENS-07) [ROUTINE]","08-10-10/08-25-10","Non-toxic","Non-toxic","51.08","> 100","4010003",43.227222,-77.616389
+"Genesee River @ Rochester 04010003 (GENS-07) [ROUTINE]","09-27-05/11-08 & 09-05","Moderately Toxic","Non-toxic","6.65","> 100","4010003",43.227222,-77.616389
+"Genesee River @ Scio 04030133 (UGNS-05) [INTENSIVE]","09-27-05/11-08 & 09-05","Moderately Toxic","Non-toxic","1.55","> 100","4030133",42.170833,-77.984722
+"Gidneytown Creek @ Fostertown 13012604 (GIDN-01) [INTENSIVE]","09-26-13/01-14&16-14","Moderately Toxic","Non-toxic","47.6","> 100","13012604",41.55214,-74.04414
+"Goff Creek-Avoca","08-09-17/11-21-17","Moderate","Toxic","28.37","31.04","05-GOFF-0.5",42.38802,-77.41187
+"Golden Hill Creek @ Somerset 03011502 (GHIL-1.5) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","3011502",43.36561,-78.49772
+"Goose Creek @ Ashville 02025100 (GOOS-01) [INTENSIVE]","07-23-12/08-29-12","Non-toxic","Non-toxic","49.19","> 100","2025100",42.09439087,-79.37354279
+"Great Brook @ Victor 07044100 (GRBR-02) [INTENSIVE]","08-09-12/12-18-12","Slightly Toxic","Non-toxic","39.82","> 100","7044100",42.9793,-77.3915
+"Great Brook @ Victor 07044100 (GRBR-02) [INTENSIVE]","08-31-11/09-14&15-11","Moderately Toxic","Non-toxic","8.24","> 100","7044100",42.9793,-77.3915
+"Great Chazy River @ Altona 10021028 (GCHZ-02B) [INTENSIVE]","06-18-14/07-14-14","Non-toxic","Non-toxic","> 100","> 100","10021028",44.912829,-73.639877
+"Great Chazy River @ Altona 10021030 (GCHZ-02) [INTENSIVE]","08-19-09/01-12 & 14-10","Slightly Toxic","Non-toxic","35.39","> 100","10021030",44.888889,-73.645278
+"Great Chazy River @ Champlain 10021006 (GCHZ-03) [INTENSIVE]","08-10-04/11-02 & 04-04","Severely Toxic","Non-toxic","0.359","> 100","10021006",44.986944,-73.449444
+"Green Creek @ West Sayville 17012A01 (GREN-01) [INTENSIVE]","09-09-14/09-17-14","Moderately Toxic","Non-toxic","46.96","> 100","17012A01",40.736338,-73.091945
+"Green River @ Hillsdale 16011112 (GREE-01) [INTENSIVE]","07-17-08/01-06 & 08-09","Non-toxic","N/A","68.35","N/A","16011112",42.26119,-73.47103
+"Green River @ Hillsdale 16011112 (GREE-01) [INTENSIVE]","09-27-13/01-14&16-14","Non-toxic","Non-toxic","81.4","> 100","16011112",42.26119,-73.47103
+"Hackensack River @ West Nyack 15012105 (HACK-01) [INTENSIVE]","07-16-08/01-06 & 08-09","Non-toxic","Non-toxic","61.16","> 100","15012105",41.08654,-73.96228
+"Halfway Brook @ Barryville 14011400 (HAFY-01) [INTENSIVE]","10-22-10/10-28 & 29-10","Non-toxic","Non-toxic","70.37","> 100","14011400",41.47754,-74.9099
+"Hoffman Creek-Elmira","08-28-17/11-21-17","Non-toxic","Non-toxic","> 100","> 100","05-HOFF-0.8",42.09147,-76.82686
+"Honeoye Creek @ Mendon 04021310 (HONY-10) [INTENSIVE]","09-14-05/10-27 & 28-05","Moderately Toxic","Non-toxic","2.93","> 100","4021310",42.983333,-77.600278
+"Honeoye Creek @ Mendon 04021312 (HONY-11.8) [INTENSIVE]","07-30-15/09-24&25-15","Non-toxic","Non-toxic","68.03","> 100","4021312",42.983607,-77.600098
+"Hoosic River @ Eagle Bridge 11021023 (HOOS-10) [INTENSIVE]","09-06-07/01-03 & 04-08","Slightly Toxic","Non-toxic","22.26","> 100","11021023",42.951389,-73.391111
+"Hudson River @ Bethlehem 13010139 (LHUD-??) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","13010139",42.5477777,-73.7586111
+"Hudson River @ Corinth 11010215 (UHUD-01) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","11010215",43.2486111,-73.8325
+"Hudson River @ Poughkeepsie 13010077 (LHUD-18) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","13010077",41.7211111,-73.9383333
+"Hudson River @ Riparius 11040247 (UHUD-01A) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","11040247",43.66166687,-73.89861298
+"Hudson River @ Waterford 11010157 (UHUD-11) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","11010157",42.7886111,-73.6741667
+"Hunt Creek @ Hubbardsville 06023201 (HUNC-01) [INTENSIVE]","07-14-09/09-23 & 24-09","Non-toxic","Non-toxic","51.58","> 100","6023201",42.82640075,-75.46939849
+"Hunt Creek @ Hubbardsville 06023201 (HUNC-01) [INTENSIVE]","07-29-14/09-03-14","Slightly Toxic","Non-toxic","72.74","> 100","6023201",42.82640075,-75.46939849
+"Hyde Creek @ Dunkirk 01053101 (HYCK-1.0) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","1053101",42.48891,-79.31323
+"Independence River @ Turin 08011305 (INDY-02) [INTENSIVE]","09-30-08/01-13 & 16-09","Non-toxic","Non-toxic","84.28","> 100","8011305",43.73078,-75.3653
+"Indian Kill @ Glenville 12012400 (INDK-06) [INTENSIVE]","07-29-10/08-11/10","Slightly Toxic","Non-toxic","64.95","> 100","12012400",42.87028,-73.90638
+"Indian Kill @ Glenville 12012400 (INDK-06) [INTENSIVE]","08-15-11/08-24-11","Slightly Toxic","Non-toxic","23.43","> 100","12012400",42.87028,-73.90638
+"Indian River @ Hall Corners 09064234 (INDN-33.7) [INTENSIVE]","09-23-15/11-18&19-15","Non-toxic","Non-toxic","68.73","> 100","9064234",44.11111,-75.78278
+"Irondequoit Creek @ Penfield 03023106 (IRON-07) [INTENSIVE]","08-19-05/01-13 & 16-06","Severely Toxic","Non-toxic","1.17","> 100","3023106",43.13,-77.4947222
+"Ischua Creek @ Hinsdale 02012202 (ISCH-07) [INTENSIVE]","08-08-07/12-19-07","Slightly Toxic","Non-toxic","36.92","> 100","2012202",42.1938888,-78.3813888
+"Jaketown Creek @ Bethel 14013103 (JAKE-3.0) [INTENSIVE]","08-27-15/10-07&08-15","Slightly Toxic","Non-toxic","59.3","> 100","14013103",41.7219,-74.9223
+"Jeddo Creek @ North Ridgeway 03012102 (JEDO-1.3) [INTENSIVE]","08-16-16/11-29&30-16","Slightly Toxic","Non-toxic","47.43","> 100","3012102",43.27981,-78.45586
+"Jewett Creek @ Redwood 09055103 (JEWT-3.1) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","9055103",44.33389,-75.79028
+"Johnson Creek @ Lyndonville 03011309 (JOHN-01) [INTENSIVE]","08-19-11/08-24-11","Slightly Toxic","Non-toxic","27.97","> 100","3011309",43.335,-78.35889
+"Kelsey Creek-Watertown","09-12-17/11-07 & 08/17","Moderate","Toxic","23.95","37.4","08-KLSY-0.1",43.98944,-75.92416
+"Kelsey Creek @ Watertown 08011A00 (KLSY-05) [INTENSIVE]","09-18-13/01-07&08-14","Moderately Toxic","Non-toxic","50.04","> 100","08011A00",43.989472,-75.92475
+"Kinderhook Creek-Rossman","07-24-17/11-15 & 16-17","Non-toxic","Non-toxic","87.52","> 100","13-KIND-0.2",42.31972,-73.74611
+"Klein Kill-New Paltz","08-03-17/11-15 & 16-17","Slight","Non-toxic","59.37","> 100","13-WKLEI-0.6",41.77464,-74.09647
+"Kline Kill @ Valatie 13103202 (KLIN-04) [INTENSIVE]","07-16-08/01-06 & 08-09","Moderately Toxic","Non-toxic","19.89","> 100","13103202",42.39642,-73.64161
+"Knight Creek @ Scio 04031900 (KNIT-04) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","4031900",42.17102,-77.98788
+"Kromma Kill-Menands","07-06-17/11-15 & 16-17","Non-toxic","Non-toxic","81.72","> 100","13-KROM-1.1",42.70361,-73.71611
+"Kromma Kill @ Menands 13011C01 (KROM-03) [INTENSIVE]","10-01-13/01-14&16-14","Slightly Toxic","Non-toxic","71.42","> 100","13011C01",42.7035,-73.71569
+"Krum Kill-Delmar","07-11-17/11-15 & 16-17","Non-toxic","Non-toxic","60.1","> 100","13-KRUM-2.5",42.66833,-73.8275
+"LaChute River-Ticonderoga [SCREENING]","07-19-18/08-02 & 03-18","Slightly Toxic","Non-toxic","58.4","> 100","10-LCHU-2.0",43.8494,-73.4211
+"Lansing Kill @ Hillside 12011A00 (LKIL-01) [INTENSIVE]","08-18-11/08-24-11","Non-toxic","Non-toxic","52.82","> 100","12011A00",43.35867,-75.388
+"Lasher Creek @ Sprakers 12013201 (LASH-0.1) [INTENSIVE]","09-20-16/12-06&07-16","Moderately Toxic","Non-toxic","22.27","> 100","12013201",42.89521,-74.470803
+"Lawrence Brook @ Moira 09023107 (LAWR-01) [INTENSIVE]","08-10-05/09-07 & 21-05","Moderately Toxic","Non-toxic","16.1","> 100","9023107",44.8388888,-74.5961111
+"Ley Creek @ Syracuse 07024101 (LEY-02) [INTENSIVE]","08-21-07/12-12 & 13-07","Severely Toxic","Non-toxic","0.028","> 100","7024101",43.075556,-76.1725
+"Limekiln Creek @ Springwater 04025101 (LIMK-1.3) [INTENSIVE]","07-29-15/09-24&25-15","Non-toxic","Non-toxic","68.29","> 100","4025101",42.63042,-77.59616
+"Limestone Creek @ Minoa 07035103 (LIME-02) [INTENSIVE]","08-21-07/12-12 & 13-07","Moderately Toxic","Non-toxic","12.17","> 100","7035103",43.0886111,-75.9938888
+"Little Black Creek @ Chili 04021502 (LBLA-01) [INTENSIVE]","09-27-05/11-08 & 09-05","Moderately Toxic","Non-toxic","6.68","> 100","4021502",43.1161111,-77.6825
+"Little Black Creek @ Remsen 08011702 (LBLK-01) [INTENSIVE]","08-20-08/01-13 & 16-09","Non-toxic","Non-toxic","86.32","> 100","8011702",43.389,-75.113
+"Little Buffalo Creek @ East Lancaster 01033200 (LBUF-01) [INTENSIVE]","08-02-11/08-10-11","Slightly Toxic","Non-toxic","30.31","> 100","1033200",42.88914,-78.64223
+"Little Chazy River-Chazy [SCREENING]","07-17-18/08-02 & 03-18","Non-toxic","Non-toxic","65.31","> 100","10-LCHZ-2.4",44.9017,-73.415
+"Little Chazy River @ Chazy 10021203 (LCHZ-A) [INTENSIVE]","08-10-04/10-27 & 28-04","Moderately Toxic","Toxic","4.23","74.61","10021203",44.901944,-73.415556
+"Little Choconut Creek @ Johnson City 06031802 (LCHO-01) [INTENSIVE]","07-29-14/09-03-14","Moderately Toxic","Non-toxic","50.67","> 100","6031802",42.11787,-75.95059
+"Little Delaware River @ Delhi 14042201 (LDEL-01A) [INTENSIVE]","09-07-05/09-28 & 29-05","Slightly Toxic","Non-toxic","31.6","> 100","14042201",42.2575,-74.9277777
+"Little Delaware River @ Delhi 14042201 (LDEL-01A) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","14042201",42.2575,-74.9277777
+"Little Genesee Creek @ Bolivar 02012603 (LGEN-06) [INTENSIVE]","07-24-12/08-29-12","Moderately Toxic","Non-toxic","10.49","> 100","2012603",42.03113937,-78.2052536
+"Little Hoosic River @ Petersburg 11022301 (HOOS-06A) [INTENSIVE]","09-11-12/11-16-12","Non-toxic","Non-toxic","79.84","> 100","11022301",42.82305527,-73.32694244
+"Little River @ Canton 09042104 (LITL-01) [INTENSIVE]","08-11-05/09-07 & 21-05","Slightly Toxic","Non-toxic","29.08","> 100","9042104",44.5866666,-75.1316666
+"Little Salmon River @ Fort Covington 09022303 (LSAL-01) [INTENSIVE]","07-14-10/07-21 & 22-10","Non-toxic","Non-toxic","47.54","> 100","9022303",44.96708,-74.51117
+"Little Schoharie Creek @ Middleburgh 12022401 (LSCH-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","12022401",42.5877777,-74.3363888
+"Little Tonawanda Creek @ East Alexander 01022404 (LTON-01) [INTENSIVE]","08-23-06/11-08 & 14-06","Moderately Toxic","Non-toxic","16.84","> 100","1022404",42.9297222,-78.1927777
+"Little Trout River @ Constable 09022406 (TROU-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","9022406",44.94121,-74.28667
+"Lower Glen Creek-Queensbury [SCREENING]","07-19-18/08-02 & 03-18","Slightly Toxic","Non-toxic","51.23","> 100","10-LGLN-0.5",43.377,-73.6157
+"Lower Neversink River @ Oakland Valley 14021015 (NEVR-14.6) [INTENSIVE]","08-27-15/10-07&08-15","Slightly Toxic","Non-toxic","49.03","> 100","14021015",41.50444,-74.64778
+"Mad River @ Otto Mills 03031703 (MAD-2.5) [INTENSIVE]","08-17-16/11-29&30-16","Non-toxic","Non-toxic","65.49","> 100","3031703",43.59889,-75.819
+"Mallory Creek @ Chemung 05012100 (MALL-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","5012100",42.0547,-76.62354
+"Mamaroneck River @ Mamaroneck 17022401 (MAMR-04) [INTENSIVE]","10-08-09/01-08-10","Moderately Toxic","Non-toxic","14.65","> 100","17022401",40.95236,-73.7342
+"Massapequa Creek @ Massapequa 17012404 (MASS-01) [INTENSIVE]","07-12-04/10-25-04","Moderately Toxic","Non-toxic","9.2","> 100","17012404",40.6811111,-73.4613888
+"Matoon Creek @ Hailesboro 09053101 (MATO-01) [INTENSIVE]","08-11-05/09-07 & 21-05","Severely Toxic","Non-toxic","0.0487","> 100","9053101",44.3130555,-75.4558333
+"Matthew Creek @ Johnstown 12013101 (MATT-01) [INTENSIVE]","08-15-11/08-24-11","Non-toxic","Non-toxic","52.81","> 100","12013101",43.02389,-74.38139
+"McHenry Valley Creek-Almond","08-09-17/11-21-17","Non-toxic","Non-toxic","60.63","> 100","05-MCHE-1.5",42.296584,-77.763004
+"McKenzie Brook @ Saranac Lake 10032A01 (MKZI-01) [INTENSIVE]","06-18-14/07-14-14","Moderately Toxic","Non-toxic","41.33","> 100","10032A01",44.3154,-74.104653
+"Mettawee River @ Whitehall 10051501 (METT-01) [INTENSIVE]","08-11-04/10-27-04","Non-toxic","N/A","48.48","N/A","10051501",43.5283333,-73.3877777
+"Mettawee River @ Whitehall 10051600 (METT-01) [INTENSIVE]","09-08-09/01-12 & 14-10","Non-toxic","Non-toxic","50.83","> 100","10051600",43.55514144,-73.40144348
+"Mianus River @ Bedford 17021113 (MIAN-04) [INTENSIVE]","09-14-04/10-27 & 28-04","Severely Toxic","Non-toxic","0.026","> 100","17021113",41.1938888,-73.6241666
+"Michigan Creek-Campbell","08-09-17/11-21-17","Moderate","Toxic","29.94","58.59","05-MIGA-0.4",42.22966,-77.20564
+"Middle Branch Grass River @ Russell 09042304 (GRAS-M3.7) [INTENSIVE]","09-22-15/11-18&19-15","Non-toxic","Non-toxic","71.53","> 100","9042304",44.381397,-75.029737
+"Middle Branch Mongaup River @ Harris 14012200 (MONG-E) [INTENSIVE]","10-21-10/10-28-10","Non-toxic","N/A","61.67","N/A","14012200",41.70758,-74.74076
+"Middle Branch Moose River @ McKeever 08012116 (MOOS-01) [INTENSIVE]","08-20-08/01-13 & 16-09","Non-toxic","Non-toxic","70.64","> 100","8012116",43.6122222,-75.1025
+"Middle Sprite Creek @ Oppenheim 12012302 (SPRT-01) [INTENSIVE]","08-03-06/11-29 & 30-06","Non-toxic","Non-toxic","64.42","> 100","12012302",43.1133333,-74.755
+"Mile Creek @ Boonville 08011901 (MILE-01) [INTENSIVE]","09-19-13/01-07&08-14","Non-toxic","Non-toxic","91.04","> 100","8011901",43.52542,-75.29972
+"Mill Brook-Putnam [SCREENING]","07-19-18/08-02 & 03-18","Non-toxic","Non-toxic","69.1","> 100","10-CMIL-3.3",43.72213,-73.4183
+"Mill Brook @ Putnam Station 10051702 (CMIL-01) [INTENSIVE]","06-03-14/07-14-14","Non-toxic","Non-toxic","91.69","> 100","10051702",43.722127,-73.418303
+"Mill Creek @ Lowville 08011E02 (MILL-04) [INTENSIVE]","09-19-13/01-07&08-14","Slightly Toxic","Non-toxic","61.33","> 100","8.01E+05",43.78314,-75.47808
+"Mill River-Hempstead [SCREENING]","09-11-18/10-30 & 31-18","Non-toxic","Non-toxic","84.3","> 100","17-MILR-5.3",40.70431,-73.6581
+"Mohawk River @ Cohoes 12010001 (MOHK-1.5) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","12010001",42.778333,-73.696667
+"Mohawk River @ Fort Plain 12010065 (MOHK-??) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","12010065",42.938889,-74.622222
+"Mohawk River @ North Western 12010142 (MOHK-136.0) [INTENSIVE]","09-20-16/12-06&07-16","Slightly Toxic","Non-toxic","42.54","> 100","12010142",43.339444,-75.365833
+"Mohawk River @ Utica 12010108 (MOHK-??) [INTENSIVE]","08-02-06/11-29 & 30-06","Moderately Toxic","Non-toxic","12.51","> 100","12010108",43.1116666,-75.2447222
+"Mohawk River @ West Schuyler 12010101 (MOHK-06) [ROUTINE]","08-02-06/11-29 & 30-06","Moderately Toxic","Non-toxic","17.1","> 100","12010101",43.090556,-75.157778
+"Mohawk River @ West Schuyler 12010101 (MOHK-06) [ROUTINE]","08-18-11/08-24-11","Slightly Toxic","Non-toxic","27.31","> 100","12010101",43.090556,-75.157778
+"Mongaup River @ Mongaup Valley 14011119 (MONG-18.9) [INTENSIVE]","08-26-15/10-07&08-15","Moderately Toxic","Non-toxic","33.79","> 100","14011119",41.66678,-74.7826
+"Monhagen Brook-Middletown","07-26-17/11-15 & 16-17","Moderate","Non-toxic","24.29","> 100","13-MONH-4.1",41.42833,-74.42389
+"Monhagen Brook-Middletown","08-02-17/11-15 & 16-17","Slight","Non-toxic","42.21","> 100","13-MONH-0.4",41.42361,-74.38111
+"Mourning Kill @ Ballston Spa 11014205 (MORN-04) [INTENSIVE]","09-05-07/01-03 & 04-08","Moderately Toxic","Non-toxic","16.23","> 100","11014205",42.9766666,-73.8508333
+"Mud Brook @ Whitehall 10052104 (MDBR-01) [INTENSIVE]","08-18-09/01-12 & 14-10","Slightly Toxic","Non-toxic","32.56","> 100","10052104",44.47956085,-73.46357727
+"Mud Brook @ Whitehall 10052105 (MDBR-01) [INTENSIVE]","06-03-14/07-14-14","Non-toxic","Non-toxic","86.71","> 100","10052105",43.5622222,-73.3469444
+"Mud Brook @ Whitehall 10052105 (MDBR-01) [INTENSIVE]","08-11-04/10-27 & 28-04","Moderately Toxic","Non-toxic","11.27","> 100","10052105",43.5622222,-73.3469444
+"Mud Creek-Bath","08-29-17/11-21-17","Non-toxic","Non-toxic","66.06","> 100","05-MDCR-0.9",42.29023,-77.22003
+"Mud Creek @ Raymond 01022303 (MUDN-01) [INTENSIVE]","08-23-06/11-08 & 14-06","Moderately Toxic","Non-toxic","2.11","> 100","1022303",43.1002777,-78.6672222
+"Nail Creek @ Utica 12051501 (NAIL-0.1) [INTENSIVE]","09-20-16/12-06&07-16","Severely Toxic","Toxic","15.52","46.27","12051501",43.1093,-75.24194
+"Nanticoke Creek @ Endicott 06031301 (NANT-01) [INTENSIVE]","07-30-14/09-03-14","Slightly Toxic","Non-toxic","70.82","> 100","6031301",42.0925,-76.0897222
+"Nanticoke Creek @ Endicott 06031301 (NANT-01) [INTENSIVE]","10-06-04/12-07 & 08-04","Slightly Toxic","Non-toxic","33.08","> 100","6031301",42.0925,-76.0897222
+"Neversink River @ Port Jervis 14021001 (NEVR-15) [INTENSIVE]","09-08-05/09-28 & 29-05","Non-toxic","Non-toxic","70.76","> 100","14021001",41.361111,-74.685278
+"Neversink River @ Woodbourne 14021037 (NEVR-03) [INTENSIVE]","09-08-05/09-28 & 29-05","Non-toxic","Non-toxic","69.36","> 100","14021037",41.7597222,-74.5994444
+"Newtown Creek @ Elmira 05011201 (NEWT-04) [INTENSIVE]","09-03-08/01-13 & 16-09","Slightly Toxic","Non-toxic","34.65","> 100","5011201",42.09917,-76.795
+"Niagara River @ Fort Niagara 01010001 (NIAG-07) [ROUTINE]","08-03-11/08-10-11","Non-toxic","Non-toxic","69.84","> 100","1010001",43.261111,-79.063056
+"Niagara River @ Fort Niagara 01010001 (NIAG-07) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","1010001",43.261111,-79.063056
+"Ninemile Creek @ Marcy 12011501 (NMIL-0.5) [INTENSIVE]","09-20-16/12-06&07-16","Slightly Toxic","Non-toxic","58.86","> 100","12011501",43.1891667,-75.3275
+"Ninemile Creek @ North Sterling 03021101 (NIMI-01) [INTENSIVE]","08-22-07/12-12 & 13-07","Moderately Toxic","Non-toxic","7.91","> 100","3021101",43.4022222,-76.6275
+"Ninemile Creek @ South Trenton 12011B14 (NMIL-00) [INTENSIVE]","08-18-11/08-24-11","Slightly Toxic","Non-toxic","23.19","> 100","12011B14",43.21573,-75.17963
+"Normanskill @ Bethlehem 13111011 (NORM-10) [INTENSIVE]","07-17-08/01-06 & 08-09","Slightly Toxic","Non-toxic","31.13","> 100","13111011",42.634197,-73.799039
+"Normanskill Creek @ Albany 13111003 (NORM-10) [INTENSIVE]","10-01-13/01-14&16-14","Slightly Toxic","Non-toxic","69.63","> 100","13111003",42.63445,-73.8
+"North Branch Great Chazy River @ Mooers 10022300 (NCHZ-02) [INTENSIVE]","08-19-09/01-12 & 14-10","Moderately Toxic","Toxic","17.65","24","10022300",44.9568,-73.6418
+"North Branch Sandy Creek @ Rodman 03032100 (FREE-01) [INTENSIVE]","09-18-13/01-07&08-14","Moderately Toxic","Non-toxic","52.58","> 100","3032100",43.84453,-75.97086
+"North Branch Tuscarora Creek @ Hedgesville 05014108 (TUSC-N1) [INTENSIVE]","08-06-13/01-07&08-14","Slightly Toxic","Non-toxic","69.78","> 100","5014108",42.1373,-77.4125
+"North Chuctanunda Creek @ Amsterdam 12011701 (NCHU-02A) [INTENSIVE]","08-03-06/11-29 & 30-06","Moderately Toxic","Non-toxic","2.61","> 100","12011701",42.9386111,-74.1822222
+"North Chuctanunda Creek @ Amsterdam 12011C03 (NCHU-02) [INTENSIVE]","08-15-11/08-24-11","Slightly Toxic","Non-toxic","29.69","> 100","12011C03",42.96166,-74.17333
+"North Winfield Creek-Winfield [SCREENING]","08-07-18/08-28-18","Slightly Toxic","Non-toxic","51.73","> 100","06-NWIN-0.2",42.88417,-75.18861
+"Noster Kill-Copake","07-24-17/11-15 & 16-17","Moderate","Toxic","28.26","7.85","13-NOST-0.3",42.097,-73.54469
+"O’Malley Brook @ Browns Bridge 09032200 (OMAL-01) [INTENSIVE]","07-14-10/07-21 & 22-10","Non-toxic","Non-toxic","64.94","> 100","9032200",44.57554,-74.94213
+"Oak Orchard Creek @ Shelby Center 03011422 (ORCH-00) [INTENSIVE]","08-10-10/08-25-10","Non-toxic","Toxic","75.16","36.59","3011422",43.18979,-78.38674
+"Oaks Creek @ Index 06011601 (OAKS-01) [INTENSIVE]","07-14-09/09-23 & 24-09","Slightly Toxic","Non-toxic","35.35","> 100","6011601",42.66579818,-74.95999908
+"Oatka Creek @ Scottsville 04021201 (OATK-02) [INTENSIVE]","09-27-05/11-08 & 09-05","Moderately Toxic","Non-toxic","2.37","> 100","4021201",43.0191667,-77.7483333
+"Oatka Creek @ Warsaw 04021246 (OATK-46.2) [INTENSIVE]","07-29-15/09-24&25-15","Slightly Toxic","Non-toxic","64.52","> 100","4021246",42.761035,-78.141473
+"Olean Creek @ Olean 02011505 (ALGY-03A) [INTENSIVE]","08-08-07/12-19-07","Moderately Toxic","Non-toxic","18.91","> 100","2011505",42.12,-78.4197222
+"Onesquethaw Creek @ South Bethlehem 13012501 (ONES-05) [INTENSIVE]","07-16-08/01-06 & 08-09","Slightly Toxic","Non-toxic","34.18","> 100","13012501",42.53551,-73.84043
+"Onondaga Creek @ Syracuse 07024201 (ONON-05) [INTENSIVE]","08-07-12/12-18-12","Moderately Toxic","Non-toxic","16.53","> 100","7024201",43.057778,-76.163333
+"Onondaga Creek @ Syracuse 07024201 (ONON-05) [INTENSIVE]","09-21-11/09-29-11","Moderately Toxic","Non-toxic","13.38","> 100","7024201",43.057778,-76.163333
+"Oriskany Creek @ Oriskany 12041001 (ORSK-06) [INTENSIVE]","08-02-06/11-29 & 30-06","Slightly Toxic","Non-toxic","23.18","> 100","12041001",43.15583,-75.33083
+"Oriskany Creek @ Oriskany 12041001 (ORSK-06) [INTENSIVE]","08-18-11/08-24-11","Moderately Toxic","Non-toxic","18.51","> 100","12041001",43.15583,-75.33083
+"Orowic Creek-Islip [SCREENING]","09-12-18/10-30 & 31-18","Slightly Toxic","Non-toxic","58.03","> 100","17-OROW-2.0",40.751098,-73.228009
+"Orwell Brook @ Richland 03032203 (ORWL-3.1) [INTENSIVE]","08-17-16/11-29&30-16","Non-toxic","Non-toxic","60.49","> 100","3032203",43.549348,-76.000029
+"Oswegatchie River @ Ogdensburg 09051001 (GTCH-07B) [INTENSIVE]","08-11-05/09-07 & 21-05","Moderately Toxic","Non-toxic","18.97","> 100","9051001",44.6902777,-75.4938888
+"Oswegatchie River @ Ogdensburg 09051001 (GTCH-07B) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","9051001",44.6902777,-75.4938888
+"Oswego River @ Minetto 07010005 (SEOS-09) [ROUTINE]","08-22-07/12-12 & 13-07","Moderately Toxic","Non-toxic","7","> 100","7010005",43.398056,-76.471667
+"Oswego River @ Minetto 07010005 (SEOS-09) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","7010005",43.398056,-76.471667
+"Otego Creek-Laurens [SCREENING]","08-09-18/08-28-18","Slightly Toxic","Non-toxic","59.32","> 100","06-OTGO-10.8",42.53213,-75.08407
+"Otsquago Creek @ Starkville 12011610 (OSTQ-00) [INTENSIVE]","08-03-06/11-29 & 30-06","Non-toxic","Non-toxic","42.67","> 100","12011610",42.9241666,-74.7563888
+"Otter Creek-Cortland [SCREENING]","08-08-18/08-28-18","Non-toxic","Non-toxic","93.12","> 100","06-OTTC-0.2",42.60722,-76.1825
+"Otter Creek-Hamptonburgh","07-26-17/11-15 & 16-17","Moderate","Non-toxic","24.42","> 100","13-OTTK-2.4",41.45634,-74.20872
+"Owasco Lake Inlet @ Moravia 07064105 (OWAS-01) [INTENSIVE]","08-21-07/12-12 & 13-07","Moderately Toxic","Non-toxic","19.23","> 100","7064105",42.7163888,-76.4372222
+"Owego Creek @ Owego 06031201 (OWGO-10) [INTENSIVE]","07-15-09/09-23 & 24-09","Non-toxic","Non-toxic","46.64","> 100","6031201",42.09694,-76.2775
+"Page Brook @ Chenango Bridge 06022301 (PAGE-01) [INTENSIVE]","07-29-14/09-03-14","Slightly Toxic","Non-toxic","62.55","> 100","6022301",42.1980555,-75.8247222
+"Parkhurst Brook @ Potsdam 09032300 (PARK-0.3) [INTENSIVE]","09-23-15/11-18&19-15","Moderately Toxic","Non-toxic","25.7","> 100","9032300",44.65278,-74.97111
+"Patroon Creek @ Albany 13011E00 (PATS-06) [INTENSIVE]","10-01-13/01-14&16-14","Moderately Toxic","Non-toxic","53.79","> 100","1.30E+04",42.66493,-73.74677
+"Patroons Creek-Albany","07-11-17/11-15 & 16-17","Severe","Non-toxic","9.13","> 100","13-PATS-0.5",42.66444,-73.74667
+"Patterson Creek @ Endwell 06031900 (PATT-01) [INTENSIVE]","07-30-14/09-03-14","Slightly Toxic","Non-toxic","69.12","> 100","6031900",42.10661,-76.01401
+"Payne Creek-Hamilton [SCREENING]","08-07-18/08-28-18","Slightly Toxic","Non-toxic","46.27","> 100","06-PAYN-0.4",42.7908,-75.5619
+"Peconic River-Riverhead [SCREENING]","09-12-18/10-30 & 31-18","Non-toxic","Non-toxic","85.23","> 100","17-PECN-7.6",40.905543,-72.743042
+"Peconic River @ Calverton 17016109 (PECN-01) [INTENSIVE]","07-12-04/10-25-04","Slightly Toxic","Non-toxic","23.6","> 100","17016109",40.9055555,-72.7430555
+"Peconic River @ Calverton 17016109 (PECN-01) [INTENSIVE]","09-09-14/09-17-14","Slightly Toxic","Non-toxic","61.18","> 100","17016109",40.9055555,-72.7430555
+"Peconic River @ Calverton 17016109 (PECN-01) [INTENSIVE]","10-06-09/01-08-10","Slightly Toxic","Non-toxic","34.05","> 100","17016109",40.9055555,-72.7430555
+"Peekskill Hollow Creek @ Peekskill 13011904 (PEEK-05) [INTENSIVE]","07-16-08/01-06 & 08-09","Non-toxic","Non-toxic","70.22","> 100","13011904",41.33311,-73.87503
+"Penataquit Creek-Islip [SCREENING]","09-12-18/10-30 & 31-18","Moderately Toxic","Non-toxic","38.81","> 100","17-PENA-1.4",40.73028,-73.24416
+"Phillips Creek @ Belmont 04031800 (PHIP-01) [INTENSIVE]","08-11-10/08-25-10","Non-toxic","Non-toxic","46.67","> 100","4031800",42.22676,-78.0315
+"Philomel Creek-Brownville","09-13-17/11-07 & 08-17","Severe","Toxic","14.77","17.48","08-PHIL-0.3",44.004071,-75.977686
+"Pike Creek @ Bombay 09021309 (PIKC-8.7) [INTENSIVE]","09-21-15/11-18&19-15","Non-toxic","Non-toxic","68.48","> 100","9021309",44.91894,-74.615896
+"Pike Creek @ Derby 01043001 (PICR-1.3) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","1043001",42.687293,-78.999595
+"Pike Creek @ Fort Covington 09021301 (PIKC-01) [INTENSIVE]","08-10-05/09-07 & 21-05","Moderately Toxic","Non-toxic","7.03","> 100","9021301",44.9883333,-74.5466666
+"Pine Brook @ Malverne 17014101 (MILR-02) [INTENSIVE]","09-10-14/09-17-14","Moderately Toxic","Non-toxic","58.93","> 100","17014101",40.673771,-73.661914
+"Pine Creek @ Fowlersville 08013100 (PINC-01) [INTENSIVE]","08-20-08/01-13 & 16-09","Non-toxic","N/A","82.99","N/A","8013100",43.62419,-75.25819
+"Pine Kill @ Westbrookville 14023104 (PINE-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","14023104",41.54379,-74.57426
+"Pipe Creek @ Tioga Center 06031401 (PIPE-01) [INTENSIVE]","10-06-04/12-07 & 08-04","Non-toxic","Non-toxic","63","> 100","6031401",42.0625,-76.3508333
+"Pleasant Creek @ Evans Mills 09065102 (PLST-01) [INTENSIVE]","07-13-10/07-21 & 22-10","Non-toxic","Non-toxic","50.25","> 100","9065102",44.0866,-75.79286
+"Plum Bottom Creek @ Amity 04031F03 (PLBO-3.3) [INTENSIVE]","07-28-15/09-24&25-15","Non-toxic","Non-toxic","76","> 100","04031F03",42.213,-77.982
+"Poentic Kill @ Rotterdam Square 12013202 (POEN-2.0) [INTENSIVE]","09-22-16/12-06&07-16","Moderately Toxic","Non-toxic","28.74","> 100","12013202",42.8075,-73.99333
+"Poestenkill Creek @ Poestenkill 13011519 (POST-01) [INTENSIVE]","09-27-13/01-14&16-14","Non-toxic","Non-toxic","83.85","> 100","13011519",42.69097,-73.45936
+"Post Creek @ Corning 05011302 (POSC-02) [INTENSIVE]","08-06-13/01-07&08-14","Slightly Toxic","Non-toxic","77.8","> 100","5011302",42.16265,-77.05397
+"Poultney River @ Hampton 10051312 (PTNY-01) [INTENSIVE]","08-11-04/10-27-04","Non-toxic","N/A","58.08","N/A","10051312",43.5672222,-73.2636111
+"Prospect Valley Creek @ Wilseyville 06014100 (PROP-01) [INTENSIVE]","07-15-09/09-23 & 24-09","Non-toxic","Non-toxic","45.96","> 100","6014100",42.26250076,-76.37609863
+"Purdy Creek @ Canisteo 05034100 (PURD-01) [INTENSIVE]","09-02-08/01-13 & 16-09","Non-toxic","Non-toxic","48.17","> 100","5034100",42.26019,-77.61219
+"Putnam Creek @ Chilson 10051113 (PUTM-A) [INTENSIVE]","08-20-09/01-12 & 14-10","Slightly Toxic","Non-toxic","26.48","> 100","10051113",43.87469863,-73.54060363
+"Quaker Creek-Snufftown","08-02-17/11-15 & 16-17","Non-toxic","Non-toxic","78.18","> 100","13-QKER-0.9",41.32722,-74.41639
+"Quaker Creek @ Florida 13064101 (QKER-03) [INTENSIVE]","07-16-08/01-06 & 08-09","Non-toxic","Non-toxic","51.65","> 100","13064101",41.32758,-74.41559
+"Quaker Run @ Frecks 02011904 (QRUN-01) [INTENSIVE]","08-07-07/12-19-07","Non-toxic","Non-toxic","57.47","> 100","2011904",42.03,-78.8547222
+"Quassaic Creek @ Newburgh 13011700 (QUAS-03) [INTENSIVE]","07-16-08/01-06 & 08-09","Non-toxic","Non-toxic","41.44","> 100","13011700",41.4881,-74.00965
+"Ramapo River-Monroe [SPECIAL STUDY]","08-22-18/10-11-18","Severely Toxic","Non-toxic","6.842","> 100","15-RAMA_T25_3-0.2",41.33503,-74.16146
+"Ramapo River-Monroe [SPECIAL STUDY]","09-06-18/10-11-18","Non-toxic","Non-toxic","68.75","> 100","15-RAMA-18.6",41.32377,-74.1723
+"Ramapo River-Ramapo [SPECIAL STUDY]","08-21-18/10-11-18","Severely Toxic","Non-toxic","13.78","> 100","15-RAMA-16.5",41.31,-74.14278
+"Ramapo River-Ramapo [SPECIAL STUDY]","08-21-18/10-11-18","Severely Toxic","Non-toxic","19.64","> 100","15-RAMA-16.1",41.30722,-74.13695
+"Ramapo River-Ramapo [SPECIAL STUDY]","08-21-18/10-11-18","Slightly Toxic","Non-toxic","44.05","> 100","15-RAMA-1.1",41.12516,-74.16455
+"Ramapo River @ Hillburn 15011001 (RAMA-07) [INTENSIVE]","07-16-08/01-06 & 08-09","Non-toxic","Non-toxic","57.91","> 100","15011001",41.1251,-74.1646
+"Ransom Creek @ Clarence 01022208 (RANS-04) [INTENSIVE]","08-23-06/11-08 & 14-06","Moderately Toxic","Non-toxic","1.62","> 100","1022208",43.019444,-78.662778
+"Raquette River @ Browns Bridge 09031081 (RAQU-04) [INTENSIVE]","07-14-10/07-21 & 22-10","Slightly Toxic","Non-toxic","30.75","> 100","9031081",44.5869444,-74.96
+"Raquette River @ Browns Bridge 09031081 (RAQU-04) [INTENSIVE]","08-11-05/09-07 & 21-05","Slightly Toxic","Non-toxic","34.58","> 100","9031081",44.5869444,-74.96
+"Raquette River @ Rooseveltown 09031003 (RAQU-10) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","9031003",44.97861,-74.73306
+"Reall Creek @ Utica 12051401 (REAL-0.1) [INTENSIVE]","09-20-16/12-06&07-16","Moderately Toxic","Non-toxic","35.21","> 100","12051401",43.1133333,-75.2141667
+"Rice Creek @ Fruit Valley 03021200 (RICE-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","3021200",43.4366684,-76.56111145
+"Richelieu River @ Rouses Point 10010001E (RICH-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","10010001E",44.999167,-73.349167
+"Roaring Brook @ Martinsburg 08011802 (ROAR-02) [INTENSIVE]","09-30-08/01-13 & 16-09","Non-toxic","Non-toxic","75.16","> 100","8011802",43.74331,-75.42514
+"Rocky Branch Brook-Jay [SCREENING]","07-18-18/08-02 & 03-18","Moderately Toxic","Non-toxic","37.41","> 100","10-ROCY-0.1",44.370998,-73.716428
+"Roeliff Jansen Kill @ Livingston 13081002 (ROLF-01) [INTENSIVE]","07-17-08/01-06 & 08-09","Non-toxic","Toxic","53.23","91.95","13081002",42.1527777,-73.8466666
+"Rondout Creek @ Rosendale 13062203 (ROND-12) [INTENSIVE]","09-26-13/01-14&16-14","Slightly Toxic","Non-toxic","72.64","> 100","13062203",41.842778,-74.085833
+"Rush Creek @ Blasdell 01041501 (RUCK-01) [INTENSIVE]","08-02-11/08-10-11","Slightly Toxic","Non-toxic","27.79","> 100","1041501",42.79305,-78.84068
+"Rush Creek @ Blasdell 01041501 (RUCK-01) [INTENSIVE]","08-25-10/10-13-10","Slightly Toxic","Non-toxic","29.97","> 100","1041501",42.79305,-78.84068
+"Rush Creek Outlet-Queensbury [SCREENING]","07-19-18/08-02 & 03-18","Moderately Toxic","Non-toxic","25.46","> 100","10-ROUT-1.3",43.34988,-73.69271
+"Sacandaga River @ Hadley 11041101 (SACN-01) [INTENSIVE]","09-05-07/01-03 & 04-08","Slightly Toxic","Non-toxic","33.51","> 100","11041101",43.3136111,-73.845
+"Salmon River-Plattsburgh [SCREENING]","07-17-18/08-02 & 03-18","Slightly Toxic","Non-toxic","48.52","> 100","10-SAMN-4.2",44.640552,-73.49499
+"Salmon River @ Fort Covington 09021201 (SAL9-03) [INTENSIVE]","08-10-05/09-07 & 21-05","Non-toxic","Non-toxic","40.59","> 100","9021201",44.9908333,-74.5030555
+"Salmon River @ Pulaski 03031202 (SALM-3.9) [INTENSIVE]","08-17-16/11-29&30-16","Slightly Toxic","Non-toxic","52.57","> 100","3031202",43.57028,-76.14083
+"Salmon River @ Richland 03031207 (SALM-05) [INTENSIVE]","08-23-07/12-12 & 13-07","Slightly Toxic","Non-toxic","20.07","> 100","3031207",43.55,-76.0955555
+"Sampawams Creek-Islip [SCREENING]","09-12-18/10-30 & 31-18","Non-toxic","Non-toxic","61.56","> 100","17-SAMP-0.4",40.7033,-73.3186
+"Sandy Creek-Croghan","09-13-17/11-07 & 08-17","Non-toxic","Non-toxic","71.4","> 100","08-SNDC-1.1",43.897568,-75.333973
+"Sandy Creek @ Adams 03031308 (SAND-8.4) [INTENSIVE]","08-18-16/11-29&30-16","Severely Toxic","Non-toxic","9.85","> 100","3031308",43.791698,-76.107505
+"Sandy Creek @ Copenhagen 03031329 (SAND-29.3) [INTENSIVE]","08-18-16/11-29&30-16","Moderately Toxic","Non-toxic","36.4","> 100","3031329",43.891673,-75.810853
+"Sandy Creek @ Ellisburg 03031302 (SAND-03) [INTENSIVE]","09-18-13/01-07&08-14","Severely Toxic","Non-toxic","12.72","> 100","3031302",43.74378,-76.18508
+"Sandy Creek @ Ellisburg 03031302 (SAND-03) [INTENSIVE]","10-01-08/01-13 & 16-09","Moderately Toxic","Non-toxic","15.3","> 100","3031302",43.74378,-76.18508
+"Sandy Creek @ Hamlin 03013003 (SNDY-2.9) [INTENSIVE]","08-16-16/11-29&30-16","Moderately Toxic","Non-toxic","33.36","> 100","3013003",43.3335,-77.9345
+"Sangerfield Creek @ Earlville 06022503 (SANG-01) [INTENSIVE]","07-14-09/09-23 & 24-09","Non-toxic","Non-toxic","44.49","> 100","6022503",42.75194931,-75.53250122
+"Saranac River @ Plattsburgh 10031001 (SARA-06A) [INTENSIVE]","08-10-04/10-27 & 28-04","Moderately Toxic","Non-toxic","10.73","> 100","10031001",44.691944,-73.453333
+"Saranac River @ Plattsburgh 10031001 (SARA-06A) [INTENSIVE]","08-19-09/01-12 & 14-10","Slightly Toxic","Non-toxic","33.13","> 100","10031001",44.691944,-73.453333
+"Sauquoit Creek @ Whitesboro 12012002 (SAUQ-06) [INTENSIVE]","08-02-06/11-29 & 30-06","Slightly Toxic","Non-toxic","33.27","> 100","12012002",43.11722,-75.28472
+"Sauquoit Creek @ Whitesboro 12012002 (SAUQ-06) [INTENSIVE]","08-18-11/08-24-11","Non-toxic","Non-toxic","54.9","> 100","12012002",43.11722,-75.28472
+"Sauquoit Creek @ Whitesboro 12012002C (SAUQ-1.7) [INTENSIVE]","09-21-16/12-06&07-16","Moderately Toxic","Non-toxic","38.92","> 100","12012002C",43.11306,-75.29444
+"Saw Mill River-Yonkers","07-25-17/11-15 & 16-17","Non-toxic","Non-toxic","71.27","> 100","13-SAW-1.4",41.1325,-73.79667
+"Sawmill Creek-Riverhead [SCREENING]","09-12-18/10-30 & 31-18","Non-toxic","Non-toxic","84.51","> 100","17-SWML-1.4",40.92528,-72.64972
+"Schenevus Creek-Maryland [SCREENING]","08-09-18/08-28-18","Non-toxic","Non-toxic","66.71","> 100","06-NVUS-6.4",42.524226,-74.898842
+"Schenevus Creek-Milford [SCREENING]","08-09-18/08-28-18","Non-toxic","Non-toxic","60.83","> 100","06-NVUS-0.9",42.4856,-74.9694
+"Schenevus Creek @ Colliersville 06011302 (NVUS-03) [INTENSIVE]","07-16-09/09-23 & 24-09","Slightly Toxic","Toxic","29.61","98.15","6011302",42.4863,-74.96868
+"Schenevus Creek @ Colliersville 06011302 (NVUS-03) [INTENSIVE]","07-30-14/09-03-14","Slightly Toxic","Non-toxic","74.3","> 100","6011302",42.4863,-74.96868
+"Schenevus Creek @ Colliersville 06011302 (NVUS-03) [INTENSIVE]","10-05-04/12-07 & 08-04","Slightly Toxic","Non-toxic","20.7","> 100","6011302",42.4863,-74.96868
+"Schoharie Creek @ Fort Hunter 12021001 (SCHO-18) [INTENSIVE]","08-03-06/11-29 & 30-06","Slightly Toxic","Non-toxic","22.68","> 100","12021001",42.937222,-74.280556
+"Schoharie Creek @ Hunter 12021081 (SCHO-10) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","12021081",42.21639,-74.24333
+"Schroon River @ Warrensburg 11041203B (SCHR-01A) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","11041203B",43.48805618,-73.76083374
+"Sconondoa Creek @ Oneida Castle 07034301 (SCON-06) [INTENSIVE]","08-07-12/12-18-12","Slightly Toxic","Non-toxic","38.48","> 100","7034301",43.09526825,-75.625
+"Seneca River @ Jacks Reef 07011023 (SEOS-01B) [ROUTINE]","08-21-07/12-12 & 13-07","Moderately Toxic","Non-toxic","3.71","> 100","7011023",43.098611,-76.423611
+"Seneca River @ Jacks Reef 07011023 (SEOS-01B) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","7011023",43.098611,-76.423611
+"Seneca River @ Seneca Falls 07051057 (CCAN-15A) [INTENSIVE]","08-22-07/12-12 & 13-07","Severely Toxic","Non-toxic","0.12","> 100","7051057",42.909167,-76.801111
+"Shakers Creek @ Colonie 12011D02 (SHAK-02) [INTENSIVE]","07-29-10/08-11-10","Slightly Toxic","Non-toxic","27.75","> 100","12011D02",42.76055,-73.79916
+"Shakers Creek @ Colonie 12011D02 (SHAK-02) [INTENSIVE]","08-17-11/08-24-11","Slightly Toxic","Non-toxic","33.74","> 100","12011D02",42.76055,-73.79916
+"Shawangunk-Ganahgote","08-03-17/11-15 & 16-17","Non-toxic","Toxic","64.1","42.67","13-GUNK-0.4",41.68722,-74.17278
+"Sheldrake Stream @ Thompsonville 14022402 (SHEL-01) [INTENSIVE]","09-07-05/09-28 & 29-05","Non-toxic","N/A","69.45","N/A","14022402",41.6680555,-74.6230555
+"Silver Creek @ Silver Creek 01051101 (SILV-0.1) [INTENSIVE]","07-19-16/08-17&18-16","Moderately Toxic","Non-toxic","25.43","> 100","1051101",42.546111,-79.167222
+"Silver Lake Outlet @ Perry 04031103 (SILO-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","4031103",42.71255,-77.96322
+"Six Mile Creek @ Rome 12011401 (SIXM-01) [INTENSIVE]","07-28-10/08-11-10","Non-toxic","Non-toxic","56.37","> 100","12011401",43.21139,-75.38277
+"Six Mile Creek @ Rome 12011401 (SIXM-01) [INTENSIVE]","08-18-11/08-24-11","Non-toxic","Non-toxic","68.33","> 100","12011401",43.21139,-75.38277
+"Sixmile Creek @ Ithaca 07054100 (SXML-01) [INTENSIVE]","08-08-12/12-18-12","Slightly Toxic","Non-toxic","31.11","> 100","7054100",42.43415833,-76.50389099
+"Skaneateles Creek @ Jordan 07072003 (SKAN-08) [INTENSIVE]","08-21-07/12-12 & 13-07","Moderately Toxic","Non-toxic","1.04","> 100","7072003",43.0727777,-76.48
+"Slater Creek @ Greece 03013102 (SLTR-1.5) [INTENSIVE]","08-16-16/11-29&30-16","Slightly Toxic","Toxic","45","~100%","3013102",43.25423,-77.64654
+"Smith Brook-Diamond Point [SCREENING]","07-19-18/08-02 & 03-18","Moderately Toxic","Non-toxic","35.71","> 100","10-SMIB-0.5",43.47917,-73.68723
+"Smokes Creek @ Lackawanna 01041403 (SMOK-01) [INTENSIVE]","08-23-06/11-08 & 14-06","Moderately Toxic","Non-toxic","12.7","> 100","1041403",42.8197222,-78.8238888
+"Snake Creek @ Corbettsville 06031501 (SNAK-01) [INTENSIVE]","10-05-04/12-07 & 08-04","Non-toxic","Non-toxic","66.57","> 100","6031501",42.0144444,-75.7888888
+"Sodus Creek @ Glenmark 03022102 (SDUS-01) [INTENSIVE]","08-22-07/12-12 & 13-07","Moderately Toxic","Non-toxic","3.48","> 100","3022102",43.1913888,-76.9122222
+"South Branch Cattaraugus Creek @ Otto 01042414 (CATT-07A) [INTENSIVE]","08-23-06/11-08 & 14-06","Moderately Toxic","Non-toxic","9.73","> 100","1042414",42.3558333,-78.8325
+"South Branch Eighteenmile Creek @ Eden Valley 01042203 (TEEN-B) [INTENSIVE]","08-23-06/11-08 & 14-06","Slightly Toxic","Non-toxic","36.8","> 100","1042203",42.6805555,-78.8786111
+"South Chuctanunda Creek @ South Amsterdam 12011801 (SCHU-02) [INTENSIVE]","08-03-06/11-29 & 30-06","Non-toxic","Non-toxic","42.73","> 100","12011801",42.9352777,-74.2033333
+"South Sandy Creek @ Ellisburg 03031507 (SSAN-01) [INTENSIVE]","09-18-13/01-07&08-14","Non-Toxic","Non-toxic","80.81","> 100","3031507",43.73704,-76.1319
+"Sparta Brook-Ossining","07-26-17/11-15 & 16-17","Slight","Non-toxic","45.14","> 100","13-WSART-0.5",41.14559,-73.86061
+"Spooner Creek @ Springville 01042600 (SPOO-00) [INTENSIVE]","08-02-11/08-10-11","Moderately Toxic","Non-toxic","16.86","> 100","1042600",42.48855,-78.72167
+"Spring Brook @ Lima 04022103 (SPRG-3.7) [INTENSIVE]","07-30-15/09-24&25-15","Slightly Toxic","Non-toxic","52.53","> 100","4022103",42.934404,-77.606905
+"Spring Brook @ Moran Corners 04022100 (SPRG-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","4022100",42.96016,-77.61893
+"Spruce Creek @ Salisbury Center 12012203 (SPRC-01) [INTENSIVE]","08-03-06/11-29 & 30-06","Non-toxic","Non-toxic","56.93","> 100","12012203",43.1402777,-74.7861111
+"St. Lawrence River @ Massena 09010008 (STLW-15A) [ROUTINE]","08-10-05/09-07 & 21-05","Moderately Toxic","Non-toxic","5.31","> 100","9010008",45.0061111,-74.7952778
+"St. Lawrence River @ Massena 09010008 (STLW-15A) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","9010008",45.0061111,-74.7952778
+"St. Regis River @ Helena 09021009 (REGI-07) [INTENSIVE]","07-14-10/07-21 & 22-10","Moderately Toxic","Non-toxic","13.09","> 100","9021009",44.9244444,-74.7225
+"St. Regis River @ Helena 09021009 (REGI-07) [INTENSIVE]","08-10-05/09-07 & 21-05","Moderately Toxic","Non-toxic","13.67","> 100","9021009",44.9244444,-74.7225
+"St. Regis River @ Hogansburg 09021003 (REGI-08) [INTENSIVE]","07-14-10/07-21 & 22-10","Slightly Toxic","Non-toxic","24.98","> 100","9021003",44.973,-74.665
+"Stewart Brook @ Lake Luzerne 11042402 (STEW-00) [INTENSIVE]","09-10-12/11-16-12","Non-toxic","Non-toxic","82.6","> 100","11042402",43.37900162,-73.83699799
+"Stillwater Creek @ Busti  02022406 (STIL-A) [INTENSIVE]","07-23-12/08-29-12","Non-toxic","Non-toxic","49.71","> 100","2022406",42.0320015,-79.28099823
+"Stony Kill Creek @ East Chatham 13013110 (STON-02) [INTENSIVE]","09-27-13/01-14&16-14","Non-toxic","Non-toxic","84.86","> 100","13013110",42.40939,-73.52219
+"Sucker Brook @ Waddington 09011203 (SCKE-3.4) [INTENSIVE]","09-22-15/11-18&19-15","Moderately Toxic","Non-toxic","38.13","> 100","9011203",44.83778,-75.22222
+"Sumner Brook @ Bloomingdale 10032101 (SUMN-01) [INTENSIVE]","08-19-09/01-12 & 14-10","Non-toxic","Non-toxic","46.29","> 100","10032101",44.40859985,-74.0836029
+"Susquehanna River @ Hyde Park 06010153 (USSQ-11) [INTENSIVE]","10-05-04/12-07 & 08-04","Slightly Toxic","Non-toxic","28.98","> 100","6010153",42.616,-74.954
+"Susquehanna River @ Phoenix Mills 06010154 (USSQ-10) [INTENSIVE]","07-14-09/09-23 & 24-09","Non-toxic","Non-toxic","48.25","> 100","6010154",42.66722106,-74.94541931
+"Susquehanna River @ Smithboro 06030006 (SUSQ-09) [ROUTINE]","07-16-09/09-23 & 24-09","Non-toxic","Toxic","43.14","82.74","6030006",42.029167,-76.400556
+"Susquehanna River @ Smithboro 06030006 (SUSQ-09) [ROUTINE]","NOT SAMPLED","N/A","N/A","N/A","N/A","6030006",42.029167,-76.400556
+"Swamp River @ Dover Plains 16012100 (SWMP-01) [INTENSIVE]","07-17-08/01-06 & 08-09","Non-toxic","Non-toxic","54.42","> 100","16012100",41.71528,-73.57553
+"Sylvia Lake Outlet @ Fowler 09052101 (SYLV-1.4) [INTENSIVE]","09-23-15/11-18&19-15","Slightly Toxic","Non-toxic","58.27","> 100","9052101",44.27389,-75.39139
+"Taghkanic Creek @ West Taghkanic 13013310 (TAGH-02) [INTENSIVE]","09-27-13/01-14&16-14","Moderately Toxic","Non-toxic","55.27","> 100","13013310",42.12358,-73.721
+"Taughannock Creek @ Halseyville 07053603 (TGHN-00) [INTENSIVE]","08-08-12/12-18-12","Moderately Toxic","Non-toxic","11.32","> 100","7053603",42.52999878,-76.63700104
+"Ticonderoga Creek @ Ticonderoga 10051202 (TCON-01) [INTENSIVE]","08-11-04/10-27 & 28-04","Severely Toxic","Non-toxic","0.436","> 100","10051202",43.8494444,-73.4211111
+"Tin Brook @ Walden 13063302 (TINW-01) [INTENSIVE]","09-26-13/01-14&16-14","Slightly Toxic","Non-toxic","79.38","> 100","13063302",41.560958,-74.183717
+"Tioughnioga River-Cortlandville [SCREENING]","08-08-18/08-28-18","Moderately Toxic","Non-toxic","23.47","> 100","06-TOGH-29.8",42.5681,-76.1217
+"Tioughnioga River @ Blodgett Mills 06022131 (TOGH-12) [INTENSIVE]","10-06-04/12-07 & 08-04","Slightly Toxic","Non-toxic","24.99","> 100","6022131",42.568056,-76.121667
+"Tomhanncok Creek @ Schaghticoke 11022201 (TOMH-01) [INTENSIVE]","09-06-07/01-03 & 04-08","Non-toxic","Non-toxic","42.29","> 100","11022201",42.9016666,-73.6372222
+"Tonawanda Creek @ Batavia 01021103 (TONA-00) [INTENSIVE]","08-03-11/08-10-11","Slightly Toxic","Non-toxic","23.66","> 100","1021103",42.71208,-78.33084
+"Tonawanda Creek @ Rapids 01021020 (TONA-09) [INTENSIVE]","08-23-06/11-08 & 14-06","Slightly Toxic","Non-toxic","22.52","> 100","1021020",43.093056,-78.636389
+"Tributary Peconic River-Riverhead [SCREENING]","09-12-18/10-30 & 31-18","Non-toxic","Non-toxic","95.14","> 100","17-PECN-_T6-0.8",40.89078,-72.80695
+"Tributary Rondout Creek-Sugarbush Creek","07-05-17/11-15 & 16-17","Non-toxic","Non-toxic","87.71","> 100","13-ROND-T6-1.9",41.87236,-74.01783
+"Tributary to East Branch Deer Creek @ Malone 09024101 (EDEE-13.2) [INTENSIVE]","09-21-15/11-18&19-15","Moderately Toxic","N/A","41.05","N/A","9024101",44.87035,-74.36071
+"Tributary to Little Salmon River @ Fort Covington 09023201 (LSAL-F1.0) [INTENSIVE]","09-21-15/11-18&19-15","Slightly Toxic","Non-toxic","61.43","> 100","9023201",44.960765,-74.49282
+"Tributary to Plumb Creek @ Russell 09042219 (PLMB-T-0.1) [INTENSIVE]","09-22-15/11-18&19-15","Non-toxic","Non-toxic","79.11","> 100","9042219",44.327302,-75.091868
+"Tributary to Ransom Creek @ East Amherst 01021200 (RANS-T0.2) [INTENSIVE]","07-21-16/08-17&18-16","Moderately Toxic","Non-toxic","32.44","> 100","1021200",43.050046,-78.731063
+"Tributary to Skinner Creek @ Mannsville 03032001 (SKIN-T0.2) [INTENSIVE]","08-18-16/11-29&30-16","Non-toxic","Non-toxic","79.18","> 100","3032001",43.711305,-76.053117
+"Troopsburg Creek-Troopsburg","08-09-17/11-21-17","Moderate","Toxic","22.67","73.76","05-TRPS-9.5",42.04261,-77.54943
+"Trout Brook @ Raymondville 09032101 (TOOK-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","9032101",44.8344444,-74.9813888
+"Trout Creek @ Trout Creek 14042401 (TRUT-1.4) [INTENSIVE]","08-25-15/10-07&08-15","Slightly Toxic","Non-toxic","62","> 100","14042401",42.17694,-75.27889
+"Trumansburg Creek @ Trumansburg 07053702 (TRUM-01) [INTENSIVE]","08-08-12/12-18-12","Slightly Toxic","Non-toxic","34.69","> 100","7053702",42.54150009,-76.64739227
+"Trumansburg Creek @ Trumansburg 07053702 (TRUM-01) [INTENSIVE]","09-01-11/09-14&15-11","Moderately Toxic","Non-toxic","6.75","> 100","7053702",42.54150009,-76.64739227
+"Tunungwant Creek @ Limestone 02011406 (TUNG-01) [INTENSIVE]","08-07-07/12-19-07","Non-toxic","Non-toxic","47.34","> 100","2011406",42.0233333,-78.6333333
+"Tuscarora Creek @ Addison 05033101 (TUSC-05) [INTENSIVE]","08-06-13/01-07&08-14","Slightly Toxic","N/A","78.49","N/A","5033101",42.103514,-77.233886
+"Tuthills Creek-Brookhaven [SCREENING]","09-12-18/10-30 & 31-18","Slightly Toxic","Non-toxic","49.68","> 100","17-TUTL-2.1",40.77675607,-73.03464969
+"Two Bridge Brook-Bloomingdale [SCREENING]","07-18-18/08-02 & 03-18","Moderately Toxic","Non-toxic","29.46","> 100","10-TWOB-3.6",44.412307,-74.111324
+"Unadilla River-Guilford [SCREENING]","08-09-18/08-28-18","Slightly Toxic","Non-toxic","55.26","> 100","06-DILA-5.4",42.3772,-75.405
+"Unadilla River @ Rockdale 06011105 (DILA-06) [INTENSIVE]","09-24-14/10-15-14","Slightly Toxic","Non-toxic","63.47","> 100","6011105",42.37889,-75.40624
+"Unadilla River @ Rockdale 06011105 (DILA-06) [INTENSIVE]","10-05-04/12-07 & 08-04","Non-toxic","Non-toxic","64.97","> 100","6011105",42.37889,-75.40624
+"Unadilla River @ West Winfield 06011157 (DILA-A) [INTENSIVE]","07-14-09/09-23 & 24-09","Non-toxic","N/A","45.5","N/A","6011157",42.88199996,-75.19255828
+"Unnamed Trib. Wappingers Creek @ Wappingers Falls 13052100 (UWAP-01) [INTENSIVE]","09-26-13/01-14&16-14","Slightly Toxic","Non-toxic","78.16","> 100","13052100",41.593565,-73.926627
+"Unnamed Tributary Cold Spring Harbor-Huntington [SCREENING]","09-11-18/10-30 & 31-18","Slightly Toxic","Non-toxic","50.7","> 100","17-CSHA-1.9",40.84147,-73.45522
+"Unnamed Tributary Honeoye Creek @ Richmond 04023200 (RICM-0.4) [INTENSIVE]","07-29-15/09-24&25-15","Non-toxic","> 100","65.48","Non-toxic","4023200",42.723,-77.501
+"Unnamed Tributary Lake George-Bolton [SCREENING]","07-19-18/08-02 & 03-18","Non-toxic","Non-toxic","69.58","> 100","10-LGEO_T62-0.2",43.611,-73.628
+"Unnamed Tributary Mill Creek-Turin","09-13-17/11-07 & 08-17","Non-toxic","Non-toxic","64.98","> 100","08-MLCK-T2-0.1",43.62847,-75.41475
+"Unnamed Tributary Mill Creek @ West Lowville 08012201 (UMLL-01) [INTENSIVE]","09-18-13/01-07&08-14","Severely Toxic","Non-toxic","33.16","> 100","8012201",43.79053,-75.54531
+"Unnamed Tributary to Fly Creek @ Windsor 14044100 (FLYC-T0.6) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","14044100",42.044645,-75.524657
+"Unnamed Tributary Wallkill-New Paltz","07-05-17/11-15 & 16-17","Slight","Non-toxic","42.82","> 100","13-WALK-T13-1.3",41.75489,-74.08368
+"Valatie Kill @ Nassau 13103116 (VLAT-04) [INTENSIVE]","07-16-08/01-06 & 08-09","Non-toxic","Non-toxic","56.23","> 100","13103116",42.56111,-73.575
+"Valley Stream-Hempstead [SCREENING]","09-12-18/10-30 & 31-18","Moderately Toxic","Non-toxic","20.15","> 100","17-VALL-0.2",40.6731,-73.6976
+"Van Buren Bay Creek @ Dunkirk 01053301 (VBUR-0.4) [INTENSIVE]","07-20-16/08-17&18-16","Slightly Toxic","Non-toxic","46.65","> 100","1053301",42.44742,-79.40407
+"Van Campen Creek @ Belvidere 04031701 (VCAM-01) [INTENSIVE]","08-11-10/08-25-10","Non-toxic","Non-toxic","51.25","> 100","4031701",42.25177,-78.05797
+"Van Rensselaer Creek @ Pierrepont 09043201 (VREN-1.1) [INTENSIVE]","09-22-15/11-18&19-15","Non-toxic","Non-toxic","83.97","> 100","9043201",44.50056,-75.05167
+"Vandermark Creek @ Five Corners 04031E08 (VANM-01) [INTENSIVE]","08-12-10/08-25-10","Moderately Toxic","Non-toxic","18.97","> 100","4.03E+11",42.22338,-77.87255
+"Wallkill River-Galeville","08-03-17/11-07 & 08-17","Slight","Non-toxic","42.33","> 100","13-WALK-22.8",41.635,-74.18889
+"Wallkill River-Gardiner","08-03-17/11-07 & 08-17","Moderate","Toxic","37.3","84.11","13-WALK-19.0",41.68639,-74.16442
+"Wallkill River-Montgomery","08-02-17/11-07 & 08-17","Moderate","Non-toxic","38.73","> 100","13-WALK-35.6",41.5025,-74.26334
+"Wallkill River-New Hampton","08-02-17/11-07 & 08-17","Severe","Non-toxic","4.46","> 100","13-WALK-46.6",41.41217,-74.37774
+"Wallkill River-Walden","08-03-17/11-07 & 08-17","Moderate","Toxic","36.92","69.53","13-WALK-26.9",41.5763,-74.1907167
+"Wallkill River-Walden","08-03-17/11-07 & 08-17","Slight","Non-toxic","43.07","> 100","13-WALK-29.9",41.54217,-74.20946
+"Walloomsac River @ White Creek 11022107 (WALL-03) [INTENSIVE]","09-06-07/01-03 & 04-08","Moderately Toxic","Non-toxic","16.29","> 100","11022107",42.939444,-73.285
+"Walnut Creek @ Forestville 01052108 (WLNT-00) [INTENSIVE]","08-01-11/08-10-11","Non-toxic","Non-toxic","70.03","> 100","1052108",42.46825,-79.18106
+"Wappingers Creek @ Wappingers Falls 13051002 (????-??) [INTENSIVE]","09-26-13/01-14&16-14","Non-toxic","N/A","93.56","N/A","13051002",41.5988,-73.925
+"Wassaic Creek @ Wassaic 16012102 (WASS-01) [INTENSIVE]","07-17-08/01-06 & 08-09","Non-toxic","Non-toxic","68.42","> 100","16012102",41.79456,-73.5518
+"Wawayanda Creek @ New Milford 13064205 (WAWA-07) [INTENSIVE]","09-26-13/01-14&16-14","Non-toxic","Toxic","82.4","46.51","13064205",41.23855,-74.41706
+"West Branch Ausable River @ Lake Placid 10042126 (SABL-01) [INTENSIVE]","08-11-04/10-27-04","Slightly Toxic","N/A","26.94","N/A","10042126",44.2569444,-73.9619444
+"West Branch Delaware River @ Beerston 14041035 (WDEL-35.4) [INTENSIVE]","09-03-15/10-07&08-15","Moderately Toxic","Non-toxic","43.51","> 100","14041035",42.12861,-75.16055
+"West Branch Delaware River @ Delhi 14041059 (WDEL-56.4) [INTENSIVE]","09-03-15/10-07&08-15","Slightly Toxic","Non-toxic","45.33","> 100","14041059",42.25972,-74.92861
+"West Branch Delaware River @ Delhi 14041060 (WDEL-03) [INTENSIVE]","09-07-05/09-28 & 29-05","Slightly Toxic","Non-toxic","27.13","> 100","14041060",42.2783333,-74.9125
+"West Branch Delaware River @ Hancock 14041001 (WDEL-13) [INTENSIVE]","09-07-05/09-28 & 29-05","Non-toxic","Non-toxic","40.2","> 100","14041001",41.9525,-75.2916667
+"West Branch Delaware River @ Hobart 14041077 (WDEL-01) [INTENSIVE]","NOT SAMPLED","N/A","N/A","N/A","N/A","14041077",42.3731,-74.6675
+"West Branch Mongaup River @ Mongaup Valley 14012300 (WMON-05) [INTENSIVE]","10-21-10/10-28 & 29-10","Non-toxic","Non-toxic","72.11","> 100","14012300",41.67988,-74.77393
+"West Branch Neversink River @ Claryville 14022200 (UNVR-NW-11) [INTENSIVE]","10-21-10/10-28 & 29-10","Non-toxic","Non-toxic","81.21","> 100","14022200",41.92046,-74.5748
+"West Branch St. Regis River @ Skinnerville 09022203 (REGI-W) [INTENSIVE]","07-14-10/07-21 & 22-10","Non-toxic","Non-toxic","61.02","> 100","9022203",44.7857,-74.81483
+"West Brook-Lake George [SCREENING]","07-19-18/08-02 & 03-18","Slightly Toxic","Non-toxic","46.5","> 100","10-WSBR-0.2",43.41849798,-73.71023186
+"West Brook @ Lake George 10063101 (WSBR-02) [INTENSIVE]","08-11-04/10-27 & 28-04","Moderately Toxic","Non-toxic","4.87","> 100","10063101",43.4180555,-73.7116666
+"West Brook @ Walton 14042301 (WSTB-1.1) [INTENSIVE]","08-25-15/10-07&08-15","Moderately Toxic","Non-toxic","40.84","> 100","14042301",42.1775,-75.12778
+"West Creek @ Evans Mills 09066102 (WSCK-3.4) [INTENSIVE]","09-23-15/11-18&19-15","Severely Toxic","N/A","14.24","N/A","9066102",44.06185,-75.82675
+"West Stony Creek @ Benson 11043201 (STNC-W) [INTENSIVE]","09-05-07/01-03 & 04-08","Non-toxic","N/A","42.27","N/A","11043201",43.2547222,-74.2236111
+"Willowemoc Creek @ Hazel 14033103 (WILL-3.1) [INTENSIVE]","08-26-15/10-07&08-15","Moderately Toxic","Toxic","30","75.35","14033103",41.92639,-74.87527
+"Willowemoc Creek @ Roscoe 14033101 (WILL-08) [INTENSIVE]","09-07-05/09-28 & 29-05","Non-toxic","Non-toxic","58.34","> 100","14033101",41.930278,-74.915278
+"Wynantskill @ Troy 13011803 (WYNT-07) [INTENSIVE]","07-16-08/01-06 & 08-09","Moderately Toxic","Toxic","16.35","51.9","13011803",42.70142,-73.65683

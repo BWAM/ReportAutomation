@@ -35,15 +35,18 @@ chem_all<-read.csv(file.path,stringsAsFactors = FALSE)
 ## Analyte Table
 
 ```{r}
+
+library(dplyr)
+library(flextable)
 #create table for the analyte list/precision method etc
 tl.1<-analyte %>% 
   rename("Analytical Lab"=Analytical.Lab,"Standard Method"=Standard.Method,"Calibration: Initial"=Cal.initial,
          "Calibration: Ongoing"=cal.ongoing,"Calibration: Blanks"=cal.blanks,"Method Detection Limit"=Method.Detection.Limit,"Reporting Limit"=Reporting.Limit)
 
+
 tl.1<-flextable(tl.1) %>% font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% theme_zebra() %>% autofit()
 tl.1<-align(tl.1, i = NULL, j =(2:10) , align = "center", part = "all")
 tl.1
-
 
 ```
 

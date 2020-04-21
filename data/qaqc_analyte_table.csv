@@ -18,3 +18,23 @@ Hardness,ALS,SM 2340C,^,± 20%,Daily,Every 10,Every 10,0.3 mg/L,2.0 mg/L
 Calcium,ALS,EPA 200.7,^,± 20%,Daily,Every 10,Every 10,0.1 mg/L,1.0 mg/L
 Magnesium,ALS,EPA 200.7,^,± 20%,Daily,Every 10,Every 10,0.04 mg/L,1.0 mg/L
 Potassium ,ALS,EPA 200.7,^,± 20%,Daily,Every 10,Every 10,0.06 mg/L,2.0 mg/L
+Sodium,ALS,EPA 200.7,^,± 20%,Daily,Every 10,Every 10,0.03 mg/L,1.0 mg/L
+Chloride,ALS,EPA 300.0,^,± 20%,As needed,Every 10,Every 10,0.02 mg/L,0.2 mg/L
+Fluoride,ALS,EPA 300.0,^,± 20%,As needed,Every 10,Every 10,0.004 mg/L,0.1 mg/L
+Sulfate,ALS,EPA 300.0,^,± 20%,As needed,Every 10,Every 10,0.02 mg/L,0.2 mg/L
+Iron (total),ALS,EPA 200.7,^,± 20%,Daily,Every 10,Every 10,6 µ/L,100 µ/L
+Manganese (total),ALS,EPA 200.7,^,± 20%,Daily,Every 10,Every 10,0.5 µ/L,10 µ/L
+Arsenic (total),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,0.3 µ/L,1 µ/L
+Silver (total),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,0.07 µ/L,1 µ/L
+Aluminum (total),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,4.0 µ/L,50 µ/L
+Cadmium (total),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,0.03 µ/L,1 µ/L
+Copper (total),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,0.04 µ/L,1 µ/L
+Lead (total),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,0.08 µ/L,1 µ/L
+Nickel (total),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,0.04 µ/L,1 µ/L
+Zinc (total),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,0.7 µ/L,10 µ/L
+Aluminum (dissolved),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,0.9 µ/L,10 µ/L
+Cadmium (dissolved),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,0.02 µ/L,1 µ/L
+Copper (dissolved),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,0.02 µ/L,1 µ/L
+Lead (dissolved),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,0.02 µ/L,1 µ/L
+Nickel (dissolved),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,0.1 µ/L,1 µ/L
+Zinc (dissolved),ALS,EPA 200.8,^,± 20%,Daily,Every 10,Every 10,3 µ/L,5 µ/L
