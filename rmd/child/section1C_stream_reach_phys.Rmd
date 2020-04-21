@@ -1,0 +1,75 @@
+---
+title: "section1C_stream_reach_physical_char"
+author: 'NYSDEC SMAS : Keleigh Reynolds'
+date: "4/16/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+#set up the file path
+file.path.h=file.path(here::here(),
+          "data",
+          "habitat_wk.csv")
+
+```
+
+```{r}
+#read in the habitat data
+habit<-read.csv(file.path.h,stringsAsFactors = FALSE)
+
+#select relevant columns
+habit<-habit %>% 
+  select(SITE_ID,COLL_DATE,HFDH_GRADIENT,HFDH_EPIFAUNAL_COVER,HFDH_EMBEDDEDNESS_POOLING,HFDH_VELOCITY_DEPTH_REGIME,
+         HFDH_SEDIMENT_DEPOSITION,HFDH_FLOW_STATUS,HFDH_CHANNEL_ALTERATION,HFDH_RIFFLE_BEND_FREQUENCY) %>% 
+  rename("Location ID"=SITE_ID,
+         "Collection Date"=COLL_DATE,
+         "Gradient"=HFDH_GRADIENT,
+         "Epi.Cover"=HFDH_EPIFAUNAL_COVER,
+         "Embed. Pool."=HFDH_EMBEDDEDNESS_POOLING,
+         "Vel/Dep. Reg"=HFDH_VELOCITY_DEPTH_REGIME,
+         "Sed. Dep."=HFDH_SEDIMENT_DEPOSITION,
+         "Flow Status"=HFDH_FLOW_STATUS,
+         "Chan. Alt"= HFDH_CHANNEL_ALTERATION,
+         "Rif. Freq"=HFDH_RIFFLE_BEND_FREQUENCY)
+
+library(lubridate)
+habit<-habit %>% 
+  mutate(year=year(`Collection Date`))
+
+#limit to last 3 years
+
+habit<-habit %>% 
+  filter(year >= 2017)
+
+habit$year<-NULL
+  
+
+```
+
+```{r}
+#table
+
+#create function for common tables
+#df is the data frame, x and y are the column numbers you want centered, z is the caption
+table.f<-function(df,x,y){
+ library(flextable)
+  tl<-flextable(df) %>% font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% theme_zebra() %>% autofit()
+tl<-align(tl, i = NULL, j =(x:y) , align = "center", part = "all")
+tl
+}
+
+#call the function
+tl<-table.f(habit,3,8)
+
+
+#this part might have to be figured out later, with a larger caption/table function? Not sure yet.
+
+
+tl<-set_caption(tl,"Ranked habitat characteristics and calculated HMA for the Wallkill River Survey, 2017-2019. Epifaunal substrate (Epi. Cover); Embeddedness/Pool Substrate Characterization (Embed. Pool.); Velocity Depth Regime/Pool Variability (Vel/Dep Reg.); Sediment Deposition (Sed. Dep.); Channel Flow Status (Flow Status); Channel Alteration (Chan. Alt.); Riffle Frequency/Stream Sinuosity (Rif. Freq.); Left/Right Bank Stability (L/R Bank Stab.); Left/Right Bank Vegetative Cover (L/R Bank Veg.); Left/Right Bank Riparian Vegetative Zone Width (L/R Rip. Width).",html_escape = TRUE)
+tl
+
+```
+
+
