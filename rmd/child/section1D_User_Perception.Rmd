@@ -7,14 +7,11 @@ output:
   html_document: default
 ---
 
-```{r}
+```{r setup, include=FALSE}
 library(tidyverse)
 library(ggthemes)
 library(flextable)
-```
 
-
-```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 #set up the file path
@@ -36,14 +33,18 @@ Sites<-read.csv(file.path2,stringsAsFactors = FALSE)
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
 #function to make the sites a factor in order from upstream to downstream
-order_sites<-function(df, sites_table){
-Sites2<-sites_table%>%
-  rename(SITE_ID=SH_SITE_ID)
+order_sites<-function(df, sites_table, df_site_col, sites_site_col){
+Sites<-sites_table%>%
+  rename(SITE_ID=sites_site_col)
 
-contact<-left_join(df, Sites2, by="SITE_ID")
-contact<-contact%>%
+df<-df%>%
+  rename(SITE_ID=df_site_col)
+
+all_data<-left_join(df, Sites, by="SITE_ID")
+all_data<-all_data%>%
   arrange(order)%>%
-  mutate(SITE_ID=factor(SITE_ID, levels = unique(SITE_ID)))
+  mutate(SITE_ID=factor(SITE_ID, levels = unique(SITE_ID)))%>%
+  select(-c(order:UPDATED_BY_GUID))
 }
 ```
 
@@ -57,7 +58,7 @@ contact<-df%>%
          Secondary=ifelse(UPFDH_SECONDARY_CONTACT=="A", yes=1, no=ifelse(UPFDH_SECONDARY_CONTACT=="B", yes=2, no=ifelse(UPFDH_SECONDARY_CONTACT=="C", yes=3, no=ifelse(UPFDH_SECONDARY_CONTACT=="D", yes=4, no=ifelse(UPFDH_SECONDARY_CONTACT=="E", yes=5, no=ifelse(UPFDH_SECONDARY_CONTACT=="F", yes=6, no=NA)))))))%>%
   select(SITE_ID, Primary, Secondary)%>%
   pivot_longer(-SITE_ID, names_to = "Contact Type", values_to = "value")%>%
-  order_sites(sites_table)
+  order_sites(sites_table, sites_site_col = "SH_SITE_ID", df_site_col = "SITE_ID")
 
 
 
@@ -92,8 +93,7 @@ Variables<-df%>%
             Odor=round(mean(UPFDH_ODOR, na.rm=TRUE), digits=0),
             Trash= round(mean(UPFDH_TRASH, na.rm = TRUE), digits=0),
             `Discharge Pipes`= round(mean(UPFDH_DISCHARGE_PIPE, na.rm = TRUE), digits=0))%>%
-  order_sites(sites_table)%>%
-  select(SITE_ID, `Water Clarity`, `Suspended Phytoplankton`, Periphyton, Macrophyte, Odor, Trash, `Discharge Pipes`)
+  order_sites(sites_table, sites_site_col = "SH_SITE_ID", df_site_col = "SITE_ID")
 
 final_table<-flextable(Variables)%>%
   theme_zebra()%>%
@@ -134,8 +134,7 @@ group_by(SITE_ID, UPFDH_SECONDARY_VARIABLE)%>%
   summarize(Secondary=paste0(UPFDH_SECONDARY_VARIABLE, collapse=", "))
 
 Dominant<-left_join(DominantP, DominantS, by="SITE_ID")%>%
-  order_sites(site_table)%>%
-  select(SITE_ID, Primary, Secondary)
+  order_sites(sites_table=Sites, sites_site_col = "SH_SITE_ID", df_site_col = "SITE_ID")
 
 final_table<-flextable(Dominant)%>%
   theme_zebra()%>%
