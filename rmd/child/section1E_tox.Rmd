@@ -2,7 +2,6 @@
 title: "section1E_toxicity"
 author: 'NYSDEC SMAS : Keleigh Reynolds'
 date: "4/17/2020"
-<<<<<<< HEAD
 output:
   word_document: default
   html_document: default
@@ -11,14 +10,7 @@ output:
 ```{r setup, include=FALSE,message=FALSE,warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
-=======
-output: html_document
----
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-library(dplyr)
->>>>>>> 21cb47628fcc1b6467dd7d8e698ebb0a33181222
 
 #for the table
 file.path.tw<-file.path(here::here(),
@@ -40,12 +32,10 @@ sites<-read.csv(file.path.s,stringsAsFactors = FALSE)
 
 ```
 
-<<<<<<< HEAD
+
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
-=======
-```{r message=FALSE,warning=FALSE}
->>>>>>> 21cb47628fcc1b6467dd7d8e698ebb0a33181222
+
 #create function for common tables
 #df is the data frame, x and y are the column numbers you want centered, z is the caption
 table.f<-function(df,x,y){
@@ -57,7 +47,7 @@ tl
 
 ```
 
-<<<<<<< HEAD
+
 ```{r include=FALSE,message=FALSE,warning=FALSE}
 #function to make the sites a factor in order from upstream to downstream
 order_sites<-function(df, sites_table, df_site_col, sites_site_col){
@@ -76,9 +66,7 @@ all_data<-all_data%>%
 ```
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
-=======
-```{r}
->>>>>>> 21cb47628fcc1b6467dd7d8e698ebb0a33181222
+
 #select and shorten the files
 #merge the other 2
 tox.df<-merge(tox_s,tox_w,all = TRUE)
@@ -91,7 +79,6 @@ tox.df<-tox.df %>%
 sites.ls<-unique(sites$SH_SITE_ID)
 
 tox.df<-tox.df %>% 
-<<<<<<< HEAD
   filter(stationID %in% sites.ls)%>%
   separate(Sediment.Collection.Test.Date, into=c("Collection_Date", "Test_Date"), sep="/")%>%
   mutate(Test_Date=gsub(pattern="\\s&\\s\\d\\d" , replacement="", x=Test_Date))%>%
@@ -107,22 +94,7 @@ tox.tbl<-tox.df %>%
          "Sediment \n EC50"=Sediment.EC50....,
          "Porewater \n EC50"=Porewater.EC50....)
  
-=======
-  filter(stationID %in% sites.ls)
 
-tox.tbl<-tox.df %>% 
-  rename("Station"=station,
-         "Station ID"=stationID,
-    "Sample Date"=Sediment.Collection.Test.Date,
-         "Test Date"=Water.Collection.Test.Start.Date,
-         "Sediment Assessment"=Sediment.Assessment,
-         "Porewater Assessment"=Porewater.Assessment,
-         "Sediment EC50"=Sediment.EC50....,
-         "Porewater EC50"=Porewater.EC50....)
-#taking out the other test date column, since they are blank.
-tox.tbl$`Test Date`<-NULL
-
->>>>>>> 21cb47628fcc1b6467dd7d8e698ebb0a33181222
 ```
 
 ### E)	Sediment and Porewater Microtox® Analysis
@@ -130,17 +102,12 @@ tox.tbl$`Test Date`<-NULL
 Toxicity testing of surface waters, sediments, porewaters, and effluents are routinely performed as part of the RIBS program (https://www.dec.ny.gov/chemical/29854.html). Sediment toxicity was evaluated according to SOP #403-16 Microtox® Acute Toxicity Test for Sediments, Porewaters and Effluents. Testing procedures use a bioassay to assess potential acute toxicity in sediments and surface waters to aquatic life (SOP #403-16). Sediment and extracted sediment porewater samples are tested using a bioluminescent bacterium Vibrio fischeri (V. fischeri). Tests are a measure of light reduction between collected samples and a control following a 15-minute exposure period and expressed as the median effect concentration (EC50) of a sample that causes a 50% reduction in light emission from the V. fischeri. Appendix X (Fact Sheet: Acute & Chronic Toxicity Assessments of NY Streams & Rivers) describes toxicity testing procedures, Assessment criteria and results classifications. 
 
 
-<<<<<<< HEAD
 ```{r echo=FALSE, message=FALSE,warning=FALSE}
 #call table function
 table.f(tox.tbl,2,7)%>%
   fontsize(size = 10, part = "all")%>%
   width(j=4:7, width=1.2)
-=======
-```{r}
-#call table function
-table.f(tox.tbl,2,7)
->>>>>>> 21cb47628fcc1b6467dd7d8e698ebb0a33181222
+
 ```
 
 
