@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 file.path.s=file.path(here::here(),
           "data",
-          "sites.csv")
+          "sites_wallkill.csv")
 
 sites<-read.csv(file.path.s,stringsAsFactors = FALSE)
 
@@ -24,31 +24,72 @@ sites<-read.csv(file.path.s,stringsAsFactors = FALSE)
 #Table 1
 #renames column in the sites table to match
 library(dplyr)
-sites<-sites %>% 
-  rename("SITE_ID"=SH_SITE_ID)
 
-table1<-merge(chem_all,sites,by="SITE_ID") %>% 
-select(SITE_ID,SH_RIVMILE,SH_PWL_ID.x,SH_WQ_STANDARD.x,SH_DESC,SH_LATITUDE.x,SH_LONGITUDE.x) %>% 
-  distinct()
+table1<-sites %>% 
+select(SH_SITE_ID,group,SH_RIVMILE,SH_PWL_ID,SH_WQ_STANDARD,SH_DESC,SH_LATITUDE,SH_LONGITUDE,order) %>% 
+  distinct() %>% 
+  arrange(order)
 
-table1<-table1 %>% rename("Location ID"=SITE_ID,
+table1<-table1 %>% rename("Location ID"=SH_SITE_ID,
+                          "Group"=group,
                   "Rivermile"=SH_RIVMILE,
-                  "WI/PWL"=SH_PWL_ID.x,
-                  "Waterbody Classification"=SH_WQ_STANDARD.x,
+                  "WI/PWL"=SH_PWL_ID,
+                  "Waterbody Classification"=SH_WQ_STANDARD,
                   "Description"=SH_DESC,
-                  "Latitude"=SH_LATITUDE.x,
-                  "Longitude"=SH_LONGITUDE.x)
+                  "Latitude"=SH_LATITUDE,
+                  "Longitude"=SH_LONGITUDE)
 
 table1$Description<-toupper(table1$Description)
+
+#remove order column for table disply
+table1$order<-NULL
 
 
 ```
 
 ```{r}
+library(flextable)
 tl<-flextable(table1) %>% font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% theme_zebra() %>% autofit()
-tl<-align(tl, i = NULL, j =(2:4) , align = "center", part = "all")
+tl<-align(tl, i = NULL, j =(2:5) , align = "center", part = "all")
 tl
 ```
+
+```{r}
+
+#Saving this section for later, needs work.
+#library(ggplot2)
+#library(ggmap)
+
+
+#ny<-map_data("state")
+#ny<-ny %>% filter(region=="new york") %>% 
+  #filter(long>74.5,lat<42.5)
+#counties <- map_data("county")
+#ny_county <- subset(counties, region == "new york")
+
+#ny.map<-ggplot(ny) + 
+  #geom_polygon(aes(x = long, y = lat),fill=NA,color="black")
+  
+#ny.new<-ny.map+geom_point(data=sites.df,aes(x=SH_LONGITUDE,y=SH_LATITUDE),color="red",size=4)+
+  #geom_text(data=sites.df,aes(x=SH_LONGITUDE,y=SH_LATITUDE,label=paste(as.character(SH_SITE_ID))),color="black")
+
+
+```
+
+```{r}
+library(leaflet)
+m<-sites %>% 
+  distinct(SH_SITE_ID,SH_LATITUDE,SH_LONGITUDE)
+
+pop<-paste(sep = "<br/>",sites$SH_SITE_ID,sites$group)
+
+map<-leaflet(m) %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers(~SH_LONGITUDE,~SH_LATITUDE, popup=~pop)
+map
+```
+
+
 
 
 
