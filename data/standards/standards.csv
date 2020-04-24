@@ -1,0 +1,91 @@
+Core.Indicator,WQS,Classification,Best_Use,Use_Rank,75.p.avail
+Total Coliform,"Monthly median and more than 20 percent of the samples, from a minimum of five examinations, shall not exceed 50 and 240",AA,Source of Water Supply,1,
+Total Coliform,"Monthly median and more than 20 percent of the samples, from a minimum of five examinations, shall not exceed 2,400 and 5,000",A,Source of Water Supply,1,
+Total Coliform,"Geo mean, of not less than five samples, take over not more than a 30 day period shall not exceed 1,000.",A-Special,Source of Water Supply,1,
+Total Coliform,"Monthly median and more than 20 percent of the samples, from a minimum of five examinations, shall not exceed 2,400 and 5,000",B,Primary Contact Recreation and Secondary Contact Recreation,2,
+Total Coliform,"Monthly median and more than 20 percent of the samples, from a minimum of five examinations, shall not exceed 2,400 and 5,000",C,Fishing,3,
+Total Coliform,"Monthly median and more than 20 percent of the samples, from a minimum of five examinations, shall not exceed 2,400 and 5,000",D,Fishing,3,
+Total Coliform,Median most probable number value in any series of representative samples shall not be in excess of 70,SA,Shellfishing,4,
+Total Coliform,"Monthly median and more than 20 percent of the samples, from a minimum of five examinations, shall not exceed 2,400 and 5,000",SB,Primary Contact Recreation and Secondary Contact Recreation,2,
+Total Coliform,"Monthly median and more than 20 percent of the samples, from a minimum of five examinations, shall not exceed 2,400 and 5,000",SC,Fishing,3,
+Total Coliform,"Monthly median and more than 20 percent of the samples, from a minimum of five examinations, shall not exceed 2,400 and 5,000",I,Secondary Contact Recreation,5,
+Total Coliform,"Monthly median and more than 20 percent of the samples, from a minimum of five examinations, shall not exceed 2,400 and 5,000",SD,Fishing,3,
+Fecal Coliforms,"Monthly geomean from a minimum of five examinations, shall not exceed 200.",A,Source of Water Supply,1,
+Fecal Coliforms,"Geomean of not less than five samples, taken over not more than a 30 day period shall not exceed 200.",A-Special,Source of Water Supply,1,
+Fecal Coliforms,"Monthly geomean from a minimum of five examinations, shall not exceed 200.",B,Primary Contact Recreation and Secondary Contact Recreation,2,
+Fecal Coliforms,"Monthly geomean from a minimum of five examinations, shall not exceed 200.",C,Fishing,3,
+Fecal Coliforms,"Monthly geomean from a minimum of five examinations, shall not exceed 200.",D,Fishing,3,
+Fecal Coliforms,"Shellfish closures issued by DMR based on regulations from 6 NYCRR, Chapter 1, Part 47.3",SA,Shellfishing,4,
+Fecal Coliforms,"Monthly geomean from a minimum of five examinations, shall not exceed 200.",SB,Primary Contact Recreation and Secondary Contact Recreation,2,
+Fecal Coliforms,"Monthly geomean from a minimum of five examinations, shall not exceed 200.",SC,Fishing,3,
+Fecal Coliforms,"Monthly geomean from a minimum of five examinations, shall not exceed 200.",I,Secondary Contact Recreation,5,
+Fecal Coliforms,"Monthly geomean from a minimum of five examinations, shall not exceed 200.",SD,Fishing,3,
+Arsenic,50 ug/L,A,Source of Water Supply,1,Yes
+Arsenic,50 ug/L,A-Special,Source of Water Supply,1,Yes
+Arsenic,50 ug/L,AA,Source of Water Supply,1,Yes
+Arsenic,50 ug/L,AA-Special,Source of Water Supply,1,Yes
+Chloride,"250,000 ug/L",A,Source of Water Supply,1,Yes
+Chloride,"250,000 ug/L",A-Special,Source of Water Supply,1,Yes
+Chloride,"250,000 ug/L",AA,Source of Water Supply,1,Yes
+Chloride,"250,000 ug/L",AA-Special,Source of Water Supply,1,Yes
+Copper,200 ug/L,A,Source of Water Supply,1,
+Copper,200 ug/L,A-Special,Source of Water Supply,1,
+Copper,200 ug/L,AA,Source of Water Supply,1,
+Copper,200 ug/L,AA-Special,Source of Water Supply,1,
+Copper,(0.96) exp(0.9422 [ln (ppm hardness)] - 1.7),C,Fishing,3,
+Copper,(0.96) exp(0.9422 [ln (ppm hardness)] - 1.7),D,Fishing,3,
+Dissolved Solids,200 ug/L,A-Special,Source of Water Supply,1,
+Dissolved Solids,500 ug/L,AA,Source of Water Supply,1,
+Dissolved Solids,500 ug/L,A,Source of Water Supply,1,
+Dissolved Solids,500 ug/L,AA-Special,Source of Water Supply,1,
+Iron,300 ug/L,A,Source of Water Supply,1,
+Iron,300 ug/L,A-Special,Source of Water Supply,1,
+Iron,300 ug/L,AA,Source of Water Supply,1,
+Iron,300 ug/L,AA-Special,Source of Water Supply,1,
+Lead,50 ug/L,A,Source of Water Supply,1,
+Lead,50 ug/L,A-Special,Source of Water Supply,1,
+Lead,50 ug/L,AA,Source of Water Supply,1,
+Lead,50 ug/L,AA-Special,Source of Water Supply,1,
+Lead,{1.46203 - [ln (hardness) (0.145712)] } exp (1.273 [ln (hardness)] - 4.297),C,Fishing,3,
+Lead,{1.46203 - [ln (hardness) (0.145712)] } exp (1.273 [ln (hardness)] - 1.052),D,Fishing,3,
+Manganese,300 ug/L,A,Source of Water Supply,1,Yes
+Manganese,300 ug/L,A-Special,Source of Water Supply,1,Yes
+Manganese,300 ug/L,AA,Source of Water Supply,1,Yes
+Manganese,300 ug/L,AA-Special,Source of Water Supply,1,Yes
+Mecury,0.7 ug/L,A,Source of Water Supply,1,
+Mecury,0.7 ug/L,A-Special,Source of Water Supply,1,
+Mecury,0.7 ug/L,AA,Source of Water Supply,1,
+Mecury,0.7 ug/L,AA-Special,Source of Water Supply,1,
+Mecury,7 × 10-4*,C,Fishing (Consumption),6,
+Mecury,7 × 10-4*,D,Fishing (Consumption),6,
+Nickle,100 ug/L,A,Source of Water Supply,1,Yes
+Nickle,100 ug/L,A-Special,Source of Water Supply,1,Yes
+Nickle,100 ug/L,AA,Source of Water Supply,1,Yes
+Nickle,100 ug/L,AA-Special,Source of Water Supply,1,Yes
+Nickle,(0.997) exp (0.846 [ln (hardness)] + 0.0584),C,Fishing,3,Yes
+Nickle,(0.998) exp (0.846 [ln (hardness)] + 2.255),D,Fishing,3,Yes
+Nitrate,"10,000 ug/L",A,Source of Water Supply,1,
+Nitrate,"10,000 ug/L",A-Special,Source of Water Supply,1,
+Nitrate,"10,000 ug/L",AA,Source of Water Supply,1,
+Nitrate,"10,000 ug/L",AA-Special,Source of Water Supply,1,
+Phosphorus,20 ug/L,A,Source of Water Supply,1,
+Phosphorus,20 ug/L,A-Special,Source of Water Supply,1,
+Phosphorus,20 ug/L,AA,Source of Water Supply,1,
+Phosphorus,20 ug/L,AA-Special,Source of Water Supply,1,
+Phosphorus,20 ug/L,B,Primary Contact Recreation and Secondary Contact Recreation,2,
+Ammonia,Standard is based on pH and temperature,C,Fishing,3,
+Ammonia,Standard is based on pH and temperature,D,Fishing,3,
+Dissolved Solids,500 ug/L,C,Fishing,3,
+Dissolved Oxygen,"Minimum daily average shall not be less than 5.0 mg/L, and at no time shall the DO concentration be less than 4.0 mg/ L.","A,B,C",Fishing,3,
+Dissolved Oxygen,"Minimum daily average shall not be less than 6.0 mg/L, and at no time shall the concentration be less than 5.0 mg/L",(T),Fishing,3,
+Dissolved Oxygen,Shall not be less than 7.0 mg/L from other than natural conditions.,(TS),Fishing,3,
+pH,Not less than 6.5,C,Fishing,3,
+pH,Not more than 8.5,C,Fishing,3,
+pH,Not less than 6,D,Fishing,3,
+pH,Not more than 9.5,D,Fishing,3,
+Zinc,exp(0.85 [ln(ppm hardness)] + 0.50),A,Source of Water Supply,1,Yes
+Zinc,exp(0.85 [ln(ppm hardness)] + 0.50),A-Special,Source of Water Supply,1,Yes
+Zinc,exp(0.85 [ln(ppm hardness)] + 0.50),AA,Source of Water Supply,1,Yes
+Zinc,exp(0.85 [ln(ppm hardness)] + 0.50),AA-Special,Source of Water Supply,1,Yes
+Zinc,exp(0.85 [ln(ppm hardness)] + 0.50),C,Fishing,3,Yes
+Zinc,0.978 exp(0.8473 [ln(ppm hardness)] + 0.884),D,Fishing,3,Yes

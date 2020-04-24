@@ -1,0 +1,191 @@
+parameter,75p.type,Classification,75p.flow.min
+TDS,,A-Special,237
+TDS,,AA,237
+TDS,,A,237
+TDS,,AA-Special,237
+TDS,,B,237
+TDS,,C,237
+Sol. Aluminum,,A-Special,31.5
+Sol. Aluminum,,AA,31.5
+Sol. Aluminum,,A,31.5
+Sol. Aluminum,,AA-Special,31.5
+Sol. Aluminum,,B,31.5
+Sol. Aluminum,,C,31.5
+Mercury ,,A,0.637
+Mercury ,,A-Special,0.637
+Mercury ,,AA,0.637
+Mercury ,,AA-Special,0.637
+Mercury ,,A,1.1
+Mercury ,,A-Special,1.1
+Mercury ,,AA,1.1
+Mercury ,,AA-Special,1.1
+Mercury ,,B,1.1
+Mercury ,,C,1.1
+Mercury ,,D,1.1
+Mercury ,,A,0.71
+Mercury ,,A-Special,0.71
+Mercury ,,AA,0.71
+Mercury ,,AA-Special,0.71
+Mercury ,,B,0.71
+Mercury ,,C,0.71
+Chloride,,A,42.7
+Chloride,,A-Special,42.7
+Chloride,,AA,42.7
+Chloride,,AA-Special,42.7
+Copper ,,A,2.8
+Copper ,,A-Special,2.8
+Copper ,,AA,2.8
+Copper ,,AA-Special,2.8
+Copper dissolved ,calculation,A,
+Copper dissolved ,calculation,A-Special,
+Copper dissolved ,calculation,AA,
+Copper dissolved ,calculation,AA-Special,
+Copper dissolved ,calculation,B,
+Copper dissolved ,calculation,C,
+Copper dissolved ,calculation,D,
+Copper dissolved,calculation,A,
+Copper dissolved,calculation,A-Special,
+Copper dissolved,calculation,AA,
+Copper dissolved,calculation,AA-Special,
+Copper dissolved,calculation,B,
+Copper dissolved,calculation,C,
+Arsenic,,A,0.853
+Arsenic,,A-Special,0.853
+Arsenic,,AA,0.853
+Arsenic,,AA-Special,0.853
+Arsenic dissolved ,,A,0.853
+Arsenic dissolved,,A-Special,0.853
+Arsenic dissolved ,,AA,0.853
+Arsenic dissolved,,AA-Special,0.853
+Arsenic dissolved ,,B,0.853
+Arsenic dissolved,,C,0.853
+Arsenic dissolved ,,D,0.853
+Arsenic dissolved,,A,0.853
+Arsenic dissolved ,,A-Special,0.853
+Arsenic dissolved,,AA,0.853
+Arsenic dissolved ,,AA-Special,0.853
+Arsenic dissolved,,B,0.853
+Arsenic dissolved ,,C,0.853
+Cadmium dissolved,,A,0.112
+Cadmium dissolved,,A-Special,0.112
+Cadmium dissolved,,AA,0.112
+Cadmium dissolved,,AA-Special,0.112
+Cadmium dissolved ,calculation,A,
+Cadmium dissolved  ,calculation,A-Special,
+Cadmium dissolved ,calculation,AA,
+Cadmium dissolved  ,calculation,AA-Special,
+Cadmium dissolved ,calculation,B,
+Cadmium dissolved  ,calculation,C,
+Cadmium dissolved ,calculation,D,
+Cadmium dissolved  ,calculation,A,
+Cadmium dissolved ,calculation,A-Special,
+Cadmium dissolved  ,calculation,AA,
+Cadmium dissolved ,calculation,AA-Special,
+Cadmium dissolved  ,calculation,B,
+Cadmium dissolved ,calculation,C,
+Magnesium,,A,10000
+Magnesium,,A-Special,10000
+Magnesium,,AA,10000
+Magnesium,,AA-Special,10000
+Manganese,,A,63.5
+Manganese,,A-Special,63.5
+Manganese,,AA,63.5
+Manganese,,AA-Special,63.5
+Nitrite+Nitrate,,A,611
+Nitrite+Nitrate,,A-Special,611
+Nitrite+Nitrate,,AA,611
+Nitrite+Nitrate,,AA-Special,611
+Iron ,,A,218
+Iron ,,A-Special,218
+Iron ,,AA,218
+Iron ,,AA-Special,218
+Lead ,,A,0.99
+Lead ,,A-Special,0.99
+Lead ,,AA,0.99
+Lead ,,AA-Special,0.99
+Lead ,calculation,A,
+Lead ,calculation,A-Special,
+Lead ,calculation,AA,
+Lead ,calculation,AA-Special,
+Lead ,calculation,B,
+Lead ,calculation,C,
+Lead ,calculation,D,
+Lead ,calculation,A,
+Lead ,calculation,A-Special,
+Lead ,calculation,AA,
+Lead ,calculation,AA-Special,
+Lead ,calculation,B,
+Lead ,calculation,C,
+Nickle,,A,2.2
+Nickle,,A-Special,2.2
+Nickle,,AA,2.2
+Nickle,,AA-Special,2.2
+Ammonia ,,A,49.3
+Ammonia ,,A-Special,49.3
+Ammonia ,,AA,49.3
+Ammonia ,,AA-Special,49.3
+Ammonia Trout,,A(T),
+Ammonia Trout,,A-Special(T),
+Ammonia Trout,,AA(T),
+Ammonia Trout,,AA-Special(T),
+Ammonia Trout,,B(T),
+Ammonia Trout,,C(T),
+Ammonia Trout,,D(T),
+Ammonia Trout,,A(TS),
+Ammonia Trout,,A-Special(TS),
+Ammonia Trout,,AA(TS),
+Ammonia Trout,,AA-Special(TS),
+Ammonia Trout,,B(TS),
+Ammonia Trout,,C(TS),
+Ammonia Trout,,D(TS),
+Ammonia Non-Trout,calculation,A,
+Ammonia Non-Trout,calculation,A-Special,
+Ammonia Non-Trout,calculation,AA,
+Ammonia Non-Trout,calculation,AA-Special,
+Ammonia Non-Trout,calculation,B,
+Ammonia Non-Trout,calculation,C,
+Ammonia Non-Trout,calculation,D,
+pH low,,A-Special,6
+pH high,,AA,8.6
+pH high,,A,8.6
+pH high,,B,8.6
+pH high,,C,8.6
+pH high,,AA-Special,8.6
+Sulfate,,A,20700
+Sulfate,,A-Special,20700
+Sulfate,,AA,20700
+Sulfate,,AA-Special,20700
+Turbidity,,GA,3.23
+Zinc ,calculation,A,
+Zinc ,calculation,A-Special,
+Zinc ,calculation,AA,
+Zinc ,calculation,AA-Special,
+Zinc ,calculation,B,
+Zinc ,calculation,C,
+Zinc ,calculation,A,
+Zinc ,calculation,A-Special,
+Zinc ,calculation,AA,
+Zinc ,calculation,AA-Special,
+Zinc ,calculation,B,
+Zinc ,calculation,C,
+Zinc ,calculation,D,
+DO,,A(T),8
+DO,,A-Special(T),8
+DO,,AA(T),8
+DO,,AA-Special(T),8
+DO,,B(T),8
+DO,,C(T),8
+DO,,D(T),8
+DO,,A(TS),8
+DO,,A-Special(TS),8
+DO,,AA(TS),8
+DO,,AA-Special(TS),8
+DO,,B(TS),8
+DO,,C(TS),8
+DO,,D(TS),8
+TP Ponded,,A,
+TP Ponded,,A-Special,
+TP Ponded,,AA,
+TP Ponded,,AA-Special,
+TP Ponded,,B,
+TP Ponded,,C,
