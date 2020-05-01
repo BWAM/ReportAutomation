@@ -8,8 +8,11 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-library(tidyverse)
+library(dplyr)
+library(magrittr)
+library(ggplot2)
 library(ggthemes)
+library(tidyselect)
 library(flextable)
 
 knitr::opts_chunk$set(echo = TRUE)
@@ -27,7 +30,8 @@ file.path2=file.path(here::here(),
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
 #read in the data
-UserP_all<-read.csv(file.path,stringsAsFactors = FALSE)
+UserP_all<-read.csv(file.path,stringsAsFactors = FALSE)%>%
+  select(-X)
 Sites<-read.csv(file.path2,stringsAsFactors = FALSE)
 ```
 
@@ -35,16 +39,21 @@ Sites<-read.csv(file.path2,stringsAsFactors = FALSE)
 #function to make the sites a factor in order from upstream to downstream
 order_sites<-function(df, sites_table, df_site_col, sites_site_col){
 Sites<-sites_table%>%
-  rename(SITE_ID=sites_site_col)
+  dplyr::rename(SITE_ID=sites_site_col)
 
 df<-df%>%
-  rename(SITE_ID=df_site_col)
+  dplyr::rename(SITE_ID=df_site_col)
 
-all_data<-left_join(df, Sites, by="SITE_ID")
+all_data<-left_join(df, Sites)
 all_data<-all_data%>%
-  arrange(order)%>%
-  mutate(SITE_ID=factor(SITE_ID, levels = unique(SITE_ID)))%>%
-  select(-c(order:UPDATED_BY_GUID))
+  dplyr::arrange(order)%>%
+  dplyr::mutate(SITE_ID=factor(SITE_ID, levels = unique(SITE_ID)))
+
+columns<-colnames(Sites)
+columns<-columns[!(columns %in% "SITE_ID")]
+
+all_data<-all_data%>%
+  dplyr::select(!tidyselect::any_of(columns))
 }
 ```
 
@@ -52,18 +61,18 @@ all_data<-all_data%>%
 ```{r include=FALSE,message=FALSE,warning=FALSE}
 #function to create mean primary and secondary rankings graph
 #first convert letters to scores and move data to long format
-userp_contact_fig<-function(df, sites_table, bar.width, ...){
-contact<-df%>%
-  mutate(Primary=ifelse(UPFDH_PRIMARY_CONTACT=="A", yes=1, no=ifelse(UPFDH_PRIMARY_CONTACT=="B", yes=2, no=ifelse(UPFDH_PRIMARY_CONTACT=="C", yes=3, no=ifelse(UPFDH_PRIMARY_CONTACT=="D", yes=4, no=ifelse(UPFDH_PRIMARY_CONTACT=="E", yes=5, no=ifelse(UPFDH_PRIMARY_CONTACT=="F", yes=6, no=NA)))))),
+
+contact<-UserP_all%>%
+  dplyr::mutate(Primary=ifelse(UPFDH_PRIMARY_CONTACT=="A", yes=1, no=ifelse(UPFDH_PRIMARY_CONTACT=="B", yes=2, no=ifelse(UPFDH_PRIMARY_CONTACT=="C", yes=3, no=ifelse(UPFDH_PRIMARY_CONTACT=="D", yes=4, no=ifelse(UPFDH_PRIMARY_CONTACT=="E", yes=5, no=ifelse(UPFDH_PRIMARY_CONTACT=="F", yes=6, no=NA)))))),
          Secondary=ifelse(UPFDH_SECONDARY_CONTACT=="A", yes=1, no=ifelse(UPFDH_SECONDARY_CONTACT=="B", yes=2, no=ifelse(UPFDH_SECONDARY_CONTACT=="C", yes=3, no=ifelse(UPFDH_SECONDARY_CONTACT=="D", yes=4, no=ifelse(UPFDH_SECONDARY_CONTACT=="E", yes=5, no=ifelse(UPFDH_SECONDARY_CONTACT=="F", yes=6, no=NA)))))))%>%
-  select(SITE_ID, Primary, Secondary)%>%
-  pivot_longer(-SITE_ID, names_to = "Contact Type", values_to = "value")%>%
-  order_sites(sites_table, sites_site_col = "SH_SITE_ID", df_site_col = "SITE_ID")
+  dplyr::select(SITE_ID, Primary, Secondary)%>%
+  tidyr::pivot_longer(-SITE_ID, names_to = "Contact Type", values_to = "value")%>%
+  order_sites(sites_table = Sites, sites_site_col = "SH_SITE_ID", df_site_col = "SITE_ID")
 
 
 
 #second build plot
-plot<-ggplot(contact, aes(x=SITE_ID, y=value, fill=`Contact Type`))+
+ggplot2::ggplot(contact, aes(x=SITE_ID, y=value, fill=`Contact Type`))+
   geom_bar(position="dodge", width=0.7, na.rm = TRUE, stat = "summary", fun.y = "mean")+
   ylab("Mean Observer Ranking")+
   xlab("Location ID")+
@@ -73,18 +82,14 @@ plot<-ggplot(contact, aes(x=SITE_ID, y=value, fill=`Contact Type`))+
       theme(axis.text.x = element_text(angle = 60, hjust = 1))+
       theme(legend.position="right")
 
-print(plot)
-}
 ```
 
-```{r echo=FALSE, fig.height=5,fig.width=7.5,message=FALSE,warning=FALSE}
-userp_contact_fig(UserP_all, Sites, bar.width = 0.7)
-```
+
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
 #create table of mean scores for Variables influencing recreation
-userp_variables_table<-function(df, sites_table){
-Variables<-df%>%
+
+Variables<-UserP_all%>%
   group_by(SITE_ID)%>%
   summarize(`Water Clarity`=round(mean(UPFDH_WATER_CLARITY, na.rm = TRUE), digits=0),
             `Suspended Phytoplankton`= round(mean(UPFDH_SUSP_PHYTOPLANKTON, na.rm = TRUE),digits=0),
@@ -105,7 +110,7 @@ final_table<-flextable(Variables)%>%
   width(j = c(3,5), width = 1.1)%>%
   width(j=1, width=1.1)
 final_table
-}  
+
 ```
 
 ```{r echo=FALSE}
