@@ -39,9 +39,10 @@ sites<-read.csv(file.path.s,stringsAsFactors = FALSE)
 #create function for common tables
 #df is the data frame, x and y are the column numbers you want centered, z is the caption
 table.f<-function(df,x,y){
- library(flextable)
-  tl<-flextable(df) %>% font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% theme_zebra() %>% autofit()
-tl<-align(tl, i = NULL, j =(x:y) , align = "center", part = "all")
+  tl<-flextable::flextable(df) %>% 
+    flextable::font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% flextable::theme_zebra() %>%
+    flextable::autofit()
+tl<-flextable::align(tl, i = NULL, j =(x:y) , align = "center", part = "all")
 tl
 }
 
@@ -52,16 +53,21 @@ tl
 #function to make the sites a factor in order from upstream to downstream
 order_sites<-function(df, sites_table, df_site_col, sites_site_col){
 Sites<-sites_table%>%
-  rename(SITE_ID=sites_site_col)
+  dplyr::rename(SITE_ID=sites_site_col)
 
 df<-df%>%
-  rename(SITE_ID=df_site_col)
+  dplyr::rename(SITE_ID=df_site_col)
 
-all_data<-left_join(df, Sites, by="SITE_ID")
+all_data<-left_join(df, Sites)
 all_data<-all_data%>%
-  arrange(order)%>%
-  mutate(SITE_ID=factor(SITE_ID, levels = unique(SITE_ID)))%>%
-  select(-c(order:UPDATED_BY_GUID))
+  dplyr::arrange(order)%>%
+  dplyr::mutate(SITE_ID=factor(SITE_ID, levels = unique(SITE_ID)))
+
+columns<-colnames(Sites)
+columns<-columns[!(columns %in% "SITE_ID")]
+
+all_data<-all_data%>%
+  dplyr::select(!tidyselect::any_of(columns))
 }
 ```
 
