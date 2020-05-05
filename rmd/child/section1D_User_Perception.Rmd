@@ -7,7 +7,7 @@ output:
   html_document: default
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 library(magrittr)
 library(ggplot2)
@@ -58,21 +58,19 @@ all_data<-all_data%>%
 ```
 
 
-```{r include=FALSE,message=FALSE,warning=FALSE}
-#function to create mean primary and secondary rankings graph
-#first convert letters to scores and move data to long format
+```{r echo=FALSE,message=FALSE,warning=FALSE}
 
 contact<-UserP_all%>%
-  dplyr::mutate(Primary=ifelse(UPFDH_PRIMARY_CONTACT=="A", yes=1, no=ifelse(UPFDH_PRIMARY_CONTACT=="B", yes=2, no=ifelse(UPFDH_PRIMARY_CONTACT=="C", yes=3, no=ifelse(UPFDH_PRIMARY_CONTACT=="D", yes=4, no=ifelse(UPFDH_PRIMARY_CONTACT=="E", yes=5, no=ifelse(UPFDH_PRIMARY_CONTACT=="F", yes=6, no=NA)))))),
-         Secondary=ifelse(UPFDH_SECONDARY_CONTACT=="A", yes=1, no=ifelse(UPFDH_SECONDARY_CONTACT=="B", yes=2, no=ifelse(UPFDH_SECONDARY_CONTACT=="C", yes=3, no=ifelse(UPFDH_SECONDARY_CONTACT=="D", yes=4, no=ifelse(UPFDH_SECONDARY_CONTACT=="E", yes=5, no=ifelse(UPFDH_SECONDARY_CONTACT=="F", yes=6, no=NA)))))))%>%
-  dplyr::select(SITE_ID, Primary, Secondary)%>%
-  tidyr::pivot_longer(-SITE_ID, names_to = "Contact Type", values_to = "value")%>%
+  filter(UPFDH_PRIMARY_CONTACT!="")%>%
+  filter(UPFDH_SECONDARY_CONTACT!="")%>%
+  mutate(Primary=as.numeric(as.factor(UPFDH_PRIMARY_CONTACT)),
+         Secondary=as.numeric(as.factor(UPFDH_SECONDARY_CONTACT)))%>%
+  select(SITE_ID, Primary, Secondary)%>%
+  pivot_longer(-SITE_ID, names_to = "Contact Type", values_to = "value")%>%
   order_sites(sites_table = Sites, sites_site_col = "SH_SITE_ID", df_site_col = "SITE_ID")
 
 
-
-#second build plot
-ggplot2::ggplot(contact, aes(x=SITE_ID, y=value, fill=`Contact Type`))+
+plot<-ggplot(contact, aes(x=SITE_ID, y=value, fill=`Contact Type`))+
   geom_bar(position="dodge", width=0.7, na.rm = TRUE, stat = "summary", fun.y = "mean")+
   ylab("Mean Observer Ranking")+
   xlab("Location ID")+
@@ -81,12 +79,12 @@ ggplot2::ggplot(contact, aes(x=SITE_ID, y=value, fill=`Contact Type`))+
   theme_pander() +
       theme(axis.text.x = element_text(angle = 60, hjust = 1))+
       theme(legend.position="right")
-
+plot
 ```
 
 
 
-```{r include=FALSE,message=FALSE,warning=FALSE}
+```{r echo=FALSE,message=FALSE,warning=FALSE}
 #create table of mean scores for Variables influencing recreation
 
 Variables<-UserP_all%>%
@@ -98,7 +96,7 @@ Variables<-UserP_all%>%
             Odor=round(mean(UPFDH_ODOR, na.rm=TRUE), digits=0),
             Trash= round(mean(UPFDH_TRASH, na.rm = TRUE), digits=0),
             `Discharge Pipes`= round(mean(UPFDH_DISCHARGE_PIPE, na.rm = TRUE), digits=0))%>%
-  order_sites(sites_table, sites_site_col = "SH_SITE_ID", df_site_col = "SITE_ID")
+  order_sites(sites_table=Sites, sites_site_col = "SH_SITE_ID", df_site_col = "SITE_ID")
 
 final_table<-flextable(Variables)%>%
   theme_zebra()%>%
@@ -113,13 +111,9 @@ final_table
 
 ```
 
-```{r echo=FALSE}
-userp_variables_table(UserP_all, Sites)
-```
 
-```{r include=FALSE,message=FALSE,warning=FALSE}
-# function for table of Dominant Factor influencing recreation
-userp_dominant_variable_table<-function(df, site_table, fontsize){
+```{r echo=FALSE,message=FALSE,warning=FALSE}
+
 DominantP<-UserP_all%>%
   filter(UPFDH_PRIMARY_VARIABLE!="")%>%
 group_by(SITE_ID, UPFDH_PRIMARY_VARIABLE)%>%
@@ -144,15 +138,13 @@ Dominant<-left_join(DominantP, DominantS, by="SITE_ID")%>%
 final_table<-flextable(Dominant)%>%
   theme_zebra()%>%
   align(j=1:3, align="left", part="all")%>%
-  fontsize(size = fontsize, part = "body")%>%
+  fontsize(size = 10, part = "body")%>%
   font(fontname = "Arial", part="all")%>%
   autofit()
 
 final_table
-}
+
 ```
 
-```{r echo=FALSE}
-userp_dominant_variable_table(UserP_all, Sites, fontsize = 10)
-```
+
 
