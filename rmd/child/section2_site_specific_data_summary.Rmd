@@ -7,6 +7,8 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
 ```
 
 ```{r}
@@ -19,17 +21,39 @@ file.path.c=file.path(here::here(),
           "data",
           "chemistry.csv")
 
+file.path.f=file.path(here::here(),
+                      "data",
+                      "insitu_chem.csv")
+
 
 #read in the standards table and chemistry table
 stds<-read.csv(file.path.st,stringsAsFactors = FALSE)
 
 chem<-read.csv(file.path.c,stringsAsFactors = FALSE)
 
-
+field<-read.csv(file.path.f,stringsAsFactors = FALSE)
 
 ```
 
 ```{r}
+#get standards in for the field data
+sites<-chem %>% 
+  select(SITE_ID,SH_PWL_ID,SH_WQ_STANDARD) %>% 
+  distinct()
+
+field<-merge(field,sites, by="SITE_ID")
+
+field$PARAMETER_NAME<-tolower(field$PARAMETER_NAME)
+field$PARAMETER_NAME<-gsub("_"," ",field$PARAMETER_NAME)
+
+field<-field %>% 
+  select(SITE_ID,Date,PARAMETER_NAME,RESULT,unit,SH_WQ_STANDARD,SH_PWL_ID)
+
+```
+
+```{r}
+
+#####THIS SECION should be accomplished with the stayCALM package eventualy, but for now this is manual.
 #rename columns to merge
 stds<-stds %>% 
   rename("SH_WQ_STANDARD"=Classification,
@@ -42,39 +66,117 @@ chem$chemical_name<-tolower(chem$chemical_name)
 #remove any chems that have R, reject, flags
 chem<-chem %>% filter(interpreted_qualifiers!="R")
 
+```
+
+
+```{r}
 #merge them to have use, classfication and the thresholds, note this limits some of teh data set.
-mer.df<-merge(chem,stds, by=c("SH_WQ_STANDARD","chemical_name"))
+chem.df<-merge(chem,stds, by=c("SH_WQ_STANDARD","chemical_name"))
+
+field<-field %>% 
+  rename("chemical_name"=PARAMETER_NAME,
+         "result_value"=RESULT)
+  
+insitu.df<-merge(field,stds, by=c("SH_WQ_STANDARD","chemical_name"))
+
 
 #check that result unit and wqs units are the same
-units<-mer.df %>% 
-  filter(result_unit!=units)
+#units<-chem.df %>% 
+ # filter(result_unit!=units)
 
 #most of the werent, so changing from mg/l to ug/l for the standards.
 
-mer.df$corrected_value<-NA
+chem.df$corrected_value<-NA
+insitu.df$corrected_value<-NA
 
 #correct them based on the units in the stds
-mer.df$corrected_value<-ifelse(mer.df$result_unit=="mg/l" & mer.df$units=="ug/L",mer.df$result_value*1000,mer.df$result_value)
+chem.df$corrected_value<-ifelse(chem.df$result_unit=="mg/l" & chem.df$units=="ug/L",chem.df$result_value*1000,chem.df$result_value)
+insitu.df$corrected_value<-ifelse(insitu.df$unit=="mg/l" & insitu.df$units=="ug/L",insitu.df$result_value*1000,insitu.df$result_value)
 
 
-mer_short.df<-mer.df %>% 
-  select(SITE_ID,SH_WQ_STANDARD,chemical_name,result_value,corrected_value,result_unit,wqs.numeric,units,wqs.violation.direction,wqs.narrative,calculation.,params.for.calcs.1,params.for.calcs.2)
+chem_short.df<-chem.df %>% 
+  select(SITE_ID,sample_date,SH_WQ_STANDARD,chemical_name,result_value,corrected_value,result_unit,wqs.numeric,units,wqs.type,wqs.violation.direction,wqs.narrative,calculation.,params.for.calcs.1,params.for.calcs.2) %>% 
+  rename("COLL_DATE"=sample_date) %>% 
+  filter(wqs.type!="calculation")
 
+#separate out the ones that need to be calculated
+chem_calcs.df<-chem.df %>% 
+  select(SITE_ID,sample_date,SH_WQ_STANDARD,chemical_name,result_value,corrected_value,result_unit,wqs.numeric,units,wqs.type,wqs.violation.direction,wqs.narrative,calculation.,params.for.calcs.1,params.for.calcs.2) %>% 
+  rename("COLL_DATE"=sample_date) %>% 
+  filter(wqs.type=="calculation")
 
 #create exceedance column
-mer_short.df$exceed<-NA
-mer_short.df$exceed<-ifelse(mer_short.df$corrected_value>mer_short.df$wqs.numeric,1,0)
+chem_short.df$exceed<-NA
 
-#need to figure out the direction and the pH stuff, bc some have lower limits
+chem_short.df$exceed<-ifelse(chem_short.df$wqs.violation.direction=="greater"& chem_short.df$corrected_value>chem_short.df$wqs.numeric|
+                               chem_short.df$wqs.violation.direction=="less"& chem_short.df$corrected_value<chem_short.df$wqs.numeric,1,0)
 
+#same for insitu data
+insitu.df$exceed<-NA
 
+insitu.df$exceed<-ifelse(insitu.df$wqs.violation.direction=="greater"& insitu.df$corrected_value>insitu.df$wqs.numeric|
+                               insitu.df$wqs.violation.direction=="less"& insitu.df$corrected_value<insitu.df$wqs.numeric,1,0)
 
+#now we have both data frames with exceedances!
+```
+
+```{r}
+#next calculations for other stuff
+#first we need hardness
+
+hardness<-chem %>% 
+  filter(chemical_name=="hardness (as caco3)"|interpreted_qualifiers!="R") %>% 
+  rename("COLL_DATE"=sample_date,
+         "hardness_result"=result_value) %>% 
+  select(SITE_ID,COLL_DATE,hardness_result) %>% 
+  filter(!is.na(hardness_result)) %>% 
+  distinct()
+#change mg/L to PPM; so ppm basically equals mg/L, ppb is ug/L and so on
+
+#merge the hardness values in here
+calcs.df<-merge(chem_calcs.df,hardness,by=c("SITE_ID","COLL_DATE"))
+
+#now we need ph and temp
+tnp<-field %>% 
+  filter(chemical_name=="temperature"|chemical_name=="ph") %>% 
+  tidyr::spread(chemical_name,result_value) %>% 
+  select(SITE_ID,Date,ph,temperature) %>% 
+  rename("COLL_DATE"=Date)
+
+calcs.df<-merge(calcs.df,tnp, by=c("SITE_ID","COLL_DATE"))
+
+calcs.df$combo<-NA
+calcs.df$combo<-paste(calcs.df$SITE_ID,calcs.df$COLL_DATE,sep = "_")
+calcs.df<-calcs.df %>% 
+  aggregate(by=list(combo=calcs.df$combo),min,na.rm=TRUE)
+
+#now we have all theinformation in one dataframe, let's do the calcs.
+calcs.df$calc_value<-NA
+calcs.df$calc_value<-ifelse(calcs.df$chemical_name=="copper",0.96*exp(0.9422*log(calcs.df$hardness_result)-1.7),ifelse(calcs.df$chemical_name=="zinc",exp(0.85*log(calcs.df$hardness_result)+0.5),calcs.df$calc_value))
+
+calcs.df$exceedance<-NA
+calcs.df$exceedance<-ifelse(calcs.df$result_value>calcs.df$calc_value,1,0)
+
+```
+
+```{r}
 #then create summary columns
-mer_short.df<-mer_short.df %>% 
+chem_sum.df<-chem_short.df %>% 
   group_by(SITE_ID,chemical_name) %>% 
   summarize(record_count=n(),mean=mean(corrected_value),num_exceed=sum(exceed),min=min(corrected_value),max=max(corrected_value,median=median(corrected_value)))
   
+#then create summary columns for the in-situ
+insitu_sum.df<-insitu.df %>% 
+  group_by(SITE_ID,chemical_name) %>% 
+  summarize(record_count=n(),mean=mean(corrected_value),num_exceed=sum(exceed),min=min(corrected_value),max=max(corrected_value,median=median(corrected_value)))
+  
+
+calcs_sum.df<-calcs.df %>% 
+  group_by(SITE_ID,chemical_name) %>% 
+  summarize(record_count=n(),mean=mean(corrected_value),num_exceed=sum(exceedance),min=min(corrected_value),max=max(corrected_value,median=median(corrected_value)))
+  
 ```
+
 
 ```{r}
 
@@ -89,25 +191,25 @@ return(tl)
 }
 
 
-table.f<-function(df, center.cols){
+#table.f<-function(df, center.cols){
  
-  tl<-flextable::flextable(df) %>% 
-    flextable::font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% 
-    flextable::theme_zebra() %>% 
-    flextable::autofit()
-tl<- flextable::align(tl, i = NULL, j = center.cols, align = "center", part = "all")
-return(tl)
-}
-table.f(mer_short.df, c("min", "max")) %>% 
-  flextable::align(i = NULL, j = "SITE_ID", align = "center", part = "all")
+ # tl<-flextable::flextable(df) %>% 
+  #  flextable::font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% 
+   # flextable::theme_zebra() %>% 
+    #flextable::autofit()
+#tl<- flextable::align(tl, i = NULL, j = center.cols, align = "center", part = "all")
+#return(tl)
+#}
+#table.f(mer_short.df, c("min", "max")) %>% 
+ # flextable::align(i = NULL, j = "SITE_ID", align = "center", part = "all")
 
-x.vec
+#x.vec
 
-sites<-unique(mer_short.df$SITE_ID)
+sites<-unique(mer_short.sum.df$SITE_ID)
 
  for (i in seq_along(sites)) { 
    # print(i)
-  mer_short.sub <-mer_short.df[mer_short.df$SITE_ID %in% sites[i], ]
+  mer_short.sub <-mer_short.sum.df[mer_short.sum.df$SITE_ID %in% sites[i], ]
    tab<-table.f(mer_short.sub, 2,4)
    print(tab)
  }
