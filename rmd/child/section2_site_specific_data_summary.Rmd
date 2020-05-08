@@ -1,0 +1,178 @@
+---
+title: "section2_sitespecificData"
+author: 'NYSDEC SMAS : Keleigh Reynolds'
+date: "4/24/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+file.path.st=file.path(here::here(),
+          "data/standards",
+          "stds_use.csv")
+
+file.path.c=file.path(here::here(),
+          "data",
+          "chemistry.csv")
+
+
+#read in the standards table and chemistry table
+stds<-read.csv(file.path.st,stringsAsFactors = FALSE)
+
+chem<-read.csv(file.path.c,stringsAsFactors = FALSE)
+
+
+
+```
+
+```{r}
+#rename columns to merge
+stds<-stds %>% 
+  rename("SH_WQ_STANDARD"=Classification,
+         "chemical_name"=parameter)
+
+#make them both lowercase to match
+stds$chemical_name<-tolower(stds$chemical_name)
+chem$chemical_name<-tolower(chem$chemical_name)
+
+#remove any chems that have R, reject, flags
+chem<-chem %>% filter(interpreted_qualifiers!="R")
+
+#merge them to have use, classfication and the thresholds, note this limits some of teh data set.
+mer.df<-merge(chem,stds, by=c("SH_WQ_STANDARD","chemical_name"))
+
+#check that result unit and wqs units are the same
+units<-mer.df %>% 
+  filter(result_unit!=units)
+
+#most of the werent, so changing from mg/l to ug/l for the standards.
+
+mer.df$corrected_value<-NA
+
+#correct them based on the units in the stds
+mer.df$corrected_value<-ifelse(mer.df$result_unit=="mg/l" & mer.df$units=="ug/L",mer.df$result_value*1000,mer.df$result_value)
+
+
+mer_short.df<-mer.df %>% 
+  select(SITE_ID,SH_WQ_STANDARD,chemical_name,result_value,corrected_value,result_unit,wqs.numeric,units,wqs.violation.direction,wqs.narrative,calculation.,params.for.calcs.1,params.for.calcs.2)
+
+
+#create exceedance column
+mer_short.df$exceed<-NA
+mer_short.df$exceed<-ifelse(mer_short.df$corrected_value>mer_short.df$wqs.numeric,1,0)
+
+#need to figure out the direction and the pH stuff, bc some have lower limits
+
+
+
+#then create summary columns
+mer_short.df<-mer_short.df %>% 
+  group_by(SITE_ID,chemical_name) %>% 
+  summarize(record_count=n(),mean=mean(corrected_value),num_exceed=sum(exceed),min=min(corrected_value),max=max(corrected_value,median=median(corrected_value)))
+  
+```
+
+```{r}
+
+table.f<-function(df,x,y){
+ 
+  tl<-flextable::flextable(df) %>% 
+    flextable::font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% 
+    flextable::theme_zebra() %>% 
+    flextable::autofit()
+tl<- flextable::align(tl, i = NULL, j =(x:y) , align = "center", part = "all")
+return(tl)
+}
+
+
+table.f<-function(df, center.cols){
+ 
+  tl<-flextable::flextable(df) %>% 
+    flextable::font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% 
+    flextable::theme_zebra() %>% 
+    flextable::autofit()
+tl<- flextable::align(tl, i = NULL, j = center.cols, align = "center", part = "all")
+return(tl)
+}
+table.f(mer_short.df, c("min", "max")) %>% 
+  flextable::align(i = NULL, j = "SITE_ID", align = "center", part = "all")
+
+x.vec
+
+sites<-unique(mer_short.df$SITE_ID)
+
+ for (i in seq_along(sites)) { 
+   # print(i)
+  mer_short.sub <-mer_short.df[mer_short.df$SITE_ID %in% sites[i], ]
+   tab<-table.f(mer_short.sub, 2,4)
+   print(tab)
+ }
+
+    
+    # create plot for each PWL in df 
+    
+```
+
+
+
+```{r}
+#first make table based on use? or combine based on use? 
+
+class<-unique(chem$SH_WQ_STANDARD)
+class.l<-length(class)
+
+
+#this creates a unique data frame for each classification
+class_list<-split(stds,stds$Classification)
+list2env(class_list,envir = .GlobalEnv)
+
+
+
+```
+
+```{r}
+# create list of chmistry's in data to loop over 
+  chem_list <- unique(df$chemical_name)
+  l<-length(chem_list)
+  for (i in seq_along(chem_list)) { 
+    
+    # create plot for each PWL in df 
+    plot <- 
+      ggplot(subset(df, df$chemical_name==chem_list[i]),
+             aes(SITE_ID, result_value,shape=SH_PWL_ID))+ 
+      
+      geom_point() +
+      scale_shape_manual(name="PWL Segment ID",values = 0:max(l))+
+      
+      theme_pander() +
+      theme(axis.text.x = element_text(angle = 60, hjust = 1))+
+      theme(legend.position="right") + 
+      
+      scale_y_log10(paste(df$chemical_name[df$chemical_name==chem_list[i]],"(log10)",df$result_unit[df$chemical_name==chem_list[i]])) + 
+      xlab("Location ID")+
+      ggtitle(paste(chem_list[i], ' \n', 
+                    "Chemical results by PWL ID",
+                    sep=''))
+    
+    # save plots as .png
+    # ggsave(plot, file=paste(results, 
+    #                        'projection_graphs/county_graphs/',
+    #                        county_list[i], ".png", sep=''), scale=2)
+   
+    # save plots as .pdf
+    # ggsave(plot, file=paste(results, 
+    #                        'projection_graphs/county_graphs/',
+    #                        county_list[i], ".pdf", sep=''), scale=2)
+    
+    # print plots to screen
+    print(plot)
+  }
+}
+```
+
+
+
