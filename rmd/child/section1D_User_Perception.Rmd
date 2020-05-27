@@ -10,6 +10,7 @@ output:
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 library(magrittr)
+library(tidyr)
 library(ggplot2)
 library(ggthemes)
 library(tidyselect)
@@ -35,7 +36,7 @@ UserP_all<-read.csv(file.path,stringsAsFactors = FALSE)%>%
 Sites<-read.csv(file.path2,stringsAsFactors = FALSE)
 ```
 
-```{r include=FALSE,message=FALSE,warning=FALSE}
+```{r echo=FALSE,message=FALSE,warning=FALSE,fig.align="center"}
 #function to make the sites a factor in order from upstream to downstream
 order_sites<-function(df, sites_table, df_site_col, sites_site_col){
 Sites<-sites_table%>%

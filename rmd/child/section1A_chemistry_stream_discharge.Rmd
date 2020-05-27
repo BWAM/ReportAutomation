@@ -18,6 +18,7 @@ file.path.1<-file.path(here::here(),
                        "data",
                        "qaqc_analyte_table.csv")
 
+
 ```
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
@@ -28,6 +29,12 @@ analyte<-read.csv(file.path.1,stringsAsFactors = FALSE)
 
 #read in the chemistry file
 chem_all<-read.csv(file.path,stringsAsFactors = FALSE)
+
+#read in the sites table
+sites<-read.csv(file.path(here::here(),
+                          "data",
+                          "sites_wallkill.csv"),stringsAsFactors = FALSE)
+
 
           
 ```
@@ -67,12 +74,25 @@ chem_all$SH_PWL_ID<-as.factor(chem_all$SH_PWL_ID)
 chem_all<-chem_all %>% 
   filter(chem_all$validator_qualifiers!="R")
 
+#merge with sites to get the order
+#first just grab what we need
+sites<-sites %>% 
+  select(order,group,SH_SITE_ID) %>% 
+  rename("SITE_ID"=SH_SITE_ID)
+
+chem_all<-merge(chem_all,sites,by="SITE_ID")
+
 #create units column
 chem.trans<-subset(chem_all,chem_all$result_unit=="mg/l"|chem_all$result_unit=="ug/l")
-chem.no.trans<-chem_all %>% 
-  filter(chem_all$result_unit != "mg/l"& chem_all$result_unit != "ug/l")
+chem.trans<-chem.trans %>% 
+   arrange(order)
 
-#then probably need to merge with table that actually has metrics, bc we don't need to plot them all.
+chem.no.trans<-chem_all %>% 
+  filter(chem_all$result_unit != "mg/l"& chem_all$result_unit != "ug/l") %>% 
+   arrange(order)
+
+
+#then probably need to merge with table that actually has metrics, bc we don't need to plot them all-or maybe we should?.
 
 #chemp<-ggplot(chem_stat,aes(SiteID,mean))+geom_point()
 #chemp+facet_wrap(~chemical_name,scales="free")+theme_bw()
@@ -87,13 +107,17 @@ chem.graph <- function(df, na.rm = TRUE, ...){
   chem_list <- unique(df$chemical_name)
   l<-length(chem_list)
   for (i in seq_along(chem_list)) { 
+    #order by group
+    df<-df %>% 
+       arrange(order)
     
     # create plot for each PWL in df 
     plot <- 
       ggplot(subset(df, df$chemical_name==chem_list[i]),
-             aes(SITE_ID, result_value,shape=SH_PWL_ID))+ 
+             aes(order,result_value,group=SH_PWL_ID,color=group))+ 
       
-      geom_point() +
+      geom_boxplot() +
+
       scale_shape_manual(name="PWL Segment ID",values = 0:max(l))+
       
       theme_pander() +
@@ -142,9 +166,9 @@ chem.graph.n <- function(df, na.rm = TRUE, ...){
     # create plot for each PWL in df 
     plot <- 
       ggplot(subset(df, df$chemical_name==chem_list[i]),
-             aes(SITE_ID, result_value,shape=SH_PWL_ID))+ 
+             aes(order,result_value,group=SH_PWL_ID,color=group))+ 
       
-      geom_point() +
+      geom_boxplot() +
       scale_shape_manual(name="PWL Segment ID",values = 0:max(l))+
       
       theme_pander() +

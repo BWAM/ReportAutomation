@@ -11,7 +11,6 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 
-
 #for the table
 file.path.tw<-file.path(here::here(),
                        "data",
@@ -111,8 +110,8 @@ Toxicity testing of surface waters, sediments, porewaters, and effluents are rou
 ```{r echo=FALSE, message=FALSE,warning=FALSE}
 #call table function
 table.f(tox.tbl,2,7)%>%
-  fontsize(size = 10, part = "all")%>%
-  width(j=4:7, width=1.2)
+  flextable::fontsize(size = 10, part = "all")%>%
+  flextable::width(j=4:7, width=1.2)
 
 ```
 

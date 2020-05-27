@@ -81,7 +81,7 @@ library(leaflet)
 m<-sites %>% 
   distinct(SH_SITE_ID,SH_LATITUDE,SH_LONGITUDE)
 
-pop<-paste(sep = "<br/>",sites$SH_SITE_ID,sites$group)
+pop<-paste(sep = "<br/>",sites$SH_SITE_ID,sites$group,sites$order)
 
 map<-leaflet(m) %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
