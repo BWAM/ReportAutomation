@@ -13,26 +13,29 @@ library(dplyr)
 
 ```{r}
 
-file.path.st=file.path(here::here(),
-          "data/standards",
-          "stds_use.csv")
-
-file.path.c=file.path(here::here(),
-          "data",
-          "chemistry.csv")
-
-file.path.f=file.path(here::here(),
-                      "data",
-                      "insitu_chem.csv")
-
+#fix these here!
 
 #read in the standards table and chemistry table
-stds<-read.csv(file.path.st,stringsAsFactors = FALSE)
+stds<-read.csv(file.path(here::here(),
+                         "data",
+                         "standards",
+                         "stds_use.csv"),
+               stringsAsFactors = FALSE)
 
-chem<-read.csv(file.path.c,stringsAsFactors = FALSE)
+chem<-read.csv(file.path(here::here(),
+                         "data",
+                         "chemistry.csv"),stringsAsFactors = FALSE)
 
-field<-read.csv(file.path.f,stringsAsFactors = FALSE)
+field<-read.csv(file.path(here::here(),
+                          "data",
+                          "insitu_chem.csv"),stringsAsFactors = FALSE)
 
+bap<-read.csv(file.path(here::here(),
+                        "data",
+                        "metrics.csv"),stringsAsFactors = FALSE)
+flow<-read.csv(file.path(here::here(),
+                         "data",
+                         "Wallkill_Flow_All.csv"),stringsAsFactors = FALSE)
 ```
 
 ```{r}
@@ -70,14 +73,14 @@ chem<-chem %>% filter(interpreted_qualifiers!="R")
 
 
 ```{r}
-#merge them to have use, classfication and the thresholds, note this limits some of teh data set.
-chem.df<-merge(chem,stds, by=c("SH_WQ_STANDARD","chemical_name"))
+#merge them to have use, classfication and the thresholds, note this limits some of teh data set.#maybe we should keep them all?
+chem.df<-merge(chem,stds, by=c("SH_WQ_STANDARD","chemical_name"),all.x = TRUE)
 
 field<-field %>% 
   rename("chemical_name"=PARAMETER_NAME,
          "result_value"=RESULT)
   
-insitu.df<-merge(field,stds, by=c("SH_WQ_STANDARD","chemical_name"))
+insitu.df<-merge(field,stds, by=c("SH_WQ_STANDARD","chemical_name"),all.x = TRUE)
 
 
 #check that result unit and wqs units are the same
@@ -120,7 +123,7 @@ insitu.df$exceed<-ifelse(insitu.df$wqs.violation.direction=="greater"& insitu.df
 #now we have both data frames with exceedances!
 ```
 
-```{r}
+```{r message=FALSE,warning=FALSE}
 #next calculations for other stuff
 #first we need hardness
 
@@ -145,22 +148,87 @@ tnp<-field %>%
 
 calcs.df<-merge(calcs.df,tnp, by=c("SITE_ID","COLL_DATE"))
 
-calcs.df$combo<-NA
-calcs.df$combo<-paste(calcs.df$SITE_ID,calcs.df$COLL_DATE,sep = "_")
 calcs.df<-calcs.df %>% 
-  aggregate(by=list(combo=calcs.df$combo),min,na.rm=TRUE)
+  mutate(combo=paste(calcs.df$SITE_ID,calcs.df$COLL_DATE,sep = "_"))
+  
+calcs.df<-calcs.df %>% 
+  aggregate(by=list(calcs.df$combo),min,na.rm=TRUE)
+#this makes it all one line by the site/date combination of names
 
 #now we have all theinformation in one dataframe, let's do the calcs.
-calcs.df$calc_value<-NA
-calcs.df$calc_value<-ifelse(calcs.df$chemical_name=="copper",0.96*exp(0.9422*log(calcs.df$hardness_result)-1.7),ifelse(calcs.df$chemical_name=="zinc",exp(0.85*log(calcs.df$hardness_result)+0.5),calcs.df$calc_value))
+
+#transform the units and value
+calcs.df<-calcs.df %>% 
+  mutate(corrected_value_2=case_when(
+    result_unit %in% "mg/l"~result_value*1000,
+    result_unit %in% "ug/l"~ result_value,
+    TRUE ~ corrected_value))
+
+calcs.df<-calcs.df %>% 
+  mutate(calc_value=case_when(
+    chemical_name %in% "copper"~ 0.96*exp(0.9422*log(calcs.df$hardness_result)-1.7),
+    chemical_name %in% "zinc" ~ exp(0.85*log(calcs.df$hardness_result)+0.5),
+    TRUE ~ 0 #each of the things before the ~ is true or false, need to hit a true eventually working from top down %in% is better than ==
+    #bc of NA's in the column
+    #use this to correct in the units dplyr
+  ))
+#probably doing the log of ALL the values, not row-wise
+
+#transform the metal units to ug/L
 
 calcs.df$exceedance<-NA
-calcs.df$exceedance<-ifelse(calcs.df$result_value>calcs.df$calc_value,1,0)
+calcs.df$exceedance<-ifelse(calcs.df$corrected_value_2>calcs.df$calc_value,1,0)
 
 ```
 
 ```{r}
-#then create summary columns
+#now we need numeric nutrient criteria
+nnc<-chem %>% 
+  filter(chemical_name=="phosphorus, total (as p)" & interpreted_qualifiers!="R")
+
+nnc<-nnc %>% 
+  rename("DATE"=sample_date)
+nnc$DATE<-as.Date(nnc$DATE,"%m/%d/%Y")
+
+cla<-chem %>% 
+  filter(chemical_name=="chlorophyll a") %>% 
+  select(SITE_ID,result_value,sample_date) %>% 
+  rename("chla"=result_value,
+         "DATE"=sample_date)
+cla$DATE<-as.Date(cla$DATE,"%m/%d/%Y")
+
+#shorten the bap stuff
+bap<-bap %>% 
+  select(SITE_ID,DATE,MMDH_BIO_ASMT_PROFILE_SCORE)
+
+
+#also need BAP for this one,first merge the nnc (phos) with the baps
+nnc.df<-merge(nnc,bap,by=c("SITE_ID","DATE"))
+
+#then merge with CLA for chlorophyll
+
+nnc.df<-merge(nnc.df,cla,by=c("SITE_ID","DATE"))
+
+nnc.df<-nnc.df %>% 
+  select(SITE_ID,DATE,chemical_name,result_value,result_unit,SH_WQ_STANDARD,SH_PWL_ID,MMDH_BIO_ASMT_PROFILE_SCORE,chla)
+
+#now do it by SH_WQ_STANDARD
+#0.03 mg/L AND bap < 5 is phos nnc, if A, then also cla >6 ug/L
+
+nnc.final.df<-nnc.df %>% 
+  mutate(exceed=case_when(
+    SH_WQ_STANDARD %in% "A"& result_value>0.03 & MMDH_BIO_ASMT_PROFILE_SCORE<5 & chla>6 ~ 1,
+    SH_WQ_STANDARD %in% "B"& result_value>0.03 & MMDH_BIO_ASMT_PROFILE_SCORE<5 ~1,
+    SH_WQ_STANDARD %in% "C"& result_value>0.03 & MMDH_BIO_ASMT_PROFILE_SCORE<5 ~1,
+    TRUE ~ 0
+  ))
+
+
+
+```
+
+```{r}
+#then create summary columns for each type of data set
 chem_sum.df<-chem_short.df %>% 
   group_by(SITE_ID,chemical_name) %>% 
   summarize(record_count=n(),mean=mean(corrected_value),num_exceed=sum(exceed),min=min(corrected_value),max=max(corrected_value,median=median(corrected_value)))
@@ -171,9 +239,15 @@ insitu_sum.df<-insitu.df %>%
   summarize(record_count=n(),mean=mean(corrected_value),num_exceed=sum(exceed),min=min(corrected_value),max=max(corrected_value,median=median(corrected_value)))
   
 
+#and summary for the calcs
 calcs_sum.df<-calcs.df %>% 
   group_by(SITE_ID,chemical_name) %>% 
   summarize(record_count=n(),mean=mean(corrected_value),num_exceed=sum(exceedance),min=min(corrected_value),max=max(corrected_value,median=median(corrected_value)))
+
+#and summary for the nnc
+nnc_sum.df<-nnc.final.df %>% 
+  group_by(SITE_ID,chemical_name) %>% 
+  summarize(record_count=n(),mean=mean(result_value),num_exceed=sum(exceed),min=min(result_value),max=max(result_value,median=median(result_value)))
   
 ```
 
@@ -204,77 +278,54 @@ return(tl)
  # flextable::align(i = NULL, j = "SITE_ID", align = "center", part = "all")
 
 #x.vec
+```
 
-sites<-unique(mer_short.sum.df$SITE_ID)
+```{r,warning=FALSE}
+
+sites<-unique(chem$SITE_ID)
 
  for (i in seq_along(sites)) { 
+   library(flextable)
    # print(i)
-  mer_short.sub <-mer_short.sum.df[mer_short.sum.df$SITE_ID %in% sites[i], ]
-   tab<-table.f(mer_short.sub, 2,4)
-   print(tab)
+   cat("\n\n### Site ID: ",sites[i])
+   
+  temp <-chem_sum.df[chem_sum.df$SITE_ID %in% sites[i], ]
+   tab<-table.f(temp, 2,4)
+   label=paste("Chemistry Measurements:",sites[i])
+   tab<-set_caption(tab,label)
+  print(tab)
+   rm(temp)
+   
+  temp <-insitu_sum.df[insitu_sum.df$SITE_ID %in% sites[i], ]
+   tab2<-table.f(temp, 2,4)
+   label=paste("In-Situ Measurements:",sites[i])
+   tab2<-set_caption(tab2,label)
+   print(tab2)
+   rm(temp)
+   
+  temp <-calcs_sum.df[calcs_sum.df$SITE_ID %in% sites[i], ]
+   tab3<-table.f(temp, 2,4)
+   label=paste("Metal Measurements:",sites[i])
+   tab3<-set_caption(tab3,label)
+   print(tab3)
+   rm(temp)
+   
+  temp <-nnc_sum.df[nnc_sum.df$SITE_ID %in% sites[i], ]
+   tab4<-table.f(temp, 2,4)
+   label=paste("Numeric Nutrient Criteria:",sites[i])
+   tab4<-set_caption(tab4,label)
+   print(tab4)
+   rm(temp)
+  
+  temp<-flow[flow$ID %in% sites[i], ]
+  library(ggplot2)
+  tab5<-ggplot(temp,aes(Date,Discharge..cfs.))+geom_point()
+  print(tab5)
+  rm(temp)
+  
  }
 
     
     # create plot for each PWL in df 
     
 ```
-
-
-
-```{r}
-#first make table based on use? or combine based on use? 
-
-class<-unique(chem$SH_WQ_STANDARD)
-class.l<-length(class)
-
-
-#this creates a unique data frame for each classification
-class_list<-split(stds,stds$Classification)
-list2env(class_list,envir = .GlobalEnv)
-
-
-
-```
-
-```{r}
-# create list of chmistry's in data to loop over 
-  chem_list <- unique(df$chemical_name)
-  l<-length(chem_list)
-  for (i in seq_along(chem_list)) { 
-    
-    # create plot for each PWL in df 
-    plot <- 
-      ggplot(subset(df, df$chemical_name==chem_list[i]),
-             aes(SITE_ID, result_value,shape=SH_PWL_ID))+ 
-      
-      geom_point() +
-      scale_shape_manual(name="PWL Segment ID",values = 0:max(l))+
-      
-      theme_pander() +
-      theme(axis.text.x = element_text(angle = 60, hjust = 1))+
-      theme(legend.position="right") + 
-      
-      scale_y_log10(paste(df$chemical_name[df$chemical_name==chem_list[i]],"(log10)",df$result_unit[df$chemical_name==chem_list[i]])) + 
-      xlab("Location ID")+
-      ggtitle(paste(chem_list[i], ' \n', 
-                    "Chemical results by PWL ID",
-                    sep=''))
-    
-    # save plots as .png
-    # ggsave(plot, file=paste(results, 
-    #                        'projection_graphs/county_graphs/',
-    #                        county_list[i], ".png", sep=''), scale=2)
-   
-    # save plots as .pdf
-    # ggsave(plot, file=paste(results, 
-    #                        'projection_graphs/county_graphs/',
-    #                        county_list[i], ".pdf", sep=''), scale=2)
-    
-    # print plots to screen
-    print(plot)
-  }
-}
-```
-
-
-
