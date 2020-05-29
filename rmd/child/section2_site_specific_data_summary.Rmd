@@ -94,19 +94,21 @@ insitu.df$corrected_value<-NA
 
 #correct them based on the units in the stds
 chem.df$corrected_value<-ifelse(chem.df$result_unit=="mg/l" & chem.df$units=="ug/L",chem.df$result_value*1000,chem.df$result_value)
+chem.df$corrected_value<-ifelse(is.na(chem.df$corrected_value),chem.df$result_value,chem.df$corrected_value)
 insitu.df$corrected_value<-ifelse(insitu.df$unit=="mg/l" & insitu.df$units=="ug/L",insitu.df$result_value*1000,insitu.df$result_value)
+insitu.df$corrected_value<-ifelse(is.na(insitu.df$corrected_value),insitu.df$result_value,insitu.df$corrected_value)
 
 
 chem_short.df<-chem.df %>% 
   select(SITE_ID,sample_date,SH_WQ_STANDARD,chemical_name,result_value,corrected_value,result_unit,wqs.numeric,units,wqs.type,wqs.violation.direction,wqs.narrative,calculation.,params.for.calcs.1,params.for.calcs.2) %>% 
   rename("COLL_DATE"=sample_date) %>% 
-  filter(wqs.type!="calculation")
+  subset(wqs.type!="calculation"|is.na(wqs.type))
 
 #separate out the ones that need to be calculated
 chem_calcs.df<-chem.df %>% 
   select(SITE_ID,sample_date,SH_WQ_STANDARD,chemical_name,result_value,corrected_value,result_unit,wqs.numeric,units,wqs.type,wqs.violation.direction,wqs.narrative,calculation.,params.for.calcs.1,params.for.calcs.2) %>% 
   rename("COLL_DATE"=sample_date) %>% 
-  filter(wqs.type=="calculation")
+  filter(wqs.type=="calculation"|chemical_name=="coppper"|chemical_name=="zinc")
 
 #create exceedance column
 chem_short.df$exceed<-NA
@@ -138,8 +140,10 @@ hardness<-chem %>%
 
 #merge the hardness values in here
 calcs.df<-merge(chem_calcs.df,hardness,by=c("SITE_ID","COLL_DATE"))
+calcs.df<-calcs.df %>% 
+  distinct()
 
-#now we need ph and temp
+#now we need ph and temp for Nitrogen
 tnp<-field %>% 
   filter(chemical_name=="temperature"|chemical_name=="ph") %>% 
   tidyr::spread(chemical_name,result_value) %>% 
@@ -147,12 +151,14 @@ tnp<-field %>%
   rename("COLL_DATE"=Date)
 
 calcs.df<-merge(calcs.df,tnp, by=c("SITE_ID","COLL_DATE"))
+calcs.df<-calcs.df %>% 
+  distinct()
 
 calcs.df<-calcs.df %>% 
   mutate(combo=paste(calcs.df$SITE_ID,calcs.df$COLL_DATE,sep = "_"))
   
 calcs.df<-calcs.df %>% 
-  aggregate(by=list(calcs.df$combo),min,na.rm=TRUE)
+  aggregate(by=list(calcs.df$combo),first)
 #this makes it all one line by the site/date combination of names
 
 #now we have all theinformation in one dataframe, let's do the calcs.
@@ -168,13 +174,14 @@ calcs.df<-calcs.df %>%
   mutate(calc_value=case_when(
     chemical_name %in% "copper"~ 0.96*exp(0.9422*log(calcs.df$hardness_result)-1.7),
     chemical_name %in% "zinc" ~ exp(0.85*log(calcs.df$hardness_result)+0.5),
+    #chemical_name %in% "nitrogen, ammonia (as n)"~
+    chemical_name %in% "lead"~ 1.46203 - (log(calcs.df$hardness)*(0.145712))*exp(1.273* (log(calcs.df$hardness)) - 4.297),
+    chemical_name %in% "nickel"~ 0.997*exp (0.846*log(calcs.df$hardness)) + 0.0584,
     TRUE ~ 0 #each of the things before the ~ is true or false, need to hit a true eventually working from top down %in% is better than ==
     #bc of NA's in the column
     #use this to correct in the units dplyr
   ))
-#probably doing the log of ALL the values, not row-wise
 
-#transform the metal units to ug/L
 
 calcs.df$exceedance<-NA
 calcs.df$exceedance<-ifelse(calcs.df$corrected_value_2>calcs.df$calc_value,1,0)
@@ -198,16 +205,16 @@ cla<-chem %>%
 cla$DATE<-as.Date(cla$DATE,"%m/%d/%Y")
 
 #shorten the bap stuff
-bap<-bap %>% 
+bap.1<-bap %>% 
   select(SITE_ID,DATE,MMDH_BIO_ASMT_PROFILE_SCORE)
 
 
 #also need BAP for this one,first merge the nnc (phos) with the baps
-nnc.df<-merge(nnc,bap,by=c("SITE_ID","DATE"))
+nnc.df<-merge(nnc,bap.1,by=c("SITE_ID","DATE"),all.x = TRUE)
 
 #then merge with CLA for chlorophyll
 
-nnc.df<-merge(nnc.df,cla,by=c("SITE_ID","DATE"))
+nnc.df<-merge(nnc.df,cla,by=c("SITE_ID","DATE"), all.x = TRUE)
 
 nnc.df<-nnc.df %>% 
   select(SITE_ID,DATE,chemical_name,result_value,result_unit,SH_WQ_STANDARD,SH_PWL_ID,MMDH_BIO_ASMT_PROFILE_SCORE,chla)
@@ -227,28 +234,55 @@ nnc.final.df<-nnc.df %>%
 
 ```
 
-```{r}
+```{r, message=FALSE}
 #then create summary columns for each type of data set
 chem_sum.df<-chem_short.df %>% 
   group_by(SITE_ID,chemical_name) %>% 
-  summarize(record_count=n(),mean=mean(corrected_value),num_exceed=sum(exceed),min=min(corrected_value),max=max(corrected_value,median=median(corrected_value)))
+  summarize(record_count=n(),mean=mean(corrected_value,na.rm =TRUE),num_exceed=sum(exceed),min=min(corrected_value,na.rm =TRUE),max=max(corrected_value,na.rm =TRUE),median=median(corrected_value,na.rm =TRUE)) %>% 
+  mutate_if(is.numeric, round, 3)
+
+chem_sum.df<-chem_sum.df %>% 
+  mutate_if(is.numeric, round, 3)
   
 #then create summary columns for the in-situ
 insitu_sum.df<-insitu.df %>% 
   group_by(SITE_ID,chemical_name) %>% 
-  summarize(record_count=n(),mean=mean(corrected_value),num_exceed=sum(exceed),min=min(corrected_value),max=max(corrected_value,median=median(corrected_value)))
+  summarize(record_count=n(),mean=mean(corrected_value,na.rm =TRUE),num_exceed=sum(exceed),min=min(corrected_value,na.rm =TRUE),max=max(corrected_value,na.rm =TRUE),median=median(corrected_value,na.rm =TRUE)) %>% 
+  mutate_if(is.numeric, round, 3)
+
+insitu.df<-insitu.df %>% 
+  mutate_if(is.numeric, round, 3)
   
 
 #and summary for the calcs
 calcs_sum.df<-calcs.df %>% 
   group_by(SITE_ID,chemical_name) %>% 
-  summarize(record_count=n(),mean=mean(corrected_value),num_exceed=sum(exceedance),min=min(corrected_value),max=max(corrected_value,median=median(corrected_value)))
+  summarize(record_count=n(),mean=mean(corrected_value_2,na.rm =TRUE),num_exceed=sum(exceedance),min=min(corrected_value_2,na.rm =TRUE),max=max(corrected_value_2,na.rm =TRUE),median=median(corrected_value_2,na.rm =TRUE)) %>% 
+  mutate_if(is.numeric, round, 3)
 
+calcs_sum.df<-calcs_sum.df %>%
+  mutate_if(is.numeric, round, 3)
+  
 #and summary for the nnc
 nnc_sum.df<-nnc.final.df %>% 
   group_by(SITE_ID,chemical_name) %>% 
-  summarize(record_count=n(),mean=mean(result_value),num_exceed=sum(exceed),min=min(result_value),max=max(result_value,median=median(result_value)))
+  summarize(record_count=n(),mean=mean(result_value,na.rm =TRUE),num_exceed=sum(exceed),min=min(result_value,na.rm =TRUE),max=max(result_value),median=median(result_value,na.rm =TRUE))
   
+nnc_sum.df<-nnc_sum.df %>% 
+  mutate_if(is.numeric, round, 3)
+  
+
+#summary for the BAP
+bap.df<-bap %>% 
+  select(SITE_ID,DATE,MMDH_BIO_ASMT_PROFILE_SCORE,year) %>% 
+  filter(year=="2017"|year=="2018"|year=="2019") %>% 
+  group_by(SITE_ID,DATE) %>% 
+  summarize(BAP=mean(MMDH_BIO_ASMT_PROFILE_SCORE)) 
+
+bap.df<-bap.df%>% 
+  mutate_if(is.numeric, round, 2)
+            
+
 ```
 
 
@@ -316,6 +350,13 @@ sites<-unique(chem$SITE_ID)
    tab4<-set_caption(tab4,label)
    print(tab4)
    rm(temp)
+  
+  temp<-bap.df[bap.df$SITE_ID %in% sites[i], ]
+  tab6<-table.f(temp,1,2)
+  label=paste("BAP Score: ",sites[i])
+  tab6<-set_caption(tab6,label)
+  print(tab6)
+  rm(temp)
   
   temp<-flow[flow$ID %in% sites[i], ]
   library(ggplot2)

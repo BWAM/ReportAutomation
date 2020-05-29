@@ -114,7 +114,7 @@ chem.graph <- function(df, na.rm = TRUE, ...){
     # create plot for each PWL in df 
     plot <- 
       ggplot(subset(df, df$chemical_name==chem_list[i]),
-             aes(order,result_value,group=SH_PWL_ID,color=group))+ 
+             aes(SH_PWL_ID,result_value,group=SH_PWL_ID,color=group))+ 
       
       geom_boxplot() +
 
