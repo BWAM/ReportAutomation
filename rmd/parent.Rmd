@@ -1,33 +1,24 @@
 ---
-title: "Reporting_draft"
+title: "WallKill Reporting Draft"
 author: 'NYSDEC SMAS : Keleigh Reynolds'
-date: "3/24/2020"
+date: "6/10/2020"
 output: 
-  word_document:
+  bookdown::word_document:
     reference_docx: "draft_template.docx"
     fig_caption: yes
-params:
-  location: Wallkill
 ---
 
-```{r setup, include=FALSE}
-#start clean
-library(ggplot2)
-library(dplyr)
+
+#Section 1D - User Perception
+```{r child="child/section1D_User_Perception.Rmd"}
 
 ```
 
-``r params$location``| Report
-================================================================================
-
-```{r setup, child="child/section1A_chemistry_stream_discharge.Rmd"}
+#Section 1E - Sediment and Porewater Microtox® Analysis
+```{r child="child/section1E_tox.Rmd"}
 
 ```
 
 
-```{r}
-file.path(here::here(),
-          "data",
-          "file.csv")
-```
+
 
