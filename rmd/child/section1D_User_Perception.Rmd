@@ -4,10 +4,9 @@ author: "ALC"
 date: "4/16/2020"
 output:
   word_document: default
-  html_document: default
 ---
 
-```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 library(magrittr)
 library(tidyr)
@@ -29,14 +28,14 @@ file.path2=file.path(here::here(),
 
 ```
 
-```{r include=FALSE,message=FALSE,warning=FALSE}
+```{r echo=FALSE,message=FALSE,warning=FALSE}
 #read in the data
 UserP_all<-read.csv(file.path,stringsAsFactors = FALSE)%>%
   select(-X)
 Sites<-read.csv(file.path2,stringsAsFactors = FALSE)
 ```
 
-```{r echo=FALSE,message=FALSE,warning=FALSE,fig.align="center"}
+```{r echo=FALSE,message=FALSE,warning=FALSE}
 #function to make the sites a factor in order from upstream to downstream
 order_sites<-function(df, sites_table, df_site_col, sites_site_col){
 Sites<-sites_table%>%
@@ -80,9 +79,12 @@ plot<-ggplot(contact, aes(x=SITE_ID, y=value, fill=`Contact Type`))+
   theme_pander() +
       theme(axis.text.x = element_text(angle = 60, hjust = 1))+
       theme(legend.position="right")
-plot
+
 ```
 
+```{r  userP-rank, fig.cap="Mean observer ranking of recreational ability for Wallkill River sampling locations. Columns represent observer rankings for the desire to participate in 1° and 2° contact recreation. Ranking of recreation ability was performed for all locations during each site visit." , fig.width=7, fig.height=4, echo=FALSE, message=FALSE,warning=FALSE}
+plot
+```
 
 
 ```{r echo=FALSE,message=FALSE,warning=FALSE}
@@ -98,7 +100,9 @@ Variables<-UserP_all%>%
             Trash= round(mean(UPFDH_TRASH, na.rm = TRUE), digits=0),
             `Discharge Pipes`= round(mean(UPFDH_DISCHARGE_PIPE, na.rm = TRUE), digits=0))%>%
   order_sites(sites_table=Sites, sites_site_col = "SH_SITE_ID", df_site_col = "SITE_ID")
+```
 
+```{r UserP-mean-factor, echo=FALSE, message=FALSE,warning=FALSE}
 final_table<-flextable(Variables)%>%
   theme_zebra()%>%
   set_header_labels(SITE_ID="Site \n ID", `Water Clarity`="Water \n Clarity", `Suspended Phytoplankton`="Suspended \nPhytoplankton", Periphyton="Periphyton", Odor="Odor", Trash="Trash", `Discharge Pipes`= "Dishcarge \n Pipes")%>%
@@ -107,10 +111,12 @@ final_table<-flextable(Variables)%>%
   fontsize(size=10, part="all")%>%
   width(j = c(2,4,8), width = 0.8)%>%
   width(j = c(3,5), width = 1.1)%>%
-  width(j=1, width=1.1)
-final_table
+  width(j=1, width=1.1)%>%
+  set_caption(caption="Table:(\\#tab:UserP-mean-factor) Mean observer ranked value for factors influencing desire to participate in 1° and 2° contact recreation in the Wallkill River. Factors were ranked on a 10 scale (0 – Best/Natural; 10 Worst/Severe) according to perceived impact on a location. Ranking of recreation ability was performed for all locations during each site visit")
 
+final_table
 ```
+
 
 
 ```{r echo=FALSE,message=FALSE,warning=FALSE}
@@ -136,16 +142,20 @@ group_by(SITE_ID, UPFDH_SECONDARY_VARIABLE)%>%
 Dominant<-left_join(DominantP, DominantS, by="SITE_ID")%>%
   order_sites(sites_table=Sites, sites_site_col = "SH_SITE_ID", df_site_col = "SITE_ID")
 
-final_table<-flextable(Dominant)%>%
+
+
+```
+
+```{r UserP-dominant-factor, message = F, warning = F, echo= F}
+final_table2<-flextable(Dominant)%>%
   theme_zebra()%>%
   align(j=1:3, align="left", part="all")%>%
   fontsize(size = 10, part = "body")%>%
   font(fontname = "Arial", part="all")%>%
-  autofit()
+  autofit()%>%
+  set_caption(caption="Table:(\\#tab:UserP-dominant-factor) Most frequently ranked factor influencing observer desire to participate in 1° and 2° contact recreation in the Wallkill River. Factors influencing desire to recreate were ranked and a primary factor influencing the desire to participate in 1° and 2° contact recreation was chosen during each site visit. Column values represent the factor selected most frequently at each site.")
 
-final_table
-
+final_table2
 ```
-
 
 

@@ -4,10 +4,9 @@ author: 'NYSDEC SMAS : Keleigh Reynolds'
 date: "4/17/2020"
 output:
   word_document: default
-  html_document: default
 ---
 
-```{r setup, include=FALSE,message=FALSE,warning=FALSE}
+```{r include=FALSE,message=FALSE,warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 
@@ -102,16 +101,18 @@ tox.tbl<-tox.df %>%
 
 ```
 
-### E)	Sediment and Porewater Microtox® Analysis
+
 
 Toxicity testing of surface waters, sediments, porewaters, and effluents are routinely performed as part of the RIBS program (https://www.dec.ny.gov/chemical/29854.html). Sediment toxicity was evaluated according to SOP #403-16 Microtox® Acute Toxicity Test for Sediments, Porewaters and Effluents. Testing procedures use a bioassay to assess potential acute toxicity in sediments and surface waters to aquatic life (SOP #403-16). Sediment and extracted sediment porewater samples are tested using a bioluminescent bacterium Vibrio fischeri (V. fischeri). Tests are a measure of light reduction between collected samples and a control following a 15-minute exposure period and expressed as the median effect concentration (EC50) of a sample that causes a 50% reduction in light emission from the V. fischeri. Appendix X (Fact Sheet: Acute & Chronic Toxicity Assessments of NY Streams & Rivers) describes toxicity testing procedures, Assessment criteria and results classifications. 
 
 
-```{r echo=FALSE, message=FALSE,warning=FALSE}
+```{r Tox-table, echo=FALSE, message=FALSE,warning=FALSE}
 #call table function
 table.f(tox.tbl,2,7)%>%
   flextable::fontsize(size = 10, part = "all")%>%
-  flextable::width(j=4:7, width=1.2)
+  flextable::width(j=4:7, width=1.2)%>%
+  set_caption("Table: (\\#tab:Tox-table) Wallkill River Microtox® sediment and porewater toxicity results for select locations in the Wallkill River Survey. Sediment samples were collected for toxicity testing in baseflow conditions during macroinvertebrate community collection at sampling locations.")
+
 
 ```
 
