@@ -3,11 +3,20 @@ title: "WallKill Reporting Draft"
 author: 'NYSDEC SMAS : Keleigh Reynolds'
 date: "6/10/2020"
 output: 
-  bookdown::word_document:
+  bookdown::word_document2:
     reference_docx: "draft_template.docx"
     fig_caption: yes
 ---
 
+#Section 1 - General
+```{r child="child/section1_General.Rmd"}
+
+```
+
+#Section 1C - Stream Reach Physical Characteristics
+```{r child="child/section1C_stream_reach_phys.Rmd"}
+
+```
 
 #Section 1D - User Perception
 ```{r child="child/section1D_User_Perception.Rmd"}

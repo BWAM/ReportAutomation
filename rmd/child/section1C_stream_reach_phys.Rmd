@@ -5,7 +5,7 @@ date: "4/16/2020"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 knitr::opts_chunk$set(echo = FALSE)
 
@@ -16,7 +16,7 @@ file.path.h=file.path(here::here(),
 
 ```
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 #read in the habitat data
 habit<-read.csv(file.path.h,stringsAsFactors = FALSE)
 
@@ -49,7 +49,7 @@ habit$year<-NULL
 
 ```
 
-```{r}
+```{r Habitat-table, echo=FALSE, message=FALSE,warning=FALSE}
 #table
 
 #create function for common tables
@@ -68,7 +68,7 @@ tl<-table.f(habit,3,8)
 #this part might have to be figured out later, with a larger caption/table function? Not sure yet.
 
 
-tl<-set_caption(tl,"Ranked habitat characteristics and calculated HMA for the Wallkill River Survey, 2017-2019. Epifaunal substrate (Epi. Cover); Embeddedness/Pool Substrate Characterization (Embed. Pool.); Velocity Depth Regime/Pool Variability (Vel/Dep Reg.); Sediment Deposition (Sed. Dep.); Channel Flow Status (Flow Status); Channel Alteration (Chan. Alt.); Riffle Frequency/Stream Sinuosity (Rif. Freq.); Left/Right Bank Stability (L/R Bank Stab.); Left/Right Bank Vegetative Cover (L/R Bank Veg.); Left/Right Bank Riparian Vegetative Zone Width (L/R Rip. Width).",html_escape = TRUE)
+tl<-set_caption(tl,"Table: (\\#tab:Habitat-table)Ranked habitat characteristics and calculated HMA for the Wallkill River Survey, 2017-2019. Epifaunal substrate (Epi. Cover); Embeddedness/Pool Substrate Characterization (Embed. Pool.); Velocity Depth Regime/Pool Variability (Vel/Dep Reg.); Sediment Deposition (Sed. Dep.); Channel Flow Status (Flow Status); Channel Alteration (Chan. Alt.); Riffle Frequency/Stream Sinuosity (Rif. Freq.); Left/Right Bank Stability (L/R Bank Stab.); Left/Right Bank Vegetative Cover (L/R Bank Veg.); Left/Right Bank Riparian Vegetative Zone Width (L/R Rip. Width).",html_escape = TRUE)
 tl
 
 ```
