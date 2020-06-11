@@ -84,15 +84,12 @@ sites.ls<-unique(sites$SH_SITE_ID)
 
 tox.df<-tox.df %>% 
   filter(stationID %in% sites.ls)%>%
-  separate(Sediment.Collection.Test.Date, into=c("Collection_Date", "Test_Date"), sep="/")%>%
-  mutate(Test_Date=gsub(pattern="\\s&\\s\\d\\d" , replacement="", x=Test_Date))%>%
   select(-Water.Collection.Test.Start.Date, -station)%>%
    order_sites(sites_table = sites, df_site_col = "stationID", sites_site_col = "SH_SITE_ID")
 
 tox.tbl<-tox.df %>% 
   rename("Station ID"=SITE_ID,
-    "Sample Date"=Collection_Date,
-         "Test Date"=Test_Date,
+    "Sample Date"=Sediment.Collection.Test.Date,
          "Sediment \n Assessment"=Sediment.Assessment,
          "Porewater \n Assessment"=Porewater.Assessment,
          "Sediment \n EC50"=Sediment.EC50....,
@@ -108,10 +105,10 @@ Toxicity testing of surface waters, sediments, porewaters, and effluents are rou
 
 ```{r Tox-table, echo=FALSE, message=FALSE,warning=FALSE}
 #call table function
-table.f(tox.tbl,2,7)%>%
+table.f(tox.tbl,2,6)%>%
   flextable::fontsize(size = 10, part = "all")%>%
-  flextable::width(j=4:7, width=1.2)%>%
-  set_caption("Table: (\\#tab:Tox-table) Wallkill River Microtox® sediment and porewater toxicity results for select locations in the Wallkill River Survey. Sediment samples were collected for toxicity testing in baseflow conditions during macroinvertebrate community collection at sampling locations.")
+  flextable::width(j=3:6, width=1.2)%>%
+  flextable::set_caption("Table: (\\#tab:Tox-table) Wallkill River Microtox® sediment and porewater toxicity results for select locations in the Wallkill River Survey. Sediment samples were collected for toxicity testing in baseflow conditions during macroinvertebrate community collection at sampling locations.")
 
 
 ```
