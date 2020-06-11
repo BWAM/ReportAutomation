@@ -13,6 +13,14 @@ output:
 
 ```
 
+#Section 1A - Water Chemistry and Stream Discharge
+```{r child="child/section1A_chemistry_stream_discharge.Rmd"}
+
+```
+
+#Section 1B - Benthic Macroinvertebrate Community 
+
+
 #Section 1C - Stream Reach Physical Characteristics
 ```{r child="child/section1C_stream_reach_phys.Rmd"}
 
