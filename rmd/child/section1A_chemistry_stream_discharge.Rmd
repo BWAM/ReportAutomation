@@ -5,7 +5,7 @@ date: "4/10/2020"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r include=FALSE, message=FALSE,warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 #set up the file path
@@ -41,7 +41,7 @@ sites<-read.csv(file.path(here::here(),
 
 ## Analyte Table
 
-```{r}
+```{r Analytes, echo=FALSE, message=FALSE,warning=FALSE}
 
 library(dplyr)
 library(flextable)
@@ -52,7 +52,8 @@ tl.1<-analyte %>%
 
 
 tl.1<-flextable(tl.1) %>% font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% theme_zebra() %>% autofit()
-tl.1<-align(tl.1, i = NULL, j =(2:10) , align = "center", part = "all")
+tl.1<-align(tl.1, i = NULL, j =(2:10) , align = "center", part = "all")%>%
+  set_caption(caption="Table:(\\#tab:Analytes) Water chemistry analytes sampled as part of the Ramapo River Stream Assessment Survey. Table lists sampled analytes and analytical specifications. ^ Precision objectives are defined by results of duplicate samples as described in Appendix III")
 tl.1
 
 ```
@@ -99,7 +100,7 @@ chem.no.trans<-chem_all %>%
 ```
 
 
-```{r message=FALSE,warning=FALSE}
+```{r echo=FALSE, message=FALSE,warning=FALSE}
 # create graphing function for those that need to be log10 (ug/L or mg/l-so not weird ones)
 chem.graph <- function(df, na.rm = TRUE, ...){
   
@@ -147,12 +148,12 @@ chem.graph <- function(df, na.rm = TRUE, ...){
 ```
 
 
-```{r fig.height=6,fig.width=6,message=FALSE,warning=FALSE}
+```{r chem1, fig.height=6,fig.width=6,message=FALSE,warning=FALSE, echo=FALSE, fig.cap="The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. The y-axis represents base log10 analyte concentrations. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III." }
 chem.graph(chem.trans)  
 
 ```
 
-```{r echo=FALSE, fig.width=5,fig.height=6,message=FALSE,warning=FALSE}
+```{r chem.2, echo=FALSE, fig.width=5, fig.height=6, message=FALSE, warning=FALSE, fig.cap="The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. The y-axis represents base log10 analyte concentrations. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III." }
 #this one for the other values (no transformation of units)
 
 # create graphing function for those that don't need to be log10
