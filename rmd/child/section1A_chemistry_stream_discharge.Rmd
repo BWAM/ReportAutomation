@@ -2,11 +2,11 @@
 title: "Section 1 a) chemistry and stream discharge"
 author: 'NYSDEC SMAS : Keleigh Reynolds'
 date: "4/10/2020"
-output: html_document
+output: 
+word_document: default
 ---
 
 ```{r include=FALSE, message=FALSE,warning=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 
 #set up the file path
 file.path=file.path(here::here(),
@@ -62,12 +62,15 @@ tl.1<-flextable(tl.1) %>%
   fontsize(size = 8, part="all")%>%
   autofit()
 tl.1<-align(tl.1, i = NULL, j =(2:10) , align = "center", part = "all")%>%
-  set_caption(caption="Table:(\\#tab:Analytes) Water chemistry analytes sampled as part of the Ramapo River Stream Assessment Survey. Table lists sampled analytes and analytical specifications. ^ Precision objectives are defined by results of duplicate samples as described in Appendix III")
+  set_caption(caption="Table:(\\#tab:Analytes) Water chemistry analytes sampled as part of the Wallkill River Stream Assessment Survey. Table lists sampled analytes and analytical specifications. ^ Precision objectives are defined by results of duplicate samples as described in Appendix III")%>%
+  width(j=c(6:10), width = 0.8)%>%
+  width(j=3:5, width=0.6)%>%
+  width(j=1, width=1.2)
 tl.1
 
 ```
 
-
+## Water Chemistry by PWL ID
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
 
@@ -134,7 +137,7 @@ chem.graph <- function(df, na.rm = TRUE, ...){
       theme(axis.text.x = element_text(angle = 60, hjust = 1))+
       theme(legend.position="right") + 
       
-      scale_y_log10(paste(df$chemical_name[df$chemical_name==chem_list[i]],"(log10)",df$result_unit[df$chemical_name==chem_list[i]])) + 
+      scale_y_log10(paste(df$chemical_name[df$chemical_name==chem_list[i]],"log(10)", df$result_unit[df$chemical_name==chem_list[i]])) + 
       xlab("Location ID")+
       ggtitle(paste(chem_list[i], ' \n', 
                     "Chemical results by PWL ID",
@@ -152,17 +155,25 @@ chem.graph <- function(df, na.rm = TRUE, ...){
     
     # print plots to screen
     print(plot)
+    
+    
   }
+  
+  
 }
+
+
 ```
 
 
-```{r chem1, fig.height=6,fig.width=6,message=FALSE,warning=FALSE, echo=FALSE, fig.cap="The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. The y-axis represents base log10 analyte concentrations. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III." }
+```{r chemgraph, fig.height=4, fig.width=6, message=TRUE, warning=FALSE, echo=FALSE, fig.cap="caption test"}
 chem.graph(chem.trans)  
 
+
 ```
 
-```{r chem.2, echo=FALSE, fig.width=5, fig.height=6, message=FALSE, warning=FALSE, fig.cap="The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. The y-axis represents base log10 analyte concentrations. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III." }
+
+```{r chemgraph2, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap= "The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. The y-axis represents base log10 analyte concentrations. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III."}
 #this one for the other values (no transformation of units)
 
 # create graphing function for those that don't need to be log10
@@ -203,10 +214,17 @@ chem.graph.n <- function(df, na.rm = TRUE, ...){
     
     # print plots to screen
     print(plot)
+    
+    
   }
+  
+  
 }
 
 chem.graph.n(chem.no.trans)
 
+
 ```
+
+
 

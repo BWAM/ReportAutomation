@@ -15,7 +15,6 @@ library(ggthemes)
 library(tidyselect)
 library(flextable)
 
-knitr::opts_chunk$set(echo = TRUE)
 
 #set up the file path
 file.path=file.path(here::here(),
@@ -82,6 +81,7 @@ plot<-ggplot(contact, aes(x=SITE_ID, y=value, fill=`Contact Type`))+
 
 ```
 
+
 ```{r  userP-rank, fig.cap="Mean observer ranking of recreational ability for Wallkill River sampling locations. Columns represent observer rankings for the desire to participate in 1° and 2° contact recreation. Ranking of recreation ability was performed for all locations during each site visit." , fig.width=7, fig.height=4, echo=FALSE, message=FALSE,warning=FALSE}
 plot
 ```
@@ -101,6 +101,7 @@ Variables<-UserP_all%>%
             `Discharge Pipes`= round(mean(UPFDH_DISCHARGE_PIPE, na.rm = TRUE), digits=0))%>%
   order_sites(sites_table=Sites, sites_site_col = "SH_SITE_ID", df_site_col = "SITE_ID")
 ```
+
 
 ```{r UserP-mean-factor, echo=FALSE, message=FALSE,warning=FALSE}
 final_table<-flextable(Variables)%>%
@@ -145,6 +146,7 @@ Dominant<-left_join(DominantP, DominantS, by="SITE_ID")%>%
 
 
 ```
+
 
 ```{r UserP-dominant-factor, message = F, warning = F, echo= F}
 final_table2<-flextable(Dominant)%>%
