@@ -112,7 +112,7 @@ final_table<-flextable(Variables)%>%
   width(j = c(2,4,8), width = 0.8)%>%
   width(j = c(3,5), width = 1.1)%>%
   width(j=1, width=1.1)%>%
-  set_caption(caption="Table:(\\#tab:UserP-mean-factor) Mean observer ranked value for factors influencing desire to participate in 1° and 2° contact recreation in the Wallkill River. Factors were ranked on a 10 scale (0 – Best/Natural; 10 Worst/Severe) according to perceived impact on a location. Ranking of recreation ability was performed for all locations during each site visit")
+  set_caption(caption="Table: (\\#tab:UserP-mean-factor) Mean observer ranked value for factors influencing desire to participate in 1° and 2° contact recreation in the Wallkill River. Factors were ranked on a 10 scale (0 – Best/Natural; 10 Worst/Severe) according to perceived impact on a location. Ranking of recreation ability was performed for all locations during each site visit")
 
 final_table
 ```
@@ -153,7 +153,7 @@ final_table2<-flextable(Dominant)%>%
   fontsize(size = 10, part = "body")%>%
   font(fontname = "Arial", part="all")%>%
   autofit()%>%
-  set_caption(caption="Table:(\\#tab:UserP-dominant-factor) Most frequently ranked factor influencing observer desire to participate in 1° and 2° contact recreation in the Wallkill River. Factors influencing desire to recreate were ranked and a primary factor influencing the desire to participate in 1° and 2° contact recreation was chosen during each site visit. Column values represent the factor selected most frequently at each site.")
+  set_caption(caption="Table: (\\#tab:UserP-dominant-factor) Most frequently ranked factor influencing observer desire to participate in 1° and 2° contact recreation in the Wallkill River. Factors influencing desire to recreate were ranked and a primary factor influencing the desire to participate in 1° and 2° contact recreation was chosen during each site visit. Column values represent the factor selected most frequently at each site.")
 
 final_table2
 ```
