@@ -173,7 +173,7 @@ chem.graph(chem.trans)
 ```
 
 
-```{r chemgraph2, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap= "The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. The y-axis represents base log10 analyte concentrations. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III."}
+```{r chemgraph2, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap="The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. The y-axis represents base log10 analyte concentrations. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III."}
 #this one for the other values (no transformation of units)
 
 # create graphing function for those that don't need to be log10

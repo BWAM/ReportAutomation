@@ -26,7 +26,7 @@ output:
 
 ```
 
-#Section 1D - User Perception
+# Section 1D - User Perception
 ```{r child="child/section1D_User_Perception.Rmd"}
 
 ```
