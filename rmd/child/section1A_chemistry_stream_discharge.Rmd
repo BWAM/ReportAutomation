@@ -47,11 +47,20 @@ library(dplyr)
 library(flextable)
 #create table for the analyte list/precision method etc
 tl.1<-analyte %>% 
-  rename("Analytical Lab"=Analytical.Lab,"Standard Method"=Standard.Method,"Calibration: Initial"=Cal.initial,
-         "Calibration: Ongoing"=cal.ongoing,"Calibration: Blanks"=cal.blanks,"Method Detection Limit"=Method.Detection.Limit,"Reporting Limit"=Reporting.Limit)
+  rename("Analytical \nLab"=Analytical.Lab,
+         "Method"=Standard.Method,
+         "Calibration: \n Initial"=Cal.initial,
+         "Calibration: \n Ongoing"=cal.ongoing,
+         "Calibration: \n Blanks"=cal.blanks,
+         "Detection \n Limit"=Method.Detection.Limit,
+         "Reporting \n Limit"=Reporting.Limit)
 
 
-tl.1<-flextable(tl.1) %>% font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% theme_zebra() %>% autofit()
+tl.1<-flextable(tl.1) %>% 
+  font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% 
+  theme_zebra() %>% 
+  fontsize(size = 8, part="all")%>%
+  autofit()
 tl.1<-align(tl.1, i = NULL, j =(2:10) , align = "center", part = "all")%>%
   set_caption(caption="Table:(\\#tab:Analytes) Water chemistry analytes sampled as part of the Ramapo River Stream Assessment Survey. Table lists sampled analytes and analytical specifications. ^ Precision objectives are defined by results of duplicate samples as described in Appendix III")
 tl.1
