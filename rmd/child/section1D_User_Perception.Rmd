@@ -7,10 +7,7 @@ output:
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
-library(dplyr)
-library(magrittr)
-library(tidyr)
-library(ggplot2)
+library(tidyverse)
 library(ggthemes)
 library(tidyselect)
 library(flextable)
@@ -38,21 +35,21 @@ Sites<-read.csv(file.path2,stringsAsFactors = FALSE)
 #function to make the sites a factor in order from upstream to downstream
 order_sites<-function(df, sites_table, df_site_col, sites_site_col){
 Sites<-sites_table%>%
-  dplyr::rename(SITE_ID=sites_site_col)
+  rename(SITE_ID=sites_site_col)
 
 df<-df%>%
-  dplyr::rename(SITE_ID=df_site_col)
+  rename(SITE_ID=df_site_col)
 
 all_data<-left_join(df, Sites)
 all_data<-all_data%>%
-  dplyr::arrange(order)%>%
-  dplyr::mutate(SITE_ID=factor(SITE_ID, levels = unique(SITE_ID)))
+  arrange(order)%>%
+  mutate(SITE_ID=factor(SITE_ID, levels = unique(SITE_ID)))
 
 columns<-colnames(Sites)
 columns<-columns[!(columns %in% "SITE_ID")]
 
 all_data<-all_data%>%
-  dplyr::select(!tidyselect::any_of(columns))
+  select(!tidyselect::any_of(columns))
 }
 ```
 
