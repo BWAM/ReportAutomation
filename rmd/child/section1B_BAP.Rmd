@@ -6,7 +6,6 @@ output: html_document
 ---
 
 ```{r message=FALSE,warning=FALSE, echo=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 
 #set up the file path to the metrics data
 file.path=file.path(here::here(),
@@ -98,7 +97,7 @@ sum.metrics$SH_PWL_ID<-as.factor(sum.metrics$SH_PWL_ID)
 ```
 
 
-```{r BAP, fig.width=10,fig.height=10,message=FALSE,warning=FALSE, echo=FALSE, fig.cap="Biological Assessment Profile (BAP) Scores and 95% confidence intervals for benthic macroinvertebrate community assessment data for the Wallkill River Survey, 2017-2019. Symbology corresponds with WI/PWL segmentation as indicated in the plot legend."}
+```{r BAP, fig.width=10,fig.height=10, message=FALSE, warning=FALSE, echo=FALSE, fig.cap="Biological Assessment Profile (BAP) Scores and 95% confidence intervals for benthic macroinvertebrate community assessment data for the Wallkill River Survey, 2017-2019. Symbology corresponds with WI/PWL segmentation as indicated in the plot legend."}
 #Prob shoudl make this into a function, and make it by PWL ID, but this is a good start. 
 
 metrics.l<-unique(sum.metrics$siteyear)
@@ -116,35 +115,42 @@ labels.df <- data.frame(
   stringsAsFactors = FALSE
 )
 library(ggplot2)
-bap_p<-ggplot(sum.metrics,aes(siteyear,mean))+geom_point(stat="identity",aes(shape=SH_PWL_ID))+
+bap_p<-ggplot(sum.metrics,aes(siteyear,mean))+
+  geom_point(stat="identity",aes(shape=SH_PWL_ID))+
   scale_shape_manual(name="PWL Segment ID",values = 0:max(l.p))
-stat_smooth(method="lm",fullrange=T)
-bap_p+geom_errorbar(aes(ymin=mean-ci,ymax=mean+ci),width=.1)+theme_bw() + theme(
+#stat_smooth(method="lm",fullrange=T)
+bap_p+geom_errorbar(aes(ymin=mean-ci,ymax=mean+ci),width=.1)+
+  theme_bw() + 
+  theme(
   panel.grid.major = element_blank(),
-  panel.grid.minor = element_blank(),
-  #remove gridlines
+  panel.grid.minor = element_blank(),#remove gridlines
   axis.title.y = element_text(
     size = 12,
     family = "serif",
-    face = "bold"
-  ),
+    face = "bold"),
   axis.title.x = element_blank(),
   axis.text.x = element_text(
     angle = 45,
     hjust = 1,
     size = 12,
     family = "serif",
-    face = "bold"
-  ),
-  #rotate text angle
+    face = "bold"), #rotate text angle
   plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
   legend.position = c(.11, .81) + #reduces white space around plot edges
     geom_label(aes(x = .5, y = .5), label = "test")
-)+geom_hline(yintercept=2.5,linetype="dashed",color="grey")+geom_hline(yintercept=5,linetype="dashed",color="grey")+geom_hline(yintercept=7.5,linetype="dashed",color="grey")+ylab("Biological Assessment Profile Score")+xlab("Year")+ geom_text(data = labels.df, aes(max(l)+1, y, label = label), color = "black",angle=90)+expand_limits(y=c(0,10),x=c(0:max(l+2)))
+)+
+  geom_hline(yintercept=2.5,linetype="dashed",color="grey")+
+  geom_hline(yintercept=5,linetype="dashed",color="grey")+
+  geom_hline(yintercept=7.5,linetype="dashed",color="grey")+
+  ylab("Biological Assessment Profile Score")+xlab("Year")+ geom_text(data = labels.df, aes(max(l)+1, y, label = label), color = "black",angle=90)+
+  expand_limits(y=c(0,10),x=c(0:max(l+2)))
 
 ```
 
-```{r message=FALSE,warning=FALSE}
+
+
+
+```{r message=FALSE,warning=FALSE, echo=FALSE}
 #PThis section is doing the same thing, but trying to make this into a function. 
 
 #might be able to do more of the pre-manipulation as a function, but I'm not sure yet.
@@ -195,6 +201,9 @@ bap_p+geom_errorbar(aes(ymin=mean-ci,ymax=mean+ci),width=.1)+theme_bw() + theme(
 
 ```
 
-
+```{r message=FALSE,warning=FALSE, echo=FALSE}
+detach("package:reshape2", unload = TRUE)
+detach("package:plyr", unload = TRUE)
+```
 
 
