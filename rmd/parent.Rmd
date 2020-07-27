@@ -19,6 +19,10 @@ output:
 ```
 
 # Section 1B - Benthic Macroinvertebrate Community 
+```{r child="child/section1B_BAP.Rmd"}
+
+```
+
 
 
 # Section 1C - Stream Reach Physical Characteristics
