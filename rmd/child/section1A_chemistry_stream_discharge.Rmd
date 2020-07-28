@@ -111,7 +111,7 @@ chem.no.trans<-chem_all %>%
 #chemp+facet_wrap(~chemical_name,scales="free")+theme_bw()
 ```
 
-```{r echo=FALSE, message=FALSE,warning=FALSE}
+```{r chemgraph1, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(chem.trans$chemical_name), ", " , "The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III.", sep="")}
 # create graphing function for those that need to be log10 (ug/L or mg/l-so not weird ones)
 chem.graph <- function(df, na.rm = TRUE, ...){
   
@@ -154,27 +154,20 @@ chem.graph <- function(df, na.rm = TRUE, ...){
     
     # print plots to screen
     print(plot)
-    
+    cat('\n\n') 
     
   }
   
   
 }
 
-
-```
-
-
-
-
-```{r chem.trans, fig.cap="The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. The y-axis represents base log10 analyte concentrations. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III.", fig.height=5.5, fig.width=6, message=TRUE, warning=FALSE, echo=FALSE}
-
 chem.graph(chem.trans) 
-  
+
 ```
 
 
-```{r chemgraph, echo=FALSE, fig.width=6, fig.height=4, split=TRUE, message=FALSE, warning=FALSE, fig.cap= "The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III."}
+
+```{r chemgraph2, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(chem.no.trans$chemical_name), "," , "The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III.", sep="")}
 #this one for the other values (no transformation of units)
 
 # create graphing function for those that don't need to be log10
@@ -218,7 +211,7 @@ chem.graph.n <- function(df, na.rm = TRUE, ...){
     # print plots to screen
     print(plot)
     
-    
+  cat('\n\n')   
   }
   
   
