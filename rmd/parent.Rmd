@@ -4,8 +4,9 @@ author: 'NYSDEC SMAS : Keleigh Reynolds'
 date: "6/10/2020"
 output: 
   bookdown::word_document2:
-    reference_docx: "draft_template.docx"
+    reference_docx: "rmd/style_ref_doc.docx"
     fig_caption: yes
+
 ---
 
 # Section 1 - General
