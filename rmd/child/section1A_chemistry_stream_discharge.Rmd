@@ -41,10 +41,11 @@ sites<-read.csv(file.path(here::here(),
 
 ## Analyte Table
 
-```{r Analytes, echo=FALSE, message=FALSE,warning=FALSE}
+```{r Analytes, echo=FALSE, message=FALSE, warning=FALSE}
 
 library(dplyr)
 library(flextable)
+
 #create table for the analyte list/precision method etc
 tl.1<-analyte %>% 
   rename("Analytical \nLab"=Analytical.Lab,
@@ -62,7 +63,7 @@ tl.1<-flextable(tl.1) %>%
   fontsize(size = 8, part="all")%>%
   autofit()
 tl.1<-align(tl.1, i = NULL, j =(2:10) , align = "center", part = "all")%>%
-  set_caption(caption="Table:(\\#tab:Analytes) Water chemistry analytes sampled as part of the Wallkill River Stream Assessment Survey. Table lists sampled analytes and analytical specifications. ^ Precision objectives are defined by results of duplicate samples as described in Appendix III")%>%
+  set_caption(caption="Table: (\\#tab:Analytes) Water chemistry analytes sampled as part of the Wallkill River Stream Assessment Survey. Table lists sampled analytes and analytical specifications. ^ Precision objectives are defined by results of duplicate samples as described in Appendix III")%>%
   width(j=c(6:10), width = 0.8)%>%
   width(j=3:5, width=0.6)%>%
   width(j=1, width=1.2)
