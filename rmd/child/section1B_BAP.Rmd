@@ -2,7 +2,8 @@
 title: "Section 1 b) BAP metrics"
 author: 'NYSDEC SMAS : Keleigh Reynolds'
 date: "4/10/2020"
-output: html_document
+output:
+  word_document: default
 ---
 
 ```{r message=FALSE,warning=FALSE, echo=FALSE}
@@ -97,7 +98,7 @@ sum.metrics$SH_PWL_ID<-as.factor(sum.metrics$SH_PWL_ID)
 ```
 
 
-```{r BAP, fig.width=10,fig.height=10, message=FALSE, warning=FALSE, echo=FALSE, fig.cap="Biological Assessment Profile (BAP) Scores and 95% confidence intervals for benthic macroinvertebrate community assessment data for the Wallkill River Survey, 2017-2019. Symbology corresponds with WI/PWL segmentation as indicated in the plot legend."}
+```{r BAP, fig.width=7,fig.height=7, message=FALSE, warning=FALSE, echo=FALSE, fig.cap="Biological Assessment Profile (BAP) Scores and 95% confidence intervals for benthic macroinvertebrate community assessment data for the Wallkill River Survey, 2017-2019. Symbology corresponds with WI/PWL segmentation as indicated in the plot legend."}
 #Prob shoudl make this into a function, and make it by PWL ID, but this is a good start. 
 
 metrics.l<-unique(sum.metrics$siteyear)
@@ -132,9 +133,8 @@ bap_p+geom_errorbar(aes(ymin=mean-ci,ymax=mean+ci),width=.1)+
   axis.text.x = element_text(
     angle = 45,
     hjust = 1,
-    size = 12,
-    family = "serif",
-    face = "bold"), #rotate text angle
+    size = 10,
+    family = "serif"), #rotate text angle
   plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
   legend.position = c(.11, .81) + #reduces white space around plot edges
     geom_label(aes(x = .5, y = .5), label = "test")

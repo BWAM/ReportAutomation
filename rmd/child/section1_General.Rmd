@@ -2,7 +2,8 @@
 title: "section1_General"
 author: 'NYSDEC SMAS : Keleigh Reynolds'
 date: "4/14/2020"
-output: html_document
+output: 
+word_document: default
 ---
 
 ```{r include=FALSE}
@@ -50,7 +51,7 @@ table1<-table1 %>%
 
 ```
 
-```{r sites-table, echo=FALSE,message=FALSE,warning=FALSE}
+```{r tab.id="sites-table",  echo=FALSE, message=FALSE, warning=FALSE, tab.cap="Wallkill River (WALK) sampling locations. Locations are ordered from upstream to downstream according to river mile and mainstem confluence"}
 library(flextable)
 tl<-flextable(table1) %>% font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% theme_zebra() %>% autofit()
 tl<-align(tl, i = NULL, j =(2:5) , align = "center", part = "all")%>%
@@ -60,8 +61,7 @@ tl<-align(tl, i = NULL, j =(2:5) , align = "center", part = "all")%>%
   width(j=c(5), width=1.1)%>%
   width(j=c(4), width=0.8)%>%
   width(j=c(2), width=0.5)%>%
-  width(j=6, width=1.5)%>%
-  set_caption("Table:(\\#tab:sites-table) Wallkill River (WALK) sampling locations. Locations are ordered from upstream to downstream according to river mile and mainstem confluence")
+  width(j=6, width=1.5)
 tl
 ```
 

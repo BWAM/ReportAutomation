@@ -2,12 +2,12 @@
 title: "section1C_stream_reach_physical_char"
 author: 'NYSDEC SMAS : Keleigh Reynolds'
 date: "4/16/2020"
-output: html_document
+output:
+  word_document: default
 ---
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
-knitr::opts_chunk$set(echo = FALSE)
 
 #set up the file path
 file.path.h=file.path(here::here(),
@@ -39,7 +39,7 @@ habit$year<-NULL
 
 ```
 
-```{r Habitat-table, echo=FALSE, message=FALSE,warning=FALSE}
+```{r tab.id="Habitat-table", tab.cap="Ranked habitat characteristics and calculated HMA for the Wallkill River Survey, 2017-2019. Epifaunal substrate (Epi. Cover); Embeddedness/Pool Substrate Characterization (Embed. Pool.); Velocity Depth Regime/Pool Variability (Vel/Dep Reg.); Sediment Deposition (Sed. Dep.); Channel Flow Status (Flow Status); Channel Alteration (Chan. Alt.); Riffle Frequency/Stream Sinuosity (Rif. Freq.); Left/Right Bank Stability (L/R Bank Stab.); Left/Right Bank Vegetative Cover (L/R Bank Veg.); Left/Right Bank Riparian Vegetative Zone Width (L/R Rip. Width).", echo=FALSE, message=FALSE,warning=FALSE}
 #table
 
 #create function for common tables
@@ -59,7 +59,6 @@ tl<-table.f(habit,3,10)
 
 
 tl<-tl%>%
-  set_caption("Table: (\\#tab:Habitat-table)Ranked habitat characteristics and calculated HMA for the Wallkill River Survey, 2017-2019. Epifaunal substrate (Epi. Cover); Embeddedness/Pool Substrate Characterization (Embed. Pool.); Velocity Depth Regime/Pool Variability (Vel/Dep Reg.); Sediment Deposition (Sed. Dep.); Channel Flow Status (Flow Status); Channel Alteration (Chan. Alt.); Riffle Frequency/Stream Sinuosity (Rif. Freq.); Left/Right Bank Stability (L/R Bank Stab.); Left/Right Bank Vegetative Cover (L/R Bank Veg.); Left/Right Bank Riparian Vegetative Zone Width (L/R Rip. Width).")%>%
   width(j=3:10, width=0.7)%>%
   width(j=2, width=1)
 tl
