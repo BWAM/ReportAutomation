@@ -4,8 +4,8 @@ author: "NYSDEC SMAS"
 title: "Wallkill Reporting Draft"
 output: 
   officedown::rdocx_document:
-    mapstyles:
-      Normal: ['First Paragraph']
+     reference_docx: draft_template.docx
+      
 ---
 
 ```{r setup, include=FALSE}
