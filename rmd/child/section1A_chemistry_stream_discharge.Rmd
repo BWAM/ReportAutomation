@@ -69,7 +69,7 @@ tl.1<-align(tl.1, i = NULL, j =(2:10) , align = "center", part = "all")%>%
 tl.1
 
 ```
-
+\newpage
 ## Water Chemistry by PWL ID
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
@@ -81,6 +81,7 @@ library(ggplot2)
 library(ggthemes)
 library(pander)
 library(dplyr)
+library(forcats)
 
 chem_all$SH_PWL_ID<-as.factor(chem_all$SH_PWL_ID)
 #take out the Rejected samples
@@ -100,10 +101,13 @@ chem.trans<-subset(chem_all,chem_all$result_unit=="mg/l"|chem_all$result_unit=="
 chem.trans<-chem.trans %>% 
    arrange(order)
 
+chem.trans$SH_PWL_ID<-fct_reorder(chem.trans$SH_PWL_ID, chem.trans$order)
+
 chem.no.trans<-chem_all %>% 
   filter(chem_all$result_unit != "mg/l"& chem_all$result_unit != "ug/l") %>% 
    arrange(order)
 
+chem.no.trans$SH_PWL_ID<-fct_reorder(chem.no.trans$SH_PWL_ID, chem.no.trans$order)
 
 #then probably need to merge with table that actually has metrics, bc we don't need to plot them all-or maybe we should?.
 
@@ -130,17 +134,17 @@ chem.graph <- function(df, na.rm = TRUE, ...){
       
       geom_boxplot() +
 
-      scale_shape_manual(name="PWL Segment ID",values = 0:max(l))+
+      #scale_shape_manual(name="PWL Segment ID",values = 0:max(l))+
       
       theme_pander() +
       theme(axis.text.x = element_text(angle = 60, hjust = 1))+
       theme(legend.position="right") + 
       
-      scale_y_log10(paste(df$chemical_name[df$chemical_name==chem_list[i]],"log(10)", df$result_unit[df$chemical_name==chem_list[i]])) + 
-      xlab("Location ID")+
-      ggtitle(paste(chem_list[i], ' \n', 
-                    "Chemical results by PWL ID",
-                    sep=''))
+      scale_y_log10(paste(df$chemical_name[df$chemical_name==chem_list[i]], df$result_unit[df$chemical_name==chem_list[i]], "log(10)")) + 
+      xlab("Location ID")#+
+     # ggtitle(paste(chem_list[i], ' \n', 
+                    #"Chemical results by PWL ID",
+                    #sep=''))
     
     # save plots as .png
     # ggsave(plot, file=paste(results, 
@@ -183,20 +187,20 @@ chem.graph.n <- function(df, na.rm = TRUE, ...){
     # create plot for each PWL in df 
     plot <- 
       ggplot(subset(df, df$chemical_name==chem_list[i]),
-             aes(order,result_value,group=SH_PWL_ID,color=group))+ 
+             aes(SH_PWL_ID,result_value,group=SH_PWL_ID,color=group))+ 
       
       geom_boxplot() +
-      scale_shape_manual(name="PWL Segment ID",values = 0:max(l))+
+      #scale_shape_manual(name="PWL Segment ID",values = 0:max(l))+
       
       theme_pander() +
       theme(axis.text.x = element_text(angle = 60, hjust = 1))+
       theme(legend.position="right") + 
       
       scale_y_continuous(paste(df$chemical_name[df$chemical_name==chem_list[i]],df$result_unit[df$chemical_name==chem_list[i]])) + 
-      xlab("Location ID")+
-      ggtitle(paste(chem_list[i], ' \n', 
-                    "Chemical results by PWL ID",
-                    sep=''))
+      xlab("Location ID")#+
+      #ggtitle(paste(chem_list[i], ' \n', 
+                   # "Chemical results by PWL ID",
+                   # sep=''))
     
     # save plots as .png
     # ggsave(plot, file=paste(results, 

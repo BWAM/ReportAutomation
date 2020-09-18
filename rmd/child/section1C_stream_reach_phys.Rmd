@@ -14,6 +14,32 @@ file.path.h=file.path(here::here(),
           "data",
           "habitat_wk.csv")
 
+file.path.s<-file.path(here::here(),
+                       "data",
+                       "sites_wallkill.csv")
+
+```
+
+```{r include=FALSE,message=FALSE,warning=FALSE}
+#function to make the sites a factor in order from upstream to downstream
+order_sites<-function(df, sites_table, df_site_col, sites_site_col){
+Sites<-sites_table%>%
+  dplyr::rename(SITE_ID=sites_site_col)
+
+df<-df%>%
+  dplyr::rename(SITE_ID=df_site_col)
+
+all_data<-left_join(df, Sites)
+all_data<-all_data%>%
+  dplyr::arrange(order)%>%
+  dplyr::mutate(SITE_ID=factor(SITE_ID, levels = unique(SITE_ID)))
+
+columns<-colnames(Sites)
+columns<-columns[!(columns %in% "SITE_ID")]
+
+all_data<-all_data%>%
+  dplyr::select(!tidyselect::any_of(columns))
+}
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -34,12 +60,28 @@ habit<-habit %>%
 habit<-habit %>% 
   filter(year >= 2017)
 
+#read in sites table and reorder sites upstream to downstream
+sites<-read.csv(file.path.s,stringsAsFactors = FALSE)
+
+habit<-habit%>%
+  order_sites(sites_table = sites, df_site_col = "Location ID", sites_site_col = "SH_SITE_ID")
+
 habit$year<-NULL
-  
+
+#Average all entries per site
+habit<-habit%>%
+  group_by(SITE_ID, Gradient)%>%
+  summarize(`Epi.\n Cover`=mean(`Epi.\n Cover`),
+            `Embed. \n Pool.`=mean(`Embed. \n Pool.`),
+            `Vel/Dep. \n Reg.`=mean(`Vel/Dep. \n Reg`),
+            `Sed. \n Dep.`=mean(`Sed. \n Dep.`),
+            `Flow \n Status`=mean(`Flow \n Status`),
+            `Chan. \n Alt`=mean(`Chan. \n Alt`),
+            `Rif. \n Freq`=mean(`Rif. \n Freq`))
 
 ```
 
-```{r tab.id="Habitat-table", tab.cap="Ranked habitat characteristics and calculated HMA for the Wallkill River Survey, 2017-2019. Epifaunal substrate (Epi. Cover); Embeddedness/Pool Substrate Characterization (Embed. Pool.); Velocity Depth Regime/Pool Variability (Vel/Dep Reg.); Sediment Deposition (Sed. Dep.); Channel Flow Status (Flow Status); Channel Alteration (Chan. Alt.); Riffle Frequency/Stream Sinuosity (Rif. Freq.); Left/Right Bank Stability (L/R Bank Stab.); Left/Right Bank Vegetative Cover (L/R Bank Veg.); Left/Right Bank Riparian Vegetative Zone Width (L/R Rip. Width).", echo=FALSE, message=FALSE,warning=FALSE}
+```{r tab.id="Habitat-table", tab.cap="Ranked habitat characteristics and calculated HMA for the Wallkill River Survey, 2017-2019. Epifaunal substrate (Epi. Cover); Embeddedness/Pool Substrate Characterization (Embed. Pool.); Velocity Depth Regime/Pool Variability (Vel/Dep Reg.); Sediment Deposition (Sed. Dep.); Channel Flow Status (Flow Status); Channel Alteration (Chan. Alt.); Riffle Frequency/Stream Sinuosity (Rif. Freq.)", echo=FALSE, message=FALSE,warning=FALSE}
 #table
 
 #create function for common tables
@@ -52,15 +94,14 @@ tl
 }
 
 #call the function
-tl<-table.f(habit,3,10)
+tl<-table.f(habit,2,9)
 
 
 #this part might have to be figured out later, with a larger caption/table function? Not sure yet.
 
 
 tl<-tl%>%
-  width(j=3:10, width=0.7)%>%
-  width(j=2, width=1)
+  width(j=2:9, width=0.7)
 tl
 
 ```
