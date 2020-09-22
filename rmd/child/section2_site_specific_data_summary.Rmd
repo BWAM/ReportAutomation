@@ -35,6 +35,11 @@ bap<-read.csv(file.path(here::here(),
 flow<-read.csv(file.path(here::here(),
                          "data",
                          "Wallkill_Flow_All.csv"),stringsAsFactors = FALSE)
+
+site.loc<-read.csv(file.path(here::here(),
+                             "data",
+                            "sites_wallkill.csv"),stringsAsFactors = FALSE)
+
 #make flow dates as dates:
 flow$Date<-as.Date(flow$Date,"%m/%d/%Y")
 ```
@@ -68,7 +73,8 @@ stds$chemical_name<-tolower(stds$chemical_name)
 chem$chemical_name<-tolower(chem$chemical_name)
 
 #remove any chems that have R, reject, flags
-chem<-chem %>% filter(interpreted_qualifiers!="R")
+chem<-chem %>% filter(validator_qualifiers!="R")
+chem<-chem %>% filter(!is.na(result_value))
 
 ```
 
@@ -94,7 +100,7 @@ chem.df$corrected_value<-NA
 insitu.df$corrected_value<-NA
 
 #correct them based on the units in the stds
-chem.df$corrected_value<-ifelse(chem.df$result_unit=="mg/l" & chem.df$units=="ug/L",chem.df$result_value*1000,chem.df$result_value)
+chem.df$corrected_value<-ifelse(chem.df$result_unit=="mg/l" & chem.df$units=="ug/L",chem.df$result_value*1000,paste0(chem.df$result_value))
 chem.df$corrected_value<-ifelse(is.na(chem.df$corrected_value),chem.df$result_value,chem.df$corrected_value)
 insitu.df$corrected_value<-ifelse(insitu.df$unit=="mg/l" & insitu.df$units=="ug/L",insitu.df$result_value*1000,insitu.df$result_value)
 insitu.df$corrected_value<-ifelse(is.na(insitu.df$corrected_value),insitu.df$result_value,insitu.df$corrected_value)
@@ -164,18 +170,11 @@ calcs.df<-calcs.df %>%
 
 #now we have all theinformation in one dataframe, let's do the calcs.
 
-#transform the units and value
-calcs.df<-calcs.df %>% 
-  mutate(corrected_value_2=case_when(
-    result_unit %in% "mg/l"~result_value*1000,
-    result_unit %in% "ug/l"~ result_value,
-    TRUE ~ corrected_value))
-
 calcs.df<-calcs.df %>% 
   mutate(calc_value=case_when(
     chemical_name %in% "copper"~ 0.96*exp(0.9422*log(calcs.df$hardness_result)-1.7),
     chemical_name %in% "zinc" ~ exp(0.85*log(calcs.df$hardness_result)+0.5),
-    #chemical_name %in% "nitrogen, ammonia (as n)"~
+    #chemical_name %in% "nitrogen, ammonia (as n)"~ 1*calcs.df$corrected_value,
     chemical_name %in% "lead"~ 1.46203 - (log(calcs.df$hardness)*(0.145712))*exp(1.273* (log(calcs.df$hardness)) - 4.297),
     chemical_name %in% "nickel"~ 0.997*exp (0.846*log(calcs.df$hardness)) + 0.0584,
     TRUE ~ 0 #each of the things before the ~ is true or false, need to hit a true eventually working from top down %in% is better than ==
@@ -185,7 +184,7 @@ calcs.df<-calcs.df %>%
 
 
 calcs.df$exceedance<-NA
-calcs.df$exceedance<-ifelse(calcs.df$corrected_value_2>calcs.df$calc_value,1,0)
+calcs.df$exceedance<-ifelse(calcs.df$corrected_value>calcs.df$calc_value,1,0)
 
 ```
 
@@ -237,13 +236,15 @@ nnc.final.df<-nnc.df %>%
 
 ```{r, message=FALSE,include=FALSE}
 #then create summary columns for each type of data set
+chem_short.df$corrected_value<-as.numeric(chem_short.df$corrected_value)
+
 chem_sum.df<-chem_short.df %>% 
   group_by(SITE_ID,chemical_name) %>% 
-  summarize(record_count=n(),mean=mean(corrected_value,na.rm =TRUE),num_exceed=sum(exceed),min=min(corrected_value,na.rm =TRUE),max=max(corrected_value,na.rm =TRUE),median=median(corrected_value,na.rm =TRUE)) %>% 
-  mutate_if(is.numeric, round, 3)
+  summarise(record_count=n(),mean=mean(corrected_value,na.rm =TRUE),num_exceed=sum(exceed),min=min(corrected_value,na.rm =TRUE),max=max(corrected_value,na.rm =TRUE),median=median(corrected_value,na.rm =TRUE))
 
 chem_sum.df<-chem_sum.df %>% 
   mutate_if(is.numeric, round, 3)
+
   
 #then create summary columns for the in-situ
 insitu_sum.df<-insitu.df %>% 
@@ -256,9 +257,10 @@ insitu.df<-insitu.df %>%
   
 
 #and summary for the calcs
+calcs.df$corrected_value<-as.numeric(calcs.df$corrected_value)
 calcs_sum.df<-calcs.df %>% 
   group_by(SITE_ID,chemical_name) %>% 
-  summarize(record_count=n(),mean=mean(corrected_value_2,na.rm =TRUE),num_exceed=sum(exceedance),min=min(corrected_value_2,na.rm =TRUE),max=max(corrected_value_2,na.rm =TRUE),median=median(corrected_value_2,na.rm =TRUE)) %>% 
+  summarize(record_count=n(),mean=mean(corrected_value,na.rm =TRUE),num_exceed=sum(exceedance),min=min(corrected_value,na.rm =TRUE),max=max(corrected_value,na.rm =TRUE),median=median(corrected_value,na.rm =TRUE)) %>% 
   mutate_if(is.numeric, round, 3)
 
 calcs_sum.df<-calcs_sum.df %>%
@@ -278,7 +280,7 @@ bap.df<-bap %>%
   select(SITE_ID,DATE,MMDH_BIO_ASMT_PROFILE_SCORE,year) %>% 
   filter(year=="2017"|year=="2018"|year=="2019") %>% 
   group_by(SITE_ID,DATE) %>% 
-  summarize(BAP=mean(MMDH_BIO_ASMT_PROFILE_SCORE)) 
+  summarize(BAP=mean(MMDH_BIO_ASMT_PROFILE_SCORE),SD=sd(MMDH_BIO_ASMT_PROFILE_SCORE),n=n())
 
 bap.df<-bap.df%>% 
   mutate_if(is.numeric, round, 2)
@@ -288,6 +290,7 @@ bap.df<-bap.df%>%
 
 
 ```{r include=FALSE}
+#FUNCTIONS
 
 table.f<-function(df,x,y){
  
@@ -296,9 +299,22 @@ table.f<-function(df,x,y){
     flextable::theme_zebra() %>% 
     flextable::autofit()
 tl<- flextable::align(tl, i = NULL, j =(x:y) , align = "center", part = "all")
+tl<-flextable::fit_to_width(tl,max_width = 6)
 return(tl)
 }
 
+#map function
+map.me<-function(df1,df2){
+  #bounding box
+library(ggmap)
+nybox<-make_bbox(df1,lon=SH_LONGITUDE,lat=SH_LATITUDE)
+ 
+ny.map<-qmap(nybox, source = "osm")+geom_point(data=df1,aes(x=SH_LONGITUDE,y=SH_LATITUDE),
+                  color="yellow",size=4)+
+  geom_point(data=df2,aes(x=SH_LONGITUDE,y=SH_LATITUDE),color="red",size=4)
+print(ny.map)
+  
+}
 
 #table.f<-function(df, center.cols){
  
@@ -315,21 +331,27 @@ return(tl)
 #x.vec
 ```
 
-```{r,warning=FALSE, echo=FALSE, results= 'asis',fig.height=3,fig.width=5}
+```{r,warning=FALSE, echo=FALSE,message=FALSE, results='asis',fig.align="left"}
 
-sites<-unique(chem$SITE_ID)
+sites<-unique(site.loc$SH_SITE_ID)
 
  for (i in seq_along(sites)) { 
    # print(i)
    cat("  \n\n### Site ID: ",sites[i])
    
+   site.loc.small<-site.loc[site.loc$SH_SITE_ID %in% sites[i],]
+   
+   map.me(site.loc,site.loc.small)
+  
   temp <-chem_sum.df[chem_sum.df$SITE_ID %in% sites[i], ]
    tab<-table.f(temp, 2,4)
    label=paste("Chemistry Measurements:",sites[i])
    tab<-flextable::set_caption(tab,label)
    flextable::docx_value(tab)
+   flextable::fit_to_width(tab,max_width = 6)
    rm(temp)
    cat("  \n")
+   cat("<br><br>")
    
   temp <-insitu_sum.df[insitu_sum.df$SITE_ID %in% sites[i], ]
    tab2<-table.f(temp, 2,4)
@@ -337,15 +359,17 @@ sites<-unique(chem$SITE_ID)
    tab2<-flextable::set_caption(tab2,label)
    flextable::docx_value(tab2)
    rm(temp)
-   cat("  \n")
+   cat(rep("\n", 10))
+   cat("<br><br>")
    
   temp <-calcs_sum.df[calcs_sum.df$SITE_ID %in% sites[i], ]
    tab3<-table.f(temp, 2,4)
-   label=paste("Metal Measurements:",sites[i])
+   label=paste("Dependent Measurements (Metals and Ammonia):",sites[i])
    tab3<-flextable::set_caption(tab3,label)
    flextable::docx_value(tab3)
    rm(temp)
    cat("  \n")
+   cat("<br><br>")
    
   temp <-nnc_sum.df[nnc_sum.df$SITE_ID %in% sites[i], ]
    tab4<-table.f(temp, 2,4)
@@ -354,6 +378,7 @@ sites<-unique(chem$SITE_ID)
    flextable::docx_value(tab4)
    rm(temp)
    cat("  \n")
+   cat("<br><br>")
   
   temp<-bap.df[bap.df$SITE_ID %in% sites[i], ]
   tab6<-table.f(temp,1,2)
@@ -362,12 +387,17 @@ sites<-unique(chem$SITE_ID)
   flextable::docx_value(tab6)
   rm(temp)
   cat("  \n")
+  cat("<br><br>")
   
   temp<-flow[flow$ID %in% sites[i], ]
-  library(ggplot2)
-  tab5<-ggplot(temp,aes(Date,Discharge..cfs.))+geom_point()
-  print(tab5)
-  rm(temp)
+  if (nrow(temp) > 0) {
+    library(ggplot2)
+    tab5<-ggplot(temp,aes(Date,Discharge..cfs.)) +
+      geom_point()
+    print(tab5)
+    rm(temp)
+  }
+
 
   cat("  \n")
   
@@ -377,3 +407,5 @@ sites<-unique(chem$SITE_ID)
     # create plot for each PWL in df 
     
 ```
+
+
