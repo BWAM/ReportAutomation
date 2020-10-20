@@ -97,17 +97,35 @@ sites<-sites %>%
 chem_all<-merge(chem_all,sites,by="SITE_ID")
 
 #create units column
-chem.trans<-subset(chem_all,chem_all$result_unit=="mg/l"|chem_all$result_unit=="ug/l")
+chem.trans<-subset(chem_all,chem_all$result_unit=="mg/l"|chem_all$result_unit=="ug/l"|chem_all$result_unit=="ntu")
 chem.trans<-chem.trans %>% 
    arrange(order)
 
 chem.trans$SH_PWL_ID<-fct_reorder(chem.trans$SH_PWL_ID, chem.trans$order)
 
-chem.no.trans<-chem_all %>% 
-  filter(chem_all$result_unit != "mg/l"& chem_all$result_unit != "ug/l") %>% 
-   arrange(order)
 
-chem.no.trans$SH_PWL_ID<-fct_reorder(chem.no.trans$SH_PWL_ID, chem.no.trans$order)
+chem.trans<-chem.trans%>%
+  mutate(chemical_name=case_when(
+    chemical_name=="CHLORIDE (AS CL)"~ "Chloride",
+    chemical_name=="HARDNESS (AS CACO3)" ~"Hardness (as CaCO3)",
+    chemical_name=="NITROGEN, NITRATE (AS N)" ~"Nitrate",
+    chemical_name=="NITROGEN, NITRITE" ~ "Nitrite",
+    chemical_name=="PHOSPHORUS, TOTAL (AS P)" ~ "Total Phosphorus",
+    chemical_name=="TOTAL DISSOLVED SOLIDS (RESIDUE, FILTERABLE)" ~ "Total Dissolved Solids",
+    chemical_name=="ALKALINITY, TOTAL (AS CaCO3)" ~ "Alkalinity",
+    chemical_name=="NITROGEN, KJELDAHL, TOTAL" ~ "Total Kjeldahl Nitrogen",
+    chemical_name=="Nitrate+Nitrite as Nitrogen" ~ "Nitrate+Nitrite",
+    chemical_name=="Nitrogen, ammonia (As N)" ~ "Ammonia",
+    chemical_name=="TURBIDITY" ~ "Turbidity",
+    TRUE ~ as.character(chemical_name)
+  ))%>%
+  filter(chemical_name!="Nitrogen")
+
+#chem.no.trans<-chem_all %>% 
+  #filter(chem_all$result_unit != "mg/l"& chem_all$result_unit != "ug/l") %>% 
+  # arrange(order)
+
+#chem.no.trans$SH_PWL_ID<-fct_reorder(chem.no.trans$SH_PWL_ID, chem.no.trans$order)
 
 #then probably need to merge with table that actually has metrics, bc we don't need to plot them all-or maybe we should?.
 
@@ -171,33 +189,34 @@ chem.graph(chem.trans)
 
 
 
-```{r chemgraph2, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(chem.no.trans$chemical_name), "," , "The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III.", sep="")}
+```{r  echo=FALSE, message=FALSE, warning=FALSE}
+#Going to replace this function with graphs of the in situ data
 #this one for the other values (no transformation of units)
 
 # create graphing function for those that don't need to be log10
 
  
-chem.graph.n <- function(df, na.rm = TRUE, ...){
+#chem.graph.n <- function(df, na.rm = TRUE, ...){
   
   # create list of chmistry's in data to loop over 
-  chem_list <- unique(df$chemical_name)
-  l<-length(df$SITE_ID)
-  for (i in seq_along(chem_list)) { 
+  #chem_list <- unique(df$chemical_name)
+  #l<-length(df$SITE_ID)
+  #for (i in seq_along(chem_list)) { 
     
     # create plot for each PWL in df 
-    plot <- 
-      ggplot(subset(df, df$chemical_name==chem_list[i]),
-             aes(SH_PWL_ID,result_value,group=SH_PWL_ID,color=group))+ 
+   # plot <- 
+   #   ggplot(subset(df, df$chemical_name==chem_list[i]),
+         #    aes(SH_PWL_ID,result_value,group=SH_PWL_ID,color=group))+ 
       
-      geom_boxplot() +
+    #  geom_boxplot() +
       #scale_shape_manual(name="PWL Segment ID",values = 0:max(l))+
       
-      theme_pander() +
-      theme(axis.text.x = element_text(angle = 60, hjust = 1))+
-      theme(legend.position="right") + 
+     # theme_pander() +
+     # theme(axis.text.x = element_text(angle = 60, hjust = 1))+
+      #theme(legend.position="right") + 
       
-      scale_y_continuous(paste(df$chemical_name[df$chemical_name==chem_list[i]],df$result_unit[df$chemical_name==chem_list[i]])) + 
-      xlab("Location ID")#+
+     # scale_y_continuous(paste(df$chemical_name[df$chemical_name==chem_list[i]],df$result_unit[df$chemical_name==chem_list[i]])) + 
+     # xlab("Location ID")#+
       #ggtitle(paste(chem_list[i], ' \n', 
                    # "Chemical results by PWL ID",
                    # sep=''))
@@ -213,15 +232,15 @@ chem.graph.n <- function(df, na.rm = TRUE, ...){
     #                        county_list[i], ".pdf", sep=''), scale=2)
     
     # print plots to screen
-    print(plot)
+   # print(plot)
     
-  cat('\n\n')   
-  }
+  #cat('\n\n')   
+ # }
   
   
-}
+#}
 
-chem.graph.n(chem.no.trans)
+#chem.graph.n(chem.no.trans)
 
 ```
 
