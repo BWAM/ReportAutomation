@@ -264,7 +264,10 @@ calcs_sum.df<-calcs.df %>%
   mutate_if(is.numeric, round, 3)
 
 calcs_sum.df<-calcs_sum.df %>%
-  mutate_if(is.numeric, round, 3)
+  mutate_if(is.numeric,round, 3)
+
+calcs_sum.df<-calcs_sum.df %>%
+  mutate_if(is.numeric,format, scientific=FALSE)
   
 #and summary for the nnc
 nnc_sum.df<-nnc.final.df %>% 
