@@ -58,5 +58,11 @@ ft <- fp_text(shading.color='#EFEFEF', bold = TRUE)
 ```{r child="child/section1E_tox.Rmd"}
 
 ```
+\newpage
+
+# Section 2 - Site Specific Data Summary
+```{r child="child/section2_site_specific_data_summary.Rmd"}
+
+```
 
 
