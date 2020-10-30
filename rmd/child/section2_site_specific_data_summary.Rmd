@@ -207,7 +207,7 @@ cla$DATE<-as.Date(cla$DATE,"%m/%d/%Y")
 #shorten the bap stuff
 bap.1<-bap %>% 
   select(SITE_ID,DATE,MMDH_BIO_ASMT_PROFILE_SCORE)
-
+bap.1$DATE<-as.Date(bap.1$DATE,"%m/%d/%Y")
 
 #also need BAP for this one,first merge the nnc (phos) with the baps
 nnc.df<-merge(nnc,bap.1,by=c("SITE_ID","DATE"),all.x = TRUE)
