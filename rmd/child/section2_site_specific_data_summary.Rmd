@@ -206,8 +206,9 @@ cla$DATE<-as.Date(cla$DATE,"%m/%d/%Y")
 
 #shorten the bap stuff
 bap.1<-bap %>% 
-  select(SITE_ID,DATE,MMDH_BIO_ASMT_PROFILE_SCORE)
-
+  select(SITE_ID,MSSIH_EVENT_SMAS_SAMPLE_DATE,MMDH_BIO_ASMT_PROFILE_SCORE) %>% 
+  rename(DATE=MSSIH_EVENT_SMAS_SAMPLE_DATE)
+bap.1$DATE<-as.Date(bap.1$DATE,"%m/%d/%Y")
 
 #also need BAP for this one,first merge the nnc (phos) with the baps
 nnc.df<-merge(nnc,bap.1,by=c("SITE_ID","DATE"),all.x = TRUE)
@@ -280,7 +281,8 @@ nnc_sum.df<-nnc_sum.df %>%
 
 #summary for the BAP
 bap.df<-bap %>% 
-  select(SITE_ID,DATE,MMDH_BIO_ASMT_PROFILE_SCORE,year) %>% 
+  select(SITE_ID,MSSIH_EVENT_SMAS_SAMPLE_DATE,MMDH_BIO_ASMT_PROFILE_SCORE,year) %>% 
+  rename(DATE=MSSIH_EVENT_SMAS_SAMPLE_DATE) %>% 
   filter(year=="2017"|year=="2018"|year=="2019") %>% 
   group_by(SITE_ID,DATE) %>% 
   summarize(BAP=mean(MMDH_BIO_ASMT_PROFILE_SCORE),SD=sd(MMDH_BIO_ASMT_PROFILE_SCORE),n=n())
