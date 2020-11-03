@@ -18,4 +18,4 @@ metrics.wk<-metrics.wk %>%
 
 metrics.df<-merge(metrics.wk,sites,by="SH_SITE_ID")
   
-write.csv(metrics.wk,"data/metrics.wallkill.csv",row.names = FALSE)
+write.csv(metrics.df,"data/metrics.wallkill.csv",row.names = FALSE)
