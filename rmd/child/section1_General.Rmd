@@ -66,19 +66,20 @@ tl<-align(tl, i = NULL, j =(2:5) , align = "center", part = "all")%>%
 tl
 ```
 
-
-```{r site-map, fig.cap="Map of Wallkill River (WALK) sampling locations. Site names reference the Location ID and River Mile presented in \\@ref(tab:sites-table)", echo=FALSE, message=FALSE, warning=FALSE}
+  
+```{r site-map, fig.cap="Map of Wallkill River (WALK) sampling locations. Site names reference the Location ID and River Mile presented in \\@ref(tab:sites-table)", echo=FALSE, message=FALSE, warning=FALSE,fig.width=7,fig.height=8}
 #library(leaflet)
 #map function
   #bounding box
 library(ggmap)
+library(ggrepel)
 nybox<-make_bbox(sites,lon=SH_LONGITUDE,lat=SH_LATITUDE)
  
 ny.map<-qmap(nybox, source = "osm")+geom_point(data=sites,aes(x=SH_LONGITUDE,y=SH_LATITUDE,label=SH_SITE_ID,color=group),size=4)+ geom_label_repel(data=sites,
     label= sites$SH_SITE_ID, 
     aes(x=SH_LONGITUDE,
     y=SH_LATITUDE),box.padding   = 0.35, point.padding = 0.5,
-                  segment.color = 'grey50',size=1.5)
+                  segment.color = 'grey50',size=2)
 
 
 ny.map
