@@ -66,39 +66,24 @@ tl<-align(tl, i = NULL, j =(2:5) , align = "center", part = "all")%>%
 tl
 ```
 
-```{r include=FALSE,message=FALSE,warning=FALSE}
-
-#Saving this section for later, needs work.
-#library(ggplot2)
-#library(ggmap)
-
-
-#ny<-map_data("state")
-#ny<-ny %>% filter(region=="new york") %>% 
-  #filter(long>74.5,lat<42.5)
-#counties <- map_data("county")
-#ny_county <- subset(counties, region == "new york")
-
-#ny.map<-ggplot(ny) + 
-  #geom_polygon(aes(x = long, y = lat),fill=NA,color="black")
-  
-#ny.new<-ny.map+geom_point(data=sites.df,aes(x=SH_LONGITUDE,y=SH_LATITUDE),color="red",size=4)+
-  #geom_text(data=sites.df,aes(x=SH_LONGITUDE,y=SH_LATITUDE,label=paste(as.character(SH_SITE_ID))),color="black")
-
-
-```
 
 ```{r site-map, fig.cap="Map of Wallkill River (WALK) sampling locations. Site names reference the Location ID and River Mile presented in \\@ref(tab:sites-table)", echo=FALSE, message=FALSE, warning=FALSE}
 #library(leaflet)
-#m<-sites %>% 
- # distinct(SH_SITE_ID,SH_LATITUDE,SH_LONGITUDE)
+#map function
+  #bounding box
+library(ggmap)
+nybox<-make_bbox(sites,lon=SH_LONGITUDE,lat=SH_LATITUDE)
+ 
+ny.map<-qmap(nybox, source = "osm")+geom_point(data=sites,aes(x=SH_LONGITUDE,y=SH_LATITUDE,label=SH_SITE_ID,color=group),size=4)+ geom_label_repel(data=sites,
+    label= sites$SH_SITE_ID, 
+    aes(x=SH_LONGITUDE,
+    y=SH_LATITUDE),box.padding   = 0.35, point.padding = 0.5,
+                  segment.color = 'grey50',size=1.5)
 
-#pop<-paste(sep = "<br/>",sites$SH_SITE_ID,sites$group,sites$order)
 
-#map<-leaflet(m) %>%
- # addTiles() %>%  # Add default OpenStreetMap map tiles
-  #addMarkers(~SH_LONGITUDE,~SH_LATITUDE, popup=~pop)
-#map
+ny.map
+
+  
 ```
 
 
