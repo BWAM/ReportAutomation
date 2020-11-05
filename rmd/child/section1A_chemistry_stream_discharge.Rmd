@@ -199,7 +199,7 @@ chem.trans<-chem.trans%>%
 
 ```
 
-```{r chemgraph1, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(chem.trans$chemical_name), ", " , "The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III.", sep="")}
+```{r chemgraph1, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(chem.trans$chemical_name), ", " , "The X-axis presents WI/PWL ID of the sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Color of the box represents the location of the WI/WPL in the watershed as indicated in the plot legend. Red horizontal lines represent the 95% confidence interval of statewide data for each endpoint. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III.", sep="")}
 # create graphing function for those that need to be log10 (ug/L or mg/l-so not weird ones)
 chem.graph <- function(df, na.rm = TRUE, ...){
   
@@ -246,7 +246,7 @@ chem.graph(chem.trans)
 
 
 
-```{r echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE}
+```{r insituChem, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(insitu.short$PARAMETER_NAME), ", " , "The X-axis presents WI/PWL ID of the sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Color of the box represents the location of the WI/WPL in the watershed as indicated in the plot legend. Red horizontal lines represent the 95% confidence interval of statewide data for each endpoint. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III.", sep="")}
 
 #this one for the other values (no transformation of units-In-SITU data)
 
@@ -303,7 +303,7 @@ for (i in seq_along(chem_list.2)) {
  theme(axis.text.x = element_text(angle = 60, hjust = 1))+
 theme(legend.position="right") + 
 
- scale_y_continuous(paste(df$PARAMETER_NAME[df$PARAMETER_NAME==chem_list.2[i]],df$RESULT[df$PARAMETER_NAME==chem_list.2[i]])) + 
+ scale_y_continuous(paste(df$PARAMETER_NAME[df$PARAMETER_NAME==chem_list.2[i]],df$unit[df$PARAMETER_NAME==chem_list.2[i]])) + 
  xlab("Location ID")+
    geom_hline(yintercept = temp.insitu.sw$ci95,color="firebrick")
 
