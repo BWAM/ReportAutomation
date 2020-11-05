@@ -18,7 +18,14 @@ file.path.1<-file.path(here::here(),
                        "data",
                        "qaqc_analyte_table.csv")
 
+#for in-siture
+file.path.2<-file.path(here::here(),
+                       "data",
+                       "insitu_chem.csv")
 
+file.path.3<-file.path(here::here(),
+                       "data",
+                       "sbu.chem.all.csv")
 ```
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
@@ -35,7 +42,8 @@ sites<-read.csv(file.path(here::here(),
                           "data",
                           "sites_wallkill.csv"),stringsAsFactors = FALSE)
 
-
+#read in the in-siture data
+insitu<-read.csv(file.path.2,stringsAsFactors = FALSE)
           
 ```
 
@@ -73,6 +81,73 @@ tl.1
 ## Water Chemistry by PWL ID
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
+#adding statewide stuff to the graphs
+chem.everywhere<-read.csv(file.path.3,stringsAsFactors = FALSE)
+
+#limit to just eh columns we need
+chem.everywhere<-chem.everywhere %>% 
+  select(CHR_CHEMICAL_NAME,CHR_RESULT_VALUE,CHR_RESULT_UNIT,CHR_VALIDATOR_QUAL)
+
+#take out the ones that were flagged as rejected
+chem.statewide<-chem.everywhere %>% 
+  filter(CHR_VALIDATOR_QUAL!="R")
+
+#summarize for statwide averages
+chem.statewide<-chem.statewide %>%
+  group_by(CHR_CHEMICAL_NAME) %>% 
+  summarise_at(vars(CHR_RESULT_VALUE),funs(mean(.,na.rm = TRUE),sd(.,na.rm = TRUE),n=n()))
+
+#confidence intervals
+chem.statewide<-chem.statewide %>% 
+  mutate(error=(qnorm(0.975)*sd/sqrt(n)),ci95=mean+error,ci.neg95=mean-error)
+
+#now limit it to just the chemistry we have on hand
+
+chem.short<-chem_all %>% 
+  select(chemical_name) %>% 
+  distinct() 
+
+chem.short$chemical_name<-tolower(chem.short$chemical_name)
+  
+chem.short.l<-unique(chem.short$chemical_name)
+
+chem.statewide<-chem.statewide %>% 
+  filter(CHR_CHEMICAL_NAME %in% chem.short.l)
+
+#change names to match
+
+chem.statewide<-chem.statewide%>%
+  mutate(CHR_CHEMICAL_NAME=case_when(
+    CHR_CHEMICAL_NAME=="chloride (as cl)"~ "Chloride",
+    CHR_CHEMICAL_NAME=="hardness (as caco3)" ~"Hardness (as CaCO3)",
+    CHR_CHEMICAL_NAME=="nitrogen, nitrate (as n)" ~"Nitrate",
+    CHR_CHEMICAL_NAME=="nitrogen, nitrite" ~ "Nitrite",
+    CHR_CHEMICAL_NAME=="phosphorus, total (as p)" ~ "Total Phosphorus",
+    CHR_CHEMICAL_NAME=="total dissolved solids (residue, filterable)" ~ "Total Dissolved Solids",
+    CHR_CHEMICAL_NAME=="alkalinity, total (as caco3)" ~ "Alkalinity",
+    CHR_CHEMICAL_NAME=="nitrogen, kjeldahl, total" ~ "Total Kjeldahl Nitrogen",
+    CHR_CHEMICAL_NAME=="nitrate+nitrite as nitrogen" ~ "Nitrate+Nitrite",
+    CHR_CHEMICAL_NAME=="nitrogen, ammonia (as n)" ~ "Ammonia",
+    CHR_CHEMICAL_NAME=="turbidity" ~ "Turbidity",
+    CHR_CHEMICAL_NAME=="aluminum" ~ "Aluminum",
+    CHR_CHEMICAL_NAME=="arsenic" ~ "Arsenic",
+    CHR_CHEMICAL_NAME=="cadmium" ~ "Cadmium",
+    CHR_CHEMICAL_NAME=="calcium" ~ "Calcium",
+    CHR_CHEMICAL_NAME=="chlorophyll a" ~ "Chlorophyll A",
+    CHR_CHEMICAL_NAME=="copper" ~ "Copper",
+    CHR_CHEMICAL_NAME=="iron" ~ "Iron",
+    CHR_CHEMICAL_NAME=="lead" ~ "Lead",
+    CHR_CHEMICAL_NAME=="magnesium" ~ "Magnesium",
+    CHR_CHEMICAL_NAME=="nickel" ~ "Nickel",
+    CHR_CHEMICAL_NAME=="silver" ~ "Silver",
+    CHR_CHEMICAL_NAME=="zinc" ~ "Zinc",
+    TRUE ~ as.character(CHR_CHEMICAL_NAME)
+  ))
+
+```
+
+
+```{r include=FALSE,message=FALSE,warning=FALSE}
 
 #Chemistry figures for each analyte
 library(stringr)
@@ -90,11 +165,11 @@ chem_all<-chem_all %>%
 
 #merge with sites to get the order
 #first just grab what we need
-sites<-sites %>% 
+sites.1<-sites %>% 
   select(order,group,SH_SITE_ID) %>% 
   rename("SITE_ID"=SH_SITE_ID)
 
-chem_all<-merge(chem_all,sites,by="SITE_ID")
+chem_all<-merge(chem_all,sites.1,by="SITE_ID")
 
 #create units column
 chem.trans<-subset(chem_all,chem_all$result_unit=="mg/l"|chem_all$result_unit=="ug/l"|chem_all$result_unit=="ntu")
@@ -121,16 +196,7 @@ chem.trans<-chem.trans%>%
   ))%>%
   filter(chemical_name!="Nitrogen")
 
-#chem.no.trans<-chem_all %>% 
-  #filter(chem_all$result_unit != "mg/l"& chem_all$result_unit != "ug/l") %>% 
-  # arrange(order)
 
-#chem.no.trans$SH_PWL_ID<-fct_reorder(chem.no.trans$SH_PWL_ID, chem.no.trans$order)
-
-#then probably need to merge with table that actually has metrics, bc we don't need to plot them all-or maybe we should?.
-
-#chemp<-ggplot(chem_stat,aes(SiteID,mean))+geom_point()
-#chemp+facet_wrap(~chemical_name,scales="free")+theme_bw()
 ```
 
 ```{r chemgraph1, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(chem.trans$chemical_name), ", " , "The X-axis presents sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Point symbols match with WI/PWL segmentation as indicated in the plot legend. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III.", sep="")}
@@ -144,6 +210,8 @@ chem.graph <- function(df, na.rm = TRUE, ...){
     #order by group
     df<-df %>% 
        arrange(order)
+    
+    temp.statewide<-subset(chem.statewide,chem.statewide$CHR_CHEMICAL_NAME==chem_list[i])
     
     # create plot for each PWL in df 
     plot <- 
@@ -159,20 +227,9 @@ chem.graph <- function(df, na.rm = TRUE, ...){
       theme(legend.position="right") + 
       
       scale_y_log10(paste(df$chemical_name[df$chemical_name==chem_list[i]], df$result_unit[df$chemical_name==chem_list[i]], "log(10)")) + 
-      xlab("Location ID")#+
-     # ggtitle(paste(chem_list[i], ' \n', 
-                    #"Chemical results by PWL ID",
-                    #sep=''))
+      xlab("Location ID")+
+      geom_hline(yintercept=temp.statewide$ci95,color="firebrick")
     
-    # save plots as .png
-    # ggsave(plot, file=paste(results, 
-    #                        'projection_graphs/county_graphs/',
-    #                        county_list[i], ".png", sep=''), scale=2)
-   
-    # save plots as .pdf
-    # ggsave(plot, file=paste(results, 
-    #                        'projection_graphs/county_graphs/',
-    #                        county_list[i], ".pdf", sep=''), scale=2)
     
     # print plots to screen
     print(plot)
@@ -189,58 +246,78 @@ chem.graph(chem.trans)
 
 
 
-```{r  echo=FALSE, message=FALSE, warning=FALSE}
-#Going to replace this function with graphs of the in situ data
-#this one for the other values (no transformation of units)
+```{r echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE}
+
+#this one for the other values (no transformation of units-In-SITU data)
 
 # create graphing function for those that don't need to be log10
+#Chemistry, no transformation of results (in-situ)
+
+#first get the sites and data we want.
+sites.l<-unique(sites$SH_SITE_ID)
+
+insitu.short<-insitu %>% 
+  filter(SITE_ID %in% sites.l)
+#merge to get the order/group/PWL
+
+insitu.short<-merge(insitu.short,sites,by.x="SITE_ID",by.y="SH_SITE_ID")
+
+#arrange them according to group and PWL
+insitu.short$SH_PWL_ID<-fct_reorder(insitu.short$SH_PWL_ID, insitu.short$order)
+
+insitu.short<-insitu.short %>% arrange(order)
+
+
+#get the statwide values for these as well############################################
+#limit to just eh columns we need
+insitu.statewide<-insitu %>% 
+  select(PARAMETER_NAME,RESULT,VALIDATOR_QUAL)
+
+#summarize for statwide averages
+insitu.statewide<-insitu.statewide %>%
+  group_by(PARAMETER_NAME) %>% 
+  summarise_at(vars(RESULT),funs(mean(.,na.rm = TRUE),sd(.,na.rm = TRUE),n=n()))
+
+#confidence intervals
+insitu.statewide<-insitu.statewide %>% 
+  mutate(error=(qnorm(0.975)*sd/sqrt(n)),ci95=mean+error,ci.neg95=mean-error)
+
+
+chem.graph.n <- function(df, na.rm = TRUE, ...){
+
+# create list of chmistry's in data to loop over 
+chem_list.2 <- unique(df$PARAMETER_NAME)
+for (i in seq_along(chem_list.2)) { 
+
+#create dataframe for statewide
+  temp.insitu.sw<-subset(insitu.statewide,insitu.statewide$PARAMETER_NAME==chem_list.2[i])
+
+# create plot for each parameter with PWL in df 
+ plot <- 
+   ggplot(subset(df, df$PARAMETER_NAME==chem_list.2[i]),
+    aes(SH_PWL_ID,RESULT,group=SH_PWL_ID,color=group))+ 
+
+  geom_boxplot() +
+
+ theme_pander() +
+ theme(axis.text.x = element_text(angle = 60, hjust = 1))+
+theme(legend.position="right") + 
+
+ scale_y_continuous(paste(df$PARAMETER_NAME[df$PARAMETER_NAME==chem_list.2[i]],df$RESULT[df$PARAMETER_NAME==chem_list.2[i]])) + 
+ xlab("Location ID")+
+   geom_hline(yintercept = temp.insitu.sw$ci95,color="firebrick")
+
+
+# print plots to screen
+ print(plot)
+
+cat('\n\n')   
+ }
+
+}
 
  
-#chem.graph.n <- function(df, na.rm = TRUE, ...){
-  
-  # create list of chmistry's in data to loop over 
-  #chem_list <- unique(df$chemical_name)
-  #l<-length(df$SITE_ID)
-  #for (i in seq_along(chem_list)) { 
-    
-    # create plot for each PWL in df 
-   # plot <- 
-   #   ggplot(subset(df, df$chemical_name==chem_list[i]),
-         #    aes(SH_PWL_ID,result_value,group=SH_PWL_ID,color=group))+ 
-      
-    #  geom_boxplot() +
-      #scale_shape_manual(name="PWL Segment ID",values = 0:max(l))+
-      
-     # theme_pander() +
-     # theme(axis.text.x = element_text(angle = 60, hjust = 1))+
-      #theme(legend.position="right") + 
-      
-     # scale_y_continuous(paste(df$chemical_name[df$chemical_name==chem_list[i]],df$result_unit[df$chemical_name==chem_list[i]])) + 
-     # xlab("Location ID")#+
-      #ggtitle(paste(chem_list[i], ' \n', 
-                   # "Chemical results by PWL ID",
-                   # sep=''))
-    
-    # save plots as .png
-    # ggsave(plot, file=paste(results, 
-    #                        'projection_graphs/county_graphs/',
-    #                        county_list[i], ".png", sep=''), scale=2)
-   
-    # save plots as .pdf
-    # ggsave(plot, file=paste(results, 
-    #                        'projection_graphs/county_graphs/',
-    #                        county_list[i], ".pdf", sep=''), scale=2)
-    
-    # print plots to screen
-   # print(plot)
-    
-  #cat('\n\n')   
- # }
-  
-  
-#}
-
-#chem.graph.n(chem.no.trans)
+chem.graph.n(insitu.short)
 
 ```
 
