@@ -76,6 +76,13 @@ chem$chemical_name<-tolower(chem$chemical_name)
 chem<-chem %>% filter(validator_qualifiers!="R")
 chem<-chem %>% filter(!is.na(result_value))
 
+#make the name for phosphorus match
+chem<-chem%>%
+  mutate(chemical_name=case_when(
+    chemical_name=="phosphorus, total (as p)"~ "phosphorus",
+    TRUE ~ as.character(chemical_name)
+  ))
+
 ```
 
 
@@ -99,11 +106,13 @@ insitu.df<-merge(field,stds, by=c("SH_WQ_STANDARD","chemical_name"),all.x = TRUE
 chem.df$corrected_value<-NA
 insitu.df$corrected_value<-NA
 
-#correct them based on the units in the stds
+#correct them based on the units in the stds, and convert corrected value column to numeric
 chem.df$corrected_value<-ifelse(chem.df$result_unit=="mg/l" & chem.df$units=="ug/L",chem.df$result_value*1000,paste0(chem.df$result_value))
 chem.df$corrected_value<-ifelse(is.na(chem.df$corrected_value),chem.df$result_value,chem.df$corrected_value)
+chem.df$corrected_value<-as.numeric(chem.df$corrected_value)
 insitu.df$corrected_value<-ifelse(insitu.df$unit=="mg/l" & insitu.df$units=="ug/L",insitu.df$result_value*1000,insitu.df$result_value)
 insitu.df$corrected_value<-ifelse(is.na(insitu.df$corrected_value),insitu.df$result_value,insitu.df$corrected_value)
+insitu.df$corrected_value<-as.numeric(insitu.df$corrected_value)
 
 
 chem_short.df<-chem.df %>% 
@@ -191,7 +200,7 @@ calcs.df$exceedance<-ifelse(calcs.df$corrected_value>calcs.df$calc_value,1,0)
 ```{r include=FALSE}
 #now we need numeric nutrient criteria
 nnc<-chem %>% 
-  filter(chemical_name=="phosphorus, total (as p)" & interpreted_qualifiers!="R")
+  filter(chemical_name=="phosphorus" & interpreted_qualifiers!="R")
 
 nnc<-nnc %>% 
   rename("DATE"=sample_date)
@@ -225,9 +234,10 @@ nnc.df<-nnc.df %>%
 
 nnc.final.df<-nnc.df %>% 
   mutate(exceed=case_when(
-    SH_WQ_STANDARD %in% "A"& result_value>0.03 & MMDH_BIO_ASMT_PROFILE_SCORE<5 & chla>6 ~ 1,
-    SH_WQ_STANDARD %in% "B"& result_value>0.03 & MMDH_BIO_ASMT_PROFILE_SCORE<5 ~1,
-    SH_WQ_STANDARD %in% "C"& result_value>0.03 & MMDH_BIO_ASMT_PROFILE_SCORE<5 ~1,
+    SH_WQ_STANDARD %in% "A"& result_value>0.025 & chla>6 ~ 1,
+    SH_WQ_STANDARD %in% "B"& result_value>0.075 & MMDH_BIO_ASMT_PROFILE_SCORE<5 ~1,
+    SH_WQ_STANDARD %in% "B(T)"& result_value>0.075 & MMDH_BIO_ASMT_PROFILE_SCORE<5 ~1,
+    SH_WQ_STANDARD %in% "C"& result_value>0.075 & MMDH_BIO_ASMT_PROFILE_SCORE<5 ~1,
     TRUE ~ 0
   ))
 
