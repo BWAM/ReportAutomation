@@ -146,7 +146,7 @@ insitu.df$exceed<-ifelse(insitu.df$wqs.violation.direction=="greater"& insitu.df
 #first we need hardness
 
 hardness<-chem %>% 
-  filter(chemical_name=="hardness (as caco3)"|interpreted_qualifiers!="R") %>% 
+  filter(chemical_name=="hardness (as caco3)"&interpreted_qualifiers!="R") %>% 
   rename("COLL_DATE"=sample_date,
          "hardness_result"=result_value) %>% 
   select(SITE_ID,COLL_DATE,hardness_result) %>% 
@@ -159,23 +159,25 @@ calcs.df<-merge(chem_calcs.df,hardness,by=c("SITE_ID","COLL_DATE"))
 calcs.df<-calcs.df %>% 
   distinct()
 
-#now we need ph and temp for Nitrogen
+#now we need ph and temp for Nitrogen, field = insitu data
 tnp<-field %>% 
   filter(chemical_name=="temperature"|chemical_name=="ph") %>% 
   tidyr::spread(chemical_name,result_value) %>% 
   select(SITE_ID,Date,ph,temperature) %>% 
   rename("COLL_DATE"=Date)
 
+#collapse temp and ph into one line
+#first transform from wide to long, and then back out to get it into one line
+tnp$combo<-paste(tnp$SITE_ID,tnp$COLL_DATE,sep = "_")
+tnp<-tnp %>% 
+  group_by(combo) %>% 
+  tidyr::gather(parameter,value,ph:temperature,na.rm=TRUE)
+tnp<-tnp %>% 
+  tidyr::spread(parameter,value)
+  
 calcs.df<-merge(calcs.df,tnp, by=c("SITE_ID","COLL_DATE"))
 calcs.df<-calcs.df %>% 
   distinct()
-
-calcs.df<-calcs.df %>% 
-  mutate(combo=paste(calcs.df$SITE_ID,calcs.df$COLL_DATE,sep = "_"))
-  
-calcs.df<-calcs.df %>% 
-  aggregate(by=list(calcs.df$combo),first)
-#this makes it all one line by the site/date combination of names
 
 #now we have all theinformation in one dataframe, let's do the calcs.
 
@@ -205,6 +207,7 @@ nnc<-chem %>%
 nnc<-nnc %>% 
   rename("DATE"=sample_date)
 nnc$DATE<-as.Date(nnc$DATE,"%m/%d/%Y")
+nnc$year<-format(nnc$DATE,"%Y")
 
 cla<-chem %>% 
   filter(chemical_name=="chlorophyll a") %>% 
@@ -212,19 +215,35 @@ cla<-chem %>%
   rename("chla"=result_value,
          "DATE"=sample_date)
 cla$DATE<-as.Date(cla$DATE,"%m/%d/%Y")
+cla$year<-format(cla$DATE,"%Y")
 
 #shorten the bap stuff
 bap.1<-bap %>% 
   select(SITE_ID,MSSIH_EVENT_SMAS_SAMPLE_DATE,MMDH_BIO_ASMT_PROFILE_SCORE) %>% 
   rename(DATE=MSSIH_EVENT_SMAS_SAMPLE_DATE)
 bap.1$DATE<-as.Date(bap.1$DATE,"%m/%d/%Y")
+bap.1$year<-format(bap.1$DATE,"%Y")
+#dates don't match exactly, so maybe we'll do bap by year?
 
-#also need BAP for this one,first merge the nnc (phos) with the baps
-nnc.df<-merge(nnc,bap.1,by=c("SITE_ID","DATE"),all.x = TRUE)
+#make bap scores by year
+bap.1<-bap.1 %>% 
+  select(SITE_ID,year,MMDH_BIO_ASMT_PROFILE_SCORE) %>% 
+  group_by(SITE_ID,year) %>% 
+  mutate(bap.scr=mean(MMDH_BIO_ASMT_PROFILE_SCORE))
+
+#remove the individual bap's from the df
+bap.1$MMDH_BIO_ASMT_PROFILE_SCORE<-NULL
+bap.1<-bap.1 %>% 
+  distinct()
+
+#also need BAP for this one,first merge the nnc (phos) with the bap(by year)-some of these seem to be missing, they were listed as collected with LGSS low gradient, listed. so no bap's can be calculated
+nnc.df<-merge(nnc,bap.1,by=c("SITE_ID","year"),all.x = TRUE)
 
 #then merge with CLA for chlorophyll
 
 nnc.df<-merge(nnc.df,cla,by=c("SITE_ID","DATE"), all.x = TRUE)
+nnc.df<-nnc.df %>% 
+  rename(MMDH_BIO_ASMT_PROFILE_SCORE=bap.scr)
 
 nnc.df<-nnc.df %>% 
   select(SITE_ID,DATE,chemical_name,result_value,result_unit,SH_WQ_STANDARD,SH_PWL_ID,MMDH_BIO_ASMT_PROFILE_SCORE,chla)
@@ -241,6 +260,8 @@ nnc.final.df<-nnc.df %>%
     TRUE ~ 0
   ))
 
+#add note for misssing bap
+nnc.final.df$exceed.note<-if_else(is.na(nnc.final.df$MMDH_BIO_ASMT_PROFILE_SCORE), paste("Missing BAP score."),paste(""))
 
 
 ```
