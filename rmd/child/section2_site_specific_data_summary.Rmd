@@ -185,7 +185,8 @@ calcs.df<-calcs.df %>%
   mutate(calc_value=case_when(
     chemical_name %in% "copper"~ 0.96*exp(0.9422*log(calcs.df$hardness_result)-1.7),
     chemical_name %in% "zinc" ~ exp(0.85*log(calcs.df$hardness_result)+0.5),
-    #chemical_name %in% "nitrogen, ammonia (as n)"~ 1*calcs.df$corrected_value,
+    chemical_name %in% "nitrogen, ammonia (as n)"~2,
+    #this is a placeholder for nitrogen, this one might be really difficult-it's a lookup table based on WQ standard, ph and temp! actually this might not apply, since fish propagation and survival isn't a thing anymore? it's fishing.
     chemical_name %in% "lead"~ 1.46203 - (log(calcs.df$hardness)*(0.145712))*exp(1.273* (log(calcs.df$hardness)) - 4.297),
     chemical_name %in% "nickel"~ 0.997*exp (0.846*log(calcs.df$hardness)) + 0.0584,
     TRUE ~ 0 #each of the things before the ~ is true or false, need to hit a true eventually working from top down %in% is better than ==
