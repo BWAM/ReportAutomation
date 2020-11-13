@@ -10,6 +10,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
+library(stringr)
 library(dplyr)
 ```
 
@@ -18,7 +19,7 @@ library(dplyr)
 stds<-read.csv(file.path(here::here(),
                          "data",
                          "standards",
-                         "stds_use.csv"),
+                         "corrected_stds_11_12_20.csv"),
                stringsAsFactors = FALSE)
 
 chem<-read.csv(file.path(here::here(),
@@ -39,24 +40,28 @@ flow<-read.csv(file.path(here::here(),
 site.loc<-read.csv(file.path(here::here(),
                              "data",
                             "sites_wallkill.csv"),stringsAsFactors = FALSE)
+nnc.stds<-read.csv(file.path(here::here(),
+                             "data/standards",
+                            "nnc.csv"),stringsAsFactors = FALSE)
+
 
 #make flow dates as dates:
 flow$Date<-as.Date(flow$Date,"%m/%d/%Y")
 ```
 
 ```{r include=FALSE}
-#get standards in for the field data
-sites<-chem %>% 
-  select(SITE_ID,SH_PWL_ID,SH_WQ_STANDARD) %>% 
+#get standards in for the field data,using the new sites table
+sites<-site.loc %>% 
+  select(SH_SITE_ID,classification,SH_WQ_STANDARD,trout_class,SH_PWL_ID) %>% 
   distinct()
 
-field<-merge(field,sites, by="SITE_ID")
+field<-merge(field,sites, by.x ="SITE_ID",by.y = "SH_SITE_ID")
 
 field$PARAMETER_NAME<-tolower(field$PARAMETER_NAME)
 field$PARAMETER_NAME<-gsub("_"," ",field$PARAMETER_NAME)
 
 field<-field %>% 
-  select(SITE_ID,Date,PARAMETER_NAME,RESULT,unit,SH_WQ_STANDARD,SH_PWL_ID)
+  select(SITE_ID,Date,PARAMETER_NAME,RESULT,unit,SH_WQ_STANDARD,SH_PWL_ID,trout_class)
 
 ```
 
@@ -65,12 +70,17 @@ field<-field %>%
 #####THIS SECION should be accomplished with the stayCALM package eventualy, but for now this is manual.
 #rename columns to merge
 stds<-stds %>% 
-  rename("SH_WQ_STANDARD"=Classification,
-         "chemical_name"=parameter)
+  rename("SH_WQ_STANDARD"=classifcation,
+         "chemical_name"=parameter) %>% 
+  mutate(trout_class=case_when(
+    trout_class =="all"~"non-trout",
+    TRUE ~ as.character(trout_class)
+  ))
 
-#make them both lowercase to match
+#make them both lowercase to match, including pwl class
 stds$chemical_name<-tolower(stds$chemical_name)
 chem$chemical_name<-tolower(chem$chemical_name)
+chem$SH_WQ_STANDARD<-tolower(chem$SH_WQ_STANDARD)
 
 #remove any chems that have R, reject, flags
 chem<-chem %>% filter(validator_qualifiers!="R")
@@ -88,13 +98,15 @@ chem<-chem%>%
 
 ```{r include=FALSE}
 #merge them to have use, classfication and the thresholds, note this limits some of teh data set.#maybe we should keep them all?
-chem.df<-merge(chem,stds, by=c("SH_WQ_STANDARD","chemical_name"),all.x = TRUE)
+chem.df<-merge(chem,stds, by=c("SH_WQ_STANDARD","chemical_name","fraction"),all.x = TRUE)
 
 field<-field %>% 
   rename("chemical_name"=PARAMETER_NAME,
          "result_value"=RESULT)
+field$chemical_name<-str_replace(field$chemical_name," ","_")
+field$SH_WQ_STANDARD<-tolower(field$SH_WQ_STANDARD)
   
-insitu.df<-merge(field,stds, by=c("SH_WQ_STANDARD","chemical_name"),all.x = TRUE)
+insitu.df<-merge(field,stds, by=c("SH_WQ_STANDARD","chemical_name","trout_class"),all.x = TRUE)
 
 
 #check that result unit and wqs units are the same
@@ -107,36 +119,35 @@ chem.df$corrected_value<-NA
 insitu.df$corrected_value<-NA
 
 #correct them based on the units in the stds, and convert corrected value column to numeric
-chem.df$corrected_value<-ifelse(chem.df$result_unit=="mg/l" & chem.df$units=="ug/L",chem.df$result_value*1000,paste0(chem.df$result_value))
+chem.df$corrected_value<-ifelse(chem.df$result_unit=="mg/l" & chem.df$t=="ug/L",chem.df$result_value*1000,paste0(chem.df$result_value))
 chem.df$corrected_value<-ifelse(is.na(chem.df$corrected_value),chem.df$result_value,chem.df$corrected_value)
 chem.df$corrected_value<-as.numeric(chem.df$corrected_value)
-insitu.df$corrected_value<-ifelse(insitu.df$unit=="mg/l" & insitu.df$units=="ug/L",insitu.df$result_value*1000,insitu.df$result_value)
+insitu.df$corrected_value<-ifelse(insitu.df$unit=="mg/l" & insitu.df$t=="ug/L",insitu.df$result_value*1000,insitu.df$result_value)
 insitu.df$corrected_value<-ifelse(is.na(insitu.df$corrected_value),insitu.df$result_value,insitu.df$corrected_value)
 insitu.df$corrected_value<-as.numeric(insitu.df$corrected_value)
 
 
 chem_short.df<-chem.df %>% 
-  select(SITE_ID,sample_date,SH_WQ_STANDARD,chemical_name,result_value,corrected_value,result_unit,wqs.numeric,units,wqs.type,wqs.violation.direction,wqs.narrative,calculation.,params.for.calcs.1,params.for.calcs.2) %>% 
-  rename("COLL_DATE"=sample_date) %>% 
-  subset(wqs.type!="calculation"|is.na(wqs.type))
+  select(SITE_ID,sample_date,SH_WQ_STANDARD,chemical_name,result_value,corrected_value,result_unit,threshold,t,direction) %>% 
+  rename("COLL_DATE"=sample_date)
 
 #separate out the ones that need to be calculated
 chem_calcs.df<-chem.df %>% 
-  select(SITE_ID,sample_date,SH_WQ_STANDARD,chemical_name,result_value,corrected_value,result_unit,wqs.numeric,units,wqs.type,wqs.violation.direction,wqs.narrative,calculation.,params.for.calcs.1,params.for.calcs.2) %>% 
+  select(SITE_ID,sample_date,SH_WQ_STANDARD,chemical_name,result_value,corrected_value,result_unit,threshold,t,direction) %>% 
   rename("COLL_DATE"=sample_date) %>% 
-  filter(wqs.type=="calculation"|chemical_name=="coppper"|chemical_name=="zinc")
+  filter(chemical_name=="nitrogen, ammonia (as n)"|chemical_name=="coppper"|chemical_name=="zinc"|chemical_name=="lead"|chemical_name=="nickel")
 
 #create exceedance column
 chem_short.df$exceed<-NA
 
-chem_short.df$exceed<-ifelse(chem_short.df$wqs.violation.direction=="greater"& chem_short.df$corrected_value>chem_short.df$wqs.numeric|
-                               chem_short.df$wqs.violation.direction=="less"& chem_short.df$corrected_value<chem_short.df$wqs.numeric,1,0)
+chem_short.df$exceed<-ifelse(chem_short.df$direction==">="& chem_short.df$corrected_value<chem_short.df$threshold|
+                               chem_short.df$direction=="<="& chem_short.df$corrected_value>chem_short.df$threshold,1,0)
 
 #same for insitu data
 insitu.df$exceed<-NA
 
-insitu.df$exceed<-ifelse(insitu.df$wqs.violation.direction=="greater"& insitu.df$corrected_value>insitu.df$wqs.numeric|
-                               insitu.df$wqs.violation.direction=="less"& insitu.df$corrected_value<insitu.df$wqs.numeric,1,0)
+insitu.df$exceed<-ifelse(insitu.df$direction=="greater"& insitu.df$corrected_value<insitu.df$threshold|
+                               insitu.df$direction=="less"& insitu.df$corrected_value>insitu.df$threshold,1,0)
 
 #now we have both data frames with exceedances!
 ```
@@ -250,14 +261,22 @@ nnc.df<-nnc.df %>%
   select(SITE_ID,DATE,chemical_name,result_value,result_unit,SH_WQ_STANDARD,SH_PWL_ID,MMDH_BIO_ASMT_PROFILE_SCORE,chla)
 
 #now do it by SH_WQ_STANDARD
-#0.03 mg/L AND bap < 5 is phos nnc, if A, then also cla >6 ug/L
+#merge with site.loc to get ecoregion, first get the relevant columns from the sites
+nnc.ecoregion<-site.loc %>% 
+  select(SH_SITE_ID,ecoregion)
+#merge with nnc.df to get what will used for each site
 
-nnc.final.df<-nnc.df %>% 
+nnc.df<-merge(nnc.df,nnc.ecoregion,by.x="SITE_ID",by.y ="SH_SITE_ID")
+
+nnc.stds$SH_WQ_STANDARD<-tolower(nnc.stds$SH_WQ_STANDARD)
+#now merge with the nnc stnds to get the calc
+nnc.final.df<-merge(nnc.df,nnc.stds,by=c("SH_WQ_STANDARD","ecoregion"))
+
+nnc.final.df<-nnc.final.df %>% 
   mutate(exceed=case_when(
-    SH_WQ_STANDARD %in% "A"& result_value>0.025 & chla>6 ~ 1,
-    SH_WQ_STANDARD %in% "B"& result_value>0.075 & MMDH_BIO_ASMT_PROFILE_SCORE<5 ~1,
-    SH_WQ_STANDARD %in% "B(T)"& result_value>0.075 & MMDH_BIO_ASMT_PROFILE_SCORE<5 ~1,
-    SH_WQ_STANDARD %in% "C"& result_value>0.075 & MMDH_BIO_ASMT_PROFILE_SCORE<5 ~1,
+    type %in% "aquatic_chronic"& result_value>guidance.value & MMDH_BIO_ASMT_PROFILE_SCORE<5 ~1,
+    type %in% "health_water-supply" & result_value>guidance.value & 
+      chla > chla_grtr ~1,
     TRUE ~ 0
   ))
 
@@ -304,12 +323,15 @@ calcs_sum.df<-calcs_sum.df %>%
   
 #and summary for the nnc
 nnc_sum.df<-nnc.final.df %>% 
-  group_by(SITE_ID,chemical_name) %>% 
+  group_by(SITE_ID,chemical_name,type) %>% 
   summarize(record_count=n(),mean=mean(result_value,na.rm =TRUE),num_exceed=sum(exceed),min=min(result_value,na.rm =TRUE),max=max(result_value),median=median(result_value,na.rm =TRUE))
   
 nnc_sum.df<-nnc_sum.df %>% 
-  mutate_if(is.numeric, round, 3)
-  
+  mutate_if(is.numeric, round, 3) %>% 
+  mutate(Type=
+           case_when(type %in% "aquatic_chronic"~ "Aquatic Chronic",
+                     type %in% "health_water-supply"~ "Health-Water Supply"),)
+nnc_sum.df$type<-NULL  
 
 #summary for the BAP
 bap.df<-bap %>% 
