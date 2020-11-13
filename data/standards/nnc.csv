@@ -1,8 +1,19 @@
-SH_WQ_STANDARD,guidance value,bap_less,chla_grtr
-A,0.03,5,0.06
-A-S,0.03,5,0.06
-AA,0.03,5,
-AA-S,0.03,5,
-B,0.03,5,
-C,0.03,5,
-D,0.03,5,
+SH_WQ_STANDARD,guidance value,bap_less,chla_grtr,ecoregion,unit,type
+A,0.03,5,,11,mg/L,aquatic_chronic
+A-S,0.03,5,,11,mg/L,aquatic_chronic
+AA,0.03,5,,11,mg/L,aquatic_chronic
+AA-S,0.03,5,,11,mg/L,aquatic_chronic
+B,0.03,5,,11,mg/L,aquatic_chronic
+C,0.03,5,,11,mg/L,aquatic_chronic
+D,0.03,5,,11,mg/L,aquatic_chronic
+A,0.075,5,,7,mg/L,aquatic_chronic
+A-S,0.075,5,,7,mg/L,aquatic_chronic
+AA,0.075,5,,7,mg/L,aquatic_chronic
+AA-S,0.075,5,,7,mg/L,aquatic_chronic
+B,0.075,5,,7,mg/L,aquatic_chronic
+C,0.075,5,,7,mg/L,aquatic_chronic
+D,0.075,5,,7,mg/L,aquatic_chronic
+A,0.025,,0.006,7,mg/L,health_water-supply
+A-S,0.025,,0.006,7,mg/L,health_water-supply
+A,0.025,,0.006,11,mg/L,health_water-supply
+A-S,0.025,,0.006,11,mg/L,health_water-supply
