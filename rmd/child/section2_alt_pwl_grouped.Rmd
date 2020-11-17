@@ -128,7 +128,7 @@ insitu.df$corrected_value<-as.numeric(insitu.df$corrected_value)
 
 
 chem_short.df<-chem.df %>% 
-  select(SITE_ID,sample_date,SH_WQ_STANDARD,chemical_name,
+  select(SITE_ID,sample_date,SH_WQ_STANDARD,SH_PWL_ID,chemical_name,
          result_value,corrected_value,result_unit,threshold,t,direction,fraction) %>% 
   rename("COLL_DATE"=sample_date)
 
@@ -151,7 +151,7 @@ insitu.df$exceed<-ifelse(insitu.df$direction=="greater"& insitu.df$corrected_val
 #next calculations for other stuff
 #separate out the ones that need to be calculated
 chem_calcs.df<-chem.df %>% 
-  select(SITE_ID,sample_date,SH_WQ_STANDARD,chemical_name,result_value,corrected_value,result_unit,threshold,t,direction,wqs_threshold,wqs_threshold_formula,fraction) %>% 
+  select(SITE_ID,sample_date,SH_WQ_STANDARD,SH_PWL_ID,chemical_name,result_value,corrected_value,result_unit,threshold,t,direction,wqs_threshold,wqs_threshold_formula,fraction) %>% 
   rename("COLL_DATE"=sample_date) %>% 
   filter(chemical_name=="nitrogen, ammonia (as n)"|chemical_name=="coppper"|chemical_name=="zinc"|chemical_name=="lead"|chemical_name=="nickel")
 
@@ -195,10 +195,19 @@ calcs.df$wqs_threshold_formula<-if_else(calcs.df$wqs_threshold_formula=="",paste
 calcs.df$x<-paste(calcs.df$hardness_result)
 calcs.df$x<-as.numeric(calcs.df$x)
 #now we have all theinformation in one dataframe, let's do the calcs. for metals
+
+#maybe create a loop for the hardness?
+
+#calcs.df<-calcs.df %>% 
+ # for calcs.df$wqs_threshold_formula!="NA"{
+  #  x<-calcs.df$hardness_result
+   # calcs.df$calc.value<-as.formula(wqs_threshold_formula)
+#}
+
 calcs.df<-calcs.df %>% 
   mutate(calc.value=case_when(
     wqs_threshold_formula=="NA"~corrected_value,
-    #wqs_threshold_formula!="NA"~as.formula(paste(wqs_threshold_formula,hardness_result,sep = "~")),
+    #wqs_threshold_formula!="NA"~as.formula(wqs_threshold_formula),
     TRUE~corrected_value))
 
 calcs.df$exceedance<-NA
@@ -287,7 +296,7 @@ nnc.final.df$exceed.note<-if_else(is.na(nnc.final.df$MMDH_BIO_ASMT_PROFILE_SCORE
 chem_short.df$corrected_value<-as.numeric(chem_short.df$corrected_value)
 
 chem_sum.df<-chem_short.df %>% 
-  group_by(SITE_ID,chemical_name) %>% 
+  group_by(SH_PWL_ID,chemical_name) %>% 
   summarise(record_count=n(),mean=mean(corrected_value,na.rm =TRUE),num_exceed=sum(exceed),min=min(corrected_value,na.rm =TRUE),max=max(corrected_value,na.rm =TRUE),median=median(corrected_value,na.rm =TRUE))
 
 chem_sum.df<-chem_sum.df %>% 
@@ -296,7 +305,7 @@ chem_sum.df<-chem_sum.df %>%
   
 #then create summary columns for the in-situ
 insitu_sum.df<-insitu.df %>% 
-  group_by(SITE_ID,chemical_name) %>% 
+  group_by(SH_PWL_ID,chemical_name) %>% 
   summarize(record_count=n(),mean=mean(corrected_value,na.rm =TRUE),num_exceed=sum(exceed),min=min(corrected_value,na.rm =TRUE),max=max(corrected_value,na.rm =TRUE),median=median(corrected_value,na.rm =TRUE)) %>% 
   mutate_if(is.numeric, round, 3)
 
@@ -307,7 +316,7 @@ insitu.df<-insitu.df %>%
 #and summary for the calcs
 calcs.df$corrected_value<-as.numeric(calcs.df$corrected_value)
 calcs_sum.df<-calcs.df %>% 
-  group_by(SITE_ID,chemical_name) %>% 
+  group_by(SH_PWL_ID,chemical_name) %>% 
   summarize(record_count=n(),mean=mean(corrected_value,na.rm =TRUE),num_exceed=sum(exceedance),min=min(corrected_value,na.rm =TRUE),max=max(corrected_value,na.rm =TRUE),median=median(corrected_value,na.rm =TRUE)) %>% 
   mutate_if(is.numeric, round, 3)
 
@@ -319,7 +328,7 @@ calcs_sum.df<-calcs_sum.df %>%
   
 #and summary for the nnc
 nnc_sum.df<-nnc.final.df %>% 
-  group_by(SITE_ID,chemical_name,type) %>% 
+  group_by(SH_PWL_ID,chemical_name,type) %>% 
   summarize(record_count=n(),mean=mean(result_value,na.rm =TRUE),num_exceed=sum(exceed),min=min(result_value,na.rm =TRUE),max=max(result_value),median=median(result_value,na.rm =TRUE))
   
 nnc_sum.df<-nnc_sum.df %>% 
@@ -331,10 +340,10 @@ nnc_sum.df$type<-NULL
 
 #summary for the BAP
 bap.df<-bap %>% 
-  select(SITE_ID,MSSIH_EVENT_SMAS_SAMPLE_DATE,MMDH_BIO_ASMT_PROFILE_SCORE,year) %>% 
+  select(SITE_ID,SH_PWL_ID,MSSIH_EVENT_SMAS_SAMPLE_DATE,MMDH_BIO_ASMT_PROFILE_SCORE,year) %>% 
   rename(DATE=MSSIH_EVENT_SMAS_SAMPLE_DATE) %>% 
   filter(year=="2017"|year=="2018"|year=="2019") %>% 
-  group_by(SITE_ID,DATE) %>% 
+  group_by(SH_PWL_ID,DATE) %>% 
   summarize(BAP=mean(MMDH_BIO_ASMT_PROFILE_SCORE),SD=sd(MMDH_BIO_ASMT_PROFILE_SCORE),n=n())
 
 bap.df<-bap.df%>% 
@@ -388,17 +397,17 @@ print(ny.map)
 
 ```{r,warning=FALSE, echo=FALSE,message=FALSE, results='asis',fig.align="left"}
 
-sites<-unique(site.loc$SH_SITE_ID)
+sites<-unique(site.loc$SH_PWL_ID)
 
  for (i in seq_along(sites)) { 
    # print(i)
-   cat("  \n\n### Site ID: ",sites[i])
+   cat("  \n\n### PWL ID: ",sites[i])
    
-   site.loc.small<-site.loc[site.loc$SH_SITE_ID %in% sites[i],]
+   site.loc.small<-site.loc[site.loc$SH_PWL_ID %in% sites[i],]
    
    map.me(site.loc,site.loc.small)
   
-  temp <-chem_sum.df[chem_sum.df$SITE_ID %in% sites[i], ]
+  temp <-chem_sum.df[chem_sum.df$SH_PWL_ID %in% sites[i], ]
    tab<-table.f(temp, 2,4)
    label=paste("Chemistry Measurements:",sites[i])
    tab<-flextable::set_caption(tab,label)
@@ -408,7 +417,7 @@ sites<-unique(site.loc$SH_SITE_ID)
    cat("  \n")
    cat("<br><br>")
    
-  temp <-insitu_sum.df[insitu_sum.df$SITE_ID %in% sites[i], ]
+  temp <-insitu_sum.df[insitu_sum.df$SH_PWL_ID %in% sites[i], ]
    tab2<-table.f(temp, 2,4)
    label=paste("In-Situ Measurements:",sites[i])
    tab2<-flextable::set_caption(tab2,label)
@@ -417,7 +426,7 @@ sites<-unique(site.loc$SH_SITE_ID)
    cat(rep("\n", 10))
    cat("<br><br>")
    
-  temp <-calcs_sum.df[calcs_sum.df$SITE_ID %in% sites[i], ]
+  temp <-calcs_sum.df[calcs_sum.df$SH_PWL_ID %in% sites[i], ]
    tab3<-table.f(temp, 2,4)
    label=paste("Dependent Measurements (Metals and Ammonia):",sites[i])
    tab3<-flextable::set_caption(tab3,label)
@@ -426,7 +435,7 @@ sites<-unique(site.loc$SH_SITE_ID)
    cat("  \n")
    cat("<br><br>")
    
-  temp <-nnc_sum.df[nnc_sum.df$SITE_ID %in% sites[i], ]
+  temp <-nnc_sum.df[nnc_sum.df$SH_PWL_ID %in% sites[i], ]
    tab4<-table.f(temp, 2,4)
    label=paste("Numeric Nutrient Criteria:",sites[i])
    tab4<-flextable::set_caption(tab4,label)
@@ -435,7 +444,7 @@ sites<-unique(site.loc$SH_SITE_ID)
    cat("  \n")
    cat("<br><br>")
   
-  temp<-bap.df[bap.df$SITE_ID %in% sites[i], ]
+  temp<-bap.df[bap.df$SH_PWL_ID %in% sites[i], ]
   tab6<-table.f(temp,1,2)
   label=paste("BAP Score: ",sites[i])
   tab6<-flextable::set_caption(tab6,label)
