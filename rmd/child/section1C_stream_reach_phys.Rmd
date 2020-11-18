@@ -49,7 +49,7 @@ habit<-read.csv(file.path.h,stringsAsFactors = FALSE)
 #select relevant columns
 habit<-habit %>% 
   select("Location ID" =SITE_ID, "Collection \n Date"=COLL_DATE, "Gradient"=HFDH_GRADIENT, "Epi.\n Cover"=HFDH_EPIFAUNAL_COVER, "Embed. \n Pool."=HFDH_EMBEDDEDNESS_POOLING, "Vel/Dep. \n Reg"=HFDH_VELOCITY_DEPTH_REGIME,
-         "Sed. \n Dep."=HFDH_SEDIMENT_DEPOSITION, "Flow \n Status"=HFDH_FLOW_STATUS, "Chan. \n Alt"=HFDH_CHANNEL_ALTERATION, "Rif. \n Freq"=HFDH_RIFFLE_BEND_FREQUENCY) 
+         "Sed. \n Dep."=HFDH_SEDIMENT_DEPOSITION, "Flow \n Status"=HFDH_FLOW_STATUS, "Chan. \n Alt"=HFDH_CHANNEL_ALTERATION, "Rif. \n Freq"=HFDH_RIFFLE_BEND_FREQUENCY, "L.B. \n Stability"=HFDH_LEFT_BANK_STABILITY, "R.B. \n Stability"= HFDH_RIGHT_BANK_STABILITY, "L.B. \n Veg"= HFDH_LEFT_BANK_VEG, "R.B.\n Veg"=HFDH_RIGHT_BANK_VEG, "L.B. \n Veg Zone"=HFDH_LEFT_BANK_VEG_ZONE, "R.B. \n Veg Zone"=HFDH_RIGHT_BANK_VEG_ZONE) 
 
 library(lubridate)
 habit<-habit %>% 
@@ -77,11 +77,110 @@ habit<-habit%>%
             `Sed. \n Dep.`=mean(`Sed. \n Dep.`),
             `Flow \n Status`=mean(`Flow \n Status`),
             `Chan. \n Alt`=mean(`Chan. \n Alt`),
-            `Rif. \n Freq`=mean(`Rif. \n Freq`))
+            `Rif. \n Freq`=mean(`Rif. \n Freq`),
+            `L.B. \n Stability`=mean(`L.B. \n Stability`),
+            `R.B. \n Stability`=mean(`R.B. \n Stability`),
+            `L.B. \n Veg`=mean(`L.B. \n Veg`),
+            `R.B.\n Veg`=mean(`R.B.\n Veg`),
+            `L.B. \n Veg Zone`=mean(`L.B. \n Veg Zone`),
+            `R.B. \n Veg Zone`=mean(`R.B. \n Veg Zone`))
 
 ```
 
-```{r tab.id="Habitat-table", tab.cap="Ranked habitat characteristics and calculated HMA for the Wallkill River Survey, 2017-2019. Epifaunal substrate (Epi. Cover); Embeddedness/Pool Substrate Characterization (Embed. Pool.); Velocity Depth Regime/Pool Variability (Vel/Dep Reg.); Sediment Deposition (Sed. Dep.); Channel Flow Status (Flow Status); Channel Alteration (Chan. Alt.); Riffle Frequency/Stream Sinuosity (Rif. Freq.)", echo=FALSE, message=FALSE,warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Add HMA model values to the table, add columns to see whether the model or stream score is lower, calculate HMA, add column to interpret HMA score
+habit.hma<-habit%>%
+  mutate(EpiCoverM=case_when(
+    Gradient=="High" ~ 17,
+    TRUE ~ 14),
+    EmbedM=case_when(
+      Gradient=="High" ~ 17,
+      TRUE ~ 13),
+    VelDepM=case_when(
+      Gradient=="High" ~ 19,
+      TRUE~10),
+    SedDepM=case_when(
+      Gradient=="High" ~ 18,
+      TRUE ~ 14),
+    FlowM=case_when(
+      Gradient=="High" ~19,
+      TRUE ~17),
+    ChanM=case_when(
+      Gradient=="High"~ 18,
+      TRUE ~ 17),
+    RiffleM=case_when(
+      Gradient=="High"~ 19,
+      TRUE~ 14),
+    StabilityM=18,
+    VegM=case_when(
+      Gradient=="High" ~ 18,
+      TRUE ~ 17),
+    VegZoneM=case_when(
+      Gradient=="High" ~ 18,
+      TRUE ~ 15),
+    EpiCover.Low= case_when(
+      `Epi.
+ Cover`<= EpiCoverM ~ `Epi.
+ Cover`,
+ TRUE ~ EpiCoverM),
+  Embed.Low=case_when(
+    `Embed. 
+ Pool.`<=EmbedM ~ `Embed. 
+ Pool.`,
+ TRUE~EmbedM),
+ VelDep.Low=case_when(
+   `Vel/Dep. 
+ Reg.`<=VelDepM ~ `Vel/Dep. 
+ Reg.`,
+ TRUE~ VelDepM),
+ SedDep.Low=case_when(
+   `Sed. 
+ Dep.`<=SedDepM ~ `Sed. 
+ Dep.`,
+ TRUE~ SedDepM),
+ Flow.Low=case_when(
+   `Flow 
+ Status`<=FlowM ~ `Flow 
+ Status`,
+ TRUE ~ FlowM),
+ Chan.Low=case_when(
+   `Chan. 
+ Alt`<=ChanM ~ `Chan. 
+ Alt`,
+ TRUE~ ChanM),
+ Riffle.Low=case_when(
+   `Rif. 
+ Freq`<=RiffleM ~ `Rif. 
+ Freq`,
+ TRUE ~ RiffleM),
+ Stability.Low=case_when(
+   (`L.B. \n Stability`+ `R.B. \n Stability`)<=StabilityM ~ (`L.B. \n Stability`+ `R.B. \n Stability`),
+   TRUE~ StabilityM),
+ Veg.Low=case_when(
+   (`L.B. \n Veg`+`R.B.\n Veg`)<=VegM ~ (`L.B. \n Veg`+`R.B.\n Veg`),
+   TRUE ~ VegM),
+ Veg.Zone.Low=case_when(
+   (`L.B. \n Veg Zone`+ `R.B. \n Veg Zone`)<= VegZoneM ~ (`L.B. \n Veg Zone`+ `R.B. \n Veg Zone`),
+   TRUE~VegZoneM),
+ `HMA \n Score`= case_when(
+   Gradient=="High" ~(EpiCover.Low+ Embed.Low+ VelDep.Low+ SedDep.Low+ Flow.Low+ Chan.Low+ Riffle.Low+ Stability.Low+Veg.Low+ Veg.Zone.Low)/181*100,
+   TRUE ~ (EpiCover.Low+ Embed.Low+ VelDep.Low+ SedDep.Low+ Flow.Low+ Chan.Low+ Riffle.Low+ Stability.Low+Veg.Low+ Veg.Zone.Low)/149*100),
+ `HMA \n Assess.`=case_when(
+   `HMA \n Score`>=80 ~ "Natural",
+   `HMA \n Score`>=70&`HMA \n Score`<80 ~ "Altered",
+   `HMA \n Score`>=60 & `HMA \n Score` <70 ~ "Moderate",
+   TRUE~ "Severe"
+ ))
+
+
+habit.hma$`HMA \n Score`<-round(habit.hma$`HMA 
+ Score`, 1)
+
+```
+
+
+
+```{r tab.id="Habitat-table", tab.cap="Ranked habitat characteristics and calculated HMA for the Wallkill River Survey, 2017-2019. Epifaunal substrate (Epi. Cover); Embeddedness/Pool Substrate Characterization (Embed. Pool.); Velocity Depth Regime/Pool Variability (Vel/Dep Reg.); Sediment Deposition (Sed. Dep.); Channel Flow Status (Flow Status); Channel Alteration (Chan. Alt.); Riffle Frequency/Stream Sinuosity (Rif. Freq.); Left and Right Bank Stability (L.B. and R.B. Stability); Left and Right Bank Vegetation (L.B. and R.B. Veg); Width of Left and Right Bank Vegetative Zone (L.B. and R.B. Veg Zone)", echo=FALSE, message=FALSE,warning=FALSE}
 #table
 
 #create function for common tables
@@ -94,14 +193,16 @@ tl
 }
 
 #call the function
-tl<-table.f(habit,2,9)
+tl<-table.f(habit.hma[,c(1:15,36,37)],2,17)
 
 
 #this part might have to be figured out later, with a larger caption/table function? Not sure yet.
 
 
 tl<-tl%>%
-  width(j=2:9, width=0.7)
+  fontsize(size=7, part = "all")%>%
+  width(j=1:17, width=0.4)%>%
+  width(j=c(1,2,4,5,10,11), width=0.6)
 tl
 
 ```
