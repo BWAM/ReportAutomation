@@ -180,7 +180,7 @@ habit.hma$`HMA \n Score`<-round(habit.hma$`HMA
 
 
 
-```{r tab.id="Habitat-table", tab.cap="Ranked habitat characteristics and calculated HMA for the Wallkill River Survey, 2017-2019. Epifaunal substrate (Epi. Cover); Embeddedness/Pool Substrate Characterization (Embed. Pool.); Velocity Depth Regime/Pool Variability (Vel/Dep Reg.); Sediment Deposition (Sed. Dep.); Channel Flow Status (Flow Status); Channel Alteration (Chan. Alt.); Riffle Frequency/Stream Sinuosity (Rif. Freq.); Left and Right Bank Stability (L.B. and R.B. Stability); Left and Right Bank Vegetation (L.B. and R.B. Veg); Width of Left and Right Bank Vegetative Zone (L.B. and R.B. Veg Zone)", echo=FALSE, message=FALSE,warning=FALSE}
+```{r tab.id="Habitat-table", tab.cap="Ranked habitat characteristics and calculated HMA for the Wallkill River Survey, 2017-2019. Epifaunal substrate (Epi. Cover); Embeddedness/Pool Substrate Characterization (Embed. Pool.); Velocity Depth Regime/Pool Variability (Vel/Dep Reg.); Sediment Deposition (Sed. Dep.); Channel Flow Status (Flow Status); Channel Alteration (Chan. Alt.); Riffle Frequency/Stream Sinuosity (Rif. Freq.); Left and Right Bank Stability (L.B. and R.B. Stability); Left and Right Bank Vegetation (L.B. and R.B. Veg); Width of Left and Right Bank Vegetative Zone (L.B. and R.B. Veg Zone); Habitat Model Affinity Score (HMA Score); HMA Assessment (HMA Assess.)", echo=FALSE, message=FALSE,warning=FALSE}
 #table
 
 #create function for common tables
@@ -202,7 +202,9 @@ tl<-table.f(habit.hma[,c(1:15,36,37)],2,17)
 tl<-tl%>%
   fontsize(size=7, part = "all")%>%
   width(j=1:17, width=0.4)%>%
-  width(j=c(1,2,4,5,10,11), width=0.6)
+  width(j=c(2, 4,5,10,11), width = 0.5)%>%
+  width(j=c(17), width=0.6)%>%
+  width(j=1, width=0.8)
 tl
 
 ```
