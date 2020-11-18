@@ -61,7 +61,7 @@ tl<-align(tl, i = NULL, j =(2:5) , align = "center", part = "all")%>%
   width(j=c(5), width=0.8)%>%
   width(j=c(4,7,8), width=0.6)%>%
   width(j=c(2), width=0.7)%>%
-  width(j=c(3), width=0.5)%>%
+  width(j=c(3), width=0.6)%>%
   width(j=6, width=2.5)
 tl
 ```
