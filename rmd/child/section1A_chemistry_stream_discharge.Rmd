@@ -95,11 +95,12 @@ chem.statewide<-chem.everywhere %>%
 #summarize for statwide averages
 chem.statewide<-chem.statewide %>%
   group_by(CHR_CHEMICAL_NAME) %>% 
-  summarise_at(vars(CHR_RESULT_VALUE),funs(mean(.,na.rm = TRUE),sd(.,na.rm = TRUE),n=n()))
+  summarise_at(vars(CHR_RESULT_VALUE),funs(mean(.,na.rm = TRUE),sd(.,na.rm = TRUE),n=n(),q95=quantile(CHR_RESULT_VALUE,.95,na.rm = TRUE),q75=quantile(CHR_RESULT_VALUE,.75,na.rm = TRUE),q50=quantile(CHR_RESULT_VALUE,.50,na.rm=TRUE),q25=quantile(CHR_RESULT_VALUE,.25,na.rm = TRUE)))
 
 #confidence intervals
-chem.statewide<-chem.statewide %>% 
-  mutate(error=(qnorm(0.975)*sd/sqrt(n)),ci95=mean+error,ci.neg95=mean-error)
+chem.statewide.2<-chem.statewide %>% 
+  #mutate(error=(qnorm(0.975)*sd/sqrt(n)),ci95=mean+error,ci.neg95=mean-error)#this is the confidense interval
+  mutate(q95=quantile(chem.statewide$CHR_RESULT_VALUE,.95),q75=quantile(chem.statewide$CHR_RESULT_VALUE,.75),)
 
 #now limit it to just the chemistry we have on hand
 
@@ -228,7 +229,12 @@ chem.graph <- function(df, na.rm = TRUE, ...){
       
       scale_y_log10(paste(df$chemical_name[df$chemical_name==chem_list[i]], df$result_unit[df$chemical_name==chem_list[i]], "log(10)")) + 
       xlab("Location ID")+
-      geom_hline(yintercept=temp.statewide$ci95,color="firebrick")
+      geom_hline(yintercept=temp.statewide$q95,color="grey53")+
+      geom_hline(yintercept=temp.statewide$q75,color="grey53")+
+       geom_hline(yintercept=temp.statewide$q25,color="grey53")+
+      annotate(geom="text", label="95th", x=2, y=temp.statewide$q95, vjust=-1,color="grey")+
+    annotate(geom="text", label="75th", x=2, y=temp.statewide$q75, vjust=-1,color="grey")+
+    annotate(geom="text", label="25th", x=2, y=temp.statewide$q25, vjust=-1,color="grey")
     
     
     # print plots to screen
@@ -276,11 +282,11 @@ insitu.statewide<-insitu %>%
 #summarize for statwide averages
 insitu.statewide<-insitu.statewide %>%
   group_by(PARAMETER_NAME) %>% 
-  summarise_at(vars(RESULT),funs(mean(.,na.rm = TRUE),sd(.,na.rm = TRUE),n=n()))
+  summarise_at(vars(RESULT),funs(mean(.,na.rm = TRUE),sd(.,na.rm = TRUE),n=n(),q95=quantile(RESULT,.95,na.rm = TRUE),q75=quantile(RESULT,.75,na.rm = TRUE),q50=quantile(RESULT,.50,na.rm=TRUE),q25=quantile(RESULT,.25,na.rm = TRUE)))
 
 #confidence intervals
-insitu.statewide<-insitu.statewide %>% 
-  mutate(error=(qnorm(0.975)*sd/sqrt(n)),ci95=mean+error,ci.neg95=mean-error)
+#insitu.statewide<-insitu.statewide %>% 
+  #mutate(error=(qnorm(0.975)*sd/sqrt(n)),ci95=mean+error,ci.neg95=mean-error)
 
 
 chem.graph.n <- function(df, na.rm = TRUE, ...){
@@ -305,7 +311,13 @@ theme(legend.position="right") +
 
  scale_y_continuous(paste(df$PARAMETER_NAME[df$PARAMETER_NAME==chem_list.2[i]],df$unit[df$PARAMETER_NAME==chem_list.2[i]])) + 
  xlab("Location ID")+
-   geom_hline(yintercept = temp.insitu.sw$ci95,color="firebrick")
+        geom_hline(yintercept=temp.insitu.sw$q95,color="grey53")+
+      geom_hline(yintercept=temp.insitu.sw$q75,color="grey53")+
+       geom_hline(yintercept=temp.insitu.sw$q25,color="grey53")+
+       annotate(geom="text", label="95th", x=2, y=temp.insitu.sw$q95, vjust=-1,color="grey")+
+    annotate(geom="text", label="75th", x=2, y=temp.insitu.sw$q75, vjust=-1,color="grey")+
+    annotate(geom="text", label="25th", x=2, y=temp.insitu.sw$q25, vjust=-1,color="grey")
+    
 
 
 # print plots to screen
