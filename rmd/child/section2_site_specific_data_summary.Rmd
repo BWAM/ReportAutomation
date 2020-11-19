@@ -106,7 +106,7 @@ field<-field %>%
 field$chemical_name<-str_replace(field$chemical_name," ","_")
 field$SH_WQ_STANDARD<-tolower(field$SH_WQ_STANDARD)
   
-insitu.df<-merge(field,stds, by=c("SH_WQ_STANDARD","chemical_name","trout_class"),all.x = TRUE)
+insitu.df<-merge(field,stds, by=c("SH_WQ_STANDARD","chemical_name"),all.x = TRUE)
 
 
 #check that result unit and wqs units are the same
@@ -129,21 +129,38 @@ insitu.df$corrected_value<-as.numeric(insitu.df$corrected_value)
 
 chem_short.df<-chem.df %>% 
   select(SITE_ID,sample_date,SH_WQ_STANDARD,chemical_name,
-         result_value,corrected_value,result_unit,threshold,t,direction,fraction) %>% 
+         result_value,corrected_value,result_unit,threshold,t,direction,fraction,block,calculation,wqs_threshold,wqs_threshold_formula) %>% 
   rename("COLL_DATE"=sample_date)
 
 #create exceedance column
 chem_short.df$exceed<-NA
 
-chem_short.df$exceed<-ifelse(chem_short.df$direction==">="& chem_short.df$corrected_value<chem_short.df$threshold|
-                               chem_short.df$direction=="<="& chem_short.df$corrected_value>chem_short.df$threshold,1,0)
+#need to do this only for the single vaues
+chem_short.df<-chem_short.df %>% 
+  mutate(exceed=case_when(
+    block%in%"single"& direction=="<="& corrected_value>threshold~1,#this notation seems backwards in Zach's new stds file to me, but it probably makes sense to him. the direction is the direction <= means that the result should be less than or equal to the threshold.
+    block%in%"single"&direction==">="& corrected_value<threshold~1,
+    TRUE ~0
+  ))
+ 
+#now we need the ones that are not just single, but means by day? There are none, so it won't let me finish it, so I"m hashing it out.
+#means_date<-chem_short.df %>% 
+  #filter(block %in% "date") %>% 
+  #group_by(c(SITE_ID,COLL_DATE)) %>% 
+  #summarise(corrected_value_date=mean(corrected_value)) %>% 
+  #mutate(exceed=case_when(
+   # direction %in% "<="&corrected_value_date>threshold~1,
+    #direction %in% ">="&corrected_value_date<threshold~1,
+  #TRUE~0))
 
 #same for insitu data
-insitu.df$exceed<-NA
 
-insitu.df$exceed<-ifelse(insitu.df$direction=="greater"& insitu.df$corrected_value<insitu.df$threshold|
-                               insitu.df$direction=="less"& insitu.df$corrected_value>insitu.df$threshold,1,0)
-
+insitu.df<-insitu.df %>% 
+  mutate(exceed=case_when(
+    block%in%"single"& direction=="<="& corrected_value>threshold~1,#this notation seems backwards in Zach's new stds file to me, but it probably makes sense to him. the direction is the direction <= means that the result should be less than or equal to the threshold.
+    block%in%"single"&direction==">="& corrected_value<threshold~1,
+    TRUE ~0
+  ))
 #now we have both data frames with exceedances!
 ```
 
@@ -151,9 +168,9 @@ insitu.df$exceed<-ifelse(insitu.df$direction=="greater"& insitu.df$corrected_val
 #next calculations for other stuff
 #separate out the ones that need to be calculated
 chem_calcs.df<-chem.df %>% 
-  select(SITE_ID,sample_date,SH_WQ_STANDARD,chemical_name,result_value,corrected_value,result_unit,threshold,t,direction,wqs_threshold,wqs_threshold_formula,fraction) %>% 
+  select(SITE_ID,sample_date,SH_WQ_STANDARD,chemical_name,result_value,corrected_value,result_unit,threshold,t,direction,wqs_threshold,wqs_threshold_formula,fraction,calculation,wqs_threshold,trout_class,type) %>% 
   rename("COLL_DATE"=sample_date) %>% 
-  filter(chemical_name=="nitrogen, ammonia (as n)"|chemical_name=="coppper"|chemical_name=="zinc"|chemical_name=="lead"|chemical_name=="nickel")
+  filter(wqs_threshold_formula!=""&!is.na(wqs_threshold_formula))
 
 #first we need hardness
 
@@ -188,22 +205,17 @@ tnp<-tnp %>%
   tidyr::spread(parameter,value)
   
 calcs.df<-merge(calcs.df,tnp, by=c("SITE_ID","COLL_DATE"))
+
+#now we need stayCALM for ammonia corrections
 calcs.df<-calcs.df %>% 
-  distinct()
+  mutate(trout_water=ifelse((trout_class=="trout"|trout_class=="trout_spawning"),TRUE,FALSE)) %>% 
+  filter(!is.na(ph))
 
-calcs.df$wqs_threshold_formula<-if_else(calcs.df$wqs_threshold_formula=="",paste("NA"),calcs.df$wqs_threshold_formula)
-calcs.df$x<-paste(calcs.df$hardness_result)
-calcs.df$x<-as.numeric(calcs.df$x)
-#now we have all theinformation in one dataframe, let's do the calcs. for metals
-calcs.df<-calcs.df %>% 
-  mutate(calc.value=case_when(
-    wqs_threshold_formula=="NA"~corrected_value,
-    #wqs_threshold_formula!="NA"~as.formula(paste(wqs_threshold_formula,hardness_result,sep = "~")),
-    TRUE~corrected_value))
+calcs.df <- calcs.df %>%
+  rowwise() %>% 
+dplyr::mutate(threshold_calc = stayCALM::thresh_total_ammonia(.ph= ph,.temp= temperature,.trout_water= trout_water,.type= type))
 
-calcs.df$exceedance<-NA
-
-calcs.df$exceedance<-if_else(calcs.df$corrected_value>calcs.df$calc.value,1,0)
+calcs.df$exceedance<-if_else(calcs.df$corrected_value>calcs.df$threshold_calc,1,0)
 
 ```
 
@@ -287,7 +299,7 @@ nnc.final.df$exceed.note<-if_else(is.na(nnc.final.df$MMDH_BIO_ASMT_PROFILE_SCORE
 chem_short.df$corrected_value<-as.numeric(chem_short.df$corrected_value)
 
 chem_sum.df<-chem_short.df %>% 
-  group_by(SITE_ID,chemical_name) %>% 
+  group_by(SITE_ID,chemical_name,fraction) %>% 
   summarise(record_count=n(),mean=mean(corrected_value,na.rm =TRUE),num_exceed=sum(exceed),min=min(corrected_value,na.rm =TRUE),max=max(corrected_value,na.rm =TRUE),median=median(corrected_value,na.rm =TRUE))
 
 chem_sum.df<-chem_sum.df %>% 
@@ -307,7 +319,7 @@ insitu.df<-insitu.df %>%
 #and summary for the calcs
 calcs.df$corrected_value<-as.numeric(calcs.df$corrected_value)
 calcs_sum.df<-calcs.df %>% 
-  group_by(SITE_ID,chemical_name) %>% 
+  group_by(SITE_ID,chemical_name,fraction) %>% 
   summarize(record_count=n(),mean=mean(corrected_value,na.rm =TRUE),num_exceed=sum(exceedance),min=min(corrected_value,na.rm =TRUE),max=max(corrected_value,na.rm =TRUE),median=median(corrected_value,na.rm =TRUE)) %>% 
   mutate_if(is.numeric, round, 3)
 
@@ -396,6 +408,9 @@ sites<-unique(site.loc$SH_SITE_ID)
    
    site.loc.small<-site.loc[site.loc$SH_SITE_ID %in% sites[i],]
    
+   stds_small<-unique(site.loc.small$classification)
+   temp <-chem_sum.df[chem_sum.df$SITE_ID %in% sites[i], ]
+   
    map.me(site.loc,site.loc.small)
   
   temp <-chem_sum.df[chem_sum.df$SITE_ID %in% sites[i], ]
@@ -419,7 +434,7 @@ sites<-unique(site.loc$SH_SITE_ID)
    
   temp <-calcs_sum.df[calcs_sum.df$SITE_ID %in% sites[i], ]
    tab3<-table.f(temp, 2,4)
-   label=paste("Dependent Measurements (Metals and Ammonia):",sites[i])
+   label=paste("Dependent Measurements (Dissolved Metals and Ammonia):",sites[i])
    tab3<-flextable::set_caption(tab3,label)
    flextable::docx_value(tab3)
    rm(temp)
