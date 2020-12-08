@@ -409,6 +409,7 @@ sites<-unique(site.loc$SH_SITE_ID)
    site.loc.small<-site.loc[site.loc$SH_SITE_ID %in% sites[i],]
    
    stds_small<-unique(site.loc.small$classification)
+   
    temp <-chem_sum.df[chem_sum.df$SITE_ID %in% sites[i], ]
    
    map.me(site.loc,site.loc.small)
