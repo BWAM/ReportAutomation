@@ -25,7 +25,7 @@ file.path.2<-file.path(here::here(),
 
 file.path.3<-file.path(here::here(),
                        "data",
-                       "sbu.chem.all.csv")
+                       "sbu_chem_2001_2019_provis.csv")
 ```
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
@@ -86,11 +86,20 @@ chem.everywhere<-read.csv(file.path.3,stringsAsFactors = FALSE)
 
 #limit to just eh columns we need
 chem.everywhere<-chem.everywhere %>% 
-  select(CHR_CHEMICAL_NAME,CHR_RESULT_VALUE,CHR_RESULT_UNIT,CHR_VALIDATOR_QUAL)
+  select(site_id,chemical_name,result_value,result_unit,validator_qualifiers,fraction) %>% 
+  rename(CHR_CHEMICAL_NAME=chemical_name,
+         CHR_RESULT_VALUE=result_value,
+         CHR_RESULT_UNIT=result_unit,
+         CHR_VALIDATOR_QUAL=validator_qualifiers)
+    
 
 #take out the ones that were flagged as rejected
 chem.statewide<-chem.everywhere %>% 
-  filter(CHR_VALIDATOR_QUAL!="R")
+  filter(CHR_VALIDATOR_QUAL!="R") %>% 
+  group_by(site_id,CHR_CHEMICAL_NAME,fraction,CHR_RESULT_UNIT) %>% 
+  summarise(CHR_RESULT_VALUE=mean(CHR_RESULT_VALUE,na.rm = TRUE))
+
+#grouped by site to take care of bias in oversampling "bad" water for studies
 
 #summarize for statwide averages
 chem.statewide<-chem.statewide %>%
