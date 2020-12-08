@@ -1,0 +1,215 @@
+,Characteristic.Name,Result.Sample.Fraction,INFO_TYPE,SAMPLE_DATE,Result.Value,Result.Unit,INTERPRETED_QUALIFIERS,SITE_HISTORY_ID
+1,"ALKALINITY, TOTAL (AS CACO3)",T,epilimnion,9/7/2012,107,mg/L,,sturgeon_pool_epilimnion
+2,"ALKALINITY, TOTAL (AS CACO3)",T,hypolimnion,9/7/2012,117,mg/L,,sturgeon_pool_hypolimnion
+3,"ALKALINITY, TOTAL (AS CACO3)",T,epilimnion,9/11/2013,88.4,mg/L,,sturgeon_pool_epilimnion
+4,"ALKALINITY, TOTAL (AS CACO3)",T,hypolimnion,6/18/2013,58,mg/L,,sturgeon_pool_hypolimnion
+5,"ALKALINITY, TOTAL (AS CACO3)",T,hypolimnion,7/16/2013,60,mg/L,,sturgeon_pool_hypolimnion
+6,"ALKALINITY, TOTAL (AS CACO3)",T,epilimnion,6/18/2013,68.4,mg/L,,sturgeon_pool_epilimnion
+7,"ALKALINITY, TOTAL (AS CACO3)",T,epilimnion,7/16/2013,91.2,mg/L,,sturgeon_pool_epilimnion
+8,"ALKALINITY, TOTAL (AS CACO3)",T,epilimnion,8/13/2013,50.5,mg/L,,sturgeon_pool_epilimnion
+9,"ALKALINITY, TOTAL (AS CACO3)",T,epilimnion,8/12/2019,86.8,mg/L,,sturgeon_pool_epilimnion
+10,"ALKALINITY, TOTAL (AS CACO3)",T,hypolimnion,8/13/2013,46.7,mg/L,,sturgeon_pool_hypolimnion
+11,"ALKALINITY, TOTAL (AS CACO3)",T,epilimnion,7/22/2019,129,mg/L,,sturgeon_pool_epilimnion
+12,"ALKALINITY, TOTAL (AS CACO3)",T,hypolimnion,9/11/2013,88,mg/L,,sturgeon_pool_hypolimnion
+13,"ALKALINITY, TOTAL (AS CACO3)",T,hypolimnion,7/22/2019,94,mg/L,estimated value due to Equipment Blank error,sturgeon_pool_hypolimnion
+14,"ALKALINITY, TOTAL (AS CACO3)",T,hypolimnion,8/12/2019,78.8,mg/L,,sturgeon_pool_hypolimnion
+15,"ALKALINITY, TOTAL (AS CACO3)",T,epilimnion,9/3/2019,104,mg/L,,sturgeon_pool_epilimnion
+16,"ALKALINITY, TOTAL (AS CACO3)",T,hypolimnion,9/3/2019,105,mg/L,,sturgeon_pool_hypolimnion
+17,AMMONIA,T,hypolimnion,6/18/2013,0.115,mg/L,,sturgeon_pool_hypolimnion
+18,AMMONIA,T,hypolimnion,9/7/2012,1.7,mg/L,,sturgeon_pool_hypolimnion
+19,AMMONIA,T,epilimnion,7/16/2013,0.074,mg/L,,sturgeon_pool_epilimnion
+20,AMMONIA,T,epilimnion,8/13/2013,0.076,mg/L,,sturgeon_pool_epilimnion
+21,AMMONIA,T,hypolimnion,8/12/2019,0.2,mg/L,,sturgeon_pool_hypolimnion
+22,AMMONIA,T,hypolimnion,7/16/2013,0.395,mg/L,,sturgeon_pool_hypolimnion
+23,AMMONIA,T,hypolimnion,8/13/2013,0.148,mg/L,,sturgeon_pool_hypolimnion
+24,AMMONIA,T,hypolimnion,9/3/2019,0.236,mg/L,,sturgeon_pool_hypolimnion
+25,AMMONIA,T,epilimnion,7/22/2019,0.017,mg/L,,sturgeon_pool_epilimnion
+26,AMMONIA,T,epilimnion,9/7/2012,0.113,mg/L,,sturgeon_pool_epilimnion
+27,AMMONIA,T,epilimnion,6/18/2013,0.051,mg/L,,sturgeon_pool_epilimnion
+28,AMMONIA,T,epilimnion,9/11/2013,0.045,mg/L,,sturgeon_pool_epilimnion
+29,AMMONIA,T,epilimnion,8/12/2019,0.132,mg/L,,sturgeon_pool_epilimnion
+30,AMMONIA,T,hypolimnion,7/22/2019,0.681,mg/L,,sturgeon_pool_hypolimnion
+31,AMMONIA,T,hypolimnion,9/11/2013,0.251,mg/L,,sturgeon_pool_hypolimnion
+32,AMMONIA,T,epilimnion,9/3/2019,0.092,mg/L,,sturgeon_pool_epilimnion
+33,ARSENIC,T,hypolimnion,8/12/2019,1.5,ug/L,,sturgeon_pool_hypolimnion
+34,ARSENIC,T,hypolimnion,9/3/2019,1.5,ug/L,,sturgeon_pool_hypolimnion
+35,ARSENIC,T,hypolimnion,7/22/2019,1.7,ug/L,,sturgeon_pool_hypolimnion
+36,CALCIUM,T,epilimnion,7/22/2019,43.3,mg/L,,sturgeon_pool_epilimnion
+37,CALCIUM,T,hypolimnion,6/18/2013,18.8,mg/L,,sturgeon_pool_hypolimnion
+38,CALCIUM,T,hypolimnion,7/16/2013,18.8,mg/L,,sturgeon_pool_hypolimnion
+39,CALCIUM,T,hypolimnion,8/13/2013,16.8,mg/L,,sturgeon_pool_hypolimnion
+40,CALCIUM,T,hypolimnion,9/11/2013,33,mg/L,,sturgeon_pool_hypolimnion
+41,CALCIUM,T,epilimnion,7/16/2013,29.2,mg/L,,sturgeon_pool_epilimnion
+42,CALCIUM,T,epilimnion,8/12/2019,33.3,mg/L,,sturgeon_pool_epilimnion
+43,CALCIUM,T,hypolimnion,7/22/2019,30.1,mg/L,estimated value due to Equipment Blank error,sturgeon_pool_hypolimnion
+44,CALCIUM,T,hypolimnion,9/7/2012,34.3,mg/L,,sturgeon_pool_hypolimnion
+45,CALCIUM,T,epilimnion,9/7/2012,37.6,mg/L,,sturgeon_pool_epilimnion
+46,CALCIUM,T,epilimnion,8/13/2013,18,mg/L,,sturgeon_pool_epilimnion
+47,CALCIUM,T,hypolimnion,8/12/2019,32,mg/L,,sturgeon_pool_hypolimnion
+48,CALCIUM,T,epilimnion,9/3/2019,39.1,mg/L,,sturgeon_pool_epilimnion
+49,CALCIUM,T,hypolimnion,9/3/2019,40.1,mg/L,,sturgeon_pool_hypolimnion
+50,CALCIUM,T,epilimnion,6/18/2013,21.4,mg/L,,sturgeon_pool_epilimnion
+51,CALCIUM,T,epilimnion,9/11/2013,30.4,mg/L,,sturgeon_pool_epilimnion
+52,CHLORIDE,T,hypolimnion,7/22/2019,40.5,mg/L,,sturgeon_pool_hypolimnion
+53,CHLORIDE,T,hypolimnion,6/18/2013,24.4,mg/L,,sturgeon_pool_hypolimnion
+54,CHLORIDE,T,epilimnion,9/11/2013,38.8,mg/L,,sturgeon_pool_epilimnion
+55,CHLORIDE,T,epilimnion,7/22/2019,71.4,mg/L,,sturgeon_pool_epilimnion
+56,CHLORIDE,T,hypolimnion,8/12/2019,47.6,mg/L,,sturgeon_pool_hypolimnion
+57,CHLORIDE,T,epilimnion,9/3/2019,71.1,mg/L,,sturgeon_pool_epilimnion
+58,CHLORIDE,T,epilimnion,9/7/2012,51.7,mg/L,,sturgeon_pool_epilimnion
+59,CHLORIDE,T,hypolimnion,9/11/2013,35.2,mg/L,,sturgeon_pool_hypolimnion
+60,CHLORIDE,T,epilimnion,6/18/2013,29.1,mg/L,,sturgeon_pool_epilimnion
+61,CHLORIDE,T,epilimnion,7/16/2013,37.7,mg/L,,sturgeon_pool_epilimnion
+62,CHLORIDE,T,hypolimnion,9/7/2012,39.7,mg/L,,sturgeon_pool_hypolimnion
+63,CHLORIDE,T,epilimnion,8/13/2013,21.9,mg/L,,sturgeon_pool_epilimnion
+64,CHLORIDE,T,hypolimnion,9/3/2019,71.6,mg/L,,sturgeon_pool_hypolimnion
+65,CHLORIDE,T,hypolimnion,7/16/2013,21.2,mg/L,,sturgeon_pool_hypolimnion
+66,CHLORIDE,T,hypolimnion,8/13/2013,19.4,mg/L,,sturgeon_pool_hypolimnion
+67,CHLOROPHYLL A,T,epilimnion,7/22/2019,51.5,ug/L,,sturgeon_pool_epilimnion
+68,CHLOROPHYLL A,T,epilimnion,8/12/2019,5.02,ug/L,,sturgeon_pool_epilimnion
+69,CHLOROPHYLL A,T,epilimnion,7/16/2013,4.44,ug/L,,sturgeon_pool_epilimnion
+70,CHLOROPHYLL A,T,epilimnion,8/13/2013,3.51,ug/L,,sturgeon_pool_epilimnion
+71,CHLOROPHYLL A,T,epilimnion,9/11/2013,14,ug/L,,sturgeon_pool_epilimnion
+72,CHLOROPHYLL A,T,epilimnion,9/7/2012,12.7,ug/L,,sturgeon_pool_epilimnion
+73,CHLOROPHYLL A,T,epilimnion,6/18/2013,1.55,ug/L,,sturgeon_pool_epilimnion
+74,CHLOROPHYLL A,T,epilimnion,9/3/2019,15,ug/L,,sturgeon_pool_epilimnion
+75,"DEPTH, SECCHI DISK DEPTH",,secchi,7/16/2013,1.7,m,,sturgeon_pool_secchi
+76,"DEPTH, SECCHI DISK DEPTH",,secchi,8/13/2013,0.9,m,,sturgeon_pool_secchi
+77,"DEPTH, SECCHI DISK DEPTH",,secchi,9/3/2019,2.9,m,,sturgeon_pool_secchi
+78,"DEPTH, SECCHI DISK DEPTH",,secchi,9/7/2012,2.7,m,,sturgeon_pool_secchi
+79,"DEPTH, SECCHI DISK DEPTH",,secchi,9/11/2013,1.5,m,,sturgeon_pool_secchi
+80,"DEPTH, SECCHI DISK DEPTH",,secchi,6/18/2013,0.5,m,,sturgeon_pool_secchi
+81,"DEPTH, SECCHI DISK DEPTH",,secchi,7/22/2019,0.9,m,,sturgeon_pool_secchi
+82,"DEPTH, SECCHI DISK DEPTH",,secchi,8/12/2019,1.9,m,,sturgeon_pool_secchi
+83,DISSOLVED ORGANIC CARBON,D,epilimnion,9/3/2019,6.2,mg/L,,sturgeon_pool_epilimnion
+84,DISSOLVED ORGANIC CARBON,D,hypolimnion,9/3/2019,6.2,mg/L,,sturgeon_pool_hypolimnion
+85,IRON,T,epilimnion,9/3/2019,86.5,ug/L,estimated value due to lab error,sturgeon_pool_epilimnion
+86,IRON,T,epilimnion,7/22/2019,103,ug/L,,sturgeon_pool_epilimnion
+87,IRON,T,epilimnion,8/12/2019,164,ug/L,,sturgeon_pool_epilimnion
+88,IRON,T,hypolimnion,7/22/2019,195,ug/L,,sturgeon_pool_hypolimnion
+89,IRON,T,hypolimnion,9/3/2019,196,ug/L,,sturgeon_pool_hypolimnion
+90,IRON,T,hypolimnion,9/7/2012,248,ug/L,,sturgeon_pool_hypolimnion
+91,IRON,T,epilimnion,9/7/2012,39.7,ug/L,,sturgeon_pool_epilimnion
+92,IRON,T,hypolimnion,8/12/2019,310,ug/L,,sturgeon_pool_hypolimnion
+93,MAGNESIUM,T,hypolimnion,9/7/2012,8800,ug/L,,sturgeon_pool_hypolimnion
+94,MAGNESIUM,T,epilimnion,9/7/2012,10900,ug/L,,sturgeon_pool_epilimnion
+95,MANGANESE,T,epilimnion,8/12/2019,32.7,ug/L,,sturgeon_pool_epilimnion
+96,MANGANESE,T,hypolimnion,8/12/2019,136,ug/L,,sturgeon_pool_hypolimnion
+97,MANGANESE,T,epilimnion,9/3/2019,31.6,ug/L,,sturgeon_pool_epilimnion
+98,MANGANESE,T,hypolimnion,9/3/2019,131,ug/L,,sturgeon_pool_hypolimnion
+99,MANGANESE,T,epilimnion,7/22/2019,66.7,ug/L,,sturgeon_pool_epilimnion
+100,MANGANESE,T,hypolimnion,7/22/2019,939,ug/L,,sturgeon_pool_hypolimnion
+101,MANGANESE,T,hypolimnion,9/7/2012,4260,ug/L,,sturgeon_pool_hypolimnion
+102,MANGANESE,T,epilimnion,9/7/2012,29.2,ug/L,,sturgeon_pool_epilimnion
+103,"NITROGEN, KJELDAHL, TOTAL",T,epilimnion,7/16/2013,0.72,mg/L,,sturgeon_pool_epilimnion
+104,"NITROGEN, KJELDAHL, TOTAL",T,epilimnion,9/11/2013,0.84,mg/L,,sturgeon_pool_epilimnion
+105,"NITROGEN, KJELDAHL, TOTAL",T,hypolimnion,6/18/2013,0.74,mg/L,,sturgeon_pool_hypolimnion
+106,"NITROGEN, KJELDAHL, TOTAL",T,hypolimnion,7/16/2013,0.97,mg/L,,sturgeon_pool_hypolimnion
+107,"NITROGEN, KJELDAHL, TOTAL",T,epilimnion,6/18/2013,0.62,mg/L,,sturgeon_pool_epilimnion
+108,"NITROGEN, KJELDAHL, TOTAL",T,epilimnion,8/13/2013,1,mg/L,,sturgeon_pool_epilimnion
+109,"NITROGEN, KJELDAHL, TOTAL",T,epilimnion,8/12/2019,0.78,mg/L,,sturgeon_pool_epilimnion
+110,"NITROGEN, KJELDAHL, TOTAL",T,hypolimnion,8/12/2019,0.78,mg/L,estimated value due to Equipment Blank error,sturgeon_pool_hypolimnion
+111,"NITROGEN, KJELDAHL, TOTAL",T,epilimnion,9/3/2019,0.61,mg/L,,sturgeon_pool_epilimnion
+112,"NITROGEN, KJELDAHL, TOTAL",T,hypolimnion,9/3/2019,0.69,mg/L,,sturgeon_pool_hypolimnion
+113,"NITROGEN, KJELDAHL, TOTAL",T,hypolimnion,9/11/2013,1.12,mg/L,,sturgeon_pool_hypolimnion
+114,"NITROGEN, KJELDAHL, TOTAL",T,hypolimnion,9/7/2012,2.11,mg/L,,sturgeon_pool_hypolimnion
+115,"NITROGEN, KJELDAHL, TOTAL",T,epilimnion,7/22/2019,0.96,mg/L,,sturgeon_pool_epilimnion
+116,"NITROGEN, KJELDAHL, TOTAL",T,epilimnion,9/7/2012,0.7,mg/L,,sturgeon_pool_epilimnion
+117,"NITROGEN, KJELDAHL, TOTAL",T,hypolimnion,8/13/2013,0.88,mg/L,,sturgeon_pool_hypolimnion
+118,"NITROGEN, NITRATE-NITRITE",T,hypolimnion,9/7/2012,0.0921,mg/L,,sturgeon_pool_hypolimnion
+119,"NITROGEN, NITRATE-NITRITE",T,epilimnion,6/18/2013,0.615,mg/L,,sturgeon_pool_epilimnion
+120,"NITROGEN, NITRATE-NITRITE",T,epilimnion,7/22/2019,0.056,mg/L,,sturgeon_pool_epilimnion
+121,"NITROGEN, NITRATE-NITRITE",T,hypolimnion,8/12/2019,0.903,mg/L,,sturgeon_pool_hypolimnion
+122,"NITROGEN, NITRATE-NITRITE",T,hypolimnion,7/22/2019,0.297,mg/L,,sturgeon_pool_hypolimnion
+123,"NITROGEN, NITRATE-NITRITE",T,hypolimnion,8/13/2013,0.608,mg/L,,sturgeon_pool_hypolimnion
+124,"NITROGEN, NITRATE-NITRITE",T,hypolimnion,9/11/2013,1.75,mg/L,,sturgeon_pool_hypolimnion
+125,"NITROGEN, NITRATE-NITRITE",T,epilimnion,9/11/2013,1.38,mg/L,,sturgeon_pool_epilimnion
+126,"NITROGEN, NITRATE-NITRITE",T,epilimnion,8/13/2013,0.673,mg/L,,sturgeon_pool_epilimnion
+127,"NITROGEN, NITRATE-NITRITE",T,epilimnion,9/3/2019,0.7,mg/L,,sturgeon_pool_epilimnion
+128,"NITROGEN, NITRATE-NITRITE",T,hypolimnion,9/3/2019,0.657,mg/L,,sturgeon_pool_hypolimnion
+129,"NITROGEN, NITRATE-NITRITE",T,hypolimnion,6/18/2013,0.833,mg/L,,sturgeon_pool_hypolimnion
+130,"NITROGEN, NITRATE-NITRITE",T,hypolimnion,7/16/2013,0.455,mg/L,,sturgeon_pool_hypolimnion
+131,"NITROGEN, NITRATE-NITRITE",T,epilimnion,7/16/2013,0.506,mg/L,,sturgeon_pool_epilimnion
+132,"NITROGEN, NITRATE-NITRITE",T,epilimnion,9/7/2012,0.213,mg/L,,sturgeon_pool_epilimnion
+133,"NITROGEN, NITRATE-NITRITE",T,epilimnion,8/12/2019,0.661,mg/L,,sturgeon_pool_epilimnion
+134,PHOSPHORUS,T,epilimnion,7/16/2013,0.117,mg/L,,sturgeon_pool_epilimnion
+135,PHOSPHORUS,T,epilimnion,9/11/2013,0.177,mg/L,,sturgeon_pool_epilimnion
+136,PHOSPHORUS,T,epilimnion,8/13/2013,0.144,mg/L,,sturgeon_pool_epilimnion
+137,PHOSPHORUS,T,epilimnion,9/3/2019,0.122,mg/L,,sturgeon_pool_epilimnion
+138,PHOSPHORUS,T,epilimnion,9/7/2012,0.105,mg/L,,sturgeon_pool_epilimnion
+139,PHOSPHORUS,T,epilimnion,6/18/2013,0.124,mg/L,,sturgeon_pool_epilimnion
+140,PHOSPHORUS,T,epilimnion,7/22/2019,0.105,mg/L,,sturgeon_pool_epilimnion
+141,PHOSPHORUS,D,hypolimnion,9/7/2012,0.181,mg/L,,sturgeon_pool_hypolimnion
+142,PHOSPHORUS,D,hypolimnion,8/13/2013,0.124,mg/L,,sturgeon_pool_hypolimnion
+143,PHOSPHORUS,D,hypolimnion,9/3/2019,0.103,mg/L,,sturgeon_pool_hypolimnion
+144,PHOSPHORUS,D,hypolimnion,7/22/2019,0.102,mg/L,,sturgeon_pool_hypolimnion
+145,PHOSPHORUS,D,hypolimnion,7/16/2013,0.106,mg/L,,sturgeon_pool_hypolimnion
+146,PHOSPHORUS,D,hypolimnion,8/12/2019,0.108,mg/L,,sturgeon_pool_hypolimnion
+147,PHOSPHORUS,D,hypolimnion,6/18/2013,0.116,mg/L,,sturgeon_pool_hypolimnion
+148,PHOSPHORUS,D,hypolimnion,9/11/2013,0.182,mg/L,,sturgeon_pool_hypolimnion
+149,PHOSPHORUS,T,hypolimnion,9/7/2012,0.215,mg/L,,sturgeon_pool_hypolimnion
+150,PHOSPHORUS,T,hypolimnion,7/16/2013,0.13,mg/L,,sturgeon_pool_hypolimnion
+151,PHOSPHORUS,T,hypolimnion,8/13/2013,0.161,mg/L,,sturgeon_pool_hypolimnion
+152,PHOSPHORUS,T,hypolimnion,9/3/2019,0.126,mg/L,,sturgeon_pool_hypolimnion
+153,PHOSPHORUS,T,hypolimnion,7/22/2019,0.119,mg/L,,sturgeon_pool_hypolimnion
+154,PHOSPHORUS,T,hypolimnion,8/12/2019,0.129,mg/L,,sturgeon_pool_hypolimnion
+155,PHOSPHORUS,T,hypolimnion,6/18/2013,0.14,mg/L,,sturgeon_pool_hypolimnion
+156,PHOSPHORUS,T,hypolimnion,9/11/2013,0.213,mg/L,,sturgeon_pool_hypolimnion
+157,PHOSPHORUS,D,epilimnion,9/7/2012,0.0782,mg/L,,sturgeon_pool_epilimnion
+158,PHOSPHORUS,D,epilimnion,8/13/2013,0.12,mg/L,,sturgeon_pool_epilimnion
+159,PHOSPHORUS,D,epilimnion,8/12/2019,0.099,mg/L,,sturgeon_pool_epilimnion
+160,PHOSPHORUS,D,epilimnion,9/3/2019,0.098,mg/L,,sturgeon_pool_epilimnion
+161,PHOSPHORUS,D,epilimnion,6/18/2013,0.0866,mg/L,,sturgeon_pool_epilimnion
+162,PHOSPHORUS,D,epilimnion,9/11/2013,0.151,mg/L,,sturgeon_pool_epilimnion
+163,PHOSPHORUS,D,epilimnion,7/22/2019,0.0568,mg/L,,sturgeon_pool_epilimnion
+164,PHOSPHORUS,D,epilimnion,7/16/2013,0.0252,mg/L,,sturgeon_pool_epilimnion
+165,POTASSIUM,T,hypolimnion,9/7/2012,2100,ug/L,,sturgeon_pool_hypolimnion
+166,POTASSIUM,T,epilimnion,9/7/2012,2660,ug/L,,sturgeon_pool_epilimnion
+167,SILICA,T,epilimnion,7/16/2013,8.3,mg/L,,sturgeon_pool_epilimnion
+168,SILICA,T,hypolimnion,9/7/2012,6.23,mg/L,,sturgeon_pool_hypolimnion
+169,SILICA,T,hypolimnion,6/18/2013,6.89,mg/L,,sturgeon_pool_hypolimnion
+170,SILICA,T,epilimnion,9/7/2012,1.31,mg/L,,sturgeon_pool_epilimnion
+171,SILICA,T,epilimnion,9/11/2013,7.15,mg/L,,sturgeon_pool_epilimnion
+172,SILICA,T,hypolimnion,7/16/2013,6.68,mg/L,,sturgeon_pool_hypolimnion
+173,SILICA,T,epilimnion,8/13/2013,6.95,mg/L,,sturgeon_pool_epilimnion
+174,SILICA,T,hypolimnion,8/13/2013,6.17,mg/L,,sturgeon_pool_hypolimnion
+175,SILICA,T,hypolimnion,9/11/2013,7.76,mg/L,,sturgeon_pool_hypolimnion
+176,SILICA,T,epilimnion,6/18/2013,7.88,mg/L,,sturgeon_pool_epilimnion
+177,SODIUM,T,hypolimnion,9/7/2012,23000,ug/L,,sturgeon_pool_hypolimnion
+178,SODIUM,T,epilimnion,9/7/2012,32200,ug/L,,sturgeon_pool_epilimnion
+179,SULFATE (AS SO4),T,epilimnion,7/22/2019,15.8,mg/L,,sturgeon_pool_epilimnion
+180,SULFATE (AS SO4),T,hypolimnion,8/12/2019,18.2,mg/L,,sturgeon_pool_hypolimnion
+181,SULFATE (AS SO4),T,epilimnion,9/3/2019,18.1,mg/L,,sturgeon_pool_epilimnion
+182,SULFATE (AS SO4),T,hypolimnion,9/3/2019,18,mg/L,,sturgeon_pool_hypolimnion
+183,SULFATE (AS SO4),T,hypolimnion,9/7/2012,11.4,mg/L,,sturgeon_pool_hypolimnion
+184,SULFATE (AS SO4),T,hypolimnion,7/22/2019,9,mg/L,,sturgeon_pool_hypolimnion
+185,SULFATE (AS SO4),T,epilimnion,8/12/2019,17.2,mg/L,,sturgeon_pool_epilimnion
+186,SULFATE (AS SO4),T,epilimnion,9/7/2012,20.2,mg/L,,sturgeon_pool_epilimnion
+187,TOTAL ORGANIC CARBON,T,epilimnion,8/12/2019,7.7,mg/L,,sturgeon_pool_epilimnion
+188,TOTAL ORGANIC CARBON,T,hypolimnion,8/13/2013,8.7,mg/L,,sturgeon_pool_hypolimnion
+189,TOTAL ORGANIC CARBON,T,epilimnion,8/13/2013,9.9,mg/L,,sturgeon_pool_epilimnion
+190,TOTAL ORGANIC CARBON,T,epilimnion,7/22/2019,6.2,mg/L,,sturgeon_pool_epilimnion
+191,TOTAL ORGANIC CARBON,T,epilimnion,7/16/2013,7.3,mg/L,,sturgeon_pool_epilimnion
+192,TOTAL ORGANIC CARBON,T,epilimnion,9/7/2012,6.3,mg/L,,sturgeon_pool_epilimnion
+193,TOTAL ORGANIC CARBON,T,epilimnion,6/18/2013,7.6,mg/L,,sturgeon_pool_epilimnion
+194,TOTAL ORGANIC CARBON,T,hypolimnion,6/18/2013,8.7,mg/L,,sturgeon_pool_hypolimnion
+195,TOTAL ORGANIC CARBON,T,epilimnion,9/11/2013,8.5,mg/L,,sturgeon_pool_epilimnion
+196,TOTAL ORGANIC CARBON,T,hypolimnion,7/16/2013,8.8,mg/L,,sturgeon_pool_hypolimnion
+197,TOTAL ORGANIC CARBON,T,hypolimnion,9/7/2012,7.4,mg/L,,sturgeon_pool_hypolimnion
+198,TOTAL ORGANIC CARBON,T,hypolimnion,9/11/2013,11.1,mg/L,,sturgeon_pool_hypolimnion
+199,TOTAL ORGANIC CARBON,T,hypolimnion,8/12/2019,8.1,mg/L,,sturgeon_pool_hypolimnion
+200,TRUE COLOR,T,hypolimnion,8/13/2013,95,color units,,sturgeon_pool_hypolimnion
+201,TRUE COLOR,T,hypolimnion,7/16/2013,170,color units,,sturgeon_pool_hypolimnion
+202,TRUE COLOR,T,hypolimnion,9/11/2013,76,color units,,sturgeon_pool_hypolimnion
+203,TRUE COLOR,T,epilimnion,9/11/2013,85,color units,,sturgeon_pool_epilimnion
+204,TRUE COLOR,T,epilimnion,6/18/2013,90,color units,,sturgeon_pool_epilimnion
+205,TRUE COLOR,T,epilimnion,7/22/2019,55,color units,,sturgeon_pool_epilimnion
+206,TRUE COLOR,T,hypolimnion,9/3/2019,37,color units,,sturgeon_pool_hypolimnion
+207,TRUE COLOR,T,hypolimnion,8/12/2019,100,color units,,sturgeon_pool_hypolimnion
+208,TRUE COLOR,T,epilimnion,9/3/2019,37,color units,,sturgeon_pool_epilimnion
+209,TRUE COLOR,T,epilimnion,8/12/2019,100,color units,,sturgeon_pool_epilimnion
+210,TRUE COLOR,T,hypolimnion,9/7/2012,43,color units,,sturgeon_pool_hypolimnion
+211,TRUE COLOR,T,epilimnion,9/7/2012,34,color units,,sturgeon_pool_epilimnion
+212,TRUE COLOR,T,hypolimnion,6/18/2013,110,color units,,sturgeon_pool_hypolimnion
+213,TRUE COLOR,T,epilimnion,7/16/2013,85,color units,,sturgeon_pool_epilimnion
+214,TRUE COLOR,T,epilimnion,8/13/2013,90,color units,,sturgeon_pool_epilimnion
