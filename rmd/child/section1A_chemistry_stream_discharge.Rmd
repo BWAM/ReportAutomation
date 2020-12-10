@@ -11,7 +11,7 @@ word_document: default
 #set up the file path
 file.path=file.path(here::here(),
           "data",
-          "chemistry.csv")
+          "chemistry_sp_incl.csv")
 
 #for the table
 file.path.1<-file.path(here::here(),
@@ -26,6 +26,8 @@ file.path.2<-file.path(here::here(),
 file.path.3<-file.path(here::here(),
                        "data",
                        "sbu_chem_2001_2019_provis.csv")
+
+file.path.4<-file.path(here::here(),"data","sturgeonpool_insitu.csv")
 ```
 
 ```{r include=FALSE,message=FALSE,warning=FALSE}
@@ -40,7 +42,7 @@ chem_all<-read.csv(file.path,stringsAsFactors = FALSE)
 #read in the sites table
 sites<-read.csv(file.path(here::here(),
                           "data",
-                          "sites_wallkill.csv"),stringsAsFactors = FALSE)
+                          "sites_wallkill_sturg.csv"),stringsAsFactors = FALSE)
 
 #read in the in-siture data
 insitu<-read.csv(file.path.2,stringsAsFactors = FALSE)
@@ -268,14 +270,8 @@ chem.graph(chem.trans)
 # create graphing function for those that don't need to be log10
 #Chemistry, no transformation of results (in-situ)
 
-#first get the sites and data we want.
-sites.l<-unique(sites$SH_SITE_ID)
-
-insitu.short<-insitu %>% 
-  filter(SITE_ID %in% sites.l)
-#merge to get the order/group/PWL
-
-insitu.short<-merge(insitu.short,sites,by.x="SITE_ID",by.y="SH_SITE_ID")
+#first get the sites and data we want
+insitu.short<-merge(insitu,sites,by.x="SITE_ID",by.y="SH_SITE_ID")
 
 #arrange them according to group and PWL
 insitu.short$SH_PWL_ID<-fct_reorder(insitu.short$SH_PWL_ID, insitu.short$order)
@@ -341,7 +337,3 @@ cat('\n\n')
 chem.graph.n(insitu.short)
 
 ```
-
-
-
-

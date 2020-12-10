@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 file.path.s=file.path(here::here(),
           "data",
-          "sites_wallkill.csv")
+          "sites_wallkill_sturg.csv")
 
 sites<-read.csv(file.path.s,stringsAsFactors = FALSE)
 
