@@ -211,7 +211,11 @@ chem.trans<-chem.trans%>%
 
 ```
 
-```{r chemgraph1, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(chem.trans$chemical_name), ", " , "The X-axis presents WI/PWL ID of the sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Color of the box represents the location of the WI/WPL in the watershed as indicated in the plot legend. Horizontal lines represent the 95th, 75th, and 25th percentiles of statewide data for each endpoint. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III.", sep="")}
+```{r chemgraph1, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(chem.trans$chemical_name), ", " , "The X-axis presents WI/PWL ID of the sampling locations from upstream to downstream. Color of the box represents the location of the WI/WPL in the watershed as indicated in the plot legend. Horizontal lines represent the 95th, 75th, and 25th percentiles of statewide data for each endpoint. Note that the percentiles do not apply to the ponded WI/PWL segment. The total number of reported values illustrated for each sampling location can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III.", sep="")}
+
+#set colors for each group
+group_colors<-c("Lower Wallkill Trib"= "tomato2", "Middle Wallkill Trib"="olivedrab3", "Upper Wallkill Trib"= "springgreen4", "Wallkill Main Stem"="deepskyblue2", "Wallkill Main Stem-Ponded"="magenta2")
+
 # create graphing function for those that need to be log10 (ug/L or mg/l-so not weird ones)
 chem.graph <- function(df, na.rm = TRUE, ...){
   
@@ -243,6 +247,7 @@ chem.graph <- function(df, na.rm = TRUE, ...){
       geom_hline(yintercept=temp.statewide$q95,color="grey53")+
       geom_hline(yintercept=temp.statewide$q75,color="grey53")+
        geom_hline(yintercept=temp.statewide$q25,color="grey53")+
+       scale_color_manual(values=group_colors)+
       annotate(geom="text", label="95th", x=2, y=temp.statewide$q95, vjust=-1,color="grey")+
     annotate(geom="text", label="75th", x=2, y=temp.statewide$q75, vjust=-1,color="grey")+
     annotate(geom="text", label="25th", x=2, y=temp.statewide$q25, vjust=-1,color="grey")
@@ -319,6 +324,7 @@ theme(legend.position="right") +
         geom_hline(yintercept=temp.insitu.sw$q95,color="grey53")+
       geom_hline(yintercept=temp.insitu.sw$q75,color="grey53")+
        geom_hline(yintercept=temp.insitu.sw$q25,color="grey53")+
+   scale_color_manual(values=group_colors)+
        annotate(geom="text", label="95th", x=2, y=temp.insitu.sw$q95, vjust=-1,color="grey")+
     annotate(geom="text", label="75th", x=2, y=temp.insitu.sw$q75, vjust=-1,color="grey")+
     annotate(geom="text", label="25th", x=2, y=temp.insitu.sw$q25, vjust=-1,color="grey")
