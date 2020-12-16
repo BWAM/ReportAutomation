@@ -1,0 +1,395 @@
+---
+title: "StayCALM: Workflow for exceedance number only"
+author: "Zachary M. Smith & Keleigh A. Reynolds"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Workflow}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+# Introduction
+  
+This provides an overview of how to apply to utilize __stayCALM__ to automate waterbody assessments according to the New York State Department of Environmental Conservation's (NYSDEC) Consolidated Assessment and Listing Methodology (CALM).
+  
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+collapse = TRUE,
+comment = "#>"
+)
+```
+
+# stayCALM Package Installation
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+```{r install-github, eval=FALSE}
+install.packages("devtools")
+# Install the stayCALM package from the GitHub stayCALM repository, 
+# of the BWAM GitHub organization.
+devtools::install_github("BWAM/stayCALM")
+```
+
+You must have `rtools` installed on your machine for the stayCALM to be built upon installation from GitHub. `rtools` is __NOT__ an R package. On Windows machines, `rtools` can be installed from the following CRAN repository: https://cran.r-project.org/bin/windows/Rtools/. Be sure to follow the instructions under the header "Putting Rtools on the PATH."
+
+# Prepare the R Environment
+
+Load the necessary R packages into the global environment, including the __stayCALM__ package.
+```{r load-packages, message=FALSE}
+# Load a collection of tidyverse packages into the environment.
+library(tidyverse)
+# Load the stayCALM package into the environment.
+library(stayCALM)
+```
+
+## Establish File Output Directory
+
+Determine the root directory of the R project file currently being utilized. This directory will differ between machine it is executed on.
+```{r}
+# Extract the package root with base R functions.
+# This directory will provide relative paths between machines.
+root.dir <- gsub("(stayCALM)(.*$)", "\\1", getwd())
+```
+
+Specify if you want CSV tables to be export when compiling the document.
+
++ TRUE = Yes, export CSV tables.
++ FALSE = No, do not export CSV tables.
+```{r}
+# This argument is supplied to the Rmarkdown code chunk options.
+export.logical <- TRUE
+```
+
+# Preprocess Data
+
+## Water Quality Standards
+
+The table includes all of the necessary information to compare sampled data to NYSDEC's water quality standards (WQS).
+```{r}
+wqs.df <- stayCALM::nysdec_wqs
+```
+
+## WI/PWL
+
+Data was preprocessed to resemble the expected output from the authoritative databases that will become available as part of the Data Modernization effort.
+```{r}
+data("wipwl.df")
+```
+
+Extract the necessary columns from WI/PWL table (`wipwl.df`) and join this information with the WQS table (`wqs.df`).
+```{r}
+wqs_wipwl.df <- wipwl.df %>%
+  # Subset columns
+  select(seg_id, class, spatial_extent, water_type) %>% 
+  # Ensure all rows are unique representations of the data.
+  distinct() %>%
+  # Join the DF with the WQS by the specified columns.
+  left_join(wqs.df,
+            by = c("class",
+                   "spatial_extent",
+                   "water_type"))
+```
+
+Export the original data as a CSV file.
+```{r, eval=export.logical}
+# Create a CSV of the data set prior to assessing.
+write.csv(wqs_wipwl.df, 
+          # Specify the file directory and name of the file.
+          file = file.path(root.dir,
+                           "data",
+                           "output",
+                           paste0(Sys.Date(),
+                                  "_stay-calm_wqs-wipwl",
+                                  ".csv")),
+          # Drop row names in the CSV output.
+          row.names = FALSE)
+```
+
+## Observed Data
+
+Data was pre-processed to resemble the expected output from the authoritative databases. This was further processed by KAR to create package for computing exceedances only, NOT an Assessment.
+```{r}
+# These data sets have been added to the stayCALM package as .Rda files.
+# This data will eventually be housed in an authoritative database.
+data(smas.df) 
+data(lmas.df)
+
+# Append the SMAS and LMAS data by row.
+org.df <- rbind(smas.df, lmas.df)
+
+# # Keep only the dates within the 10-year assessment period.
+# # StayCALM will flag these dates as outside of the assessment period, but
+# # this can inflate the number of un-assessed waters reported. It is easier,
+# # to filter out the older data here if it is not of interest.
+# day_zero <- stayCALM::date_subtraction(.date = Sys.Date(),
+#                                        .subtract = "10 years")
+# org.df <- org.df[org.df$date >= day_zero, ]
+
+#limit to just the data set we want for wallkill
+cols.keep<-names(org.df)
+
+#need to have the insitu data in there too
+
+raw.wallkill<-read.csv("data/chemistry_sp_incl.csv",stringsAsFactors = FALSE)
+raw.wallkill<-raw.wallkill %>% 
+  rename(value=result_value,
+         units=result_unit,
+         site_id=SITE_ID,
+         sample_id=sample_delivery_group,
+         info_type=INFO_TYPE,
+         date=sample_date,
+         seg_id=SH_PWL_ID,
+         parameter=chemical_name,
+         data_provider=Project_name)
+
+x1<-raw.wallkill[,names(raw.wallkill) %in% cols.keep] 
+x1$depth<-"NA"
+
+insitu<-read.csv("data/in.situ_sp_included.csv",stringsAsFactors = FALSE)
+insitu$PARAMETER_NAME<-tolower(insitu$PARAMETER_NAME)
+insitu$PARAMETER_NAME<-gsub(" ","_",insitu$PARAMETER_NAME)
+
+insitu<-insitu %>% #nee and data provider and quant limit, need pwl id, info_type
+  rename(site_id=SITE_ID,
+         parameter=PARAMETER_NAME,
+         date=Date,
+         value=RESULT,
+         units=unit,
+         validator_qualifiers=VALIDATOR_QUAL,
+         interpreted_qualifiers=VALIDATOR_QUAL_REASON,
+         sample_id=SAMPLE_EVENT_INFO_HISTORY_ID
+         ) %>% 
+  mutate(fraction=case_when(
+    parameter %in% "ph"~"total",
+    parameter %in% "dissolved_oxygen"~"dissolved",
+    TRUE~"total")) %>% 
+  mutate(data_provider="NA",quantitation_limit="NA",info_type="NA")
+
+x2<-insitu[,names(insitu) %in% cols.keep] 
+#x2 needs PWL ID
+
+pwl<-x1 %>% 
+  select(seg_id,site_id) %>% 
+  distinct()
+x2<-merge(x2,pwl,by="site_id")
+
+x3<-rbind(x1,x2)
+
+#fix the chemicals to match wqs file
+x3$parameter<-tolower(x3$parameter)
+
+x3<-x3 %>% 
+  mutate(parameter=case_when(
+    parameter %in% "nitrogen, ammonia (as n)"~ "ammonia",
+    parameter %in% "chloride (as cl)"~"chloride",
+    parameter %in% "total dissolved solids (residue, filterable)" ~ "total_dissolved_solids",
+    parameter %in% "nitrogen, nitrate (as n)"  ~ "nitrate",
+    parameter %in% "nitrogen, nitrite" ~"nitrite",
+    parameter %in%  "nitrate+nitrite as nitrogen" ~"nitrate_nitrite",
+    parameter %in% "sulfate (as so4)"  ~ "sulfate",
+    parameter %in% "hardness (as caco3)"     ~ "hardness",
+    TRUE ~ paste(parameter)
+    
+  )) %>% 
+  mutate(units=case_when(
+    parameter %in% "ph"~"ph_units",
+    TRUE~paste(units)
+  ))
+
+org.df<-x3
+org.df$units<-tolower(org.df$units)
+org.df$date<-as.Date(org.df$date,"%m/%d/%Y")
+
+```
+
+Export the original data as a CSV file.
+```{r, eval=export.logical}
+write.csv(org.df, 
+          file = file.path(root.dir,
+                           "data",
+                           "output",
+                           paste0(Sys.Date(),
+                                  "_stay-calm_original-data",
+                                  ".csv")),
+          row.names = FALSE)
+```
+
+
+```{r}
+chem_extract.df <- org.df %>% 
+  filter(parameter %in% c("hardness", "ph", "temperature")) %>% 
+  tidyr::pivot_wider(
+    id_cols = sample_id,
+    names_from = "parameter",
+    values_from = c("value", "units"),
+    names_sep = "_",
+    values_fn = list(value = mean,
+                     units = unique,
+                     na.rm = TRUE)
+  ) %>% 
+  right_join(org.df, by = "sample_id")
+
+# .data <- org.df
+# params.vec <- c("hardness", "ph", "temperature")
+# 
+# test <- function(...) {
+#   unlist(list(...))
+# }
+# 
+# test1 <- test("hardness", "ph", "temperature")
+# 
+# extract_params <- function(.data , ..., .by_col) {
+#   sub.df <- subset(.data, select = unlist(list(...)))
+#   
+#   chem_extract.df <- 
+#   tidyr::pivot_wider(
+#     id_cols = sample_id,
+#     names_from = "parameter",
+#     values_from = c("value", "units"),
+#     names_sep = "_",
+#     values_fn = list(value = mean,
+#                      units = unique,
+#                      na.rm = TRUE)
+#   ) %>% 
+#   right_join(org.df, by = "sample_id")
+#   
+#   final.df <- merge(.data, chem_extract.df, by = .by_col)
+# }
+
+```
+
+Perform an inner-join with the observed chemical parameter data with the associated WQS and WI/PWL information. An inner-join refers to retaining only rows where a match is found between both data frames. Therefore, at this stage the parameters that are not applicable to a given segment, based on the segments waterbody class, are omitted from the assessment process.
+```{r}
+chem.df <- merge(x = chem_extract.df, 
+                 y = wqs_wipwl.df,
+                 by = c("seg_id", "parameter",
+                        "fraction", "units"))
+```
+
+A number of NYSDEC's WQS (e.g., total ammonia) are determined by other observed environmental variables, such as hardness, water-temperature, or pH. `thresh_determination` applies the appropriate formula for determining the WQS threshold for dissolved cadmium, dissolved copper, dissolved lead, dissolved nickel, dissolved silver, dissolved zinc, fluoride, and ammonia based on the environmental variables known to influence the parameter of interests values.
+```{r, warning=FALSE}
+chem.df <- thresh_determination(chem.df)
+```
+
+The `date_standard_cols` function adds four standard date columns to the data frame:
+
+1. __datetime:__ the date and time the sample was collected
+2. __date:__ the date the sample was collected
+3. __year:__ the year the sample was collected
+4. __month:__ the month the sample was collected as a character string
+
+These columns are useful for grouping the data in subsequent processes. 
+
+
+```{r}
+chem.df$date<-as.Date(chem.df$date,"%m/%d/%Y")
+chem.df$year<-format(chem.df$date,"%Y")
+chem.df$month<-format(chem.df$date,"%m")
+```
+
+Add an assessment ID to simplifying grouping by key fields to perform summary calculations.
+```{r}
+chem.df$assessment_id <- group_id(.data = chem.df,
+                                  .keep = c("seg_id",
+                                            "parameter",
+                                            "fraction"),
+                                  .numeric = TRUE)
+```
+
+Determine if the sample was collected within assessment period specified within the CALM. Currently, the CALM specifies that only data collected within the last ten-years will be utilized for assessments. The `assessment_period` function identifies if the sample was collected (`.date_vec = chem.df$date`) within the specified period (`.n_years_ago = 10`). The `.n_years_ago` can be updated with an integer value if this time period changes in the future. Additionally, the `.n_years_ago` argument is compared against the computers date each time the function is run; therefore, this sampling period changes each day.
+
+This part is most likely unnecessary since Wallkill study,and most other studies, will be for recent data.
+
+```{r}
+chem.df$within_period <- assessment_period(.date_vec = chem.df$date,
+                                           .n_years_ago = 10)
+```
+
+The values are aggregated together based on the sampling block specified and the values are summarized by the a supplied statistic.
+
+There are currently five expected sampling blocks that are specified in the WQS table:
+
+1. __single:__ The value for a given parameter within a segment and the assessment period are not aggregated in anyway. The grouping value assigned is the values row number, which is unique to each row.
+2. __date:__ All values for a given parameter within a segment and the assessment period are aggregated together based on the collection date. The values are grouped by  the "assessment_id", "statistic", "date", and "within_period" columns.
+3. __all:__ All values for a given parameter within a segment and the assessment period are aggregated together. The values are grouped by "assessment_id", "statistic", and "within_period" columns.
+4. __month:__ The values for a given parameter within a segment and the assessment period are aggregated together based on the month the data was collected. The values are grouped by the "assessment_id", "statistic", "year", "month", and "within_period" columns. The "year" column must be included to ensure that data collected during the same month but during different years are not aggregated together.
+5. __30-day:__ The values for a given parameter within a segment and the assessment period are aggregated together based on 30-day rolling window. The values are first grouped by the "assessment_id", "statistic", and "within_period" columns. However, the `rolling` function is subsequently supplied to aggregate the data by a rolling 30-day window.
+
+There are currently seven expected "statistic" inputs:
+
+
+```{r}
+prepped.df <- prep_values(.data = chem.df,
+                          .block_col = "block",
+                          .value_col = "value",
+                          .statistic_col = "statistic",
+                          .new_value_col = "result",
+                          .min_n_col = "min_n")
+```
+
+
+
+```{r}
+selected.df <-
+  subset(
+    prepped.df,
+    select = c(
+      "assessment_id",
+      "seg_id",
+      "site_id",
+      "water_type",
+      "type",
+      "use",
+      "standard_type",
+      "group",
+      "block",
+      "statistic",
+      "parameter",
+      "fraction",
+      "units",
+      "result",
+      "date",
+      "year",
+      "within_period",
+      "direction",
+      "threshold",
+      "summarize_rows",
+      "summarize_rows_operator",
+      "wqs_75p_threshold",
+      "data_provider"
+    )
+  )
+```
+
+This is where it will tally the exceedance or not.
+
+```{r}
+selected.df$attaining_wqs <- attaining(selected.df$result,
+                                       selected.df$direction,
+                                       selected.df$threshold)
+
+selected.df$attaining_75 <- attaining(selected.df$result,
+                                      selected.df$direction,
+                                      selected.df$wqs_75p_threshold)
+```
+
+#This is where we can end for simply an exceedance count
+
+
+```{r}
+#have to work on the grouping for the dissolved O2. 
+#probably group by ID, and then one and the other.
+
+sum.row<-selected.df %>% 
+  subset(summarize_rows_operator %in% "&")
+
+#use split apply combine to split it up by site?
+temp<-split(sum.row,sum.row$parameter)#split into the 2 params, might be able to use the group to do the stats
+temp<-split(temp,temp$dissolved_oxygen$statistic)
+
+temp<-split(temp,temp$mean$dissolved_oxygen$block)#i think it's grouped ok now, but i can't figure out how to do the rest...
+
+
+```
+
