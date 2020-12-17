@@ -393,3 +393,17 @@ temp<-split(temp,temp$mean$dissolved_oxygen$block)#i think it's grouped ok now, 
 
 ```
 
+```{r}
+#Andrea's attempt to do the summarizing while accounting for multiple standards like DO and pH (i think it works)
+
+temp4<-selected.df%>%
+group_by(site_id, parameter, fraction, date)%>%
+  summarize(n=n(),
+    combined=sum(attaining_wqs),
+    WQS_attain_combined= ifelse(combined==n, yes=TRUE, no=FALSE),
+    num_exceedances=(n-combined))
+
+#From here you should be able to left join pwls or raw data back on or filter to do summaries to create tables etc. 
+
+```
+
