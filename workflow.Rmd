@@ -94,16 +94,16 @@ wqs_wipwl.df <- wipwl.df %>%
 Export the original data as a CSV file.
 ```{r, eval=export.logical}
 # Create a CSV of the data set prior to assessing.
-write.csv(wqs_wipwl.df, 
+#write.csv(wqs_wipwl.df, 
           # Specify the file directory and name of the file.
-          file = file.path(root.dir,
-                           "data",
-                           "output",
-                           paste0(Sys.Date(),
-                                  "_stay-calm_wqs-wipwl",
-                                  ".csv")),
+          #file = file.path(root.dir,
+                          # "data",
+                           #"output",
+                           #paste0(Sys.Date(),
+                             #     "_stay-calm_wqs-wipwl",
+                              #    ".csv")),
           # Drop row names in the CSV output.
-          row.names = FALSE)
+         # row.names = FALSE)
 ```
 
 ## Observed Data
@@ -205,14 +205,14 @@ org.df$date<-as.Date(org.df$date,"%m/%d/%Y")
 
 Export the original data as a CSV file.
 ```{r, eval=export.logical}
-write.csv(org.df, 
-          file = file.path(root.dir,
-                           "data",
-                           "output",
-                           paste0(Sys.Date(),
-                                  "_stay-calm_original-data",
-                                  ".csv")),
-          row.names = FALSE)
+#write.csv(org.df, 
+          #file = file.path(root.dir,
+                          # "data",
+                          # "output",
+                          # paste0(Sys.Date(),
+                           #       "_stay-calm_original-data",
+                            #      ".csv")),
+  #        row.names = FALSE)
 ```
 
 
@@ -376,22 +376,6 @@ selected.df$attaining_75 <- attaining(selected.df$result,
 
 #This is where we can end for simply an exceedance count
 
-
-```{r}
-#have to work on the grouping for the dissolved O2. 
-#probably group by ID, and then one and the other.
-
-sum.row<-selected.df %>% 
-  subset(summarize_rows_operator %in% "&")
-
-#use split apply combine to split it up by site?
-temp<-split(sum.row,sum.row$parameter)#split into the 2 params, might be able to use the group to do the stats
-temp<-split(temp,temp$dissolved_oxygen$statistic)
-
-temp<-split(temp,temp$mean$dissolved_oxygen$block)#i think it's grouped ok now, but i can't figure out how to do the rest...
-
-
-```
 
 ```{r}
 #Andrea's attempt to do the summarizing while accounting for multiple standards like DO and pH (i think it works)
