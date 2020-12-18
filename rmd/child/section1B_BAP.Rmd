@@ -97,5 +97,63 @@ ggplot(sum.metrics, aes(SITE_ID, y=mean))+
 
 ```
 
+```{r BAP2, fig.width=7,fig.height=7, message=FALSE, warning=FALSE, echo=FALSE, fig.cap="Biological Assessment Profile (BAP) Scores and 95% confidence intervals for benthic macroinvertebrate community assessment data for the Wallkill River Survey, 2017-2019. Symbology corresponds with WI/PWL segmentation as indicated in the plot legend."}
+
+sum.metrics2<-metrics.df%>%
+  filter(year>2016)%>%
+  rename(BAP=MMDH_BIO_ASMT_PROFILE_SCORE)%>%
+  group_by(SH_PWL_ID)%>%
+  summarise(mean=mean(BAP, na.rm = TRUE),
+            N=n(),
+            sd=sd(BAP, na.rm = TRUE))%>%
+  mutate(se=sd/sqrt(N),
+         ci=qt(1 - ((1 - 0.95) / 2), N - 1) * se)%>%
+  rename(PWL_ID=SH_PWL_ID)
+#create labels
+l<-length(sum.metrics2$PWL_ID)
+
+pwl.l<-unique(sum.metrics2$PWL_ID)
+l.p<-length(pwl.l)
+
+labels.df <- data.frame(
+  label = c("Non", "Slight", "Moderate", "Severe"),
+  x = max(l)+1,
+  y = c(8.75, 6.25, 3.75, 1.25),
+  stringsAsFactors = FALSE)
+
+
+
+b2<-ggplot(sum.metrics2, aes(PWL_ID, y=mean))+
+  geom_point(aes(color=PWL_ID), size=4)+
+  scale_shape_manual(name="PWL Segment ID",values = 0:max(l.p))+
+  geom_errorbar(aes(ymin=mean-ci, ymax=mean+ci),  width=.5)+
+  theme_bw() + 
+  theme(
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank(),#remove gridlines
+  axis.title.y = element_text(
+    size = 12,
+    family = "serif",
+    face = "bold"),
+  axis.title.x = element_blank(),
+  axis.text.x = element_text(
+    angle = 45,
+    hjust = 1,
+    size = 10,
+    family = "serif"), #rotate text angle
+  plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
+  legend.position = c(.11, .81) + #reduces white space around plot edges
+    geom_label(aes(x = .5, y = .5), label = "test")
+)+
+  geom_hline(yintercept=2.5,linetype="dashed",color="grey")+
+  geom_hline(yintercept=5,linetype="dashed",color="grey")+
+  geom_hline(yintercept=7.5,linetype="dashed",color="grey")+
+  ylab("Biological Assessment Profile Score")+xlab("Year")+ geom_text(data = labels.df, aes(max(l)+1, y, label = label), color = "black",angle=90)+
+  expand_limits(y=c(0,10),x=c(0:max(l+2)))
+b2
+
+```
+
+
 
 `
