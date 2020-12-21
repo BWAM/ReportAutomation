@@ -43,12 +43,14 @@ org.df <- rbind(smas.df, lmas.df)
 
 #limit to just the data set we want for wallkill
 cols.keep<-names(org.df)
+#remove org.df
+rm(org.df)
 
 #need to have the insitu data in there too
 
 raw.wallkill<-read.csv(file.path(here::here(),
                          "data",
-                         "chemistry_sp_incl.csv"),
+                         "chemistry_sp_peers_12_21_2020.csv"),
                stringsAsFactors = FALSE)
 
 
@@ -91,6 +93,7 @@ insitu<-insitu %>% #nee and data provider and quant limit, need pwl id, info_typ
     TRUE~"total")) %>% 
   mutate(data_provider="NA",quantitation_limit="NA",info_type="NA")
 
+
 x2<-insitu[,names(insitu) %in% cols.keep] 
 #x2 needs PWL ID
 
@@ -125,6 +128,10 @@ x3<-x3 %>%
 org.df<-x3
 org.df$units<-tolower(org.df$units)
 org.df$date<-as.Date(org.df$date,"%m/%d/%Y")
+org.df$year<-format(org.df$date,"%Y")
+
+org.df<-org.df %>% 
+  subset(year>=2017)
 
 chem_extract.df <- org.df %>% 
   filter(parameter %in% c("hardness", "ph", "temperature")) %>% 

@@ -19,6 +19,7 @@ fp <- fp_par(
   border.bottom = fp_border())
 
 ft <- fp_text(shading.color='#EFEFEF', bold = TRUE)
+
 ```
 
 \newpage

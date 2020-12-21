@@ -99,6 +99,8 @@ ggplot(sum.metrics, aes(SITE_ID, y=mean))+
 
 ```{r BAP2, fig.width=7,fig.height=7, message=FALSE, warning=FALSE, echo=FALSE, fig.cap="Biological Assessment Profile (BAP) Scores and 95% confidence intervals for benthic macroinvertebrate community assessment data for the Wallkill River Survey, 2017-2019. Symbology corresponds with WI/PWL segmentation as indicated in the plot legend."}
 
+
+#need to figure out how to reorder them.
 sum.metrics2<-metrics.df%>%
   filter(year>2016)%>%
   rename(BAP=MMDH_BIO_ASMT_PROFILE_SCORE)%>%
@@ -124,7 +126,7 @@ labels.df <- data.frame(
 
 
 b2<-ggplot(sum.metrics2, aes(PWL_ID, y=mean))+
-  geom_point(aes(color=PWL_ID), size=4)+
+  geom_point(size=4)+
   scale_shape_manual(name="PWL Segment ID",values = 0:max(l.p))+
   geom_errorbar(aes(ymin=mean-ci, ymax=mean+ci),  width=.5)+
   theme_bw() + 

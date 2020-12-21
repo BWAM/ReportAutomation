@@ -11,7 +11,7 @@ word_document: default
 #set up the file path
 file.path=file.path(here::here(),
           "data",
-          "chemistry_sp_incl.csv")
+          "chemistry_sp_peers_12_21_2020.csv")
 
 #for the table
 file.path.1<-file.path(here::here(),
