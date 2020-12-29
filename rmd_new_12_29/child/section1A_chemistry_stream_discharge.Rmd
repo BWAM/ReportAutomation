@@ -1,0 +1,459 @@
+---
+title: "Section 1 a) Chemistry and Stream Discharge"
+author: 'NYSDEC SMAS : Keleigh Reynolds'
+date: "4/10/2020"
+output: 
+word_document: default
+---
+
+```{r include=FALSE, message=FALSE,warning=FALSE}
+
+file.path.b=here::here()
+
+source(paste(file.path.b,"rmd","stayCALM_exceedance_calc.R",sep = "/"))
+
+#set up the file path
+file.path=file.path(here::here(),
+          "data",
+          "chemistry_sp_peers_12_21_2020.csv")
+
+#for the table
+file.path.1<-file.path(here::here(),
+                       "data",
+                       "qaqc_analyte_table.csv")
+
+#for in-siture
+file.path.2<-file.path(here::here(),
+                       "data",
+                       "insitu_chem.csv")
+
+file.path.3<-file.path(here::here(),
+                       "data",
+                       "sbu_chem_2001_2019_provis.csv")
+
+file.path.4<-file.path(here::here(),"data","sturgeonpool_insitu.csv")
+
+```
+
+```{r include=FALSE,message=FALSE,warning=FALSE}
+#Read in the data needed for the section
+
+#analyte table
+analyte<-read.csv(file.path.1,stringsAsFactors = FALSE)
+
+#read in the chemistry file
+chem_all<-read.csv(file.path,stringsAsFactors = FALSE)
+
+#read in the sites table
+sites<-read.csv(file.path(here::here(),
+                          "data",
+                          "sites_wallkill_sturg.csv"),stringsAsFactors = FALSE)
+
+#read in the in-siture data
+insitu<-read.csv(file.path.2,stringsAsFactors = FALSE)
+          
+```
+
+## Analyte Table
+
+```{r tab.id= "Analytes", tab.cap="Water chemistry analytes sampled as part of the Wallkill River Stream Assessment Survey. Table lists sampled analytes and analytical specifications. ^ Precision objectives are defined by results of duplicate samples as described in Appendix III", echo=FALSE, message=FALSE, warning=FALSE}
+
+library(dplyr)
+library(flextable)
+
+#create table for the analyte list/precision method etc
+tl.1<-analyte %>% 
+  rename("Analytical \nLab"=Analytical.Lab,
+         "Method"=Standard.Method,
+         "Calibration: \n Initial"=Cal.initial,
+         "Calibration: \n Ongoing"=cal.ongoing,
+         "Calibration: \n Blanks"=cal.blanks,
+         "Detection \n Limit"=Method.Detection.Limit,
+         "Reporting \n Limit"=Reporting.Limit)
+
+
+tl.1<-flextable(tl.1) %>% 
+  font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% 
+  theme_zebra() %>% 
+  fontsize(size = 8, part="all")%>%
+  autofit()
+tl.1<-align(tl.1, i = NULL, j =(2:10) , align = "center", part = "all")%>%
+  width(j=c(6:10), width = 0.8)%>%
+  width(j=3:5, width=0.6)%>%
+  width(j=1, width=1.2)
+tl.1<-footnote(tl.1,ref_symbols="",value = as_paragraph("* Indicates sampling performed as part of PEERS suite."))
+tl.1
+
+```
+\newpage
+## Water Chemistry by PWL ID
+
+```{r include=FALSE,message=FALSE,warning=FALSE}
+#adding statewide stuff to the graphs
+chem.everywhere<-read.csv(file.path.3,stringsAsFactors = FALSE)
+
+#limit to just eh columns we need
+chem.everywhere<-chem.everywhere %>% 
+  select(site_id,chemical_name,result_value,result_unit,validator_qualifiers,fraction) %>% 
+  rename(CHR_CHEMICAL_NAME=chemical_name,
+         CHR_RESULT_VALUE=result_value,
+         CHR_RESULT_UNIT=result_unit,
+         CHR_VALIDATOR_QUAL=validator_qualifiers)
+    
+
+#take out the ones that were flagged as rejected
+chem.statewide<-chem.everywhere %>% 
+  filter(CHR_VALIDATOR_QUAL!="R") %>% 
+  group_by(site_id,CHR_CHEMICAL_NAME,fraction,CHR_RESULT_UNIT) %>% 
+  summarise(CHR_RESULT_VALUE=mean(CHR_RESULT_VALUE,na.rm = TRUE))
+
+#grouped by site to take care of bias in oversampling "bad" water for studies
+
+#summarize for statwide averages
+chem.statewide<-chem.statewide %>%
+  group_by(CHR_CHEMICAL_NAME) %>% 
+  summarise_at(vars(CHR_RESULT_VALUE),funs(mean(.,na.rm = TRUE),sd(.,na.rm = TRUE),n=n(),q95=quantile(CHR_RESULT_VALUE,.95,na.rm = TRUE),q75=quantile(CHR_RESULT_VALUE,.75,na.rm = TRUE),q50=quantile(CHR_RESULT_VALUE,.50,na.rm=TRUE),q25=quantile(CHR_RESULT_VALUE,.25,na.rm = TRUE)))
+
+#confidence intervals
+chem.statewide.2<-chem.statewide %>% 
+  #mutate(error=(qnorm(0.975)*sd/sqrt(n)),ci95=mean+error,ci.neg95=mean-error)#this is the confidense interval
+  mutate(q95=quantile(chem.statewide$CHR_RESULT_VALUE,.95),q75=quantile(chem.statewide$CHR_RESULT_VALUE,.75),)
+
+#now limit it to just the chemistry we have on hand
+
+chem.short<-chem_all %>% 
+  select(chemical_name) %>% 
+  distinct() 
+
+chem.short$chemical_name<-tolower(chem.short$chemical_name)
+  
+chem.short.l<-unique(chem.short$chemical_name)
+
+chem.statewide<-chem.statewide %>% 
+  filter(CHR_CHEMICAL_NAME %in% chem.short.l)
+
+#change names to match
+
+chem.statewide<-chem.statewide%>%
+  mutate(CHR_CHEMICAL_NAME=case_when(
+    CHR_CHEMICAL_NAME=="chloride (as cl)"~ "Chloride",
+    CHR_CHEMICAL_NAME=="hardness (as caco3)" ~"Hardness (as CaCO3)",
+    CHR_CHEMICAL_NAME=="nitrogen, nitrate (as n)" ~"Nitrate",
+    CHR_CHEMICAL_NAME=="nitrogen, nitrite" ~ "Nitrite",
+    CHR_CHEMICAL_NAME=="phosphorus, total (as p)" ~ "Total Phosphorus",
+    CHR_CHEMICAL_NAME=="total dissolved solids (residue, filterable)" ~ "Total Dissolved Solids",
+    CHR_CHEMICAL_NAME=="alkalinity, total (as caco3)" ~ "Alkalinity",
+    CHR_CHEMICAL_NAME=="nitrogen, kjeldahl, total" ~ "Total Kjeldahl Nitrogen",
+    CHR_CHEMICAL_NAME=="nitrate+nitrite as nitrogen" ~ "Nitrate+Nitrite",
+    CHR_CHEMICAL_NAME=="nitrogen, ammonia (as n)" ~ "Ammonia",
+    CHR_CHEMICAL_NAME=="turbidity" ~ "Turbidity",
+    CHR_CHEMICAL_NAME=="aluminum" ~ "Aluminum",
+    CHR_CHEMICAL_NAME=="arsenic" ~ "Arsenic",
+    CHR_CHEMICAL_NAME=="cadmium" ~ "Cadmium",
+    CHR_CHEMICAL_NAME=="calcium" ~ "Calcium",
+    CHR_CHEMICAL_NAME=="chlorophyll a" ~ "Chlorophyll A",
+    CHR_CHEMICAL_NAME=="copper" ~ "Copper",
+    CHR_CHEMICAL_NAME=="iron" ~ "Iron",
+    CHR_CHEMICAL_NAME=="lead" ~ "Lead",
+    CHR_CHEMICAL_NAME=="magnesium" ~ "Magnesium",
+    CHR_CHEMICAL_NAME=="nickel" ~ "Nickel",
+    CHR_CHEMICAL_NAME=="silver" ~ "Silver",
+    CHR_CHEMICAL_NAME=="zinc" ~ "Zinc",
+    TRUE ~ as.character(CHR_CHEMICAL_NAME)
+  ))
+
+chem.statewide<-chem.statewide %>% 
+    mutate_if(is.numeric, round, 1)
+
+
+
+```
+
+
+```{r include=FALSE,message=FALSE,warning=FALSE}
+
+#Chemistry figures for each analyte
+library(stringr)
+library(reshape2)
+library(ggplot2)
+library(ggthemes)
+library(pander)
+library(dplyr)
+library(forcats)
+
+chem_all$SH_PWL_ID<-as.factor(chem_all$SH_PWL_ID)
+#take out the Rejected samples
+chem_all<-chem_all %>% 
+  filter(chem_all$validator_qualifiers!="R")
+
+#merge with sites to get the order
+#first just grab what we need
+sites.1<-sites %>% 
+  select(order,group,SH_SITE_ID) %>% 
+  rename("SITE_ID"=SH_SITE_ID)
+
+chem_all<-merge(chem_all,sites.1,by="SITE_ID")
+
+#create units column
+chem.trans<-subset(chem_all,chem_all$result_unit=="mg/l"|chem_all$result_unit=="ug/l"|chem_all$result_unit=="ntu")
+chem.trans<-chem.trans %>% 
+   arrange(order)
+
+chem.trans$SH_PWL_ID<-fct_reorder(chem.trans$SH_PWL_ID, chem.trans$order)
+
+
+chem.trans<-chem.trans%>%
+  mutate(chemical_name=case_when(
+    chemical_name=="CHLORIDE (AS CL)"~ "Chloride",
+    chemical_name=="HARDNESS (AS CACO3)" ~"Hardness (as CaCO3)",
+    chemical_name=="NITROGEN, NITRATE (AS N)" ~"Nitrate",
+    chemical_name=="NITROGEN, NITRITE" ~ "Nitrite",
+    chemical_name=="PHOSPHORUS, TOTAL (AS P)" ~ "Total Phosphorus",
+    chemical_name=="TOTAL DISSOLVED SOLIDS (RESIDUE, FILTERABLE)" ~ "Total Dissolved Solids",
+    chemical_name=="ALKALINITY, TOTAL (AS CaCO3)" ~ "Alkalinity",
+    chemical_name=="NITROGEN, KJELDAHL, TOTAL" ~ "Total Kjeldahl Nitrogen",
+    chemical_name=="Nitrate+Nitrite as Nitrogen" ~ "Nitrate+Nitrite",
+    chemical_name=="Nitrogen, ammonia (As N)" ~ "Ammonia",
+    chemical_name=="TURBIDITY" ~ "Turbidity",
+    TRUE ~ as.character(chemical_name)
+  ))%>%
+  filter(chemical_name!="Nitrogen")
+
+
+```
+
+
+##A) Water Chemistry and Stream Discharge
+
+SMAS and HREP  
+Methods used for water chemistry data collection are described by NYSDEC standard operating procedures (SOP). The collection of water chemistry samples followed procedures described in SOP #210(17-19) Collection of Water Column Samples for the Rotating Integrated Basin Studies (RIBS) Program. Where the depth of water permitted, water chemistry samples were collected using the depth-integrating suspended sediment sampler – wading (DH-81) method (SOP #210(17-19)), section 11.2). Where the depth of water was too shallow water chemistry samples were collected using the direct grab method (SOP #210(¬17-19), section 11.6). Water samples were processed using a contract lab with NYS Environmental Laboratory Approval Program (ELAP) certification. 
+
+PEERS  
+
+Methods used for water chemistry data collection are described by NYSDEC standard operating procedures (SOP). The collection of water chemistry samples followed procedures described in SOP #210-18 Collection of Water Column Samples for the Rotating Integrated Basin Studies (RIBS) Program. Water chemistry samples were collected using the direct grab method (SOP #210-18, section 11.6). Water samples were processed using a contract lab with NYS Environmental Laboratory Approval Program (ELAP) certification. No discharge was collected at these locations.
+For samples collected by SMAS and HREP, stream discharge was measured using the velocity-area method according to Turnipseed and Sauer (2010). The velocity-area method (Midsection Method) calculates discharge by subdividing a stream cross-section into 10 equally spaced stations and measuring depth and velocity within each station and summing the products (Turnipseed and Sauer, 2010). A top-set wading rod and Sontek FlowTracker was used. Methods are described in detail in Turnipseed and Sauer (2010) and Appendix I provides pertinent elements. Appendix II provides the field sheet used in collection of stream depth and velocity for discharge calculations.
+
+The collection of water chemistry samples and stream discharge spanned three years (2017, 2018, 2019), included 39 sampling locations, and covered a range of stream flow conditions. PEERS sampling was conducted during 2018 only and included a reduced suite of water quality analytes at nine sampling locations to broaden sampling coverage. Locations were generally sampled eight times with the exception of PEERS sites which were sampled five times. Ambient water chemistry sampling included in situ and lab measured water quality analytes (Table 2). Where applicable, chemistry results were analyzed for exceedances of state water quality standards and summarized below using R programing software (R Core Team, 2017). All raw chemistry results (in situ and lab reported) with all applicable standards and exceedance determinations accompany this report as Attachment I.
+All Wallkill River survey data were subjected to the quality assurance/quality control (QA/QC) protocols detailed in Appendix III. For water chemistry, an evaluation of the precision, accuracy, and completeness of processed water chemistry samples after lab analyses were performed following the methods detailed in part A of Appendix III of this report. Appendix III.B includes a compilation of quality assurance results for each site. Only data meeting the highest data quality standard are reported and used in this report (Appendix III).
+
+```{r include=FALSE,message=FALSE,warning=FALSE}
+#create exceedance stars for each one, using the staycalm package, you get an ouput of temp5, which has exceedances by year and PWL, first sum by pwl, year doensn't need to be on here
+stars<-temp5 %>% 
+  select(PWL_segment,Exceedances,Parameter) %>% 
+  group_by(PWL_segment,Parameter) %>% 
+  summarise(Exceedances=sum(Exceedances)) %>% 
+  mutate(chemical_name=case_when(
+    Parameter=="dissolved_oxygen"~ "Dissolved Oxygen",
+    Parameter=="ph"~"PH",
+    Parameter=="total_dissolved_solids"~"Total Dissolved Solids",
+    Parameter=="iron"~ "Iron"
+  ))
+
+stars$PWL_segment<-as.factor(stars$PWL_segment)
+
+#limit chemistry data set to just those we want
+chem.trans<-chem.trans %>% 
+  filter(chemical_name=="Chloride"|
+           chemical_name=="Chlorophyll A"|
+           chemical_name=="Nitrate+Nitrite"|
+           chemical_name=="Total Kjeldahl Nitrogen"|
+           chemical_name=="Total Phosphorus"|
+           chemical_name=="Total Dissolved Solids")
+
+#set colors for each group
+group_colors<-c("Lower Wallkill Trib"= "tomato2", "Middle Wallkill Trib"="olivedrab3", "Upper Wallkill Trib"= "springgreen4", "Wallkill Main Stem"="deepskyblue2", "Wallkill Main Stem-Ponded"="magenta2")
+#this one for the other values (no transformation of units-In-SITU data)
+
+# create graphing function for those that don't need to be log10
+#Chemistry, no transformation of results (in-situ)
+
+#first get the sites and data we want
+insitu.short<-merge(insitu,sites,by.x="SITE_ID",by.y="SH_SITE_ID")
+
+#arrange them according to group and PWL
+insitu.short$SH_PWL_ID<-fct_reorder(insitu.short$SH_PWL_ID, insitu.short$order)
+
+insitu.short<-insitu.short %>% arrange(order)
+
+insitu.short<-insitu.short %>% 
+  filter(PARAMETER_NAME!="PC_RFU",
+           PARAMETER_NAME!="Chl_RFU",
+           PARAMETER_NAME!="PC_ugL", 
+         PARAMETER_NAME!="Chl_ugL")
+
+insitu.short<-insitu.short %>% 
+  mutate(chemical_name=case_when(
+    PARAMETER_NAME=="DISSOLVED_OXYGEN"~"Dissolved Oxygen",
+    PARAMETER_NAME=="TEMPERATURE"~"Temperature",
+    PARAMETER_NAME=="CONDUCTANCE"~"Conductance",
+    PARAMETER_NAME=="PCT_SATURATION"~ "Percent Saturation",
+    PARAMETER_NAME=="SALINITY"~"Salinity",
+    PARAMETER_NAME=="PH"~"PH",
+    TRUE~paste(PARAMETER_NAME)
+  ))
+
+
+
+#get the statwide values for these as well############################################
+#limit to just eh columns we need
+insitu.statewide<-insitu %>% 
+  select(PARAMETER_NAME,RESULT,VALIDATOR_QUAL)
+
+#summarize for statwide averages
+insitu.statewide<-insitu.statewide %>%
+  group_by(PARAMETER_NAME) %>% 
+  summarise_at(vars(RESULT),funs(mean(.,na.rm = TRUE),sd(.,na.rm = TRUE),n=n(),q95=quantile(RESULT,.95,na.rm = TRUE),q75=quantile(RESULT,.75,na.rm = TRUE),q50=quantile(RESULT,.50,na.rm=TRUE),q25=quantile(RESULT,.25,na.rm = TRUE)))
+
+insitu.statewide<-insitu.statewide %>% 
+  mutate(chemical_name=case_when(
+    PARAMETER_NAME=="DISSOLVED_OXYGEN"~"Dissolved Oxygen",
+    PARAMETER_NAME=="TEMPERATURE"~"Temperature",
+    PARAMETER_NAME=="CONDUCTANCE"~"Conductance",
+    PARAMETER_NAME=="PCT_SATURATION"~ "Percent (%) Saturation",
+    PARAMETER_NAME=="SALINITY"~"Salinity",
+    PARAMETER_NAME=="PH"~"PH",
+    TRUE~paste(PARAMETER_NAME)
+  ))
+
+
+#confidence intervals
+#insitu.statewide<-insitu.statewide %>% 
+  #mutate(error=(qnorm(0.975)*sd/sqrt(n)),ci95=mean+error,ci.neg95=mean-error)
+
+#chnage names to match the insitu files
+  stars.insitu<-stars %>% 
+    mutate(chemical_name=case_when(
+      Parameter=="dissolved_oxygen"~"Dissolved Oxygen",
+      Parameter=="ph"~"PH",
+      Parameter=="total_dissolved_solids"~"Total Dissolved Solids",
+      Parameter=="iron"~"Iron"
+    ))
+
+```
+
+
+##Exceedances of Water Quality Standards
+
+Exceedances of water quality standards occurred in `r n_distinct(temp5$PWL_segment)` of `r n_distinct(sites$SH_PWL_ID)` WI/PWL segments. A total of `r n_distinct(chem.short$chemical_name)` lab-measured, and `r n_distinct(insitu.short$chemical_name)` in situ water quality analytes, were analyzed and out of the `r nrow(chem_all)` lab-measured records and `r nrow(insitu.short)` in situ water quality records, there were `r sum(temp5$Exceedances)` exceedances of established water quality standards (6 NYCRR Part 703). There were exceedances in dissolved oxygen, iron (total), total dissolved solids, and pH. Chloride and nutrient concentrations across the Wallkill watershed were generally elevated relative to statewide data concentrations. Nutrients are regulated by a narrative water quality standard stating: “None in amounts that result in growths of algae, weeds, and slimes that will impair the waters for their best usages” (6 NYCRR 703.2). 
+
+Plots illustrating the range of analyte concentration values within each WI/PWL segments from both mainstem and tributaries, are included in this report (Figures 2 – 9) from upstream to downstream. Locations on a WI/PWL tributary segments are inserted between mainstem WI/PWL segments. The total number of values represented for each WI/PWL segment can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III. Analytes selected for presentation were subset to those of specific interest to the study. Therefore, the analytes presented here include: Chloride; Chorophyll-a; inorganic nitrogen (NO2+NO3); organic nitrogen (Total Kjeldahl Nitrogen); Total Phosphorus; Total Dissolved Solids; Dissolved Oxygen (in situ), Temperature (in situ), Conductanct (in situ) and pH (in situ). To provide context, each figure contains lines representing the 25th, 75th, and 95th percentiles of each analyte collected statewide by SMAS from 2001 to 2019. Exceedance within a PWL segment are indicated by an asterisk. Site specific exceedance are quantified in Section II. 
+
+
+```{r chemgraph1, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(chem.trans$chemical_name), ", " , "The X-axis presents WI/PWL ID of the sampling locations from upstream to downstream. Color of the box represents the location of the WI/WPL in the watershed as indicated in the plot legend.", sep="")}
+
+
+# create graphing function for those that need to be log10 (ug/L or mg/l-so not weird ones)
+chem.graph <- function(df, na.rm = TRUE, ...){
+  
+  # create list of chmistry's in data to loop over 
+  chem_list <- unique(df$chemical_name)
+  l<-length(chem_list)
+  y=tail(df$SH_PWL_ID)#get the factor alone for the plots
+  
+  for (i in seq_along(chem_list)) { 
+    #order by group
+    df<-df %>% 
+       arrange(order)
+    
+    temp.statewide<-subset(chem.statewide,chem.statewide$CHR_CHEMICAL_NAME==chem_list[i])
+    temp.stars<-subset(stars,stars$chemical_name==chem_list[i])
+    
+
+    # create plot for each PWL in df 
+    plot <- 
+      ggplot(subset(df, df$chemical_name==chem_list[i]),
+             aes(SH_PWL_ID,result_value,group=SH_PWL_ID,color=group))+ 
+      
+      geom_boxplot() +
+
+      #scale_shape_manual(name="PWL Segment ID",values = 0:max(l))+
+      
+      theme_grey() +
+      theme(axis.text.x = element_text(angle = 60, hjust = 1))+
+      theme(legend.position="right") + 
+      
+      scale_y_log10(paste(df$chemical_name[df$chemical_name==chem_list[i]], df$result_unit[df$chemical_name==chem_list[i]], "log(10)")) + 
+      xlab("Location ID")+
+      geom_hline(yintercept=temp.statewide$q95,color="grey53")+
+      geom_hline(yintercept=temp.statewide$q75,color="grey53")+
+       geom_hline(yintercept=temp.statewide$q25,color="grey53")+
+       scale_color_manual(values=group_colors)+
+      expand_limits(x=nlevels(y)+5)+
+      annotate(geom="text", label=paste("95th",temp.statewide$q95,sep="-"), x=nlevels(y)+2, y=temp.statewide$q95, vjust=-1,color="grey")+
+    annotate(geom="text", label=paste("75th",temp.statewide$q75,sep="-"), x=nlevels(y)+2, y=temp.statewide$q75, vjust=-1,color="grey")+
+    annotate(geom="text", label=paste("25th",temp.statewide$q25,sep="-"), x=nlevels(y)+2, y=temp.statewide$q25, vjust=-1,color="grey")+
+      annotate(geom = "text",label=paste("*"),x=temp.stars$PWL_segment, y=(min(df$result_value[df$chemical_name==chem_list[i]])-10),color="black")+
+      theme(legend.title=element_blank())# print plots to screen
+    print(plot)
+    cat('\n\n') 
+    
+  }
+  
+  
+}
+
+chem.graph(chem.trans) 
+
+```
+
+
+
+```{r insituChem, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(insitu.short$chemical_name), ", " , "The X-axis presents WI/PWL ID of the sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Color of the box represents the location of the WI/WPL in the watershed as indicated in the plot legend.", sep="")}
+
+
+chem.graph.n <- function(df, na.rm = TRUE, ...){
+
+# create list of chmistry's in data to loop over 
+chem_list.2 <- unique(df$chemical_name)
+y=tail(df$SH_PWL_ID)#get the factor alone for the plots
+  
+for (i in seq_along(chem_list.2)) { 
+
+#create dataframe for statewide
+  temp.insitu.sw<-subset(insitu.statewide,insitu.statewide$chemical_name==chem_list.2[i])
+
+     #order by group
+    df<-df %>% 
+       arrange(order)
+    
+  temp.stars.i<-subset(stars.insitu,stars$chemical_name==chem_list.2[i])
+    
+  
+# create plot for each parameter with PWL in df 
+ plot <- 
+   ggplot(subset(df, df$chemical_name==chem_list.2[i]),
+    aes(SH_PWL_ID,RESULT,group=SH_PWL_ID,color=group))+ 
+
+  geom_boxplot() +
+
+ theme_grey() +
+ theme(axis.text.x = element_text(angle = 60, hjust = 1))+
+theme(legend.position="right") +
+
+ scale_y_continuous(paste(df$chemical_name[df$chemical_name==chem_list.2[i]],df$unit[df$chemical_name==chem_list.2[i]])) + 
+ xlab("Location ID")+
+   expand_limits(x=nlevels(y)+5)+
+        geom_hline(yintercept=temp.insitu.sw$q95,color="grey53")+
+      geom_hline(yintercept=temp.insitu.sw$q75,color="grey53")+
+       geom_hline(yintercept=temp.insitu.sw$q25,color="grey53")+
+   scale_color_manual(values=group_colors)+
+       annotate(geom="text", label=paste("95th",temp.insitu.sw$q95,sep="-"), x=nlevels(y)+2, y=temp.insitu.sw$q95, vjust=-1,color="grey")+
+    annotate(geom="text", label=paste("75th",temp.insitu.sw$q75,sep="-"), x=nlevels(y)+2, y=temp.insitu.sw$q75, vjust=-1,color="grey")+
+    annotate(geom="text", label=paste("25th",temp.insitu.sw$q25,sep="-"), x=nlevels(y)+2, y=temp.insitu.sw$q25, vjust=-1,color="grey")+
+    annotate(geom = "text",label=paste("*"),x=temp.stars.i$PWL_segment, y=0,color="black")+
+      theme(legend.title=element_blank())
+    
+
+
+# print plots to screen
+ print(plot)
+
+cat('\n\n')   
+ }
+
+}
+
+ 
+chem.graph.n(insitu.short)
+
+```

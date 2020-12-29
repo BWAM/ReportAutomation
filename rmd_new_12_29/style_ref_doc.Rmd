@@ -1,0 +1,18 @@
+---
+title: "Wallkill River Automated Reporting"
+author: "NYSDEC SMAS : Keleigh Reynolds"
+date: "8/4/2020"
+output: 
+  bookdown::word_document2:
+  fig_caption: yes
+---
+
+# Section 1 - General
+```{r child="child/section1_General.Rmd"}
+
+```
+
+# Section 1A - Water Chemistry and Stream Discharge
+```{r child="child/section1A_chemistry_stream_discharge.Rmd"}
+
+```

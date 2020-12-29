@@ -1,0 +1,232 @@
+---
+title: "section1C_stream_reach_physical_char"
+author: 'NYSDEC SMAS : Keleigh Reynolds'
+date: "4/16/2020"
+output:
+  word_document: default
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+
+#set up the file path
+file.path.h=file.path(here::here(),
+          "data",
+          "habitat_wk.csv")
+
+file.path.s<-file.path(here::here(),
+                       "data",
+                       "sites_wallkill_sturg.csv")
+
+```
+
+```{r include=FALSE,message=FALSE,warning=FALSE}
+#function to make the sites a factor in order from upstream to downstream
+order_sites<-function(df, sites_table, df_site_col, sites_site_col){
+Sites<-sites_table%>%
+  dplyr::rename(SITE_ID=sites_site_col)
+
+df<-df%>%
+  dplyr::rename(SITE_ID=df_site_col)
+
+all_data<-left_join(df, Sites)
+all_data<-all_data%>%
+  dplyr::arrange(order)%>%
+  dplyr::mutate(SITE_ID=factor(SITE_ID, levels = unique(SITE_ID)))
+
+columns<-colnames(Sites)
+columns<-columns[!(columns %in% "SITE_ID")]
+
+all_data<-all_data%>%
+  dplyr::select(!tidyselect::any_of(columns))
+}
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+#read in the habitat data
+habit<-read.csv(file.path.h,stringsAsFactors = FALSE)
+
+#select relevant columns
+habit<-habit %>% 
+  select("Location ID" =SITE_ID, "Collection \n Date"=COLL_DATE, "Gradient"=HFDH_GRADIENT, "Epi.\n Cover"=HFDH_EPIFAUNAL_COVER, "Embed. \n Pool."=HFDH_EMBEDDEDNESS_POOLING, "Vel/Dep. \n Reg"=HFDH_VELOCITY_DEPTH_REGIME,
+         "Sed. \n Dep."=HFDH_SEDIMENT_DEPOSITION, "Flow \n Status"=HFDH_FLOW_STATUS, "Chan. \n Alt"=HFDH_CHANNEL_ALTERATION, "Rif. \n Freq"=HFDH_RIFFLE_BEND_FREQUENCY, "L.B. \n Stability"=HFDH_LEFT_BANK_STABILITY, "R.B. \n Stability"= HFDH_RIGHT_BANK_STABILITY, "L.B. \n Veg"= HFDH_LEFT_BANK_VEG, "R.B.\n Veg"=HFDH_RIGHT_BANK_VEG, "L.B. \n Veg Zone"=HFDH_LEFT_BANK_VEG_ZONE, "R.B. \n Veg Zone"=HFDH_RIGHT_BANK_VEG_ZONE) 
+
+library(lubridate)
+habit<-habit %>% 
+  mutate(year=year(`Collection \n Date`))
+
+#limit to last 3 years
+
+habit<-habit %>% 
+  filter(year >= 2017)
+
+#read in sites table and reorder sites upstream to downstream
+sites<-read.csv(file.path.s,stringsAsFactors = FALSE)
+
+habit<-habit%>%
+  order_sites(sites_table = sites, df_site_col = "Location ID", sites_site_col = "SH_SITE_ID")
+
+habit$year<-NULL
+#get pwl into the figure
+pwl<-sites %>% 
+  select(SH_PWL_ID,SH_SITE_ID,order) %>% 
+  rename(SITE_ID=SH_SITE_ID)
+
+#Average all entries per site
+habit<-habit%>%
+  group_by(SITE_ID, Gradient)%>%
+  summarize(`Epi.\n Cover`=mean(`Epi.\n Cover`),
+            `Embed. \n Pool.`=mean(`Embed. \n Pool.`),
+            `Vel/Dep. \n Reg.`=mean(`Vel/Dep. \n Reg`),
+            `Sed. \n Dep.`=mean(`Sed. \n Dep.`),
+            `Flow \n Status`=mean(`Flow \n Status`),
+            `Chan. \n Alt`=mean(`Chan. \n Alt`),
+            `Rif. \n Freq`=mean(`Rif. \n Freq`),
+            `L.B. \n Stability`=mean(`L.B. \n Stability`),
+            `R.B. \n Stability`=mean(`R.B. \n Stability`),
+            `L.B. \n Veg`=mean(`L.B. \n Veg`),
+            `R.B.\n Veg`=mean(`R.B.\n Veg`),
+            `L.B. \n Veg Zone`=mean(`L.B. \n Veg Zone`),
+            `R.B. \n Veg Zone`=mean(`R.B. \n Veg Zone`))
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Add HMA model values to the table, add columns to see whether the model or stream score is lower, calculate HMA, add column to interpret HMA score
+habit.hma<-habit%>%
+  mutate(EpiCoverM=case_when(
+    Gradient=="High" ~ 17,
+    TRUE ~ 14),
+    EmbedM=case_when(
+      Gradient=="High" ~ 17,
+      TRUE ~ 13),
+    VelDepM=case_when(
+      Gradient=="High" ~ 19,
+      TRUE~10),
+    SedDepM=case_when(
+      Gradient=="High" ~ 18,
+      TRUE ~ 14),
+    FlowM=case_when(
+      Gradient=="High" ~19,
+      TRUE ~17),
+    ChanM=case_when(
+      Gradient=="High"~ 18,
+      TRUE ~ 17),
+    RiffleM=case_when(
+      Gradient=="High"~ 19,
+      TRUE~ 14),
+    StabilityM=18,
+    VegM=case_when(
+      Gradient=="High" ~ 18,
+      TRUE ~ 17),
+    VegZoneM=case_when(
+      Gradient=="High" ~ 18,
+      TRUE ~ 15),
+    EpiCover.Low= case_when(
+      `Epi.
+ Cover`<= EpiCoverM ~ `Epi.
+ Cover`,
+ TRUE ~ EpiCoverM),
+  Embed.Low=case_when(
+    `Embed. 
+ Pool.`<=EmbedM ~ `Embed. 
+ Pool.`,
+ TRUE~EmbedM),
+ VelDep.Low=case_when(
+   `Vel/Dep. 
+ Reg.`<=VelDepM ~ `Vel/Dep. 
+ Reg.`,
+ TRUE~ VelDepM),
+ SedDep.Low=case_when(
+   `Sed. 
+ Dep.`<=SedDepM ~ `Sed. 
+ Dep.`,
+ TRUE~ SedDepM),
+ Flow.Low=case_when(
+   `Flow 
+ Status`<=FlowM ~ `Flow 
+ Status`,
+ TRUE ~ FlowM),
+ Chan.Low=case_when(
+   `Chan. 
+ Alt`<=ChanM ~ `Chan. 
+ Alt`,
+ TRUE~ ChanM),
+ Riffle.Low=case_when(
+   `Rif. 
+ Freq`<=RiffleM ~ `Rif. 
+ Freq`,
+ TRUE ~ RiffleM),
+ Stability.Low=case_when(
+   (`L.B. \n Stability`+ `R.B. \n Stability`)<=StabilityM ~ (`L.B. \n Stability`+ `R.B. \n Stability`),
+   TRUE~ StabilityM),
+ Veg.Low=case_when(
+   (`L.B. \n Veg`+`R.B.\n Veg`)<=VegM ~ (`L.B. \n Veg`+`R.B.\n Veg`),
+   TRUE ~ VegM),
+ Veg.Zone.Low=case_when(
+   (`L.B. \n Veg Zone`+ `R.B. \n Veg Zone`)<= VegZoneM ~ (`L.B. \n Veg Zone`+ `R.B. \n Veg Zone`),
+   TRUE~VegZoneM),
+ `HMA \n Score`= case_when(
+   Gradient=="High" ~(EpiCover.Low+ Embed.Low+ VelDep.Low+ SedDep.Low+ Flow.Low+ Chan.Low+ Riffle.Low+ Stability.Low+Veg.Low+ Veg.Zone.Low)/181*100,
+   TRUE ~ (EpiCover.Low+ Embed.Low+ VelDep.Low+ SedDep.Low+ Flow.Low+ Chan.Low+ Riffle.Low+ Stability.Low+Veg.Low+ Veg.Zone.Low)/149*100),
+ `HMA \n Assess.`=case_when(
+   `HMA \n Score`>=80 ~ "Natural",
+   `HMA \n Score`>=70&`HMA \n Score`<80 ~ "Altered",
+   `HMA \n Score`>=60 & `HMA \n Score` <70 ~ "Moderate",
+   TRUE~ "Severe"
+ ))
+
+
+habit.hma$`HMA \n Score`<-round(habit.hma$`HMA 
+ Score`, 1)
+
+```
+
+<!---BLOCK_LANDSCAPE_START--->
+
+```{r tab.id="Habitat-table", tab.cap="Ranked habitat characteristics and calculated HMA for the Wallkill River Survey, 2017-2019. Epifaunal substrate (Epi. Cover); Embeddedness/Pool Substrate Characterization (Embed. Pool.); Velocity Depth Regime/Pool Variability (Vel/Dep Reg.); Sediment Deposition (Sed. Dep.); Channel Flow Status (Flow Status); Channel Alteration (Chan. Alt.); Riffle Frequency/Stream Sinuosity (Rif. Freq.); Left and Right Bank Stability (L.B. and R.B. Stability); Left and Right Bank Vegetation (L.B. and R.B. Veg); Width of Left and Right Bank Vegetative Zone (L.B. and R.B. Veg Zone); Habitat Model Affinity Score (HMA Score); HMA Assessment (HMA Assess.)", echo=FALSE, message=FALSE,warning=FALSE}
+#table
+#get pwl into the table
+
+habit.hma<-merge(habit.hma, pwl, by="SITE_ID")
+
+habit.hma<-habit.hma %>% 
+  arrange(order)
+habit.hma$order<-NULL
+
+habit.hma<-habit.hma %>% 
+  rename("PWL ID"=SH_PWL_ID)
+
+
+#create function for common tables
+#df is the data frame, x and y are the column numbers you want centered, z is the caption
+table.f<-function(df,x,y){
+ library(flextable)
+  tl<-flextable(df) %>% font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% theme_zebra() %>% autofit()
+tl<-align(tl, i = NULL, j =(x:y) , align = "center", part = "all")
+tl
+}
+
+#call the function
+tl<-table.f(habit.hma[,c(1,38,2:15,36,37)],2,17)
+
+#this part might have to be figured out later, with a larger caption/table function? Not sure yet.
+
+
+tl<-tl%>%
+  fontsize(size=7, part = "all")%>%
+  width(j=1:18, width=0.4)%>%
+  width(j=c(4,5,10,11), width = 0.5)%>%
+  width(j=c(17), width=0.6)%>%
+  width(j=1, width=0.8) %>% 
+  fit_to_width(max_width = 10)
+
+tl
+
+```
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+
