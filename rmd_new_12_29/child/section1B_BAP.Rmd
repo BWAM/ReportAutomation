@@ -6,9 +6,11 @@ output:
   word_document: default
 ---
 
+
+
 Benthic macroinvertebrate communities were sampled to evaluate water quality impacts to the aquatic life use. Where appropriate riffle habitat was present, collection of macroinvertebrates was preformed using the kick method described in section 9.4 of SOP #208-19 Biological Monitoring of Surface Waters in New York State. With the exception of PEERS sites, replicate (n=4/site) macroinvertebrate samples were collected once at each site during years water chemistries were collected. For traveling kick samples, the contents of replicates for each site were field-inspected to determine major groups of organisms present, and then preserved in alcohol for lab inspection and identification of 100-specimen subsamples. For non-wadable sites, multiplates were deployed for a five-week colonization period, scraped, contents preserved and processed to a minimum of 250 organisms and a quarter of the sample. If target counts were not met, samples were processed in their entirety. Specimens were identified to lowest possible taxonomic resolution, typically genus or species. 
 
-Biological assessments of water quality are generated from Biological Assessment Profile (BAP) scores (SOP #208-19). BAP scores are calculated by taking the average of five normalized 10-scale community metrics and assigning that score to a four-tiered system of impact category of non (7.5-10), slight (5.0-7.5), moderate (2.5-5.0), or severe (0-2.5) impacts see @ref(fig:BAP2). A final BAP score below 5 suggests that the sampled stream is not achieving its aquatic life use goals (Figure 10; SOP #208-19). A BAP score above 5 indicates that the sampled stream is attaining its aquatic life use goals (Figure 10; SOP #208-19). Expected variability in the results of benthic macroinvertebrate community samples is presented in Smith and Bode (2004).
+Biological assessments of water quality are generated from Biological Assessment Profile (BAP) scores (SOP #208-19). BAP scores are calculated by taking the average of five normalized 10-scale community metrics and assigning that score to a four-tiered system of impact category of non (7.5-10), slight (5.0-7.5), moderate (2.5-5.0), or severe (0-2.5) impacts see (Figure\@ref(fig:BAP2)). A final BAP score below 5 suggests that the sampled stream is not achieving its aquatic life use goals (Figure 10; SOP #208-19). A BAP score above 5 indicates that the sampled stream is attaining its aquatic life use goals (Figure 10; SOP #208-19). Expected variability in the results of benthic macroinvertebrate community samples is presented in Smith and Bode (2004).
 
 ![Biological Assessment Profile (BAP) score impact categories based on the macroinvertebrate community. Scores below 5 suggest impairment to aquatic life and scores above 5 indicate attainment of aquatic life of use. ](bap.jpg)
 
@@ -30,7 +32,7 @@ sites<-read.csv(file.path.s,stringsAsFactors = FALSE)
 ```
 
 
-```{r BAP2, fig.width=7,fig.height=7, message=FALSE, warning=FALSE, echo=FALSE, fig.cap="Biological Assessment Profile (BAP) Scores and 95% confidence intervals for benthic macroinvertebrate community assessment data for the Wallkill River Survey, 2017-2019. Symbology corresponds with WI/PWL segmentation as indicated in the plot legend."}
+```{r BAP2, fig.width=7,fig.height=6.5, message=FALSE, warning=FALSE, echo=FALSE, fig.cap="Biological Assessment Profile (BAP) Scores and 95% confidence intervals for benthic macroinvertebrate community assessment data for the Wallkill River Survey, 2017-2019. Symbology corresponds with WI/PWL segmentation as indicated in the plot legend."}
 
 
 #need to figure out how to reorder them.
@@ -105,7 +107,7 @@ bap.inc<-sum.metrics2 %>%
 
 ```
  
- On average, Biological Assessment Profile (BAP) scores ranged from severely to slightly impacted across all sites on the WI/PWL segments in the Wallkill watershed a (SOP #208-19). Segments with mean BAP scores that fall below the BAP impairment threshold, include segments `r paste(bap5$PWL_ID,sep=",")` (@ref(fig:BAP2)). However ninety-five percent confidence intervals suggest inconclusive results for segments  `r paste(bap.inc$PWL_ID,sep=",")`.  
+ On average, Biological Assessment Profile (BAP) scores ranged from severely to slightly impacted across all sites on the WI/PWL segments in the Wallkill watershed a (SOP #208-19). Segments with mean BAP scores that fall below the BAP impairment threshold, include segments `r paste(bap5$PWL_ID,sep=",")` (Figure\@ref(fig:BAP2)). However ninety-five percent confidence intervals suggest inconclusive results for segments  `r paste(bap.inc$PWL_ID,sep=",")`.  
 
 
 

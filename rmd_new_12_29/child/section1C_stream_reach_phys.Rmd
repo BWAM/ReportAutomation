@@ -6,6 +6,8 @@ output:
   word_document: default
 ---
 
+ 
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 
@@ -180,7 +182,16 @@ habit.hma<-habit%>%
 habit.hma$`HMA \n Score`<-round(habit.hma$`HMA 
  Score`, 1)
 
+HMA_counts<-habit.hma%>%
+  rename(Assessment=`HMA 
+ Assess.`)
 ```
+
+
+Assessments of physical habitat conditions were performed by field crews at sites along with macroinvertebrate collections following the methods detailed in section 9.10 of SOP #208-19. Each habitat category was averaged over the two years of sampling conducted at each location. The information collected in these assessments are used to calculate the Habitat Model Affinity (HMA) (Table 3), an overall estimate of habitat quality which describes potential habitat stress on aquatic life. The HMA is based on rankings of individual habitat characteristics on a scale from 0 (poor) to 20 (optimal) which are then compared to a statewide reference condition (Appendix IV). HMA scores are used to make final physical habitat assessments; Natural (80-100), Altered (70 – 80), Moderate (60 – 70), and Severe (< 60). Results are described in terms of percent similarity to the reference condition. 
+
+Habitat model affinity (HMA) scores and resulting final physical habitat assessments ranged from natural to severe alteration across all sites (SOP #208-19; Table\@ref(tab:Habitat-table)). Physical habitat final assessments demonstrate that habitat may have been a factor influencing benthic communities at sampling locations where HMA scores indicate moderate or severely altered conditions (Table\@ref(tab:Habitat-table)); natural (n=`r sum(HMA_counts$Assessment=="Natural")`), altered (n=`r sum(HMA_counts$Assessment=="Altered")`), moderate (n=`r sum(HMA_counts$Assessment=="Moderate")`), severe (n=`r sum(HMA_counts$Assessment=="Severe")`).
+
 
 <!---BLOCK_LANDSCAPE_START--->
 
@@ -215,11 +226,11 @@ tl<-table.f(habit.hma[,c(1,38,2:15,36,37)],2,17)
 
 tl<-tl%>%
   fontsize(size=7, part = "all")%>%
-  width(j=1:18, width=0.4)%>%
-  width(j=c(4,5,10,11), width = 0.5)%>%
-  width(j=c(17), width=0.6)%>%
-  width(j=1, width=0.8) %>% 
-  fit_to_width(max_width = 10)
+  #width(j=1:18, width=0.4)%>%
+  #width(j=c(4,5,10,11), width = 0.5)%>%
+  #width(j=c(17), width=0.6)%>%
+  #width(j=1, width=0.8) %>% 
+  fit_to_width(max_width = 10.5)
 
 tl
 
@@ -227,6 +238,10 @@ tl
 
 <!---BLOCK_LANDSCAPE_STOP--->
 
-<!---BLOCK_LANDSCAPE_STOP--->
 
+```{r echo=FALSE, message=FALSE,warning=FALSE}
+HMA_counts<-habit.hma%>%
+  rename(Assessment=`HMA 
+ Assess.`)
+```
 
