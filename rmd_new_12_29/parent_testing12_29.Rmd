@@ -1,0 +1,57 @@
+---
+title: "Wallkill Reporting Draft"
+author: "NYSDEC SMAS"
+date: "`r Sys.Date()`"
+output:
+  officedown::rdocx_document:
+    reference_docx: draft_template.docx
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.cap = TRUE)
+library(officedown)
+library(officer)
+
+fp <- fp_par(
+  text.align = "center", 
+  padding.bottom = 20, padding.top = 120, 
+  border.bottom = fp_border())
+
+ft <- fp_text(shading.color='#EFEFEF', bold = TRUE)
+
+```
+
+
+\newpage
+
+# Section 1A - Water Chemistry and Stream Discharge
+```{r child="child/section1A_chemistry_stream_discharge.Rmd"}
+
+```
+
+\newpage
+
+# Section 1B - Benthic Macroinvertebrate Community 
+```{r child="child/section1B_BAP.Rmd"}
+
+```
+
+
+# Section 1C - Stream Reach Physical Characteristics
+```{r child="child/section1C_stream_reach_phys.Rmd"}
+
+```
+
+# Section 1D - User Perception
+```{r child="child/section1D_User_Perception.Rmd"}
+
+```
+
+# Section 1E - Sediment and Porewater Microtox® Analysis
+```{r child="child/section1E_tox.Rmd"}
+
+```
+
+
