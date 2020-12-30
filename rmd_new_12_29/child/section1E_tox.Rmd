@@ -1,0 +1,118 @@
+---
+title: "section1E_toxicity"
+author: 'NYSDEC SMAS : Keleigh Reynolds'
+date: "4/17/2020"
+output:
+  word_document: default
+---
+
+```{r include=FALSE,message=FALSE,warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+
+#for the table
+file.path.tw<-file.path(here::here(),
+                       "data",
+                       "tox_water_results.csv")
+
+file.path.ts<-file.path(here::here(),
+                       "data",
+                       "tox_sediment_results.csv")
+file.path.s<-file.path(here::here(),
+                       "data",
+                       "sites_wallkill.csv")
+
+
+#read in the data to concatenate
+tox_s<-read.csv(file.path.ts,stringsAsFactors = FALSE)
+tox_w<-read.csv(file.path.tw,stringsAsFactors = FALSE)
+sites<-read.csv(file.path.s,stringsAsFactors = FALSE)
+
+```
+
+
+
+```{r include=FALSE,message=FALSE,warning=FALSE}
+
+#create function for common tables
+#df is the data frame, x and y are the column numbers you want centered, z is the caption
+table.f<-function(df,x,y){
+  tl<-flextable::flextable(df) %>% 
+    flextable::font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% flextable::theme_zebra() %>%
+    flextable::autofit()
+tl<-flextable::align(tl, i = NULL, j =(x:y) , align = "center", part = "all")
+tl
+}
+
+```
+
+
+```{r include=FALSE,message=FALSE,warning=FALSE}
+#function to make the sites a factor in order from upstream to downstream
+order_sites<-function(df, sites_table, df_site_col, sites_site_col){
+Sites<-sites_table%>%
+  dplyr::rename(SITE_ID=sites_site_col)
+
+df<-df%>%
+  dplyr::rename(SITE_ID=df_site_col)
+
+all_data<-left_join(df, Sites)
+all_data<-all_data%>%
+  dplyr::arrange(order)%>%
+  dplyr::mutate(SITE_ID=factor(SITE_ID, levels = unique(SITE_ID)))
+
+columns<-colnames(Sites)
+columns<-columns[!(columns %in% "SITE_ID")]
+
+all_data<-all_data%>%
+  dplyr::select(!tidyselect::any_of(columns))
+}
+```
+
+```{r include=FALSE,message=FALSE,warning=FALSE}
+
+#select and shorten the files
+#merge the other 2
+tox.df<-merge(tox_s,tox_w,all = TRUE)
+
+tox.df<-tox.df %>% 
+  select(station,stationID,Sediment.Collection.Test.Date,Water.Collection.Test.Start.Date,Sediment.Assessment,
+         Porewater.Assessment,Sediment.EC50....,Porewater.EC50....)
+
+#take out just the Wallkill ones
+sites.ls<-unique(sites$SH_SITE_ID)
+
+tox.df<-tox.df %>% 
+  filter(stationID %in% sites.ls)%>%
+  select(-Water.Collection.Test.Start.Date, -station)%>%
+   order_sites(sites_table = sites, df_site_col = "stationID", sites_site_col = "SH_SITE_ID")
+
+tox.tbl<-tox.df %>% 
+  rename("Station ID"=SITE_ID,
+    "Sample Date"=Sediment.Collection.Test.Date,
+         "Sediment \n Assessment"=Sediment.Assessment,
+         "Porewater \n Assessment"=Porewater.Assessment,
+         "Sediment \n EC50"=Sediment.EC50....,
+         "Porewater \n EC50"=Porewater.EC50....)
+ 
+
+```
+
+
+
+Toxicity testing of surface waters, sediments, porewaters, and effluents are routinely performed as part of the RIBS program (https://www.dec.ny.gov/chemical/29854.html). Sediment toxicity was evaluated according to SOP #403-16 Microtox® Acute Toxicity Test for Sediments, Porewaters and Effluents. Testing procedures use a bioassay to assess potential acute toxicity in sediments and surface waters to aquatic life (SOP #403-16). Sediment and extracted sediment porewater samples are tested using a bioluminescent bacterium Vibrio fischeri (V. fischeri). Tests are a measure of light reduction between collected samples and a control following a 15-minute exposure period and expressed as the median effect concentration (EC50) of a sample that causes a 50% reduction in light emission from the V. fischeri. Appendix X (Fact Sheet: Acute & Chronic Toxicity Assessments of NY Streams & Rivers) describes toxicity testing procedures, Assessment criteria and results classifications. 
+
+Results from Microtox® Acute Toxicity Test for Sediments, Porewaters and Effluents collected in 2017 are found in (Table\@ref(tab:Tox-table)). In the Wallkill Watershed, sediments ranged from non-toxic to severe and porewaters ranged from non-toxic to toxic. 
+
+
+```{r tab.id="Tox-table", tab.cap="Wallkill River Microtox® sediment and porewater toxicity results for select locations in the Wallkill River Survey. Sediment samples were collected for toxicity testing in baseflow conditions during macroinvertebrate community collection at sampling locations.", echo=FALSE, message=FALSE, warning=FALSE}
+#call table function
+table.f(tox.tbl,2,6)%>%
+  flextable::fontsize(size = 10, part = "all")%>%
+  flextable::width(j=3:6, width=1.2)
+
+
+```
+
+
+

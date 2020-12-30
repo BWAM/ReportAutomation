@@ -1,0 +1,46 @@
+---
+title: "Wallkill Reporting Draft"
+author: 'NYSDEC SMAS : Keleigh Reynolds'
+date: "6/10/2020"
+output: 
+  bookdown::word_document2:
+    reference_docx: rmd/draft_template.docx
+    fig_caption: yes
+
+---
+
+# Section 1 - General
+```{r child="child/section1_General.Rmd"}
+
+```
+
+# Section 1A - Water Chemistry and Stream Discharge
+```{r child="child/section1A_chemistry_stream_discharge.Rmd"}
+
+```
+
+# Section 1B - Benthic Macroinvertebrate Community 
+```{r child="child/section1B_BAP.Rmd"}
+
+```
+
+
+
+# Section 1C - Stream Reach Physical Characteristics
+```{r child="child/section1C_stream_reach_phys.Rmd"}
+
+```
+
+# Section 1D - User Perception
+```{r child="child/section1D_User_Perception.Rmd"}
+
+```
+
+# Section 1E - Sediment and Porewater Microtox® Analysis
+```{r child="child/section1E_tox.Rmd"}
+
+```
+
+
+
+

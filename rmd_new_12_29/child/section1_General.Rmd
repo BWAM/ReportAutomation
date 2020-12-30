@@ -1,0 +1,141 @@
+---
+title: "section1_General"
+author: 'NYSDEC SMAS : Keleigh Reynolds'
+date: "4/14/2020"
+output: 
+word_document: default
+---
+The Wallkill River flows approximately 90 miles north and drains approximately 760 square miles throughout New York State (NYS) and northern New Jersey. In NYS alone, the Wallkill flows approximately 66 miles and drains 552 square miles across 48 municipalities. With only the Mohawk River larger, the combined watersheds of the Wallkill and Rondout Creek form the second largest tributary to the lower Hudson River. With a highly complex and variable land use coverage across the basin, agriculture, urban stormwater, and wastewater treatment facilities (WWTF) drive water quality concerns related to nutrients, algal blooms, and low dissolved oxygen. 
+|  
+Between 2017 and 2019, a Stream Assessment Survey was conducted by the Rotating Integrated Basin Studies (RIBS) Program throughout the mainstem Wallkill and its tributaries (Figure 1). The RIBS Program operates on a five-year, rotational schedule to generate statewide water quality data in support of the Waterbody Inventory/Priority Waterbody List (WI/PWL) towards the goal of protection and restoration of water quality resources (RIBS QAPP, 2017-2019). The RIBS Program also conducts special surveys outside of this five-year cycle to support Department-initiated priorities related to water quality (RIBS QAPP, 2017-2019). The objectives of the Wallkill watershed survey were to 1) update condition assessments for Waterbody Inventory/Priority Waterbody List (WI/PWL) segments throughout the basin, 2) identify areas of elevated nutrient concentrations, 3) assess biological community condition and, 4) collect data to inform watershed planning efforts to mitigate nutrient impacts.  
+|  
+To characterize the Wallkill watershed, Bureau of Water Assessment and Management’s Stream Monitoring and Assessment Section (SMAS), Hudson River Estuary Program, and participants in the Professional External Evaluations of Rivers and Streams (PEERS) Program collected several measures of water quality at each of the 39 sampling locations locations (10 on mainstem, 29 on tributaries) across 19 WI/PWL segments between the months of July and October during 2017, 2018, and 2019 (Table\@ref(tab:sites-table) and Figure\@ref(fig:site-map)). Measures of water and habitat quality included:
+1. Water Chemistry and Stream Discharge 
+2. Benthic Macroinvertebrate Community 
+3. Stream Reach Physical Habitat Characteristics 
+4. Observer Ranking of Recreational Ability
+5. Sediment and Porewater Microtox Analysis
+
+This data report provides water quality information in a format designed to update the WI/PWL and document water quality violations. It has been structured into two primary sections: I) an overview to convey results from the five measures of water quality described above at the watershed and WI/PWL scale, and II) a site-specific data summary to present all major findings for each sampling location. Additional sections (III, IV) include literature cited and appendices covering all references and additional source material.
+
+
+```{r include=FALSE,message=FALSE,warning=FALSE}
+
+file.path.s=file.path(here::here(),
+          "data",
+          "sites_wallkill_sturg.csv")
+
+file.path.m=file.path(here::here(),"data","map")
+
+sites<-read.csv(file.path.s,stringsAsFactors = FALSE)
+
+
+```
+
+
+```{r include=FALSE,message=FALSE,warning=FALSE}
+#Table 1
+#renames column in the sites table to match
+library(dplyr)
+
+table1<-sites %>% 
+select(SH_SITE_ID,group,SH_RIVMILE,SH_PWL_ID,SH_WQ_STANDARD,SH_DESC,SH_LATITUDE,SH_LONGITUDE,order, SAMPLER) %>% 
+  distinct() %>% 
+  arrange(order)
+
+table1<-table1 %>% rename("Location ID"=SH_SITE_ID,
+                          "Group"=group,
+                  "Rivermile"=SH_RIVMILE,
+                  "WI/PWL"=SH_PWL_ID,
+                  "Waterbody Classification"=SH_WQ_STANDARD,
+                  "Description"=SH_DESC,
+                  "Latitude"=SH_LATITUDE,
+                  "Longitude"=SH_LONGITUDE,
+                  "Sampler"=SAMPLER)
+
+table1$Description<-toupper(table1$Description)
+
+#remove order column for table disply
+table1$order<-NULL
+
+table1<-table1 %>% 
+  rename("Waterbody \n Classification"=`Waterbody Classification`)
+
+
+```
+
+<!---BLOCK_LANDSCAPE_START--->
+
+```{r tab.id="sites-table",  echo=FALSE, message=FALSE, warning=FALSE, tab.cap="Wallkill River (WALK) sampling locations. Locations are ordered from upstream to downstream according to river mile and mainstem confluence"}
+library(flextable)
+tl<-flextable(table1) %>% font(i = NULL, j = NULL, fontname="Arial", part = "all") %>% theme_zebra() %>% autofit()
+tl<-align(tl, i = NULL, j =(2:5) , align = "center", part = "all")%>%
+  fontsize(size=8, part = "all")%>%
+  fontsize(j=6, size=7)%>%
+  width(j=c(1), width=1)%>%
+  width(j=c(5), width=0.8)%>%
+  width(j=c(4,7,8), width=0.6)%>%
+  width(j=c(2), width=1)%>%
+  width(j=c(3), width=0.6)%>%
+  width(j=6, width=4.5)
+tl
+```
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+```{r site-map, fig.cap="Map of Wallkill River (WALK) sampling locations. Site names reference the Location ID and River Mile presented in Table\@ref(tab:sites-table)", echo=FALSE, message=FALSE, warning=FALSE,fig.width=7,fig.height=8}
+
+#library(leaflet)
+#map function
+  #bounding box
+library(ggmap)
+library(ggrepel)
+nybox<-make_bbox(sites,lon=SH_LONGITUDE,lat=SH_LATITUDE)
+
+pwl<-here::here("data","map")
+
+pwl.1<-rgdal::readOGR(
+ dsn = pwl,
+ layer="dec_wipwl_streams_kar",
+ verbose=FALSE
+)
+
+pwl.l<-unique(sites$SH_PWL_ID)
+
+pwl.cut<-subset(pwl.1,pwl.1$PWL_ID %in% pwl.l )
+
+#change coords to web mercator for the map
+pwl.cut<-sp::spTransform(pwl.cut, sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
+
+pwl.cut$type<-as.factor(pwl.cut$type)
+
+
+ny.map1<-qmap(nybox,source="osm",maptype="satellite",color="bw")+
+  geom_path(data=subset(pwl.cut,type=="trib"),aes(x = long, y = lat,group=group),color="steelblue1",alpha=0.5)+
+  geom_path(data=subset(pwl.cut,type=="main"),aes(x = long, y = lat,group=group),color="slateblue3",size=0.9)+
+  geom_point(data=sites,aes(x=SH_LONGITUDE,y=SH_LATITUDE,label=SH_SITE_ID,color=group,shape=SAMPLER),size=4)+ 
+  geom_label_repel(data=sites,
+    label= sites$SH_SITE_ID, 
+   aes(x=SH_LONGITUDE,
+   y=SH_LATITUDE),box.padding   = 0.35, point.padding = 0.5,
+                 segment.color = 'grey50',size=2)
+
+ ny.map2<- ny.map1+ggsn::scalebar(x.min = min(sites$SH_LONGITUDE),
+                        x.max = max(sites$SH_LONGITUDE),
+                        y.min = min(sites$SH_LATITUDE),
+                        y.max = max(sites$SH_LATITUDE),
+                        dist = 10, dist_unit = "km",
+             transform = TRUE, model = "WGS84")
+ ny.map2
+ 
+ ny.state<-tmap::st_bbox(c(xmin=-79.762152,	ymin=40.496103,xmax=-71.85621,ymax=45.01585),crs=st_crs(ny.map.2))
+ 
+
+```
+
+
+
+
+
+
+
