@@ -25,7 +25,7 @@ ft <- fp_text(shading.color='#EFEFEF', bold = TRUE)
 \newpage
 
 
-# Section 1 - General
+# Section 1 - Background
 ```{r child="child/section1_General.Rmd"}
 
 ```
