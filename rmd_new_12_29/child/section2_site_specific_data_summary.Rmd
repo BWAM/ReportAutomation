@@ -7,6 +7,8 @@ output:
   html_document: default
 ---
 
+
+Section II provides a summary of results from each sampling location. Data provided includes waterbody class and WI/PWL number along with a summary of general chemistry, in situ chemistry results, BAP scores and instantaneous discharge. Water chemistry results are summarized by number of records reported after quality assurance (Appendix III), exceedances of water quality standards and a statistical summary that includes mean, median, minimum, and maximum concentrations. Specific exceedances of water quality standards are also specified. Complete, quality assured raw chemistry data results accompanied by all applicable standards are available in Attachment I. BAP scores are provided and include a statistical summary of results for each site that includes mean, impairment threshold, minimum, maximum, standard deviation and standard error. Instantaneous stream discharge (cubic feet/second) is reported for dates when conditions allowed safe, wadeable access to streams (RAS QAPP (17-19); SOP #210-19). 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
@@ -29,7 +31,7 @@ stds<-read.csv(file.path(here::here(),
 
 chem<-read.csv(file.path(here::here(),
                          "data",
-                         "chemistry_sp_peers_12_21_2020.csv.csv"),stringsAsFactors = FALSE)
+                         "chemistry_sp_peers_12_21_2020.csv"),stringsAsFactors = FALSE)
 
 field<-read.csv(file.path(here::here(),
                           "data",
@@ -190,6 +192,13 @@ temp.5<-temp4 %>%
 temp.5$Parameter<-gsub("_"," ",temp.5$Parameter)
 temp.5$Parameter<-str_to_title(temp.5$Parameter)
 
+all_exceedances.df<-selected.df%>%
+  filter(attaining_wqs==FALSE)%>%
+  unite(Standard, c("direction", "threshold"), sep = "")%>%
+  arrange(site_id, year)%>%
+  select(Site=site_id, Year=year, Parameter=parameter, Units=units, Standard, Result=result)
+  
+
 ```
 
 ```{r, message=FALSE,include=FALSE}
@@ -302,7 +311,7 @@ sites<-unique(site.loc$SH_SITE_ID)
    cat(rep("\n", 10))
    cat("<br><br>")
    
-   temp<-temp.5[temp.5$Site %in% sites[i],]
+   temp<-all_exceedances.df[all_exceedances.df$Site %in% sites[i],]
    if (nrow(temp) > 0){   
      tab3<-table.f(temp,2,4)
    label=paste("Water Quality Standard Exceedances:",sites[i])
