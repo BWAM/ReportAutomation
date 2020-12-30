@@ -218,8 +218,30 @@ temp4<-selected.df%>%
             WQS_attain_combined= ifelse(combined==n, yes=TRUE, no=FALSE),
             num_exceedances=(n-combined))
 
+temp5<-selected.df %>% 
+  group_by(seg_id,parameter,fraction,units,date) %>% 
+  summarize(n=n(),
+            combined=sum(attaining_wqs),
+            WQS_attain_combined= ifelse(combined==n, yes=TRUE, no=FALSE),
+            num_exceedances=(n-combined))
+
+temp5$num_exceedances<-NULL
+temp5$year<-format(temp5$date,"%Y")
+temp5<-temp5 %>% 
+  group_by(seg_id,year,parameter) %>% 
+  mutate(exceed=case_when(
+    WQS_attain_combined=="FALSE"~1,
+    TRUE~0
+  )) %>% 
+  summarise(Exceedances=sum(exceed)) %>%
+  filter(Exceedances!=0) %>% 
+  rename(PWL_segment=seg_id,
+         Year=year,
+         Parameter=parameter)
+
+#write.csv(temp5,"outputs/wallkill_exceedances.csv",row.names = FALSE)
 #From here you should be able to left join pwls or raw data back on or filter to do summaries to create tables etc. 
 
 #clean up
-rm(list=ls()[! ls() %in% c("temp4","selected.df","wqs_wipwl.df")])
+rm(list=ls()[! ls() %in% c("temp4","selected.df","wqs_wipwl.df","temp5")])
 
