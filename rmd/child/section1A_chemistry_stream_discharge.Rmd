@@ -222,7 +222,6 @@ chem.trans<-chem.trans%>%
 
 ```
 
-
 ##A) Water Chemistry and Stream Discharge
 
 SMAS and HREP  
@@ -259,6 +258,9 @@ chem.trans<-chem.trans %>%
            chemical_name=="Total Kjeldahl Nitrogen"|
            chemical_name=="Total Phosphorus"|
            chemical_name=="Total Dissolved Solids")
+=======
+```{r chemgraph1, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(chem.trans$chemical_name), ", " , "The X-axis presents WI/PWL ID of the sampling locations from upstream to downstream. Color of the box represents the location of the WI/WPL in the watershed as indicated in the plot legend. Horizontal lines represent the 95th, 75th, and 25th percentiles of statewide data for each endpoint.", sep="")}
+>>>>>>> af1669243196411d8c37b9ffad0fc12b87d8a1b9
 
 #set colors for each group
 group_colors<-c("Lower Wallkill Trib"= "tomato2", "Middle Wallkill Trib"="olivedrab3", "Upper Wallkill Trib"= "springgreen4", "Wallkill Main Stem"="deepskyblue2", "Wallkill Main Stem-Ponded"="magenta2")
@@ -397,8 +399,36 @@ chem.graph(chem.trans)
 ```
 
 
+```{r insituChem, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(insitu.short$PARAMETER_NAME), ", " , "The X-axis presents WI/PWL ID of the sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Color of the box represents the location of the WI/WPL in the watershed as indicated in the plot legend. Horizontal lines represent the 95th, 75th, and 25th percentiles of statewide data for each endpoint.", sep="")}
 
-```{r insituChem, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(insitu.short$chemical_name), ", " , "The X-axis presents WI/PWL ID of the sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Color of the box represents the location of the WI/WPL in the watershed as indicated in the plot legend.", sep="")}
+#this one for the other values (no transformation of units-In-SITU data)
+
+# create graphing function for those that don't need to be log10
+#Chemistry, no transformation of results (in-situ)
+
+#first get the sites and data we want
+insitu.short<-merge(insitu,sites,by.x="SITE_ID",by.y="SH_SITE_ID")
+
+#arrange them according to group and PWL
+insitu.short$SH_PWL_ID<-fct_reorder(insitu.short$SH_PWL_ID, insitu.short$order)
+
+insitu.short<-insitu.short %>% arrange(order)
+
+
+#get the statwide values for these as well############################################
+#limit to just eh columns we need
+insitu.statewide<-insitu %>% 
+  select(PARAMETER_NAME,RESULT,VALIDATOR_QUAL)
+
+#summarize for statwide averages
+insitu.statewide<-insitu.statewide %>%
+  group_by(PARAMETER_NAME) %>% 
+  summarise_at(vars(RESULT),funs(mean(.,na.rm = TRUE),sd(.,na.rm = TRUE),n=n(),q95=quantile(RESULT,.95,na.rm = TRUE),q75=quantile(RESULT,.75,na.rm = TRUE),q50=quantile(RESULT,.50,na.rm=TRUE),q25=quantile(RESULT,.25,na.rm = TRUE)))
+
+#confidence intervals
+#insitu.statewide<-insitu.statewide %>% 
+  #mutate(error=(qnorm(0.975)*sd/sqrt(n)),ci95=mean+error,ci.neg95=mean-error)
+>>>>>>> af1669243196411d8c37b9ffad0fc12b87d8a1b9
 
 
 chem.graph.n <- function(df, na.rm = TRUE, ...){

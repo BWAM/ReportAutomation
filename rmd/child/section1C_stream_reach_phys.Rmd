@@ -16,7 +16,7 @@ file.path.h=file.path(here::here(),
 
 file.path.s<-file.path(here::here(),
                        "data",
-                       "sites_wallkill.csv")
+                       "sites_wallkill_sturg.csv")
 
 ```
 
@@ -67,6 +67,10 @@ habit<-habit%>%
   order_sites(sites_table = sites, df_site_col = "Location ID", sites_site_col = "SH_SITE_ID")
 
 habit$year<-NULL
+#get pwl into the figure
+pwl<-sites %>% 
+  select(SH_PWL_ID,SH_SITE_ID,order) %>% 
+  rename(SITE_ID=SH_SITE_ID)
 
 #Average all entries per site
 habit<-habit%>%
@@ -178,10 +182,21 @@ habit.hma$`HMA \n Score`<-round(habit.hma$`HMA
 
 ```
 
-
+<!---BLOCK_LANDSCAPE_START--->
 
 ```{r tab.id="Habitat-table", tab.cap="Ranked habitat characteristics and calculated HMA for the Wallkill River Survey, 2017-2019. Epifaunal substrate (Epi. Cover); Embeddedness/Pool Substrate Characterization (Embed. Pool.); Velocity Depth Regime/Pool Variability (Vel/Dep Reg.); Sediment Deposition (Sed. Dep.); Channel Flow Status (Flow Status); Channel Alteration (Chan. Alt.); Riffle Frequency/Stream Sinuosity (Rif. Freq.); Left and Right Bank Stability (L.B. and R.B. Stability); Left and Right Bank Vegetation (L.B. and R.B. Veg); Width of Left and Right Bank Vegetative Zone (L.B. and R.B. Veg Zone); Habitat Model Affinity Score (HMA Score); HMA Assessment (HMA Assess.)", echo=FALSE, message=FALSE,warning=FALSE}
 #table
+#get pwl into the table
+
+habit.hma<-merge(habit.hma, pwl, by="SITE_ID")
+
+habit.hma<-habit.hma %>% 
+  arrange(order)
+habit.hma$order<-NULL
+
+habit.hma<-habit.hma %>% 
+  rename("PWL ID"=SH_PWL_ID)
+
 
 #create function for common tables
 #df is the data frame, x and y are the column numbers you want centered, z is the caption
@@ -193,20 +208,25 @@ tl
 }
 
 #call the function
-tl<-table.f(habit.hma[,c(1:15,36,37)],2,17)
-
+tl<-table.f(habit.hma[,c(1,38,2:15,36,37)],2,17)
 
 #this part might have to be figured out later, with a larger caption/table function? Not sure yet.
 
 
 tl<-tl%>%
   fontsize(size=7, part = "all")%>%
-  width(j=1:17, width=0.4)%>%
-  width(j=c(2, 4,5,10,11), width = 0.5)%>%
+  width(j=1:18, width=0.4)%>%
+  width(j=c(4,5,10,11), width = 0.5)%>%
   width(j=c(17), width=0.6)%>%
-  width(j=1, width=0.8)
+  width(j=1, width=0.8) %>% 
+  fit_to_width(max_width = 10)
+
 tl
 
 ```
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+<!---BLOCK_LANDSCAPE_STOP--->
 
 

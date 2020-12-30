@@ -70,3 +70,34 @@ chem_all<-merge(chem,sp_chem,all=TRUE)
 
 write.csv(chem_all,"data/chemistry_sp_incl.csv",row.names = FALSE)
 
+#getting PEERS chemistry in there
+peers<-read.csv("data/peers.chemistry.csv",stringsAsFactors = FALSE)
+
+#remove the S's or the spikes for chemistry
+peers<-peers %>% 
+  filter(type!="S")
+peers.sites<-unique(peers$SH_SITE_ID)
+
+chem<-read.csv("data/chemistry_sp_incl.csv",stringsAsFactors = FALSE)
+
+#have to get some additional data into the peers
+
+sites<-read.csv("data/sites_wallkill_sturg.csv",stringsAsFactors = FALSE)
+sites.short<-sites %>% 
+  select(SH_SITE_ID,SH_LATITUDE,SH_LONGITUDE,SH_PWL_ID,SH_WQ_STANDARD)
+sites.short$SH_SITE_ID<-trimws(sites.short$SH_SITE_ID)
+
+#remove white space
+peers$SH_SITE_ID<-trimws(peers$SH_SITE_ID)
+
+peers.1<-merge(peers,sites.short,by="SH_SITE_ID",all.x = TRUE)
+peers.1<-peers.1 %>% 
+  mutate(INFO_TYPE="",qaqc_date="",X="",sample_delivery_group="",Project_name="PEERS_WK")
+peers.1$type<-NULL
+
+peers.1<-peers.1 %>% 
+  rename(SITE_ID=SH_SITE_ID)
+
+combo<-rbind(peers.1,chem)
+
+write.csv(combo,"data/chemistry_sp_peers_12_21_2020.csv",row.names = FALSE)

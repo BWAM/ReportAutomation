@@ -29,7 +29,7 @@ stds<-read.csv(file.path(here::here(),
 
 chem<-read.csv(file.path(here::here(),
                          "data",
-                         "chemistry.csv"),stringsAsFactors = FALSE)
+                         "chemistry_sp_peers_12_21_2020.csv.csv"),stringsAsFactors = FALSE)
 
 field<-read.csv(file.path(here::here(),
                           "data",
@@ -44,7 +44,7 @@ flow<-read.csv(file.path(here::here(),
 
 site.loc<-read.csv(file.path(here::here(),
                              "data",
-                            "sites_wallkill.csv"),stringsAsFactors = FALSE)
+                            "sites_wallkill_sturg.csv"),stringsAsFactors = FALSE)
 nnc.stds<-read.csv(file.path(here::here(),
                              "data/standards",
                             "nnc.csv"),stringsAsFactors = FALSE)
