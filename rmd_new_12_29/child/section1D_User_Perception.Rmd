@@ -135,14 +135,18 @@ final_table<-flextable(Variables)%>%
   align(j=2:8, align="center", part="all")%>%
   font(fontname = "Arial", part="all")%>%
   fontsize(size=10, part="all")%>%
-  #fontsize(size=8,j=2) %>% 
-  #width(j = c(2,4,8), width = 0.8)%>%
-  #width(j = c(3,5), width = 1.1)%>%
-  #width(j=1, width=1.1) %>% 
-  #merge_v(j=1) %>% 
+  fontsize(size=8,j=2) %>% 
+  width(j = c(2,4,8), width = 0.8)%>%
+  width(j = c(3,5), width = 1.1)%>%
+  width(j=1, width=1.1) %>% 
+  merge_v(j=1) %>% 
   theme_zebra() %>% 
-  autofit() %>% 
-  fit_to_width(max_width = 7.5)
+  #autofit() %>% 
+  #fit_to_width(max_width = 7.5) %>% 
+flextable::bg(j=1,part = "body",bg = "white") %>% 
+  flextable::border(part = "body",border.bottom = officer::fp_border(color="grey")) %>% 
+  flextable::border(part = "body",j=1,border.right = officer::fp_border(color = "grey"))
+  
 
 
 final_table
@@ -197,7 +201,12 @@ final_table2<-flextable(Dominant)%>%
   fontsize(size=8,j=2) %>% 
   font(fontname = "Arial", part="all") %>% 
   autofit() %>% 
-  fit_to_width(max_width = 7.5)
+  fit_to_width(max_width = 7.5) %>% 
+  flextable::merge_v(j=1) %>% 
+  flextable::bg(j=1,part = "body",bg = "white") %>% 
+  flextable::border(part = "body",border.bottom = officer::fp_border(color="grey")) %>% 
+  flextable::border(part = "body",j=1,border.right = officer::fp_border(color = "grey"))
+  
 
 final_table2
 ```

@@ -312,7 +312,7 @@ insitu.statewide<-insitu.statewide %>%
     PARAMETER_NAME=="DISSOLVED_OXYGEN"~"Dissolved Oxygen",
     PARAMETER_NAME=="TEMPERATURE"~"Temperature",
     PARAMETER_NAME=="CONDUCTANCE"~"Conductance",
-    PARAMETER_NAME=="PCT_SATURATION"~ "Percent (%) Saturation",
+    PARAMETER_NAME=="PCT_SATURATION"~ "Percent Saturation",
     PARAMETER_NAME=="SALINITY"~"Salinity",
     PARAMETER_NAME=="PH"~"PH",
     TRUE~paste(PARAMETER_NAME)
@@ -337,12 +337,12 @@ insitu.statewide<-insitu.statewide %>%
 
 ## Exceedances of Water Quality Standards
 
-Exceedances of water quality standards occurred in `r n_distinct(temp5$PWL_segment)` of `r n_distinct(sites$SH_PWL_ID)` WI/PWL segments. A total of `r n_distinct(chem.short$chemical_name)` lab-measured, and `r n_distinct(insitu.short$chemical_name)` in situ water quality analytes, were analyzed and out of the `r nrow(chem_all)` lab-measured records and `r nrow(insitu.short)` in situ water quality records, there were `r sum(temp5$Exceedances)` exceedances of established water quality standards (6 NYCRR Part 703). There were exceedances in `r unique(temp5$Parameters)`. Chloride and nutrient concentrations across the Wallkill watershed were generally elevated relative to statewide data concentrations. Nutrients are regulated by a narrative water quality standard stating: “None in amounts that result in growths of algae, weeds, and slimes that will impair the waters for their best usages” (6 NYCRR 703.2). 
+Exceedances of water quality standards occurred in `r n_distinct(temp5$PWL_segment)` of `r n_distinct(sites$SH_PWL_ID)` WI/PWL segments. A total of `r n_distinct(chem.short$chemical_name)` lab-measured, and `r n_distinct(insitu.short$chemical_name)` in situ water quality analytes, were analyzed and out of the `r nrow(chem_all)` lab-measured records and `r nrow(insitu.short)` in situ water quality records, there were `r sum(temp5$Exceedances)` exceedances of established water quality standards (6 NYCRR Part 703). There were exceedances in `r paste(unique(stars$chemical_name),sep=",")`. Chloride and nutrient concentrations across the Wallkill watershed were generally elevated relative to statewide data concentrations. Nutrients are regulated by a narrative water quality standard stating: “None in amounts that result in growths of algae, weeds, and slimes that will impair the waters for their best usages” (6 NYCRR 703.2). 
 
 Plots illustrating the range of analyte concentration values within each WI/PWL segments from both mainstem and tributaries, are included in this report (Figure\@ref(fig:chemgraphs)-\@ref(fig:insituChem)) from upstream to downstream. Locations on a WI/PWL tributary segments are inserted between mainstem WI/PWL segments. The total number of values represented for each WI/PWL segment can vary due to non-detection and QA/QC procedures. Descriptions of removed records are presented in Appendix III. Analytes selected for presentation were subset to those of specific interest to the study. Therefore, the analytes presented here include: Chloride; Chlorophyll-a; inorganic nitrogen (NO2+NO3); organic nitrogen (Total Kjeldahl Nitrogen); Total Phosphorus; Total Dissolved Solids; Dissolved Oxygen (in situ), Temperature (in situ), Conductance (in situ) and pH (in situ). To provide context, each figure contains lines representing the 25th, 75th, and 95th percentiles of each analyte collected statewide by SMAS from 2001 to 2019. Exceedance within a PWL segment are indicated by an asterisk. Site specific exceedances are quantified in Section II. 
 
 
-```{r chemgraphs, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(chem.trans$chemical_name), ", " , "The X-axis presents WI/PWL ID of the sampling locations from upstream to downstream. Color of the box represents the location of the WI/WPL in the watershed as indicated in the plot legend. Stars at the bottom of the graph indicate an exceedance of a WQS in that PWL segment", sep="")}
+```{r chemgraphs, echo=FALSE, fig.width=7.5, fig.height=6, message=FALSE, warning=FALSE, fig.cap=paste(unique(chem.trans$chemical_name), ", " , "The X-axis presents WI/PWL ID of the sampling locations from upstream to downstream. Color of the box represents the location of the WI/WPL in the watershed as indicated in the plot legend. Stars at the bottom of the graph indicate an exceedance of a WQS in that PWL segment", sep="")}
 
 
 # create graphing function for those that need to be log10 (ug/L or mg/l-so not weird ones)
@@ -351,7 +351,7 @@ chem.graph <- function(df, na.rm = TRUE, ...){
   # create list of chmistry's in data to loop over 
   chem_list <- unique(df$chemical_name)
   l<-length(chem_list)
-  y=tail(df$SH_PWL_ID)#get the factor alone for the plots
+
   
   for (i in seq_along(chem_list)) { 
     #order by group
@@ -361,32 +361,39 @@ chem.graph <- function(df, na.rm = TRUE, ...){
     temp.statewide<-subset(chem.statewide,chem.statewide$CHR_CHEMICAL_NAME==chem_list[i])
     temp.stars<-subset(stars,stars$chemical_name==chem_list[i])
     
-
+    temp.chem<-subset(df,df$chemical_name==chem_list[i])
+    df.1<-subset(df, df$chemical_name==chem_list[i])
+    df.1$SH_PWL_ID<-droplevels(df.1$SH_PWL_ID)
+     y=tail(df.1$SH_PWL_ID) #get the number of levels needed for each one
+    
     # create plot for each PWL in df 
     plot <- 
-      ggplot(subset(df, df$chemical_name==chem_list[i]),
-             aes(SH_PWL_ID,result_value,group=SH_PWL_ID,color=group))+ 
+      ggplot(df.1,
+             aes(SH_PWL_ID,result_value,color=group,drop=TRUE))+
       
       geom_boxplot() +
 
       #scale_shape_manual(name="PWL Segment ID",values = 0:max(l))+
-      
-      theme_grey() +
+    
       theme(axis.text.x = element_text(angle = 60, hjust = 1))+
       theme(legend.position="right") + 
       
-      scale_y_log10(paste(df$chemical_name[df$chemical_name==chem_list[i]], df$result_unit[df$chemical_name==chem_list[i]], "log(10)")) + 
+      scale_y_log10(paste(df.1$chemical_name[df.1$chemical_name==chem_list[i]], df.1$result_unit[df.1$chemical_name==chem_list[i]], "log(10)")) + 
       xlab("Location ID")+
       geom_hline(yintercept=temp.statewide$q95,color="grey53")+
       geom_hline(yintercept=temp.statewide$q75,color="grey53")+
        geom_hline(yintercept=temp.statewide$q25,color="grey53")+
        scale_color_manual(values=group_colors)+
-      expand_limits(x=nlevels(y)+5)+
-      annotate(geom="text", label=paste("95th",temp.statewide$q95,sep="-"), x=nlevels(y)+2, y=temp.statewide$q95, vjust=-1,color="grey")+
-    annotate(geom="text", label=paste("75th",temp.statewide$q75,sep="-"), x=nlevels(y)+2, y=temp.statewide$q75, vjust=-1,color="grey")+
-    annotate(geom="text", label=paste("25th",temp.statewide$q25,sep="-"), x=nlevels(y)+2, y=temp.statewide$q25, vjust=-1,color="grey")+
-      annotate(geom = "text",label=paste("*"),x=temp.stars$PWL_segment, y=(min(df$result_value[df$chemical_name==chem_list[i]])-10),color="black")+
-      theme(legend.title=element_blank())# print plots to screen
+      #expand_limits(x=nlevels(y)+5)+
+      annotate(geom="text", label=paste("95th",temp.statewide$q95,sep="-"),x=nlevels(y)+2, y=temp.statewide$q95, vjust=-1,color="grey61",size=3)+
+    annotate(geom="text", label=paste("75th",temp.statewide$q75,sep="-"), x=nlevels(y)+2, y=temp.statewide$q75, vjust=-1,color="grey61",size=3)+
+    annotate(geom="text", label=paste("25th",temp.statewide$q25,sep="-"), x=nlevels(y)+2, y=temp.statewide$q25, vjust=-1,color="grey61",size=3)+
+      annotate(geom = "text",label=paste("*"),x=temp.stars$PWL_segment, y=(min(df.1$result_value[df.1$chemical_name==chem_list[i]])-10),color="black")+
+      theme(legend.title=element_blank(),legend.margin=margin(10,10,10,10),legend.key = element_rect(colour = NA, fill = NA),legend.background=element_blank())+
+      coord_cartesian(clip = "off")
+      
+      #geom_rect(aes(xmin = nlevels(y), xmax = nlevels(y)+5, ymin = log10(min(df$result_value[df$chemical_name==chem_list[i]])), ymax = log10(max(df$result_value[df$chemical_name==chem_list[i]]))),
+                  # fill = "white", alpha = 0.1)# print plots to screen
     print(plot)
     cat('\n\n') 
     
@@ -401,14 +408,13 @@ chem.graph(chem.trans)
 
 
 
-```{r insituChem, echo=FALSE, fig.width=6, fig.height=4, message=FALSE, warning=FALSE, fig.cap=paste(unique(insitu.short$chemical_name), ", " , "The X-axis presents WI/PWL ID of the sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Color of the box represents the location of the WI/WPL in the watershed as indicated in the plot legend. Stars at the bottom of the graph indicate an exceedance of a WQS in that PWL segment", sep="")}
+```{r insituChem, echo=FALSE, fig.width=7.5, fig.height=6, message=FALSE, warning=FALSE, fig.cap=paste(unique(insitu.short$chemical_name), ", " , "The X-axis presents WI/PWL ID of the sampling locations from upstream to downstream and axis labels correspond with Table 1, Figure 1 and Figure 2. Color of the box represents the location of the WI/WPL in the watershed as indicated in the plot legend. Stars at the bottom of the graph indicate an exceedance of a WQS in that PWL segment", sep="")}
 
 
 chem.graph.n <- function(df, na.rm = TRUE, ...){
 
 # create list of chmistry's in data to loop over 
 chem_list.2 <- unique(df$chemical_name)
-y=tail(df$SH_PWL_ID)#get the factor alone for the plots
   
 for (i in seq_along(chem_list.2)) { 
 
@@ -420,12 +426,16 @@ for (i in seq_along(chem_list.2)) {
        arrange(order)
     
   temp.stars.i<-subset(stars.insitu,stars$chemical_name==chem_list.2[i])
-    
+  df.1<-subset(df, df$chemical_name==chem_list.2[i])
+  
+  df.1$SH_PWL_ID<-droplevels(df.1$SH_PWL_ID)#get rid of any PWL's that don't have data
+  y=tail(df.1$SH_PWL_ID)#get the factor alone for the plots
+
   
 # create plot for each parameter with PWL in df 
  plot <- 
-   ggplot(subset(df, df$chemical_name==chem_list.2[i]),
-    aes(SH_PWL_ID,RESULT,group=SH_PWL_ID,color=group))+ 
+   ggplot(df.1,
+    aes(SH_PWL_ID,RESULT,color=group,drop=TRUE))+ 
 
   geom_boxplot() +
 
@@ -433,18 +443,19 @@ for (i in seq_along(chem_list.2)) {
  theme(axis.text.x = element_text(angle = 60, hjust = 1))+
 theme(legend.position="right") +
 
- scale_y_continuous(paste(df$chemical_name[df$chemical_name==chem_list.2[i]],df$unit[df$chemical_name==chem_list.2[i]])) + 
+ scale_y_continuous(paste(df.1$chemical_name[df.1$chemical_name==chem_list.2[i]],df.1$unit[df.1$chemical_name==chem_list.2[i]])) + 
  xlab("Location ID")+
-   expand_limits(x=nlevels(y)+5)+
         geom_hline(yintercept=temp.insitu.sw$q95,color="grey53")+
       geom_hline(yintercept=temp.insitu.sw$q75,color="grey53")+
        geom_hline(yintercept=temp.insitu.sw$q25,color="grey53")+
    scale_color_manual(values=group_colors)+
-       annotate(geom="text", label=paste("95th",temp.insitu.sw$q95,sep="-"), x=nlevels(y)+2, y=temp.insitu.sw$q95, vjust=-1,color="grey")+
-    annotate(geom="text", label=paste("75th",temp.insitu.sw$q75,sep="-"), x=nlevels(y)+2, y=temp.insitu.sw$q75, vjust=-1,color="grey")+
-    annotate(geom="text", label=paste("25th",temp.insitu.sw$q25,sep="-"), x=nlevels(y)+2, y=temp.insitu.sw$q25, vjust=-1,color="grey")+
-    annotate(geom = "text",label=paste("*"),x=temp.stars.i$PWL_segment, y=0,color="black")+
-      theme(legend.title=element_blank())
+       annotate(geom="text", label=paste("95th",temp.insitu.sw$q95,sep="-"), x=nlevels(y)+2, y=temp.insitu.sw$q95, vjust=-1,color="grey61",size=3)+
+    annotate(geom="text", label=paste("75th",temp.insitu.sw$q75,sep="-"), x=nlevels(y)+2, y=temp.insitu.sw$q75, vjust=-1,color="grey61",size=3)+
+    annotate(geom="text", label=paste("25th",temp.insitu.sw$q25,sep="-"), x=nlevels(y)+2, y=temp.insitu.sw$q25, vjust=-1,color="grey61",size=3)+
+    annotate(geom = "text",label=paste("*"),x=temp.stars.i$PWL_segment, y=(min(df.1$RESULT[df.1$chemical_name==chem_list.2[i]])-1),color="black")+
+        theme(legend.title=element_blank(),legend.margin=margin(10,10,10,10),legend.key = element_rect(colour = NA, fill = NA),legend.background=element_blank())+
+      coord_cartesian(clip = "off")
+      
     
 
 
