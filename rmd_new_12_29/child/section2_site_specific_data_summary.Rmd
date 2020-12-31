@@ -17,7 +17,7 @@ library(dplyr)
 
 file.path=here::here()
 
-source(paste(file.path,"rmd","stayCALM_exceedance_calc.R",sep = "/"))
+source(paste(file.path,"rmd_new_12_29","stayCALM_exceedance_calc.R",sep = "/"))
 
 ```
 
@@ -154,6 +154,12 @@ nnc_sum.df<-nnc_sum.df %>%
          Mean=mean,
          Records=record_count)
 
+nnc_sum.df<-nnc_sum.df %>% 
+  mutate(Parameter=case_when(
+    Parameter %in% "PHOSPHORUS, TOTAL (AS P)"~"Total Phosphorus"
+    
+  ))
+
 #summary for the BAP
 bap.df<-bap %>% 
   select(SITE_ID,MSSIH_EVENT_SMAS_SAMPLE_DATE,MMDH_BIO_ASMT_PROFILE_SCORE,year) %>% 
@@ -197,6 +203,14 @@ all_exceedances.df<-selected.df%>%
   unite(Standard, c("direction", "threshold"), sep = "")%>%
   arrange(site_id, year)%>%
   select(Site=site_id, Year=year, Parameter=parameter, Units=units, Standard, Result=result)
+
+all_exceedances.df<-all_exceedances.df %>% 
+  mutate(Parameter=case_when(
+    Parameter=="dissolved_oxygen"~"Dissolved Oxygen",
+    Parameter=="total_dissolved_solids"~"Total Dissolved Solids",
+    Parameter=="iron"~"Iron",
+    Parameter=="ph"~"pH"
+  ))
   
 
 ```
@@ -215,20 +229,43 @@ insitu_sum.df<-field %>%
 insitu_sum.df<-insitu_sum.df %>% mutate_if(is.numeric, round, 3)
 
 chem_sum.df<-chem %>% group_by(SITE_ID,chemical_name,result_unit) %>% 
-  summarise(Number=n(),Mean=mean(result_value,na.rm = TRUE),
+  summarise("Record Count"=n(),Mean=mean(result_value,na.rm = TRUE),
             Median=median(result_value,na.rm = TRUE),
             SD=sd(result_value,na.rm = TRUE),
             Max=max(result_value),
             Min=min(result_value))
   
 chem_sum.df<-chem_sum.df %>% mutate_if(is.numeric, round, 3)
-chem_sum.df$chemical_name<-str_to_lower(chem_sum.df$chemical_name)
-chem_sum.df$chemical_name<-str_to_title(chem_sum.df$chemical_name)
+#chem_sum.df$chemical_name<-str_to_lower(chem_sum.df$chemical_name)
+#chem_sum.df$chemical_name<-str_to_title(chem_sum.df$chemical_name)
 
 chem_sum.df<-chem_sum.df %>% 
   rename(Parameter=chemical_name,
          Units=result_unit)
 
+#change chemistry names
+change<-read.csv(here::here("data","chem_names.csv"),stringsAsFactors = FALSE)
+
+chem_sum.df<-merge(chem_sum.df,change,by.x="Parameter",by.y="chemical_name",all.x = TRUE)
+
+chem_sum.df$Parameter<-NULL #taking out the old name
+chem_sum.df<-chem_sum.df %>% 
+  rename(Parameter=X)
+
+chem_sum.df<-chem_sum.df %>% 
+  relocate(Parameter,.before=SITE_ID)
+
+#change insitu names
+insitu_sum.df<-merge(insitu_sum.df,change,by.x="PARAMETER_NAME",by.y="chemical_name",all.x = TRUE)
+insitu_sum.df$PARAMETER_NAME<-NULL
+insitu_sum.df<-insitu_sum.df %>% 
+  rename(Parameter=X,
+         Site=SITE_ID) %>% 
+  relocate(Parameter,.before=Site)
+
+#rename flow axis
+flow<-flow %>% 
+  rename("Discharge"=Discharge..cfs.)
 
 ```
 
@@ -244,9 +281,13 @@ table.f<-function(df,x,y){
     flextable::theme_zebra() %>% 
     flextable::autofit()
 tl<- flextable::align(tl, i = NULL, j =(x:y) , align = "center", part = "all")
-tl<-flextable::fit_to_width(tl,max_width = 6)
+tl<-flextable::fit_to_width(tl,max_width = 7.5)
+tl<-flextable::fontsize(tl, i = NULL, j = NULL, size = 9, part = "body")
 return(tl)
 }
+
+#get pwl lines for map
+mapl<-read.csv(here::here("data","map_lines_use.csv"),stringsAsFactors = FALSE)
 
 #map function
 map.me<-function(df1,df2){
@@ -254,9 +295,13 @@ map.me<-function(df1,df2){
 library(ggmap)
 nybox<-make_bbox(df1,lon=SH_LONGITUDE,lat=SH_LATITUDE)
  
-ny.map<-qmap(nybox, source = "osm")+geom_point(data=df1,aes(x=SH_LONGITUDE,y=SH_LATITUDE),
+ny.map<-qmap(nybox, source = "osm",color="bw")+
+  geom_path(data=subset(mapl,type=="trib"),aes(x = long, y = lat,group=group),color="steelblue1",alpha=0.5,,na.rm=TRUE)+
+  geom_path(data=subset(mapl,type=="main"),aes(x = long, y = lat,group=group),color="slateblue3",size=0.9,,na.rm=TRUE)+
+geom_point(data=df1,aes(x=SH_LONGITUDE,y=SH_LATITUDE),
                   color="yellow",size=4)+
   geom_point(data=df2,aes(x=SH_LONGITUDE,y=SH_LATITUDE),color="red",size=4)
+  
 print(ny.map)
   
 }
@@ -276,24 +321,28 @@ print(ny.map)
 #x.vec
 ```
 
-```{r,warning=FALSE, echo=FALSE,message=FALSE, results='asis',fig.align="left"}
+```{r,warning=FALSE, echo=FALSE,message=FALSE, results='asis',fig.align="center"}
 
 sites<-unique(site.loc$SH_SITE_ID)
 
  for (i in seq_along(sites)) { 
    # print(i)
-   cat("  \n\n### Site ID: ",sites[i])
+  site.loc.small<-site.loc[site.loc$SH_SITE_ID %in% sites[i],]
    
-   site.loc.small<-site.loc[site.loc$SH_SITE_ID %in% sites[i],]
+  stds_small<-unique(site.loc.small$classification)
+  stds_small<-toupper(stds_small)
+  
+  pwl_small<-unique(site.loc.small$SH_PWL_ID)
+  
    
-   stds_small<-unique(site.loc.small$classification)
+   cat("  \n\n###  ",sites[i], "| Waterbody Class:",stds_small,"| PWL_ID:",pwl_small)
    
-   temp <-chem_sum.df[chem_sum.df$SITE_ID %in% sites[i], ]
-   
+
    map.me(site.loc,site.loc.small)
   
   temp <-chem_sum.df[chem_sum.df$SITE_ID %in% sites[i], ]
-   tab<-table.f(temp, 2,4)
+  temp$SITE_ID<-NULL
+   tab<-table.f(temp, 2,8)
    label=paste("Chemistry Measurements:",sites[i])
    tab<-flextable::set_caption(tab,label)
    flextable::docx_value(tab)
@@ -302,7 +351,8 @@ sites<-unique(site.loc$SH_SITE_ID)
    cat("  \n")
    cat("<br><br>")
    
-  temp <-insitu_sum.df[insitu_sum.df$SITE_ID %in% sites[i], ]
+  temp <-insitu_sum.df[insitu_sum.df$Site %in% sites[i], ]
+  temp$Site<-NULL
    tab2<-table.f(temp, 2,4)
    label=paste("In-Situ Measurements:",sites[i])
    tab2<-flextable::set_caption(tab2,label)
@@ -312,16 +362,21 @@ sites<-unique(site.loc$SH_SITE_ID)
    cat("<br><br>")
    
    temp<-all_exceedances.df[all_exceedances.df$Site %in% sites[i],]
+   temp$Site<-NULL
    if (nrow(temp) > 0){   
      tab3<-table.f(temp,2,4)
    label=paste("Water Quality Standard Exceedances:",sites[i])
    tab3<-flextable::set_caption(tab3,label)
    flextable::docx_value(tab3)}
+   else{
+     cat("  \n\n There were no water quality standard exceedances at this site during the sampling period.")
+   }
    rm(temp)
      cat(rep("\n"))
    cat("<br><br>")
    
   temp <-nnc_sum.df[nnc_sum.df$SITE_ID %in% sites[i], ]
+  temp$SITE_ID<-NULL
    tab4<-table.f(temp, 2,4)
    label=paste("Numeric Nutrient Criteria:",sites[i])
    tab4<-flextable::set_caption(tab4,label)
@@ -331,9 +386,10 @@ sites<-unique(site.loc$SH_SITE_ID)
    cat("<br><br>")
   
   temp<-bap.df[bap.df$SITE_ID %in% sites[i], ]
+  temp$SITE_ID<-NULL
   if (nrow(temp) > 0){
   tab6<-table.f(temp,1,2)
-  label=paste("BAP Score: ",sites[i])
+  label=paste("Biological Assessment Score Summary: ",sites[i])
   tab6<-flextable::set_caption(tab6,label)
   flextable::docx_value(tab6)}
   rm(temp)
@@ -343,8 +399,9 @@ sites<-unique(site.loc$SH_SITE_ID)
   temp<-flow[flow$ID %in% sites[i], ]
   if (nrow(temp) > 0) {
     library(ggplot2)
-    tab5<-ggplot(temp,aes(Date,Discharge..cfs.)) +
-      geom_point()
+    tab5<-ggplot(temp,aes(Date,Discharge)) +
+      geom_point()+
+        ylab("cfs")
     print(tab5)
     rm(temp)
   }
