@@ -1,0 +1,43 @@
+chemical_name,
+"ALKALINITY, TOTAL (AS CaCO3)",Alkalinity
+Aluminum,Aluminum
+Arsenic,Arsenic
+Cadmium,Cadmium
+CHLORIDE (AS CL),Chloride
+Chlorophyll A,Chlorophyll A
+Conductivity at 25 Degrees Celsius,Conductivity At 25 Degrees Celsius
+Copper,Copper
+HARDNESS (AS CACO3),Hardness (As Caco3)
+Iron,Iron
+Lead,Lead
+Magnesium,Magnesium
+Nickel,Nickel
+Nitrate+Nitrite as Nitrogen,Nitrate+Nitrite
+"Nitrogen, ammonia (As N)",Ammonia
+"NITROGEN, NITRATE (AS N)",Nitrate
+"NITROGEN, NITRITE",Nitrite
+PH,pH
+"PHOSPHORUS, TOTAL (AS P)",Total Phosphorus
+Silver,Silver
+"TOTAL DISSOLVED SOLIDS (RESIDUE, FILTERABLE)",Total Dissolved Solids
+TURBIDITY,Turbidity
+Zinc,Zinc
+Calcium,Calcium
+Nitrogen,Nitrogen
+"NITROGEN, KJELDAHL, TOTAL",Total Kjeldahl Nitrogen
+"DEPTH, SECCHI DISK DEPTH",Secchi Disk Depth
+Manganese,Manganese
+SULFATE (AS SO4),Sulfate (As So4)
+TOTAL ORGANIC CARBON,Total Organic Carbon
+TRUE COLOR,True Color
+DISSOLVED ORGANIC CARBON,Dissolved Organic Carbon
+TEMPERATURE,Temperature
+CONDUCTANCE,Conductance
+DISSOLVED_OXYGEN,Dissolved Oxygen
+PH,pH
+PCT_SATURATION,Percent Saturation (DO)
+SALINITY,Salinity
+Chl_ugL,Chlorophyll A (Probe-ug/l)
+Chl_RFU,Chlorophyll A (Probe-RFU)
+PC_ugL,Phycocyanin  (Probe- ug/l)
+PC_RFU,Phycocyanin  (Probe- RFU)
