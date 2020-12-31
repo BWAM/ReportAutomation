@@ -130,11 +130,15 @@ tl
  
 # ny.state<-tmap::st_bbox(c(xmin=-79.762152,	ymin=40.496103,xmax=-71.85621,ymax=45.01585),crs=st_crs(ny.map.2))
 
-#pwl.df<-fortify(pwl.cut)
-#write.csv(pwl.df,"data/map_lines.csv",row.names = FALSE)
+#pwl.data<-fortify(pwl.cut@data)
+#pwl.data$id<-paste(row.names(pwl.data))#attribute data
+
+#pwl.final<-merge(pwl.df,pwl.data,by="id")#merging based on id for attributes and shapes
+
+#write.csv(pwl.final,"data/map_lines_use.csv",row.names = FALSE)
 #wrote to df so we can include in section 2, but not have to read in a .shp file
 
- knitr::include_graphics(here::here('rmd_new_12_29','map.png'))
+ knitr::include_graphics(here::here('rmd_new_12_29','map.jpg'))
 
 ```
 
