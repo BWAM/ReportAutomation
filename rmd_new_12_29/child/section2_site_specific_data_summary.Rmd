@@ -403,7 +403,8 @@ sites<-unique(site.loc$SH_SITE_ID)
     tab5<-ggplot(temp,aes(Date,Discharge)) +
       geom_point()+
         ylab("cfs")+
-      labs(caption = "Discharge measured in cubic feet per second (cfs).")
+      labs(caption = "Discharge measured in cubic feet per second (cfs).")+
+      scale_x_date(date_labels = "%b %Y")
     print(tab5)
     rm(temp)
   }
@@ -413,7 +414,6 @@ sites<-unique(site.loc$SH_SITE_ID)
   
  }
 
-    
     # create plot for each PWL in df 
     
 ```
