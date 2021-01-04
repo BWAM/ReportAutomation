@@ -152,7 +152,7 @@ nnc_sum.df<-nnc_sum.df %>%
          Max=max,
          Median=median,
          Mean=mean,
-         Records=record_count)
+         "Record Count"=record_count)
 
 nnc_sum.df<-nnc_sum.df %>% 
   mutate(Parameter=case_when(
@@ -220,11 +220,12 @@ all_exceedances.df<-all_exceedances.df %>%
 
 insitu_sum.df<-field %>% 
   group_by(SITE_ID,PARAMETER_NAME,unit) %>% 
-  summarise(Number=n(),Mean=mean(RESULT,na.rm = TRUE),
+  summarise("Record Count"=n(),Mean=mean(RESULT,na.rm = TRUE),
             Median=median(RESULT,na.rm = TRUE),
             SD=sd(RESULT,na.rm = TRUE),
             Max=max(RESULT,na.rm = TRUE),
-            Min=min(RESULT,na.rm = TRUE))
+            Min=min(RESULT,na.rm = TRUE)) %>% 
+  rename(Units=unit)
 
 insitu_sum.df<-insitu_sum.df %>% mutate_if(is.numeric, round, 3)
 
@@ -353,10 +354,10 @@ sites<-unique(site.loc$SH_SITE_ID)
    
   temp <-insitu_sum.df[insitu_sum.df$Site %in% sites[i], ]
   temp$Site<-NULL
-   tab2<-table.f(temp, 2,4)
+   if (nrow(temp) > 0){tab2<-table.f(temp, 2,4)
    label=paste("In-Situ Measurements:",sites[i])
    tab2<-flextable::set_caption(tab2,label)
-   flextable::docx_value(tab2)
+   flextable::docx_value(tab2)}
    rm(temp)
    cat(rep("\n", 10))
    cat("<br><br>")
@@ -401,7 +402,8 @@ sites<-unique(site.loc$SH_SITE_ID)
     library(ggplot2)
     tab5<-ggplot(temp,aes(Date,Discharge)) +
       geom_point()+
-        ylab("cfs")
+        ylab("cfs")+
+      labs(caption = "Discharge measured in cubic feet per second (cfs).")
     print(tab5)
     rm(temp)
   }
