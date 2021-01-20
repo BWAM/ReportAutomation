@@ -131,7 +131,8 @@ org.df$date<-as.Date(org.df$date,"%m/%d/%Y")
 org.df$year<-format(org.df$date,"%Y")
 
 org.df<-org.df %>% 
-  subset(year>=2017)
+  subset(year>=2017) %>% 
+  subset(validator_qualifiers!="R")
 
 chem_extract.df <- org.df %>% 
   filter(parameter %in% c("hardness", "ph", "temperature")) %>% 
@@ -244,4 +245,3 @@ temp5<-temp5 %>%
 
 #clean up
 rm(list=ls()[! ls() %in% c("temp4","selected.df","wqs_wipwl.df","temp5")])
-
