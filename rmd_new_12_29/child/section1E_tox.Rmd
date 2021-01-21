@@ -6,6 +6,7 @@ output:
   word_document: default
 ---
 
+# Section 1E - Sediment and Porewater Microtox® Analysis
 ```{r include=FALSE,message=FALSE,warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
@@ -114,7 +115,7 @@ Toxicity testing of surface waters, sediments, porewaters, and effluents are rou
 
 Results from Microtox® Acute Toxicity Test for Sediments, Porewaters and Effluents collected in 2017 are found in (Table\@ref(tab:Tox-table)). In the Wallkill Watershed, sediments ranged from non-toxic to severe and porewaters ranged from non-toxic to toxic. 
 
-
+<!---BLOCK_LANDSCAPE_START--->
 ```{r tab.id="Tox-table", tab.cap="Wallkill River Microtox® sediment and porewater toxicity results for select locations in the Wallkill River Survey. Sediment samples were collected for toxicity testing in baseflow conditions during macroinvertebrate community collection at sampling locations.", echo=FALSE, message=FALSE, warning=FALSE}
 #call table function
 table.f(tox.tbl,2,6)%>%
@@ -128,5 +129,5 @@ table.f(tox.tbl,2,6)%>%
 
 ```
 
-
+<!---BLOCK_LANDSCAPE_STOP--->
 
