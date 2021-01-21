@@ -5,10 +5,12 @@ date: "4/14/2020"
 output: 
 word_document: default
 ---
+
+# Section 1 - Background
 The Wallkill River flows approximately 90 miles north and drains approximately 760 square miles throughout New York State (NYS) and northern New Jersey. In NYS alone, the Wallkill flows approximately 66 miles and drains 552 square miles across 48 municipalities. With only the Mohawk River larger, the combined watersheds of the Wallkill and Rondout Creek form the second largest tributary to the lower Hudson River. With a highly complex and variable land use coverage across the basin, agriculture, urban stormwater, and wastewater treatment facilities (WWTF) drive water quality concerns related to nutrients, algal blooms, and low dissolved oxygen. 
-|  
+  
 Between 2017 and 2019, a Stream Assessment Survey was conducted by the Rotating Integrated Basin Studies (RIBS) Program throughout the mainstem Wallkill and its tributaries (Figure 1). The RIBS Program operates on a five-year, rotational schedule to generate statewide water quality data in support of the Waterbody Inventory/Priority Waterbody List (WI/PWL) towards the goal of protection and restoration of water quality resources (RIBS QAPP, 2017-2019). The RIBS Program also conducts special surveys outside of this five-year cycle to support Department-initiated priorities related to water quality (RIBS QAPP, 2017-2019). The objectives of the Wallkill watershed survey were to 1) update condition assessments for Waterbody Inventory/Priority Waterbody List (WI/PWL) segments throughout the basin, 2) identify areas of elevated nutrient concentrations, 3) assess biological community condition and, 4) collect data to inform watershed planning efforts to mitigate nutrient impacts.  
-|  
+
 To characterize the Wallkill watershed, Bureau of Water Assessment and Management’s Stream Monitoring and Assessment Section (SMAS), Hudson River Estuary Program, and participants in the Professional External Evaluations of Rivers and Streams (PEERS) Program collected several measures of water quality at each of the 39 sampling locations locations (10 on mainstem, 29 on tributaries) across 19 WI/PWL segments between the months of July and October during 2017, 2018, and 2019 (Table\@ref(tab:sites-table) and Figure\@ref(fig:site-map)). Measures of water and habitat quality included:  
 1. Water Chemistry and Stream Discharge   
 2. Benthic Macroinvertebrate Community  
@@ -142,7 +144,7 @@ tl
 
 ```
 
-
+\newpage
 
 
 
