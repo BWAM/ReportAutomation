@@ -6,7 +6,8 @@ output:
 word_document: default
 ---
 
-## Water Chemistry Methdology
+# Section 1A - Water Chemistry and Stream Discharge
+### Water Chemistry Methdology
 SMAS and HREP  
 Methods used for water chemistry data collection are described by NYSDEC standard operating procedures (SOP). The collection of water chemistry samples followed procedures described in SOP #210(17-19) Collection of Water Column Samples for the Rotating Integrated Basin Studies (RIBS) Program. Where the depth of water permitted, water chemistry samples were collected using the depth-integrating suspended sediment sampler – wading (DH-81) method (SOP #210(17-19)), section 11.2). Where the depth of water was too shallow water chemistry samples were collected using the direct grab method (SOP #210(¬17-19), section 11.6). Water samples were processed using a contract lab with NYS Environmental Laboratory Approval Program (ELAP) certification. 
 
@@ -335,7 +336,7 @@ insitu.statewide<-insitu.statewide %>%
 ```
 
 
-## Exceedances of Water Quality Standards
+### Exceedances of Water Quality Standards
 
 Exceedances of water quality standards occurred in `r n_distinct(temp5$PWL_segment)` of `r n_distinct(sites$SH_PWL_ID)` WI/PWL segments. A total of `r n_distinct(chem.short$chemical_name)` lab-measured, and `r n_distinct(insitu.short$chemical_name)` in situ water quality analytes, were analyzed and out of the `r nrow(chem_all)` lab-measured records and `r nrow(insitu.short)` in situ water quality records, there were `r sum(temp5$Exceedances)` exceedances of established water quality standards (6 NYCRR Part 703). There were exceedances in `r paste(unique(stars$chemical_name),sep=",")`. Chloride and nutrient concentrations across the Wallkill watershed were generally elevated relative to statewide data concentrations. Nutrients are regulated by a narrative water quality standard stating: “None in amounts that result in growths of algae, weeds, and slimes that will impair the waters for their best usages” (6 NYCRR 703.2). 
 
@@ -471,3 +472,6 @@ cat('\n\n')
 chem.graph.n(insitu.short)
 
 ```
+
+
+\newpage
