@@ -6,7 +6,7 @@ output:
   word_document: default
 ---
 
-
+# Section 1B - Benthic Macroinvertebrate Community
 
 Benthic macroinvertebrate communities were sampled to evaluate water quality impacts to the aquatic life use. Where appropriate riffle habitat was present, collection of macroinvertebrates was preformed using the kick method described in section 9.4 of SOP #208-19 Biological Monitoring of Surface Waters in New York State. With the exception of PEERS sites, replicate (n=4/site) macroinvertebrate samples were collected once at each site during years water chemistries were collected. For traveling kick samples, the contents of replicates for each site were field-inspected to determine major groups of organisms present, and then preserved in alcohol for lab inspection and identification of 100-specimen subsamples. For non-wadable sites, multiplates were deployed for a five-week colonization period, scraped, contents preserved and processed to a minimum of 250 organisms and a quarter of the sample. If target counts were not met, samples were processed in their entirety. Specimens were identified to lowest possible taxonomic resolution, typically genus or species. 
 
@@ -53,6 +53,22 @@ sum.metrics2<-metrics.df%>%
          ci=qt(1 - ((1 - 0.95) / 2), N - 1) * se)%>%
   rename(PWL_ID=SH_PWL_ID)
 
+#add trib/mainstem groupings
+#read in the sites table
+
+sum.metrics2$PWL_ID<-as.factor(sum.metrics2$PWL_ID)
+sites<-read.csv(file.path(here::here(),
+                          "data",
+                          "sites_wallkill_sturg.csv"),stringsAsFactors = FALSE)
+
+sites.1<-sites %>% 
+  select(group,SH_PWL_ID) %>% 
+  rename("PWL_ID"=SH_PWL_ID)
+
+sites.2<-unique(sites.1)
+
+sum.metrics2<-merge(sum.metrics2,sites.2, by.x="PWL_ID")
+#Issue with sites being duplicated when merging bc of multiple sites per PWL
 #create labels
 l<-length(sum.metrics2$PWL_ID)
 
@@ -67,7 +83,7 @@ labels.df <- data.frame(
 
 
 
-b2<-ggplot(sum.metrics2, aes(PWL_ID, y=mean))+
+b2<-ggplot(sum.metrics2, aes(PWL_ID, y=mean, color=group))+
   geom_point(size=4)+
   scale_shape_manual(name="PWL Segment ID",values = 0:max(l.p))+
   geom_errorbar(aes(ymin=mean-ci, ymax=mean+ci),  width=.5)+
@@ -84,7 +100,7 @@ b2<-ggplot(sum.metrics2, aes(PWL_ID, y=mean))+
     angle = 45,
     hjust = 1,
     size = 10,
-    family = "serif"), #rotate text angle
+    family = "serif"),  #rotate text angle
   plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "cm"),
   legend.position = c(.11, .81) + #reduces white space around plot edges
     geom_label(aes(x = .5, y = .5), label = "test")
@@ -92,7 +108,9 @@ b2<-ggplot(sum.metrics2, aes(PWL_ID, y=mean))+
   geom_hline(yintercept=2.5,linetype="dashed",color="grey")+
   geom_hline(yintercept=5,linetype="dashed",color="grey")+
   geom_hline(yintercept=7.5,linetype="dashed",color="grey")+
-  ylab("Biological Assessment Profile Score")+xlab("Year")+ geom_text(data = labels.df, aes(max(l)+1, y, label = label), color = "black",angle=90)+
+  ylab("Biological Assessment Profile Score")+
+  xlab("Year")+ 
+  geom_text(data = labels.df, aes(max(l)+1, y, label = label), color = "black",angle=90)+
   expand_limits(y=c(0,10),x=c(0:max(l+2)))
 b2
 
@@ -108,7 +126,3 @@ bap.inc<-sum.metrics2 %>%
 ```
  
  On average, Biological Assessment Profile (BAP) scores ranged from severely to slightly impacted across all sites on the WI/PWL segments in the Wallkill watershed a (SOP #208-19). Segments with mean BAP scores that fall below the BAP impairment threshold, include segments `r paste(bap5$PWL_ID,sep=",")` (Figure\@ref(fig:BAP2)). However ninety-five percent confidence intervals suggest inconclusive results for segments  `r paste(bap.inc$PWL_ID,sep=",")`.  
-
-
-
-`
