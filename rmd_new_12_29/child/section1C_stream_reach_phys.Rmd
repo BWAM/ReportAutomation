@@ -7,6 +7,7 @@ output:
 ---
 
  
+# Section 1C - Stream Reach Physical Characteristics
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -225,14 +226,18 @@ tl<-table.f(habit.hma[,c(38,1,2:15,36,37)],2,17)
 
 
 tl<-tl%>%
-  fontsize(size=10, part = "all")%>%
   #width(j=1:18, width=0.4)%>%
   #width(j=c(4,5,10,11), width = 0.5)%>%
   #width(j=c(17), width=0.6)%>%
   #width(j=1, width=0.8) %>% 
   fit_to_width(max_width = 10.5) %>% 
+  fontsize(size=8, part = "body")%>%
+  fontsize(size=9, part = "header")%>%
+  align(j=3:18, align="center", part="body")%>%
+  width(j = 3, width = 0.7)%>%
+  width(j = 2, width = 0.8)%>%
   flextable::merge_v(j=c("PWL ID")) %>% 
-  fix_border_issues() %>% 
+  #fix_border_issues() %>% 
   theme_zebra() %>% 
   flextable::bg(j=1,part = "body",bg = "white") %>% 
   flextable::border(part = "body",border.bottom = officer::fp_border(color="grey")) %>% 
