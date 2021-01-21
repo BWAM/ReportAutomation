@@ -68,7 +68,7 @@ sites.1<-sites %>%
 sites.2<-unique(sites.1)
 
 sum.metrics2<-merge(sum.metrics2,sites.2, by.x="PWL_ID")
-#Issue with sites being duplicated when merging bc of multiple sites per PWL
+
 #create labels
 l<-length(sum.metrics2$PWL_ID)
 
