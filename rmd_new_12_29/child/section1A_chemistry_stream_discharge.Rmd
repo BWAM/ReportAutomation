@@ -261,8 +261,13 @@ chem.trans<-chem.trans %>%
            chemical_name=="Chlorophyll A"|
            chemical_name=="Nitrate+Nitrite"|
            chemical_name=="Total Kjeldahl Nitrogen"|
+           chemical_name=="Ammonia"|
+           chemical_name=="Nitrate"|
+           chemical_name=="Nitrite"|
            chemical_name=="Total Phosphorus"|
-           chemical_name=="Total Dissolved Solids")
+           chemical_name=="Total Dissolved Solids"|
+           chemical_name=="Iron"
+           )
 
 #set colors for each group
 group_colors<-c("Lower Wallkill Trib"= "tomato2", "Middle Wallkill Trib"="olivedrab3", "Upper Wallkill Trib"= "springgreen4", "Wallkill Main Stem"="deepskyblue2", "Wallkill Main Stem-Ponded"="magenta2")
@@ -283,15 +288,15 @@ insitu.short<-insitu.short %>%
   filter(PARAMETER_NAME!="PC_RFU",
            PARAMETER_NAME!="Chl_RFU",
            PARAMETER_NAME!="PC_ugL", 
-         PARAMETER_NAME!="Chl_ugL")
+         PARAMETER_NAME!="Chl_ugL",
+         PARAMETER_NAME!="PCT_SATURATION",
+         PARAMETER_NAME!="SALINITY")
 
 insitu.short<-insitu.short %>% 
   mutate(chemical_name=case_when(
     PARAMETER_NAME=="DISSOLVED_OXYGEN"~"Dissolved Oxygen",
     PARAMETER_NAME=="TEMPERATURE"~"Temperature",
     PARAMETER_NAME=="CONDUCTANCE"~"Conductance",
-    PARAMETER_NAME=="PCT_SATURATION"~ "Percent Saturation",
-    PARAMETER_NAME=="SALINITY"~"Salinity",
     PARAMETER_NAME=="PH"~"PH",
     TRUE~paste(PARAMETER_NAME)
   ))
@@ -313,8 +318,6 @@ insitu.statewide<-insitu.statewide %>%
     PARAMETER_NAME=="DISSOLVED_OXYGEN"~"Dissolved Oxygen",
     PARAMETER_NAME=="TEMPERATURE"~"Temperature",
     PARAMETER_NAME=="CONDUCTANCE"~"Conductance",
-    PARAMETER_NAME=="PCT_SATURATION"~ "Percent Saturation",
-    PARAMETER_NAME=="SALINITY"~"Salinity",
     PARAMETER_NAME=="PH"~"PH",
     TRUE~paste(PARAMETER_NAME)
   ))
