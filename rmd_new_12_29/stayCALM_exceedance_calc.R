@@ -68,6 +68,8 @@ raw.wallkill<-raw.wallkill %>%
 x1<-raw.wallkill[,names(raw.wallkill) %in% cols.keep] 
 x1$depth<-"NA"
 
+x1<-x1 %>% 
+  filter(validator_qualifiers !="R")
 
 insitu<-read.csv(file.path(here::here(),
                                  "data",
@@ -100,7 +102,7 @@ x2<-insitu[,names(insitu) %in% cols.keep]
 pwl<-x1 %>% 
   select(seg_id,site_id) %>% 
   distinct()
-x2<-merge(x2,pwl,by="site_id")
+x2<-merge(x2,pwl,by="site_id",all.x = TRUE)
 
 x3<-rbind(x1,x2)
 
@@ -132,7 +134,10 @@ org.df$year<-format(org.df$date,"%Y")
 
 org.df<-org.df %>% 
   subset(year>=2017) %>% 
-  subset(validator_qualifiers!="R")
+  filter(!is.na(value))
+  
+  #there should not be any blanks?
+#need temperature!
 
 chem_extract.df <- org.df %>% 
   filter(parameter %in% c("hardness", "ph", "temperature")) %>% 
@@ -146,6 +151,29 @@ chem_extract.df <- org.df %>%
                      na.rm = TRUE)
   ) %>% 
   right_join(org.df, by = "sample_id")
+
+#fix the units/results
+wqs.short<-wqs_wipwl.df %>% 
+  select(seg_id,parameter,fraction,units) %>% 
+  rename(units_threshold=units)
+
+chem_extract.df<-merge(chem_extract.df,wqs.short,by=c("seg_id","parameter","fraction"),all.x = TRUE)
+
+chem_extract.df$value<-as.numeric(chem_extract.df$value)
+#fix units that don't match
+
+#correct them based on the units in the stds, and convert corrected value column to numeric
+chem_extract.df$corrected_value<-ifelse(chem_extract.df$units=="mg/l" & chem_extract.df$units_threshold=="ug/l",
+                                        chem_extract.df$value*1000,paste0(chem_extract.df$value))
+chem_extract.df$corrected_value<-ifelse(is.na(chem_extract.df$corrected_value),
+                                        chem_extract.df$value,chem_extract.df$corrected_value)
+chem_extract.df$corrected_value<-as.numeric(chem_extract.df$corrected_value)
+
+chem_extract.df$value<-NULL
+chem_extract.df$units<-NULL
+chem_extract.df<-chem_extract.df %>% 
+  rename(value=corrected_value,
+         units=units_threshold)
 
 chem.df <- merge(x = chem_extract.df, 
                  y = wqs_wipwl.df,
